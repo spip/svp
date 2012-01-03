@@ -9,6 +9,7 @@ formulaires/inc-confirmer_actions.html -text
 inc/pcltar.php -text
 inc/svp_actionner.php -text
 inc/svp_depoter_local.php -text
+lang/paquet-svp.xml -text
 lang/svp.xml -text
 lib/pcltar/pclerror.lib.php -text
 lib/pcltar/pcltrace.lib.php -text
