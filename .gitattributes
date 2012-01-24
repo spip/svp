@@ -14,6 +14,7 @@ lang/paquet-svp_ar.php -text
 lang/paquet-svp_en.php -text
 lang/paquet-svp_sk.php -text
 lang/svp.xml -text
+lang/svp_ar.php -text
 lang/svp_en.php -text
 lang/svp_sk.php -text
 lib/pcltar/pclerror.lib.php -text
