@@ -49,6 +49,7 @@ prive/themes/spip/images/update-32.png -text
 /svp-24.png -text
 /svp-32.png -text
 /svp-64.png -text
+/svp_ieconfig.php -text
 teleporter/git.php -text
 teleporter/http.php -text
 teleporter/http_deballe_tgz.php -text
