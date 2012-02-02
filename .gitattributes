@@ -24,7 +24,6 @@ lib/pcltar/readme.txt -text
 modeles/svp_presenter_actions.html -text
 prive/squelettes/contenu/configurer_svp.html -text
 prive/squelettes/contenu/svp_admin_plugin.html -text
-prive/squelettes/contenu/svp_admin_plugin_fonctions.php -text
 prive/squelettes/navigation/svp_admin_plugin.html -text
 prive/squelettes/navigation/svp_admin_plugin_fonctions.php -text
 prive/themes/spip/images/depot-16.png -text
