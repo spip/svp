@@ -4,6 +4,8 @@ action/teleporter.php -text
 exec/admin_plugin.php -text
 formulaires/admin_plugin.html -text
 formulaires/admin_plugin.php -text
+formulaires/charger_plugin_archive.html -text
+formulaires/charger_plugin_archive.php -text
 formulaires/configurer_svp.html -text
 formulaires/inc-admin_plugin.html -text
 formulaires/inc-confirmer_actions.html -text
