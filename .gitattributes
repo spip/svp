@@ -28,6 +28,7 @@ lang/svp_en.php -text
 lang/svp_es.php -text
 lang/svp_fa.php -text
 lang/svp_it.php -text
+lang/svp_ru.php -text
 lang/svp_sk.php -text
 lib/pcltar/pclerror.lib.php -text
 lib/pcltar/pcltrace.lib.php -text
