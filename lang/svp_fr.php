@@ -73,6 +73,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// E
 	'erreur_actions_non_traitees' => 'Certaines actions n\'ont pas été réalisées. Cela peut provenir d\'une erreur lors des actions à réaliser, ou d\'un affichage de cette page alors que des actions sont encore en cours. Les actions avaient été lancées par @auteur@ le @date@.',
+	'erreur_auth_plugins_ajouter_lib' => 'Vous n\'avez pas les droits nécessaires pour ajouter une librairie.',
 	'erreur_dir_dib_ecriture' => 'Le répertoire des bibliothèques @dir@ n\'est pas accessible en écriture. Impossible d\'y charger une bibliothèque !',
 	'erreur_dir_dib_indefini' => 'Le répertoire _DIR_LIB n\'est pas défini. Impossible d\'y charger une bibliothèque !',
 	'erreur_dir_plugins_auto' => 'Le répertoire « plugins/auto » permettant de télécharger des paquets
@@ -128,6 +129,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_plugins' => '@nb@ plugins',
 	'info_paquets_disponibles' => '@total_paquets@ paquet(s) disponible(s)',
 	'info_plugin_attente_dependance' => 'dépendances manquantes',
+	'info_plugin_attente_dependance_interdit' => 'dépendances manquantes (vous n\'avez pas les droits de les télécharger automatiquement)',
 	'info_plugin_incompatible' => 'version incompatible',
 	'info_plugin_installe' => 'déjà installé',
 	'info_plugin_obsolete' => 'version obsolète',
