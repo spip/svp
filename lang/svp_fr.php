@@ -129,7 +129,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_plugins' => '@nb@ plugins',
 	'info_paquets_disponibles' => '@total_paquets@ paquet(s) disponible(s)',
 	'info_plugin_attente_dependance' => 'dépendances manquantes',
-	'info_plugin_attente_dependance_interdit' => 'dépendances manquantes (vous n\'avez pas les droits de les télécharger automatiquement)',
 	'info_plugin_incompatible' => 'version incompatible',
 	'info_plugin_installe' => 'déjà installé',
 	'info_plugin_obsolete' => 'version obsolète',
