@@ -1,6 +1,8 @@
 <?php
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Fichier source, a modifier dans svn://zone.spip.org/spip-zone/_core_/plugins/svp/lang/
+// extrait automatiquement de http://trad.spip.net/tradlang_module/svp?lang_cible=fr_fem
+// ** ne pas modifier le fichier **
+
 if (!defined('_ECRIRE_INC_VERSION')) return;
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
@@ -43,7 +45,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// C
 	'cacher_les_plugins_incompatibles' => 'Cacher les plugins incompatibles',
 	'categorie_aucune' => 'Sans catégorie',
-	'categorie_auteur' => 'Authentification, auteur, autorisation',
+	'categorie_auteur' => 'Authentification, auteure, autorisation',
 	'categorie_communication' => 'Communication, interactivité, messagerie',
 	'categorie_date' => 'Agendas, calendrier, date',
 	'categorie_divers' => 'Objets nouveaux, services externes',
@@ -65,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_autoriser_activer_paquets_obsoletes' => 'Autoriser l’activation des paquets obsolètes ?',
 	'config_autoriser_activer_paquets_obsoletes_explication' => 'Les paquets obsolètes sont des paquets locaux présents qui sont plus anciens que d’autres paquets locaux. L’obsolescence est établie sur la base de l’état (stable, test, dev) du paquet ainsi que sur la base de sa version. Activez cette option si vous souhaitez malgré tout pouvoir activer ces plugins obsolètes.',
 	'config_depot_editable' => 'Permettre l’édition des dépôts ?',
-	'config_depot_editable_explication' => 'Cela rend éditable les informations d’un dépôt et permet ainsi de leur joindre éventuellement des mots-clés ou documents. Cette option ne devrait intéresser personne ! Préférez laisser « non » !',
+	'config_depot_editable_explication' => 'Cela rend éditable les informations d’un dépôt et permet ainsi de lui joindre éventuellement des mots-clés ou documents. Cette option ne devrait intéresser personne ! Préférez laisser « non » !',
 	'confirmer_telecharger_dans' => 'Le plugin sera chargé dans un répertoire (@dir@) qui existe déjà.
 	Cela écrasera le contenu de ce répertoire.
 	Une copie de l’ancien contenu sera sauvegardé dans « @dir_backup@ ».
@@ -108,7 +110,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_admin_plugin_verrou_tous' => 'Cette page liste tous les plugins du site.',
 	'info_admin_plugin_verrouille' => 'Cette page liste les plugins actifs et verrouillés (placés dans le répertoire <code>@dir_plugins_dist@</code>).
 	Si vous souhaitez les désactiver,
-	veuillez contacter le webmestre du site,
+	veuillez contacter la webmestre du site,
 	ou vous reporter <a href="http://programmer.spip.net/repertoire_plugins-dist">à la documentation</a>.',
 	'info_adresse_spipzone' => 'SPIP-Zone - Plugins',
 	'info_ajouter_depot' => 'En ajoutant des dépôts à votre base, vous aurez la possiblité d’obtenir des informations et d’effectuer des recherches sur tous les paquets hébergés par les dépôts ajoutés.<br />Un dépôt est décrit par un fichier XML contenant les informations sur le dépôt et sur tous ses paquets.',
