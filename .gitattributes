@@ -33,6 +33,7 @@ lang/svp_es.php -text
 lang/svp_fa.php -text
 lang/svp_fr_fem.php -text
 lang/svp_it.php -text
+lang/svp_nl.php -text
 lang/svp_ru.php -text
 lang/svp_sk.php -text
 lib/pcltar/pclerror.lib.php -text
