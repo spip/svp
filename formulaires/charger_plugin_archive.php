@@ -43,18 +43,23 @@ function formulaires_charger_plugin_archive_verifier_dist(){
 			$destination = pathinfo($archive);
 			$destination = $destination['filename'];
 		}
-		$destination = str_replace('../', '', $destination);
-		set_request('destination', $destination);
+		if (!isset($destination['extension'])) {
+			$erreurs['archive'] = _T('svp:message_nok_url_archive');
+		}
+		else {
+			$destination = str_replace('../', '', $destination);
+			set_request('destination', $destination);
 
-		// si la destination existe, on demande confirmation de l'ecrasement.
-		$dir = _DIR_PLUGINS_AUTO . $destination;
-		if (is_dir($dir) and !_request('confirmer')) {
-			$base = dirname($dir);
-			$nom = basename($dir);
-			$backup = "$base/.$nom.bck";
-			$erreurs['confirmer'] = _T("svp:confirmer_telecharger_dans", array(
-				'dir' => joli_repertoire($dir),
-				'dir_backup' => joli_repertoire($backup)));
+			// si la destination existe, on demande confirmation de l'ecrasement.
+			$dir = _DIR_PLUGINS_AUTO . $destination;
+			if (is_dir($dir) and !_request('confirmer')) {
+				$base = dirname($dir);
+				$nom = basename($dir);
+				$backup = "$base/.$nom.bck";
+				$erreurs['confirmer'] = _T("svp:confirmer_telecharger_dans", array(
+					'dir' => joli_repertoire($dir),
+					'dir_backup' => joli_repertoire($backup)));
+			}
 		}
 	}
 
