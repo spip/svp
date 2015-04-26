@@ -19,12 +19,9 @@ lang/paquet-svp_en.php -text
 lang/paquet-svp_es.php -text
 lang/paquet-svp_fa.php -text
 lang/paquet-svp_fr_fem.php -text
-lang/paquet-svp_fr_tu.php -text
 lang/paquet-svp_it.php -text
 lang/paquet-svp_nl.php -text
-lang/paquet-svp_oc_ni_mis.php -text
 lang/paquet-svp_pt.php -text
-lang/paquet-svp_pt_br.php -text
 lang/paquet-svp_ru.php -text
 lang/paquet-svp_sk.php -text
 lang/svp.xml -text
@@ -34,11 +31,7 @@ lang/svp_en.php -text
 lang/svp_es.php -text
 lang/svp_fa.php -text
 lang/svp_fr_fem.php -text
-lang/svp_fr_tu.php -text
 lang/svp_it.php -text
-lang/svp_nl.php -text
-lang/svp_oc_ni_mis.php -text
-lang/svp_pt_br.php -text
 lang/svp_ru.php -text
 lang/svp_sk.php -text
 lib/pcltar/pclerror.lib.php -text

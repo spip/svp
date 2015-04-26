@@ -68,7 +68,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_autoriser_activer_paquets_obsoletes_explication' => 'Obsolete packages are local packages that are older than other local packages. Obsolescence is established on the basis of the status (stable, testing, dev) of the package and on the basis of its version. Enable this option if you still want to activate these outdatedplugins.',
 	'config_depot_editable' => 'Allow repository edition?',
 	'config_depot_editable_explication' => 'This makes editable the informations of a repository and enable eventually to associate keywords or documents to it. This option shouldn’t interest anyone! Rather leave "no"!',
-	'confirmer_desinstaller' => 'Beware, uninstalling a plugin <b>wipes out</b> its data from the database and it is irreversible.<br />If you sure not absolutely sure, just disable the plugin.',
 	'confirmer_telecharger_dans' => 'The plugin will be loaded into a directory (@dir@) which already exists.
 This will overwrite the content of this directory.
 A copy of the old files will be saved in "@dir_backup@".
@@ -221,7 +220,6 @@ is not created or is not writable.
 	'message_nok_maj_introuvable' => 'Update of the plugin "@plugin@" not found.',
 	'message_nok_plugin_inexistant' => 'The requested plugin does not exist(@plugin@).',
 	'message_nok_sql_insert_depot' => 'SQL error when adding the repository @objet@',
-	'message_nok_url_archive' => 'The archive’s URL is invalid',
 	'message_nok_url_depot_incorrecte' => 'The address "@url@" is incorrect',
 	'message_nok_xml_non_conforme' => 'The description XML file "@fichier@" of the repository doesn’t conform',
 	'message_nok_xml_non_recupere' => 'The XML file "@fichier@" could not be recovered',

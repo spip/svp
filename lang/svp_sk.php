@@ -61,7 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_activer_log_verbeux' => 'Aktivovať podrobné protokoly?',
 	'config_activer_log_verbeux_explication' => 'Táto možnosť zabezpečí, že protokoly SVP bud podrobnejšie…',
 	'config_activer_pas_a_pas' => 'Aktivovať režim Krok za krokom?',
-	'config_activer_pas_a_pas_explication' => 'Ak aktivujete tento režim, po vykonaní každej akcie sa zobrazí záznam  namiesto súhrnného prehľadu všetkých vykonaných zmien po vykonaní všetkých akcií.',
+	'config_activer_pas_a_pas_explication' => 'Ak aktivujete tento režim, po vykonaní každej akcie sa zobrazí záznam  namiesto súhrnného prehľadu všetkých vykonaných zmien po vykonaní všetkých akcií',
 	'config_activer_runtime' => 'Aktivovať režim runtime?',
 	'config_activer_runtime_explication' => '		V režime runtime (áno) spúšťa iba zásuvné moduly kompatibilné s vašou verziou SPIPu,
 		čo sa veľmi odporúča pre väčšinu využití programu.
@@ -80,7 +80,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_depot_editable' => 'Umožniť upravovanie depozitárov?',
 	'config_depot_editable_explication' => 'Umožňuje upravovať údaje v depozitári a priradiť k ním kľúčové slová alebo dokumenty.
 		Táto možnosť by mala zaujať každého! Radšej preto nenechajte možnosť "nie"!',
-	'confirmer_desinstaller' => 'Pozor, odinštalovanie zásuvného modulu – <b>vymazanie</b> jeho údajov z databázy sa nedá vrátiť späť.<br />Ak si týmto krokom nie ste istý, zásuvný modul len deaktivujte.',
 	'confirmer_telecharger_dans' => 'Zásuvný modul, ktorý bude nahraný do priečonka (@dir@), už existuje.
 	Prepíšete tak obsah tohto priečinka.
 	Kópia starého obsahu bude uložená v priečinku "@dir_backup@".
@@ -237,7 +236,6 @@ alebo vytvoriť tento priečinok a nastaviť mu povolenie na zápis.',
 	'message_nok_maj_introuvable' => 'Aktualizácia zásuvného modulu @plugin@ sa nenašla.',
 	'message_nok_plugin_inexistant' => 'Požadovaný zásuvný modul neexistuje (@plugin@).',
 	'message_nok_sql_insert_depot' => 'Pri pridávaní depozitára @objet@ sa vyskytla chyba SQL',
-	'message_nok_url_archive' => 'URL archívu je neplatná',
 	'message_nok_url_depot_incorrecte' => 'Adresa "@url@" je nesprávna',
 	'message_nok_xml_non_conforme' => 'Súbor XML, ktorý je opisom depozitára  "@fichier@",  nie je kompatibilný',
 	'message_nok_xml_non_recupere' => 'Súbor XML " @fichier@ " sa nepodarilo získať',

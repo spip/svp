@@ -68,7 +68,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_autoriser_activer_paquets_obsoletes_explication' => 'الحزم القديمة هي حزم محلية أقدم من حزم محلية أخرى. ويتم تحديد القدم على قاعدة حالة الحزمة (ثابتة، تجريبية او قيد التطوير) ورقم إصدارها. اذا رغبت في تفعيل ملحقات قديمة، قم بتفعيل هذا الخيار.',
 	'config_depot_editable' => 'السماح بتحرير المستودعات؟',
 	'config_depot_editable_explication' => 'يجعل من معلومات مخزن قابلة للتحرير ويتيح هكذا ربطها بمفاتيح او مستندات. ليس من المتوقع ان يهتم اجد بهذا الخيار! فالأفضل ان تترك «كلا»!',
-	'confirmer_desinstaller' => 'تنبيه، يقوم إلغاء تثبيت اي ملحق <b>بحذف</b> بياناته من القاعدة بشكل نهائي.<br />اذا لم تكن متأكداً من الغائه، قم بإيقاف الملحق فقط.',
 	'confirmer_telecharger_dans' => 'سيتم تحميل الملحق في مجلد (@dir@) موجود.
 سيؤدي ذلك الى حذف محتوى هذا المجلد.
 سيتم حفظ نسخة عن محتوى المجلد القديم في «@dir_backup@».
@@ -222,7 +221,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_nok_maj_introuvable' => 'لم يتم العثور على تحديث الملحق @plugin@.',
 	'message_nok_plugin_inexistant' => 'الملحق المطلوب غير موجود (@plugin@)',
 	'message_nok_sql_insert_depot' => 'خطأ SQL لدى إضافة المستودع @objet@',
-	'message_nok_url_archive' => 'عنوان الأرسيف غير صالح',
 	'message_nok_url_depot_incorrecte' => '@url@» غير صحيح',
 	'message_nok_xml_non_conforme' => 'ملف «@fichier@» لوصف المستودع بتنسيق XML غير ملائم',
 	'message_nok_xml_non_recupere' => 'لم يتم استرجاع ملف « @fichier@ » بتنسيق XML',
