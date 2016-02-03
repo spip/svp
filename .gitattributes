@@ -10,7 +10,6 @@ formulaires/configurer_svp.html -text
 formulaires/inc-admin_plugin.html -text
 formulaires/inc-admin_plugin_fonctions.php -text
 formulaires/inc-confirmer_actions.html -text
-inc/pcltar.php -text
 inc/svp_actionner.php -text
 inc/svp_depoter_local.php -text
 lang/paquet-svp.xml -text
@@ -44,9 +43,6 @@ lang/svp_pt_br.php -text
 lang/svp_ru.php -text
 lang/svp_sk.php -text
 lang/svp_uk.php -text
-lib/pcltar/pclerror.lib.php -text
-lib/pcltar/pcltrace.lib.php -text
-lib/pcltar/readme.txt -text
 modeles/svp_presenter_actions.html -text
 prive/squelettes/contenu/configurer_svp.html -text
 prive/squelettes/contenu/svp_admin_plugin.html -text
