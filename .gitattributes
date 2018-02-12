@@ -14,6 +14,7 @@ inc/svp_actionner.php -text
 inc/svp_depoter_local.php -text
 lang/paquet-svp.xml -text
 lang/paquet-svp_ar.php -text
+lang/paquet-svp_br.php -text
 lang/paquet-svp_de.php -text
 lang/paquet-svp_en.php -text
 lang/paquet-svp_es.php -text
