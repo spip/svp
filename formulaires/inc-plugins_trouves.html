@@ -11,7 +11,7 @@
 <div class="liste plugins distants">
 	<ul class="liste-items">
 <BOUCLE_plugins_trouves(DATA) {source table, #GET{plugins}}>
-		<li class="item[(#VALEUR{installe}|oui) installe][(#VALEUR{etat}|=={stable}|non) nonstable]"[ id="(#VALEUR{prefixe}|strtolower)-#COMPTEUR_BOUCLE-#VALEUR{score}"]>
+		<li class="item[(#VALEUR{installe}|oui) installe]"[ id="(#VALEUR{prefixe}|strtolower)-#COMPTEUR_BOUCLE-#VALEUR{score}"]>
 		[(#REM) <!-- Checkbox action multiple -->]
 		[(#VALEUR{installe}|non|et{#VAL|test_plugins_auto})
 			<div class="check">
@@ -23,7 +23,7 @@
 			<div class="resume">
 				<h3 class="nom"><a href="#" rel="info">[(#VALEUR{nom}|extraire_multi)]</a></h3>
 				<span class="version">[(#VALEUR{version}|denormaliser_version)]</span>
-				<span class="etat">[ - (#VALEUR{etat})]</span>
+				<span class="etat[(#VALEUR{etat}|=={stable}|non) svp_message]">[ - (#VALEUR{etat})]</span>
 				[<span class="svp_message"> - (#VALEUR{installe}|oui)<:svp:info_plugin_installe:></span>]
 				<div class="short">[(#VALEUR{slogan}|extraire_multi)]</div>
 				<div class="icon">[(#VALEUR{logo}|image_reduire{32})]</div>
