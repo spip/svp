@@ -448,6 +448,11 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	$insert_contribs = array();
 	$prefixes = array(); // prefixe => id_plugin
 
+	// Initialisation de la configuration de l'utilisation des champs categorie et tags
+	include_spip('inc/config');
+	$utiliser_categorie = lire_config('svp/utilisation_categorie', false);
+	$utiliser_tag = lire_config('svp/utilisation_tag', false);
+
 	// On met a jour ou on cree chaque paquet a partir du contenu du fichier xml
 	// On ne fait pas cas de la compatibilite avec la version de SPIP installee
 	// car l'operation doit permettre de collecter tous les paquets
@@ -488,20 +493,18 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 					. pathinfo($insert_paquet['logo'], PATHINFO_EXTENSION);
 			}
 
-			// On loge l'absence de categorie ou une categorie erronee et on positionne la categorie
-			// par defaut "aucune"
-			// Provisoire tant que la DTD n'est pas en fonction
-			if (!$insert_plugin['categorie']) {
-				spip_log("Categorie absente dans le paquet issu de <" . $insert_paquet['src_archive'] .
-					"> du depot <" . $insert_paquet['id_depot'] . ">\n", 'svp_paquets.' . _LOG_INFO_IMPORTANTE);
-				$insert_plugin['categorie'] = 'aucune';
-			} else {
-				$svp_categories = $GLOBALS['categories_plugin'];
-				if (!in_array($insert_plugin['categorie'], $svp_categories)) {
-					spip_log("Categorie &#107;" . $insert_plugin['categorie'] . "&#108; incorrecte dans le paquet issu de <" . $insert_paquet['src_archive'] .
-						"> du depot <" . $insert_paquet['id_depot'] . ">\n", 'svp_paquets.' . _LOG_INFO_IMPORTANTE);
-					$insert_plugin['categorie'] = 'aucune';
-				}
+			// Si la configuration requiert l'utilisation de la catégorie de plugins on la récupère à partir
+			// du serveur de référentiel de plugins. Sinon, on la force à vide.
+			$insert_plugin['categorie'] = '';
+			if ($utiliser_categorie) {
+				$insert_plugin['categorie'] = type_plugin_acquerir('categorie', $insert_plugin['prefixe']);
+			}
+
+			// Si la configuration requiert l'utilisation des tags de plugins on les récupère à partir
+			// du serveur de référentiel de plugins. Sinon, on force le champ à vide.
+			$insert_plugin['tags'] = '';
+			if ($utiliser_categorie) {
+				$insert_plugin['tags'] = type_plugin_acquerir('tag', $insert_plugin['prefixe']);
 			}
 		} else {
 			$paquet_plugin = false;

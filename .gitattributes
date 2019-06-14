@@ -12,6 +12,7 @@ formulaires/inc-admin_plugin_fonctions.php -text
 formulaires/inc-confirmer_actions.html -text
 inc/svp_actionner.php -text
 inc/svp_depoter_local.php -text
+inc/svp_typologie.php -text
 lang/paquet-svp.xml -text
 lang/paquet-svp_ar.php -text
 lang/paquet-svp_br.php -text

@@ -43,6 +43,8 @@ function svp_upgrade($nom_meta_base_version, $version_cible) {
 	$maj['0.5.0'][] = array('maj_tables', 'spip_paquets');
 	$maj['0.5.1'][] = array('svp_actualiser_paquets_locaux', true);
 
+	$maj['0.6.0'][] = array('svp_vider_categories');
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
@@ -96,4 +98,19 @@ function svp_synchroniser_prefixe() {
 			sql_terminer_transaction();
 		}
 	}
+}
+
+/**
+ * Vider le champ categorie de tous les enregistrement de la table spip_plugins.
+ * En effet, à partir du schéma 0.6 ce champ n'est plus alimenté par le XML des plugins mais par une API REST
+ * fournie par le plugin SVP Typologie. L'utilisation de champ sur les sites de production devient optionnelle et
+ * est désactivée par défaut.
+ *
+ * @return void
+ */
+function svp_vider_categories() {
+	// On vide le champ catégorie de tous les plugins de la base.
+	// La fonction d'actualisation de la base des plugins ne le remplira que si demandé, sinon il restera vide
+	// ce qui n'a aucune incidence sur le fonctionnment de SVP.
+	sql_update('spip_plugins', array('categorie' => ''));
 }

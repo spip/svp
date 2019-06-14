@@ -23,8 +23,34 @@
 						[(#ENV{#GET{name}}|=={non}|oui)checked="checked"] /><label for="#GET{name}_non"><:item_non:></label>
 					</div>
 				</div>
-			<div class="editer-groupe">
+			</div>
 		</fieldset>
+
+		<fieldset>
+			<legend><:svp:fieldset_typologie:></legend>
+			<div class="editer-groupe">
+				#SET{name,utilisation_categorie}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					[<span class="erreur_message">(#GET{erreurs})</span>
+					]<div class="choix">
+						<input type="checkbox" name="#GET{name}" id="champ_#GET{name}" value="on"
+							[(#ENV{#GET{name}}|oui)checked="checked"] />
+						<label><:svp:config_utiliser_categorie:></label>
+					</div>
+				</div>
+
+				#SET{name,utilisation_tag}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
+				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
+					[<span class="erreur_message">(#GET{erreurs})</span>
+					]<div class="choix">
+						<input type="checkbox" name="#GET{name}" id="champ_#GET{name}" value="on"
+							[(#ENV{#GET{name}}|oui)checked="checked"] />
+						<label><:svp:config_utiliser_tag:></label>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+
 		<fieldset>
 			<legend><:svp:fieldset_debug:></legend>
 			<div class="editer-groupe">
@@ -74,6 +100,7 @@
 				</div>
 			<div class="editer-groupe">
 		</fieldset>
+
 		<fieldset>
 			<legend><:svp:fieldset_edition:></legend>
 			<div class="editer-groupe">
@@ -93,7 +120,10 @@
 				</div>
 			<div class="editer-groupe">
 		</fieldset>
-		<p class='boutons'><input class='btn submit' type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" /></p>
+
+		<p class='boutons'>
+			<input class='btn submit' type="submit" name="_cfg_ok" value="<:bouton_enregistrer:>" />
+		</p>
 	</div></form>
 
 </div>

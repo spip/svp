@@ -237,6 +237,10 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 	$actifs = lire_config('plugin');
 	$attentes = lire_config('plugin_attente');
 
+	// Initialisation de la configuration de l'utilisation des champs categorie et tags
+	$utiliser_categorie = lire_config('svp/utilisation_categorie', false);
+	$utiliser_tag = lire_config('svp/utilisation_tag', false);
+
 	foreach ($paquets_locaux as $const_dir => $paquets) {
 		foreach ($paquets as $chemin => $paquet) {
 			// Si on est en presence d'un plugin dont la dtd est "paquet" on compile en multi
@@ -271,17 +275,24 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 				$le_paquet = array_merge($le_paquet, $champs['paquet']);
 				$le_plugin = $champs['plugin'];
 
-				// On loge l'absence de categorie ou une categorie erronee et on positionne la categorie par defaut "aucune"
-				if (!$le_plugin['categorie']) {
-					$le_plugin['categorie'] = 'aucune';
-				} else {
-					if (!in_array($le_plugin['categorie'], $GLOBALS['categories_plugin'])) {
-						$le_plugin['categorie'] = 'aucune';
-					}
+				// Mettre le préfixeen majuscule si besoin
+				$prefixe = strtoupper($le_plugin['prefixe']);
+
+				// Si la configuration requiert l'utilisation de la catégorie de plugins on la récupère à partir
+				// du serveur de référentiel de plugins. Sinon, on la force à vide.
+				$le_plugin['categorie'] = '';
+				if ($utiliser_categorie) {
+					$le_plugin['categorie'] = type_plugin_acquerir('categorie', $prefixe);
+				}
+
+				// Si la configuration requiert l'utilisation des tags de plugins on les récupère à partir
+				// du serveur de référentiel de plugins. Sinon, on force le champ à vide.
+				$le_plugin['tags'] = '';
+				if ($utiliser_categorie) {
+					$le_plugin['tags'] = type_plugin_acquerir('tag', $prefixe);
 				}
 
 				// creation du plugin...
-				$prefixe = strtoupper($le_plugin['prefixe']);
 				// on fait attention lorqu'on cherche ou ajoute un plugin
 				// le nom et slogan est TOUJOURS celui de la plus haute version
 				// et il faut donc possiblement mettre a jour la base...
