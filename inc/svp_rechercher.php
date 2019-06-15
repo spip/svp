@@ -149,7 +149,7 @@ function svp_rechercher_plugins_spip(
 		if ($ids_paquets) {
 			$where[] = sql_in('t2.id_paquet', $ids_paquets);
 		}
-		if (($categorie) and ($categorie != 'toute_categorie')) {
+		if ($categorie) {
 			$where[] = 't1.categorie=' . sql_quote($categorie);
 		}
 		if (($etat) and ($etat != 'tout_etat')) {
