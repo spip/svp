@@ -26,11 +26,6 @@
 						[<span class="erreur_message">(#ENV{erreurs}|table_valeur{phrase})</span>]
 						<input type="text" name="phrase" id="phrase" value="#ENV{phrase}" class="text" placeholder="<:svp:placeholder_phrase:>" />
 					</div>
-					<div class="editer editer_categorie obligatoire[(#ENV{erreurs}|table_valeur{categorie}|oui) erreur]">
-						<label for="categorie"><:svp:label_critere_categorie:></label>
-						[<span class="erreur_message">(#ENV{erreurs}|table_valeur{categorie})</span>]
-						<INCLURE{fond=formulaires/inc-select_categorie, categorie=#ENV{categorie}, env} />
-					</div>
 					<div class="editer editer_etat obligatoire[(#ENV{erreurs}|table_valeur{etat}|oui) erreur]">
 						<label for="etat"><:svp:label_critere_etat:></label>
 						[<span class="erreur_message">(#ENV{erreurs}|table_valeur{etat})</span>]
@@ -58,10 +53,12 @@
 				</div>
 			</fieldset>
 
-		<p class="boutons recherche"><input type="submit" name="rechercher" class="btn submit" value="<:info_rechercher:>" /></p>
+		<p class="boutons recherche">
+			<input type="submit" name="rechercher" class="btn submit" value="<:info_rechercher:>" />
+		</p>
 		</div>
 
-		[(#ENV{phrase}|ou{#ENV{depot}}|ou{#ENV{categorie}}|ou{#ENV{etat}|ou{#ENV{doublon}}}|oui)
+		[(#ENV{phrase}|ou{#ENV{depot}}|ou{#ENV{etat}|ou{#ENV{doublon}}}|oui)
 		<div class="liste-plugins">
 			<fieldset>
 				<legend><:svp:legende_installer_plugins:></legend>

@@ -25,7 +25,6 @@ include_spip('exec/admin_plugin');
 function formulaires_charger_plugin_charger_dist() {
 	return array(
 		'phrase' => _request('phrase'),
-		'categorie' => _request('categorie'),
 		'etat' => _request('etat'),
 		'depot' => _request('depot'),
 		'doublon' => _request('doublon'),

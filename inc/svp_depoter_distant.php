@@ -497,14 +497,14 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 			// du serveur de référentiel de plugins. Sinon, on la force à vide.
 			$insert_plugin['categorie'] = '';
 			if ($utiliser_categorie) {
-				$insert_plugin['categorie'] = type_plugin_acquerir('categorie', $insert_plugin['prefixe']);
+				$insert_plugin['categorie'] = plugin_acquerir_type($insert_plugin['prefixe'], 'categorie');
 			}
 
 			// Si la configuration requiert l'utilisation des tags de plugins on les récupère à partir
 			// du serveur de référentiel de plugins. Sinon, on force le champ à vide.
 			$insert_plugin['tags'] = '';
-			if ($utiliser_categorie) {
-				$insert_plugin['tags'] = type_plugin_acquerir('tag', $insert_plugin['prefixe']);
+			if ($utiliser_tag) {
+				$insert_plugin['tags'] = plugin_acquerir_type($insert_plugin['prefixe'], 'tag');
 			}
 		} else {
 			$paquet_plugin = false;
@@ -775,7 +775,7 @@ function svp_completer_plugins($ids_plugin) {
 	) {
 
 		$plugin_en_cours = 0;
-		$inserts = array();
+		$inserts = $complements = array();
 
 		foreach ($resultats as $paquet) {
 			// On finalise le plugin en cours et on passe au suivant 

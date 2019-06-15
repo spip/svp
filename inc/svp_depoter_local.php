@@ -275,21 +275,21 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 				$le_paquet = array_merge($le_paquet, $champs['paquet']);
 				$le_plugin = $champs['plugin'];
 
-				// Mettre le préfixeen majuscule si besoin
+				// Mettre le préfixe en majuscule si besoin
 				$prefixe = strtoupper($le_plugin['prefixe']);
 
 				// Si la configuration requiert l'utilisation de la catégorie de plugins on la récupère à partir
 				// du serveur de référentiel de plugins. Sinon, on la force à vide.
 				$le_plugin['categorie'] = '';
 				if ($utiliser_categorie) {
-					$le_plugin['categorie'] = type_plugin_acquerir('categorie', $prefixe);
+					$le_plugin['categorie'] = plugin_acquerir_type($prefixe, 'categorie');
 				}
 
 				// Si la configuration requiert l'utilisation des tags de plugins on les récupère à partir
 				// du serveur de référentiel de plugins. Sinon, on force le champ à vide.
 				$le_plugin['tags'] = '';
-				if ($utiliser_categorie) {
-					$le_plugin['tags'] = type_plugin_acquerir('tag', $prefixe);
+				if ($utiliser_tag) {
+					$le_plugin['tags'] = plugin_acquerir_type($prefixe, 'tag');
 				}
 
 				// creation du plugin...

@@ -50,25 +50,6 @@ define('_SVP_REGEXP_BALISE_PAQUET', '#<paquet[^>]*>(.*)</paquet>#Uims');
 define('_SVP_REGEXP_BALISE_MULTIS', '#<multis[^>]*>(.*)</multis>#Uims');
 
 
-// Liste des categories de plugin
-# define('_CATEGORIES_PLUGIN', serialize($categories_plugin));
-$GLOBALS['categories_plugin'] = array(
-	'communication',
-	'edition',
-	'multimedia',
-	'navigation',
-	'date',
-	'divers',
-	'auteur',
-	'statistique',
-	'performance',
-	'maintenance',
-	'outil',
-	'theme',
-	'squelette',
-	'aucune'
-);
-
 /** Liste des balises techniques autorisées dans la balise <spip> */
 $GLOBALS['balises_techniques'] = array(
 	'menu',
