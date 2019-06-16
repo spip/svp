@@ -163,7 +163,7 @@ function svp_supprimer_depot($id) {
 	// Donc avant de nettoyer la base des plugins du depot ayant disparus on supprime toutes les urls
 	// associees a ce depot : on les recreera apres le nettoyage
 	if (!_SVP_MODE_RUNTIME) {
-		svp_actualiser_url_plugins($id_depot);
+		svp_actualiser_url_plugins();
 	}
 
 	// Nettoyer les autres relations à ce dépot
@@ -174,7 +174,7 @@ function svp_supprimer_depot($id) {
 	// - on supprime toutes les urls plugin
 	// - on les regenere pour la liste des plugins mise a jour
 	if (!_SVP_MODE_RUNTIME) {
-		svp_actualiser_url_plugins($id_depot);
+		svp_actualiser_url_plugins();
 	}
 
 	// On supprime le depot lui-meme
@@ -288,7 +288,7 @@ function svp_actualiser_depot($id) {
 		// de mise a jour du depot en mettant a jour *inutilement* le sha1
 		spip_log('Aucune modification du fichier XML, actualisation non declenchee - id_depot = ' . $depot['id_depot'],
 			'svp_actions.' . _LOG_INFO);
-		sql_replace('spip_depots', array_diff_key($depot, array('maj' => '')));
+		sql_updateq('spip_depots', array('sha_paquets' => $sha), 'id_depot=' . $id);
 	} else {
 
 		// Le fichier a bien change il faut actualiser tout le depot
@@ -632,7 +632,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	// - on supprime toutes les urls plugin
 	// - on les regenere pour la liste des plugins mise a jour
 	if (!_SVP_MODE_RUNTIME) {
-		svp_actualiser_url_plugins($id_depot);
+		svp_actualiser_url_plugins();
 	}
 
 	// Calcul des compteurs de paquets, plugins et contributions

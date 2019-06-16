@@ -352,7 +352,6 @@ function svp_compter_telechargements($id_depot = 0, $categorie = '', $compatible
  *     Texte indiquant certains totaux tel que nombre de plugins, nombre de paquets...
  **/
 function svp_compter_depots($id_depot, $contrib = 'plugin') {
-	$info = '';
 
 	$total = svp_compter('depot', $id_depot);
 	if (!$id_depot) {

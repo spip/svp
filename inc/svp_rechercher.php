@@ -82,7 +82,6 @@ function svp_rechercher_plugins_spip(
 		// On cherche dans tous les enregistrements de ces tables des correspondances les plugins qui
 		// correspondent a la phrase recherchee
 		// -- On obtient une liste d'id de plugins et d'id de paquets
-		$resultats = array('plugin' => array(), 'paquet' => array());
 		$resultats = recherche_en_base($phrase, $tables, $options);
 		// -- On prepare le tableau des scores avec les paquets trouves par la recherche
 		if ($resultats) {
@@ -226,8 +225,6 @@ function svp_rechercher_plugins_spip(
  *     Liste d'identifiants de plugins
  */
 function svp_lister_plugins_installes() {
-
-	$ids = array();
 
 	// On recupere la liste des plugins installes physiquement sur le site
 	// Pour l'instant ce n'est pas possible avec les fonctions natives de SPIP
