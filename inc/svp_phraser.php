@@ -300,6 +300,12 @@ function svp_phraser_plugin($dtd, $contenu) {
 			$plugin = $fusionner($plugins[0]);
 		}
 
+		// Durant la période où les XML contiennent encore l'attribut ou la balise categorie il faut la traiter
+		// lors du phrasage mais la supprimer après la fusion afin d'éviter une erreur SQL lors de l'insertion.
+		if (isset($plugin['categorie'])) {
+			unset($plugin['categorie']);
+		}
+
 		// Pour la DTD paquet, les traductions du nom, slogan et description sont compilees dans une balise
 		// du fichier archives.xml. Il faut donc completer les informations precedentes avec cette balise
 		if (($dtd == _SVP_DTD_PAQUET) and (preg_match(_SVP_REGEXP_BALISE_MULTIS, $contenu, $matches))) {
@@ -311,7 +317,7 @@ function svp_phraser_plugin($dtd, $contenu) {
 			if ($multis['nom']) {
 				$plugin['nom'] = $multis['nom'];
 			}
-			// Slogan et description sont forcement des items de langue 
+			// Slogan et description sont forcement des items de langue
 			$plugin['slogan'] = $multis['slogan'];
 			$plugin['description'] = $multis['description'];
 		}
@@ -377,12 +383,12 @@ function svp_phraser_traductions($contenu) {
 			// On continue par les balises <langue> qui donnent le code en attribut
 			// et les balises <traducteur> qui donnent uniquement le nom en attribut
 			if (is_array($_langues[0])) {
-				foreach ($_langues[0] as $_tag => $_traducteurs) {
-					list($tag, $attributs_langue) = spip_xml_decompose_tag($_tag);
+				foreach ($_langues[0] as $_tag_trad => $_traducteurs) {
+					list($tag, $attributs_langue) = spip_xml_decompose_tag($_tag_trad);
 					$traducteurs = array();
 					if (is_array($_traducteurs[0])) {
-						foreach ($_traducteurs[0] as $_tag => $_vide) {
-							list($tag, $attributs_traducteur) = spip_xml_decompose_tag($_tag);
+						foreach ($_traducteurs[0] as $_tag_lang => $_vide) {
+							list($tag, $attributs_traducteur) = spip_xml_decompose_tag($_tag_lang);
 							$traducteurs[] = $attributs_traducteur;
 						}
 					}

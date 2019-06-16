@@ -31,7 +31,7 @@ include_spip('inc/plugin');
  * @param string $phrase
  *     Texte de la recherche
  * @param string $categorie
- *     Type de catégorie de plugin (auteur, date...)
+ *     Type de catégorie de plugin (auteur, date...) : depréciée !!!
  * @param string $etat
  *     État de plugin (stable, test...)
  * @param string|int $depot
@@ -123,7 +123,7 @@ function svp_rechercher_plugins_spip(
 	}
 
 	// Maintenant, on continue la recherche en appliquant, sur la liste des id de paquets,
-	// les filtres complementaires : categorie, etat, exclusions et compatibilite spip
+	// les filtres complementaires : etat, exclusions et compatibilite spip
 	// si on a bien trouve des resultats precedemment ou si aucune phrase n'a ete saisie
 	// -- Preparation de la requete
 	if ($ids_paquets) {
@@ -148,9 +148,6 @@ function svp_rechercher_plugins_spip(
 		$where = array('t1.id_plugin=t2.id_plugin', 't2.id_depot=t3.id_depot');
 		if ($ids_paquets) {
 			$where[] = sql_in('t2.id_paquet', $ids_paquets);
-		}
-		if ($categorie) {
-			$where[] = 't1.categorie=' . sql_quote($categorie);
 		}
 		if (($etat) and ($etat != 'tout_etat')) {
 			$where[] = 't2.etat=' . sql_quote($etat);

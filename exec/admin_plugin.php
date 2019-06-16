@@ -92,10 +92,8 @@ function exec_admin_plugin_dist() {
 		include_spip('exec/fond');
 	*/
 
-
-	// liste des erreurs mises en forme 
+	// liste des erreurs mises en forme
 	$erreur_activation = plugin_donne_erreurs();
-
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");

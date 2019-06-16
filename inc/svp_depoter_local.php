@@ -237,10 +237,6 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 	$actifs = lire_config('plugin');
 	$attentes = lire_config('plugin_attente');
 
-	// Initialisation de la configuration de l'utilisation des champs categorie et tags
-	$utiliser_categorie = lire_config('svp/utilisation_categorie', false);
-	$utiliser_tag = lire_config('svp/utilisation_tag', false);
-
 	foreach ($paquets_locaux as $const_dir => $paquets) {
 		foreach ($paquets as $chemin => $paquet) {
 			// Si on est en presence d'un plugin dont la dtd est "paquet" on compile en multi
@@ -277,20 +273,6 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 
 				// Mettre le préfixe en majuscule si besoin
 				$prefixe = strtoupper($le_plugin['prefixe']);
-
-				// Si la configuration requiert l'utilisation de la catégorie de plugins on la récupère à partir
-				// du serveur de référentiel de plugins. Sinon, on la force à vide.
-				$le_plugin['categorie'] = '';
-				if ($utiliser_categorie) {
-					$le_plugin['categorie'] = plugin_acquerir_type($prefixe, 'categorie');
-				}
-
-				// Si la configuration requiert l'utilisation des tags de plugins on les récupère à partir
-				// du serveur de référentiel de plugins. Sinon, on force le champ à vide.
-				$le_plugin['tags'] = '';
-				if ($utiliser_tag) {
-					$le_plugin['tags'] = plugin_acquerir_type($prefixe, 'tag');
-				}
 
 				// creation du plugin...
 				// on fait attention lorqu'on cherche ou ajoute un plugin

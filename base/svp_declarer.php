@@ -91,8 +91,6 @@ function svp_declarer_tables_objets_sql($tables) {
 			"prefixe" => "varchar(30) DEFAULT '' NOT NULL",
 			"nom" => "text DEFAULT '' NOT NULL",
 			"slogan" => "text DEFAULT '' NOT NULL",
-			"categorie" => "varchar(100) DEFAULT '' NOT NULL",
-			"tags" => "text DEFAULT '' NOT NULL",
 			"vmax" => "varchar(24) DEFAULT '' NOT NULL", // version la plus elevee des paquets du plugin
 			"date_crea" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // la plus ancienne des paquets du plugin
 			"date_modif" => "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL", // la plus recente des paquets du plugin

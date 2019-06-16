@@ -448,11 +448,6 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	$insert_contribs = array();
 	$prefixes = array(); // prefixe => id_plugin
 
-	// Initialisation de la configuration de l'utilisation des champs categorie et tags
-	include_spip('inc/config');
-	$utiliser_categorie = lire_config('svp/utilisation_categorie', false);
-	$utiliser_tag = lire_config('svp/utilisation_tag', false);
-
 	// On met a jour ou on cree chaque paquet a partir du contenu du fichier xml
 	// On ne fait pas cas de la compatibilite avec la version de SPIP installee
 	// car l'operation doit permettre de collecter tous les paquets
@@ -491,20 +486,6 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 				$insert_paquet['logo'] = $depot['url_archives'] . '/'
 					. basename($insert_paquet['nom_archive'], '.zip') . '.'
 					. pathinfo($insert_paquet['logo'], PATHINFO_EXTENSION);
-			}
-
-			// Si la configuration requiert l'utilisation de la catégorie de plugins on la récupère à partir
-			// du serveur de référentiel de plugins. Sinon, on la force à vide.
-			$insert_plugin['categorie'] = '';
-			if ($utiliser_categorie) {
-				$insert_plugin['categorie'] = plugin_acquerir_type($insert_plugin['prefixe'], 'categorie');
-			}
-
-			// Si la configuration requiert l'utilisation des tags de plugins on les récupère à partir
-			// du serveur de référentiel de plugins. Sinon, on force le champ à vide.
-			$insert_plugin['tags'] = '';
-			if ($utiliser_tag) {
-				$insert_plugin['tags'] = plugin_acquerir_type($insert_plugin['prefixe'], 'tag');
 			}
 		} else {
 			$paquet_plugin = false;
@@ -883,9 +864,7 @@ function eclater_plugin_paquet($champs_aplat) {
 		'plugin' => array(
 			'prefixe' => $champs_aplat['prefixe'],
 			'nom' => $champs_aplat['nom'],
-			'slogan' => $champs_aplat['slogan'],
-			'categorie' => $champs_aplat['categorie'],
-			'tags' => $champs_aplat['tags'],
+			'slogan' => $champs_aplat['slogan']
 		),
 		'paquet' => array(
 			'logo' => $champs_aplat['logo'],
@@ -904,7 +883,7 @@ function eclater_plugin_paquet($champs_aplat) {
 			'lien_demo' => $champs_aplat['lien_demo'],
 			'lien_dev' => $champs_aplat['lien_dev'],
 			'dependances' => $champs_aplat['dependances'],
-			'procure' => $champs_aplat['procure'],
+			'procure' => $champs_aplat['procure']
 		)
 	);
 }

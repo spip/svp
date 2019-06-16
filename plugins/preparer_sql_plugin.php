@@ -35,7 +35,6 @@ function plugins_preparer_sql_plugin($plugin) {
 	}
 
 	// On initialise les champs ne necessitant aucune transformation
-	$champs['categorie'] = (isset($plugin['categorie']) and $plugin['categorie']) ? $plugin['categorie'] : '';
 	$champs['etat'] = (isset($plugin['etat']) and $plugin['etat']) ? $plugin['etat'] : '';
 	$champs['version'] = $plugin['version'] ? normaliser_version($plugin['version']) : '';
 	$champs['version_base'] = (isset($plugin['schema']) and $plugin['schema']) ? $plugin['schema'] : '';
@@ -50,9 +49,6 @@ function plugins_preparer_sql_plugin($plugin) {
 	// Indicateurs d'etat numerique (pour simplifier la recherche des maj de STP)
 	static $num = array('stable' => 4, 'test' => 3, 'dev' => 2, 'experimental' => 1);
 	$champs['etatnum'] = (isset($plugin['etat']) and isset($num[$plugin['etat']])) ? $num[$plugin['etat']] : 0;
-
-	// Tags : liste de mots-cles
-	$champs['tags'] = (isset($plugin['tags']) and $plugin['tags']) ? serialize($plugin['tags']) : '';
 
 	// On passe en utf-8 avec le bon charset les champs pouvant contenir des entites html
 	$champs['description'] = entite2charset($plugin['description'], 'utf-8');

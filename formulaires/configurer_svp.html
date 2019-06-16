@@ -27,31 +27,6 @@
 		</fieldset>
 
 		<fieldset>
-			<legend><:svp:fieldset_typologie:></legend>
-			<div class="editer-groupe">
-				#SET{name,utilisation_categorie}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					[<span class="erreur_message">(#GET{erreurs})</span>
-					]<div class="choix">
-						<input type="checkbox" name="#GET{name}" id="champ_#GET{name}" value="on"
-							[(#ENV{#GET{name}}|oui)checked="checked"] />
-						<label><:svp:config_utiliser_categorie:></label>
-					</div>
-				</div>
-
-				#SET{name,utilisation_tag}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}
-				<div class="editer editer_[(#GET{name})][ (#GET{obli})][ (#GET{erreurs}|oui)erreur]">
-					[<span class="erreur_message">(#GET{erreurs})</span>
-					]<div class="choix">
-						<input type="checkbox" name="#GET{name}" id="champ_#GET{name}" value="on"
-							[(#ENV{#GET{name}}|oui)checked="checked"] />
-						<label><:svp:config_utiliser_tag:></label>
-					</div>
-				</div>
-			</div>
-		</fieldset>
-
-		<fieldset>
 			<legend><:svp:fieldset_debug:></legend>
 			<div class="editer-groupe">
 				#SET{name,mode_pas_a_pas}#SET{obli,''}#SET{erreurs,#ENV**{erreurs}|table_valeur{#GET{name}}}

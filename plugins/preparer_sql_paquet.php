@@ -35,7 +35,6 @@ function plugins_preparer_sql_paquet($plugin) {
 
 	// On initialise les champs ne necessitant aucune transformation
 	foreach (array(
-		         'categorie' => 'categorie',
 		         'etat' => 'etat',
 		         'version_base' => 'schema',
 		         'logo' => 'logo',
@@ -77,7 +76,6 @@ function plugins_preparer_sql_paquet($plugin) {
 	// Tags : liste de mots-cles
 	// Traitement des auteurs, credits, licences et copyright
 	foreach (array(
-		         'tags' => 'tags',
 		         'auteur' => 'auteur',
 		         'credit' => 'credit',
 		         'licence' => 'licence',
