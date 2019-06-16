@@ -1,5 +1,5 @@
 <traduction module="svp" gestionnaire="salvatore" url="https://trad.spip.net" source="svn://zone.spip.org/spip-zone/_core_/plugins/svp/lang/" reference="fr">
-	<langue code="ar" url="https://trad.spip.net/tradlang_module/svp?lang_cible=ar" total="253" traduits="250" relire="0" modifs="0" nouveaux="3" pourcent="98.81">
+	<langue code="ar" url="https://trad.spip.net/tradlang_module/svp?lang_cible=ar" total="253" traduits="253" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
 	</langue>
 	<langue code="br" url="https://trad.spip.net/tradlang_module/svp?lang_cible=br" total="253" traduits="146" relire="0" modifs="0" nouveaux="107" pourcent="57.71">
@@ -10,7 +10,7 @@
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />
 	</langue>
-	<langue code="en" url="https://trad.spip.net/tradlang_module/svp?lang_cible=en" total="253" traduits="250" relire="0" modifs="0" nouveaux="3" pourcent="98.81">
+	<langue code="en" url="https://trad.spip.net/tradlang_module/svp?lang_cible=en" total="253" traduits="253" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="b_b" lien="https://trad.spip.net/auteur/b_b" />
 		<traducteur nom="Benitron" lien="https://trad.spip.net/auteur/benitron" />
 		<traducteur nom="George" lien="https://trad.spip.net/auteur/جورج-قندلفت" />
@@ -47,7 +47,7 @@
 		<traducteur nom="Julia14" lien="https://trad.spip.net/auteur/julia14" />
 		<traducteur nom="phante" lien="https://trad.spip.net/auteur/phante" />
 	</langue>
-	<langue code="nl" url="https://trad.spip.net/tradlang_module/svp?lang_cible=nl" total="253" traduits="250" relire="0" modifs="0" nouveaux="3" pourcent="98.81">
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/svp?lang_cible=nl" total="253" traduits="253" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="Suske" lien="https://trad.spip.net/auteur/suske" />
 	</langue>
