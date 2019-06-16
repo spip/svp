@@ -72,6 +72,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_autoriser_activer_paquets_obsoletes_explication' => 'Obsolete pakketten zijn oudere versies van lokale pakketten. Hun status wordt bepaald aan de hand van de status van de plugin (stable, testing, dev) en de versie. Schakel deze optie in wanneer je toch verouderde plugins wilt activeren.',
 	'config_depot_editable' => 'Depot aanpassingen toestaan?',
 	'config_depot_editable_explication' => 'Dit laat je toe de informatie van een depot aan te passen, zoals het toevoegen van extra trefwoorden. Een niet interessante optie, die je beter niet inschakelt!',
+	'config_utiliser_categorie' => 'De categorie van de plugins gebruiken in de weergave en het zoeken (niet noodzakelijk in runtime)',
+	'config_utiliser_tag' => 'De bakens van de plugins gebruiken in de weergave en het zoeken (niet noodzakelijk in runtime)',
 	'confirmer_desinstaller' => 'Het verwijderen van een plugin <b>wist</b> alle gerelateerde gegevens en is onomkeerbaar.<br />Twijfel je, maak de plugin dan gewoon inactief.',
 	'confirmer_telecharger_dans' => 'De plugin wordt geladen in een bestaande map (@dir@).
 Hierdoor wordt de inhoud van deze map overschreven.
@@ -101,6 +103,7 @@ Je moet deze actie bevestigen.',
 	'fieldset_debug' => 'Debug',
 	'fieldset_edition' => 'Aanpassing',
 	'fieldset_fonctionnement' => 'Werking',
+	'fieldset_typologie' => 'Typologie van de plugins',
 	'filtrer' => 'Filteren',
 
 	// I
