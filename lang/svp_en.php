@@ -72,6 +72,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_autoriser_activer_paquets_obsoletes_explication' => 'Obsolete packages are local packages that are older than other local packages. Obsolescence is established on the basis of the status (stable, testing, dev) of the package and on the basis of its version. Enable this option if you still want to activate these outdatedplugins.',
 	'config_depot_editable' => 'Allow repository edition?',
 	'config_depot_editable_explication' => 'This makes editable the informations of a repository and enable eventually to associate keywords or documents to it. This option shouldn’t interest anyone! Rather leave "no"!',
+	'config_utiliser_categorie' => 'Use the plugins’ category in the plugins display or search (not essential in runtime mode)',
+	'config_utiliser_tag' => 'Use the plugins’ tags in the plugins display or search (not essential in runtime mode)',
 	'confirmer_desinstaller' => 'Warning, uninstalling a plugin <b>wipes out</b> its data from the database and it is irreversible.<br />If you are not absolutely sure, just disable the plugin.',
 	'confirmer_telecharger_dans' => 'The plugin will be loaded into a directory (@dir@) which already exists.
 This will overwrite the content of this directory.
@@ -102,6 +104,7 @@ is not created or is not writable.
 	'fieldset_debug' => 'Debug',
 	'fieldset_edition' => 'Editing',
 	'fieldset_fonctionnement' => 'Way it works',
+	'fieldset_typologie' => 'Plugins classification',
 	'filtrer' => 'Filter',
 
 	// I
