@@ -72,6 +72,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_autoriser_activer_paquets_obsoletes_explication' => 'Les paquets obsolètes sont des paquets locaux présents qui sont plus anciens que d’autres paquets locaux. L’obsolescence est établie sur la base de l’état (stable, test, dev) du paquet ainsi que sur la base de sa version. Active cette option si tu souhaites malgré tout pouvoir activer ces plugins obsolètes.',
 	'config_depot_editable' => 'Permettre l’édition des dépôts ?',
 	'config_depot_editable_explication' => 'Cela rend éditable les informations d’un dépôt et permet ainsi de leur joindre éventuellement des mots-clés ou documents. Cette option ne devrait intéresser personne ! Préférez laisser « non » !',
+	'config_utiliser_categorie' => 'Utiliser la catégorie des plugins dans les affichages et les recherches de plugin (pas indispensable en mode runtime)',
+	'config_utiliser_tag' => 'Utiliser les tags des plugins dans les affichages et les recherches de plugin (pas indispensable en mode runtime)',
 	'confirmer_desinstaller' => 'Attention, la désinstallation d’un plugin <b>efface</b> ses données de la base et est irréversible.<br />Si tu n’es pas certain, désactives simplement le plugin.',
 	'confirmer_telecharger_dans' => 'Le plugin sera chargé dans un répertoire (@dir@) qui existe déjà.
 	Cela écrasera le contenu de ce répertoire.
@@ -102,6 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fieldset_debug' => 'Débug',
 	'fieldset_edition' => 'Édition',
 	'fieldset_fonctionnement' => 'Fonctionnement',
+	'fieldset_typologie' => 'Typologie des plugins',
 	'filtrer' => 'Filtrer',
 
 	// I
