@@ -98,7 +98,7 @@ function exec_admin_plugin_dist() {
 	$commencer_page = charger_fonction('commencer_page', 'inc');
 	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
 
-	echo debut_gauche('plugin', true);
+	echo debut_gauche();
 
 	echo pipeline('affiche_gauche',
 		array(
@@ -107,9 +107,9 @@ function exec_admin_plugin_dist() {
 		)
 	);
 
-	echo debut_droite('plugin', true);
+	echo debut_droite();
 
-	echo gros_titre(_T('icone_admin_plugin'), '', false);
+	echo gros_titre(_T('icone_admin_plugin'), '');
 
 	//  alerte si mode de compatibilité forcée
 	if (defined('_DEV_VERSION_SPIP_COMPAT')) {

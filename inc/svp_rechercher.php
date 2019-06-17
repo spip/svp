@@ -30,8 +30,6 @@ include_spip('inc/plugin');
  *
  * @param string $phrase
  *     Texte de la recherche
- * @param string $categorie
- *     Type de catégorie de plugin (auteur, date...) : depréciée !!!
  * @param string $etat
  *     État de plugin (stable, test...)
  * @param string|int $depot
@@ -56,7 +54,6 @@ include_spip('inc/plugin');
  **/
 function svp_rechercher_plugins_spip(
 	$phrase,
-	$categorie,
 	$etat,
 	$depot,
 	$version_spip = '',

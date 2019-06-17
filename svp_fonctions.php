@@ -557,23 +557,6 @@ function calcul_svp_branches_spip($branche) {
 }
 
 /**
- * Traduit un type de catégorie de plugin
- *
- * @param string $alias
- *     Type de catégorie (auteur, communication, date...)
- * @return string
- *     Titre complet et traduit de la catégorie
- **/
-function svp_traduire_categorie($alias) {
-	$traduction = '';
-	if ($alias) {
-		$traduction = _T('svp:categorie_' . strtolower($alias));
-	}
-
-	return $traduction;
-}
-
-/**
  * Traduit un type de dépot de plugin
  *
  * @param string $type
@@ -714,8 +697,6 @@ function critere_compatible_spip_dist($idb, &$boucles, $crit) {
  * @filtre
  * @param string $phrase
  *     Texte de la recherche
- * @param string $categorie
- *     Type de catégorie de plugin (auteur, date...)
  * @param string $etat
  *     État de plugin (stable, test...)
  * @param string|int $depot
@@ -733,7 +714,6 @@ function critere_compatible_spip_dist($idb, &$boucles, $crit) {
  **/
 function filtre_construire_recherche_plugins(
 	$phrase = '',
-	$categorie = '',
 	$etat = '',
 	$depot = '',
 	$afficher_exclusions = true,
@@ -755,7 +735,7 @@ function filtre_construire_recherche_plugins(
 	// tries par nom ou score
 	include_spip('inc/svp_rechercher');
 	$plugins = svp_rechercher_plugins_spip(
-		$phrase, $categorie, $etat, $depot, $version_spip,
+		$phrase, $etat, $depot, $version_spip,
 		svp_lister_plugins_installes(), $afficher_exclusions, $afficher_doublons, $tri);
 
 	return $plugins;
