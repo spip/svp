@@ -48,20 +48,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cacher_les_plugins_incompatibles' => 'إخفاء الملحقات غير المتوافقة',
-	'categorie_aucune' => 'بدون تصنيف',
-	'categorie_auteur' => 'تعريف، مؤلف، سماح',
-	'categorie_communication' => 'تواصل، تفاعلية، مراسلة',
-	'categorie_date' => 'المفكرة، الروزنامة، التاريخ',
-	'categorie_divers' => 'عناصر جديدة، خدمات خارجية',
-	'categorie_edition' => 'تحرير، طباعة، كتابة',
-	'categorie_maintenance' => 'إعداد، صيانة',
-	'categorie_multimedia' => 'صور، صالات عرض، وسائط متعددة',
-	'categorie_navigation' => 'تصفح، بحث، تنظيم',
-	'categorie_outil' => 'أدوات تطوير',
-	'categorie_performance' => 'تحسين، أداء أمان',
-	'categorie_squelette' => 'صفحات نموذجية',
-	'categorie_statistique' => 'فهرسة، إحصاءات',
-	'categorie_theme' => 'الموضوع',
 	'config_activer_log_verbeux' => 'تفعيل السجلات المفصلة؟',
 	'config_activer_log_verbeux_explication' => 'هذا الخيار يجعل سجلات خادم معلومات الملحقات أكثر تفصيلاً...',
 	'config_activer_pas_a_pas' => 'تفعيل وضعية الخطوة خطوة؟',
@@ -72,8 +58,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_autoriser_activer_paquets_obsoletes_explication' => 'الحزم القديمة هي حزم محلية أقدم من حزم محلية أخرى. ويتم تحديد القدم على قاعدة حالة الحزمة (ثابتة، تجريبية او قيد التطوير) ورقم إصدارها. اذا رغبت في تفعيل ملحقات قديمة، قم بتفعيل هذا الخيار.',
 	'config_depot_editable' => 'السماح بتحرير المستودعات؟',
 	'config_depot_editable_explication' => 'يجعل من معلومات مخزن قابلة للتحرير ويتيح هكذا ربطها بمفاتيح او مستندات. ليس من المتوقع ان يهتم اجد بهذا الخيار! فالأفضل ان تترك «كلا»!',
-	'config_utiliser_categorie' => 'استخدام أصناف الملحقات لعرضها او البحث عنها (ليست ضرورية في وضعية التشغيل) ',
-	'config_utiliser_tag' => 'استخدام علامات الملحقات لعرضها او البحث عنها (ليست ضرورية في وضعية التشغيل) ',
 	'confirmer_desinstaller' => 'تنبيه، يقوم إلغاء تثبيت اي ملحق <b>بحذف</b> بياناته من القاعدة بشكل نهائي.<br />اذا لم تكن متأكداً من الغائه، قم بإيقاف الملحق فقط.',
 	'confirmer_telecharger_dans' => 'سيتم تحميل الملحق في مجلد (@dir@) موجود.
 سيؤدي ذلك الى حذف محتوى هذا المجلد.
@@ -160,9 +144,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_actualise_le' => 'تم التحديث في',
 	'label_archive' => 'عنوان URL الخاص بالأرشيف',
 	'label_branches_spip' => 'متوافق',
-	'label_categorie' => 'فئة',
 	'label_compatibilite_spip' => 'توافق',
-	'label_critere_categorie' => 'فئات',
 	'label_critere_depot' => 'مستودعات',
 	'label_critere_doublon' => 'توافق',
 	'label_critere_etat' => 'حالات',
@@ -250,7 +232,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'onglet_depots' => 'إدارة المستودعات',
-	'option_categorie_toute' => 'كل الفئات',
 	'option_depot_tout' => 'كل المستودعات',
 	'option_doublon_non' => 'أحدث إصدار',
 	'option_doublon_oui' => 'كل الإصدارات المتوافقة',

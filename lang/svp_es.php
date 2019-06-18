@@ -47,20 +47,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cacher_les_plugins_incompatibles' => 'No mostrar los plugins incompatibles',
-	'categorie_aucune' => 'Sin categoría',
-	'categorie_auteur' => 'Autenticación, autor, autorización',
-	'categorie_communication' => 'Comunicación, interactividad, mensajería',
-	'categorie_date' => 'Agenda, calendario, fechas',
-	'categorie_divers' => 'Nuevos objetos, servicios externos',
-	'categorie_edition' => 'Edición, impresión, redacción',
-	'categorie_maintenance' => 'Configuración, mantenimiento',
-	'categorie_multimedia' => 'Imágenes, galería, multimedia',
-	'categorie_navigation' => 'Navegación, búsqueda, organización',
-	'categorie_outil' => 'Herramienta de desarrollo',
-	'categorie_performance' => 'Optimización, desempeño, seguridad',
-	'categorie_squelette' => 'Esqueleto',
-	'categorie_statistique' => 'Referenciamiento, estadísticas',
-	'categorie_theme' => 'Tema',
 	'config_activer_log_verbeux' => '¿Activar los logs detallados?',
 	'config_activer_log_verbeux_explication' => 'Esta opción genera logs de SVP mucho más locuaces...',
 	'config_activer_pas_a_pas' => '¿Activar el modo paso a paso?',
@@ -146,9 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_actualise_le' => 'Actualizado el',
 	'label_archive' => 'URL del archivo',
 	'label_branches_spip' => 'Compatible',
-	'label_categorie' => 'Categoría',
 	'label_compatibilite_spip' => 'Compatibilidad',
-	'label_critere_categorie' => 'Categorías',
 	'label_critere_depot' => 'Repositorios',
 	'label_critere_doublon' => 'Compatibilidad',
 	'label_critere_etat' => 'Estados',
@@ -234,7 +218,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'onglet_depots' => 'Administrar los repositorios',
-	'option_categorie_toute' => 'Todas las categorías',
 	'option_depot_tout' => 'Todos los repositorios',
 	'option_doublon_non' => 'La versión más reciente',
 	'option_doublon_oui' => 'Todas las versiones compatibles',

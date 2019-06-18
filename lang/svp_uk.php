@@ -47,20 +47,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cacher_les_plugins_incompatibles' => 'Сховати несумісні плагіни',
-	'categorie_aucune' => 'Нема категорій',
-	'categorie_auteur' => 'Автори, авторизація, управління правами доступу',
-	'categorie_communication' => 'Інтерактивність, комунікації',
-	'categorie_date' => 'Розклади, календарі, дата і час',
-	'categorie_divers' => 'Зовнішні сервіси, нові об’єкти',
-	'categorie_edition' => 'Робота з текстом, друк',
-	'categorie_maintenance' => 'Налаштування і обслуговування',
-	'categorie_multimedia' => 'Файли мультимедіа, галереї, картинки',
-	'categorie_navigation' => 'Навігація, пошук',
-	'categorie_outil' => 'Засоби розробки',
-	'categorie_performance' => 'Оптимізація, швидкодія, безпека',
-	'categorie_squelette' => 'Шаблони',
-	'categorie_statistique' => 'SEO і статистика',
-	'categorie_theme' => 'Теми оформлення',
 	'config_activer_log_verbeux' => 'Увімкнути детальне логування?',
 	'config_activer_log_verbeux_explication' => 'Ця опція дозволяє вести детальне логування дій...',
 	'config_activer_pas_a_pas' => 'Увімкнути режим крок за кроком?',
@@ -147,9 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_actualise_le' => 'Поновлення',
 	'label_archive' => 'Посилання на архивний файл плагіна ',
 	'label_branches_spip' => 'Сумісний',
-	'label_categorie' => 'Тематика',
 	'label_compatibilite_spip' => 'Сумісність',
-	'label_critere_categorie' => 'Тематика',
 	'label_critere_depot' => 'Репозиторій',
 	'label_critere_doublon' => 'Сумісність',
 	'label_critere_etat' => 'Статус',
@@ -235,7 +219,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'onglet_depots' => 'Репозиторії',
-	'option_categorie_toute' => 'Усі розділи',
 	'option_depot_tout' => 'Усі репозиторії',
 	'option_doublon_non' => 'Остання версія',
 	'option_doublon_oui' => 'Усі сумісні версії',

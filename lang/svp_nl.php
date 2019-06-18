@@ -48,20 +48,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cacher_les_plugins_incompatibles' => 'Verberg niet-compatibele plugins',
-	'categorie_aucune' => 'Zonder categorie',
-	'categorie_auteur' => 'Authenticatie, auteur, autorisatie',
-	'categorie_communication' => 'Communicatie, interactie, messaging',
-	'categorie_date' => 'Agendas, calender, datum',
-	'categorie_divers' => 'Nieuwe objecten, externe diensten',
-	'categorie_edition' => 'Editing, afdrukken, redactie',
-	'categorie_maintenance' => 'Configuratie, onderhoud',
-	'categorie_multimedia' => 'Afbeeldingen, galerijen, multimedia',
-	'categorie_navigation' => 'Navigatie, zoeken, organisatie',
-	'categorie_outil' => 'Ontwikkeltools',
-	'categorie_performance' => 'Optimisatie, performance, beveiliging',
-	'categorie_squelette' => 'Skeletten',
-	'categorie_statistique' => 'SEO, statistieken',
-	'categorie_theme' => 'Thema',
 	'config_activer_log_verbeux' => 'Verbale logs inschakelen?',
 	'config_activer_log_verbeux_explication' => 'Deze optie maakt de logs van SVP beter leesbaar...',
 	'config_activer_pas_a_pas' => 'Stapsgewijze modus inschakelen?',
@@ -72,8 +58,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_autoriser_activer_paquets_obsoletes_explication' => 'Obsolete pakketten zijn oudere versies van lokale pakketten. Hun status wordt bepaald aan de hand van de status van de plugin (stable, testing, dev) en de versie. Schakel deze optie in wanneer je toch verouderde plugins wilt activeren.',
 	'config_depot_editable' => 'Depot aanpassingen toestaan?',
 	'config_depot_editable_explication' => 'Dit laat je toe de informatie van een depot aan te passen, zoals het toevoegen van extra trefwoorden. Een niet interessante optie, die je beter niet inschakelt!',
-	'config_utiliser_categorie' => 'De categorie van de plugins gebruiken in de weergave en het zoeken (niet noodzakelijk in runtime)',
-	'config_utiliser_tag' => 'De bakens van de plugins gebruiken in de weergave en het zoeken (niet noodzakelijk in runtime)',
 	'confirmer_desinstaller' => 'Het verwijderen van een plugin <b>wist</b> alle gerelateerde gegevens en is onomkeerbaar.<br />Twijfel je, maak de plugin dan gewoon inactief.',
 	'confirmer_telecharger_dans' => 'De plugin wordt geladen in een bestaande map (@dir@).
 Hierdoor wordt de inhoud van deze map overschreven.
@@ -158,9 +142,7 @@ Wil je ze inactief maken dan moet je met de webmaster van de site contact opneme
 	'label_actualise_le' => 'Aangepast op',
 	'label_archive' => 'URL van het archief',
 	'label_branches_spip' => 'Compatibel',
-	'label_categorie' => 'Categorie',
 	'label_compatibilite_spip' => 'Compatibiliteit',
-	'label_critere_categorie' => 'Categorieën',
 	'label_critere_depot' => 'Depots',
 	'label_critere_doublon' => 'Compatibiliteit',
 	'label_critere_etat' => 'Status',
@@ -248,7 +230,6 @@ Wil je ze inactief maken dan moet je met de webmaster van de site contact opneme
 
 	// O
 	'onglet_depots' => 'Beheer van depots',
-	'option_categorie_toute' => 'Alle categorieën',
 	'option_depot_tout' => 'Alle depots',
 	'option_doublon_non' => 'De meest recente versie',
 	'option_doublon_oui' => 'Alle compatibele versies',

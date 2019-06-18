@@ -48,20 +48,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cacher_les_plugins_incompatibles' => 'Inkompatible Plugins ausblenden',
-	'categorie_aucune' => 'Ohne Kategorie',
-	'categorie_auteur' => 'Authentifikation, Autor, Autorisation',
-	'categorie_communication' => 'Kommunication, Interaktivität, Nachrichtensysteme',
-	'categorie_date' => 'Termine, Kalender, Datum',
-	'categorie_divers' => 'Neue Objekte, externe Services',
-	'categorie_edition' => 'Textbearbeitung, Drucken, Redaktion',
-	'categorie_maintenance' => 'Verwaltung, Wartung',
-	'categorie_multimedia' => 'Bilder, Galerien, Multimedia',
-	'categorie_navigation' => 'Navigation, Suchen, Organisation',
-	'categorie_outil' => 'Entwicklungswerkzeuge',
-	'categorie_performance' => 'Optimierung, Leistungssteigerung, Sicherheit',
-	'categorie_squelette' => 'Skelette',
-	'categorie_statistique' => 'Linkmanagement, Statistik',
-	'categorie_theme' => 'Thema',
 	'config_activer_log_verbeux' => 'Ausführliche Logs einschalten?',
 	'config_activer_log_verbeux_explication' => 'Mit diese Option werden die ausführlichen SVP-Logs aktiviert…',
 	'config_activer_pas_a_pas' => 'Schrittweise Ausführung aktvieren?',
@@ -157,9 +143,7 @@ existiert nicht oder hat keinen Schreibrechte.
 	'label_actualise_le' => 'Aktualisiert am',
 	'label_archive' => 'URL des Archivs',
 	'label_branches_spip' => 'kompatibel mit',
-	'label_categorie' => 'Kategorie',
 	'label_compatibilite_spip' => 'Kompatibilität',
-	'label_critere_categorie' => 'Kategorien',
 	'label_critere_depot' => 'Depots',
 	'label_critere_doublon' => 'Kompatibilität',
 	'label_critere_etat' => 'Status',
@@ -247,7 +231,6 @@ existiert nicht oder hat keinen Schreibrechte.
 
 	// O
 	'onglet_depots' => 'Depots verwalten',
-	'option_categorie_toute' => 'Alle Kategorien',
 	'option_depot_tout' => 'Alle Depots',
 	'option_doublon_non' => 'Die neueste Version',
 	'option_doublon_oui' => 'Alle kompatiblen Versionen',

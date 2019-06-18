@@ -47,20 +47,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cacher_les_plugins_incompatibles' => 'Escoundre lu plugin incoumpatible',
-	'categorie_aucune' => 'Sensa categourìa',
-	'categorie_auteur' => 'Autenticacioun, autour, autourousacioun',
-	'categorie_communication' => 'Communicacioun, interatività, messagerìa',
-	'categorie_date' => 'Agènda, calendari, data',
-	'categorie_divers' => 'Ouget nouvèu, servici estèrnou',
-	'categorie_edition' => 'Edicioun, estampa, redacioun',
-	'categorie_maintenance' => 'Counfiguracioun, mantenença',
-	'categorie_multimedia' => 'Image, galerìa, multimedia',
-	'categorie_navigation' => 'Navigacioun, recerca, ourganisacioun',
-	'categorie_outil' => 'Óutis de desfouloupamen',
-	'categorie_performance' => 'Òtimisacioun, proudessa, segurtà',
-	'categorie_squelette' => 'Esquèletrou',
-	'categorie_statistique' => 'Referençamen, estatìstica',
-	'categorie_theme' => 'Tèma',
 	'config_activer_log_verbeux' => 'Ativà lu log verbous ?',
 	'config_activer_log_verbeux_explication' => 'Aquela oupcioun rende lu log de SVP mai verbous…',
 	'config_activer_pas_a_pas' => 'Ativà lou mòdou pas à pas ?',
@@ -155,9 +141,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_actualise_le' => 'Atualisat lou',
 	'label_archive' => 'URL da l’arquivi',
 	'label_branches_spip' => 'Coumpatible',
-	'label_categorie' => 'Categourìa',
 	'label_compatibilite_spip' => 'Coumpatibilità',
-	'label_critere_categorie' => 'Categourìa',
 	'label_critere_depot' => 'Depòsiti',
 	'label_critere_doublon' => 'Coumpatibilità',
 	'label_critere_etat' => 'Estat',
@@ -244,7 +228,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'onglet_depots' => 'Gerà lu depòsiti',
-	'option_categorie_toute' => 'Touti li categourìa',
 	'option_depot_tout' => 'Toui lu depòsiti',
 	'option_doublon_non' => 'La darrièra versioun',
 	'option_doublon_oui' => 'Touti li versioun coumpatibli',

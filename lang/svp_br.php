@@ -48,20 +48,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cacher_les_plugins_incompatibles' => 'Kuzhat ar pluginoù diembreget',
-	'categorie_aucune' => 'Hep rummad',
-	'categorie_auteur' => 'Dilesadur, aozer, aotre',
-	'categorie_communication' => 'Kehentiñ, etreoberiadegezh, postelerezh',
-	'categorie_date' => 'Deiziataer, deiziadur, deiziad',
-	'categorie_divers' => 'Traoù nevez, servijoù diavaez',
-	'categorie_edition' => 'Aozañ, moullañ, skridaozañ',
-	'categorie_maintenance' => 'kefluniadur, trezalc’h',
-	'categorie_multimedia' => 'Skeudennoù, katalog, liesvedia',
-	'categorie_navigation' => 'Merdeiñ, enklask, aozadur',
-	'categorie_outil' => 'Ostilh dispakañ',
-	'categorie_performance' => 'Gwellekaat, askorad, surentez',
-	'categorie_squelette' => 'Skeledenn',
-	'categorie_statistique' => 'Daveenniñ, stadegoù',
-	'categorie_theme' => 'Kinkladur',
 	'config_activer_log_verbeux' => 'Ober gant al logoù ragell ?',
 	'config_activer_log_verbeux_explication' => 'An dibab-mañ a laka logoù SVP kalz ragelloc’h...',
 	'config_activer_pas_a_pas' => 'Gweredekaat ar mod paz ouzh paz',
@@ -142,7 +128,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'onglet_depots' => 'Merañ an daspugnadoù',
-	'option_categorie_toute' => 'An holl rummadoù',
 	'option_depot_tout' => 'A bep daspugnadoù',
 	'option_doublon_non' => 'Ar stumm nevesañ',
 	'option_doublon_oui' => 'An holl stummoù kenglotus',

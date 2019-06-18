@@ -48,20 +48,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cacher_les_plugins_incompatibles' => 'Hide incompatible plugins',
-	'categorie_aucune' => 'No category',
-	'categorie_auteur' => 'Authentication, author, authorization',
-	'categorie_communication' => 'Communication, interaction, messaging',
-	'categorie_date' => 'Agendas, calendar, date',
-	'categorie_divers' => 'New objects, external services',
-	'categorie_edition' => 'Editing, printing, writing',
-	'categorie_maintenance' => 'Configuration, maintenance',
-	'categorie_multimedia' => 'Images, galeries, multimedia',
-	'categorie_navigation' => 'Navigation, search organization',
-	'categorie_outil' => 'Development tool',
-	'categorie_performance' => 'Optimization, performance, security',
-	'categorie_squelette' => 'Template',
-	'categorie_statistique' => 'SEO, statistics',
-	'categorie_theme' => 'Theme',
 	'config_activer_log_verbeux' => 'Enable verbose logs?',
 	'config_activer_log_verbeux_explication' => 'This option makes the logs much verbose.',
 	'config_activer_pas_a_pas' => 'Enable the step-by-step mode?',
@@ -72,8 +58,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_autoriser_activer_paquets_obsoletes_explication' => 'Obsolete packages are local packages that are older than other local packages. Obsolescence is established on the basis of the status (stable, testing, dev) of the package and on the basis of its version. Enable this option if you still want to activate these outdatedplugins.',
 	'config_depot_editable' => 'Allow repository edition?',
 	'config_depot_editable_explication' => 'This makes editable the informations of a repository and enable eventually to associate keywords or documents to it. This option shouldn’t interest anyone! Rather leave "no"!',
-	'config_utiliser_categorie' => 'Use the plugins’ category in the plugins display or search (not essential in runtime mode)',
-	'config_utiliser_tag' => 'Use the plugins’ tags in the plugins display or search (not essential in runtime mode)',
 	'confirmer_desinstaller' => 'Warning, uninstalling a plugin <b>wipes out</b> its data from the database and it is irreversible.<br />If you are not absolutely sure, just disable the plugin.',
 	'confirmer_telecharger_dans' => 'The plugin will be loaded into a directory (@dir@) which already exists.
 This will overwrite the content of this directory.
@@ -159,9 +143,7 @@ is not created or is not writable.
 	'label_actualise_le' => 'Updated on',
 	'label_archive' => 'URL of the archive',
 	'label_branches_spip' => 'Compatible',
-	'label_categorie' => 'Category',
 	'label_compatibilite_spip' => 'Compatiblity',
-	'label_critere_categorie' => 'Categories',
 	'label_critere_depot' => 'Repositories',
 	'label_critere_doublon' => 'Compatibility',
 	'label_critere_etat' => 'States',
@@ -249,7 +231,6 @@ is not created or is not writable.
 
 	// O
 	'onglet_depots' => 'Repositories management',
-	'option_categorie_toute' => 'All categories',
 	'option_depot_tout' => 'All repositories',
 	'option_doublon_non' => 'The latest version',
 	'option_doublon_oui' => 'All compatible versions',

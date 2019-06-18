@@ -48,20 +48,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cacher_les_plugins_incompatibles' => 'Kaŝi la nekongruajn kromprogramojn',
-	'categorie_aucune' => 'Senkategoria',
-	'categorie_auteur' => 'Aŭtentigo, aŭtoro, rajtigo ',
-	'categorie_communication' => 'Komunikado, interagado, mesaĝilo',
-	'categorie_date' => 'Agendoj, kalendaroj, dato',
-	'categorie_divers' => 'Novaj objektoj, eksteraj servoj',
-	'categorie_edition' => 'Eldono, presado, redakto',
-	'categorie_maintenance' => 'Agordoj, bontenado',
-	'categorie_multimedia' => 'Bildoj, galerioj, plurmedio',
-	'categorie_navigation' => 'Navigado, serĉo, aranĝo',
-	'categorie_outil' => 'Programada ilo',
-	'categorie_performance' => 'Optimumigo, rendimento, sekureco',
-	'categorie_squelette' => 'Skeleto',
-	'categorie_statistique' => 'Optimumigo de serĉilo, statistikoj',
-	'categorie_theme' => 'Etoso',
 	'config_activer_log_verbeux' => 'Aktivigi malkoncizan protokolon ?',
 	'config_activer_log_verbeux_explication' => 'Tiu opcio igas la protokolon multe pli malkonciza...',
 	'config_activer_pas_a_pas' => 'Aktivi la popaŝan reĝimon ?',
@@ -150,9 +136,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_actualise_le' => 'Ĝisdatigita je',
 	'label_archive' => 'Arĥivo-retadreso',
 	'label_branches_spip' => 'Kongrua',
-	'label_categorie' => 'Kategorio',
 	'label_compatibilite_spip' => 'Kongrueco',
-	'label_critere_categorie' => 'Kategorioj',
 	'label_critere_depot' => 'Deponejoj',
 	'label_critere_doublon' => 'Kongrueco',
 	'label_critere_etat' => 'Statoj',
@@ -240,7 +224,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'onglet_depots' => 'Mastrumi la deponejojn',
-	'option_categorie_toute' => 'Ĉiuj kategorioj',
 	'option_depot_tout' => 'Ĉiuj deponejoj',
 	'option_doublon_non' => 'Plej freŝa versio',
 	'option_doublon_oui' => 'Ĉiuj kongruaj versioj',

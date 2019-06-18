@@ -46,20 +46,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cacher_les_plugins_incompatibles' => 'Nascondi i plugin incompatibili',
-	'categorie_aucune' => 'Nessuna categoria',
-	'categorie_auteur' => 'Autenticazione, autore, autorizzazione',
-	'categorie_communication' => 'Comunicazione, interattività, messagistica',
-	'categorie_date' => 'Agenda, calendario, date',
-	'categorie_divers' => 'Nuovi oggetti, servizi esterni',
-	'categorie_edition' => 'Modifica, stampa, scrittura',
-	'categorie_maintenance' => 'Configurazione, manutenzione',
-	'categorie_multimedia' => 'Immagini, gallerie, multimedialità',
-	'categorie_navigation' => 'Navigazione, ricerca, organizzazione',
-	'categorie_outil' => 'Strumenti di sviluppo',
-	'categorie_performance' => 'Ottimizzazione, prestazioni, sicurezza',
-	'categorie_squelette' => 'Template',
-	'categorie_statistique' => 'SEO, statistiche',
-	'categorie_theme' => 'Temi',
 	'config_activer_log_verbeux' => 'Abilita il logging verboso?',
 	'config_activer_log_verbeux_explication' => 'Questa opzione rende il log di SVP più verboso...',
 	'config_activer_pas_a_pas' => 'Attivare la modalità passo-passo?',
@@ -151,9 +137,7 @@ Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controll
 	'label_actualise_le' => 'Aggiorna su',
 	'label_archive' => 'URL dell’archivio',
 	'label_branches_spip' => 'Compatibile',
-	'label_categorie' => 'Categoria',
 	'label_compatibilite_spip' => 'Compatibilità',
-	'label_critere_categorie' => 'Categorie',
 	'label_critere_depot' => 'Repository',
 	'label_critere_doublon' => 'Compatibilità',
 	'label_critere_etat' => 'Stati',
@@ -239,7 +223,6 @@ Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controll
 
 	// O
 	'onglet_depots' => 'Gestione dei repository',
-	'option_categorie_toute' => 'Tutte le categorie',
 	'option_depot_tout' => 'Tutti i repository',
 	'option_doublon_non' => 'L’ultima versione',
 	'option_doublon_oui' => 'Tutte le versioni compatibili',

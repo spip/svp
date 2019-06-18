@@ -48,20 +48,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cacher_les_plugins_incompatibles' => 'Cacher les plugins incompatibles',
-	'categorie_aucune' => 'Sans catégorie',
-	'categorie_auteur' => 'Authentification, auteur, autorisation',
-	'categorie_communication' => 'Communication, interactivité, messagerie',
-	'categorie_date' => 'Agendas, calendrier, date',
-	'categorie_divers' => 'Objets nouveaux, services externes',
-	'categorie_edition' => 'Édition, impression, rédaction',
-	'categorie_maintenance' => 'Configuration, maintenance',
-	'categorie_multimedia' => 'Images, galerie, multimédia',
-	'categorie_navigation' => 'Navigation, recherche, organisation',
-	'categorie_outil' => 'Outil de développement',
-	'categorie_performance' => 'Optimisation, performance, sécurité',
-	'categorie_squelette' => 'Squelette',
-	'categorie_statistique' => 'Référencement, statistiques',
-	'categorie_theme' => 'Thème',
 	'config_activer_log_verbeux' => 'Activer les logs verbeux ?',
 	'config_activer_log_verbeux_explication' => 'Cette option rend les logs de SVP beaucoup plus locaces…',
 	'config_activer_pas_a_pas' => 'Activer le mode pas-à-pas ?',
@@ -72,8 +58,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_autoriser_activer_paquets_obsoletes_explication' => 'Les paquets obsolètes sont des paquets locaux présents qui sont plus anciens que d’autres paquets locaux. L’obsolescence est établie sur la base de l’état (stable, test, dev) du paquet ainsi que sur la base de sa version. Active cette option si tu souhaites malgré tout pouvoir activer ces plugins obsolètes.',
 	'config_depot_editable' => 'Permettre l’édition des dépôts ?',
 	'config_depot_editable_explication' => 'Cela rend éditable les informations d’un dépôt et permet ainsi de leur joindre éventuellement des mots-clés ou documents. Cette option ne devrait intéresser personne ! Préférez laisser « non » !',
-	'config_utiliser_categorie' => 'Utiliser la catégorie des plugins dans les affichages et les recherches de plugin (pas indispensable en mode runtime)',
-	'config_utiliser_tag' => 'Utiliser les tags des plugins dans les affichages et les recherches de plugin (pas indispensable en mode runtime)',
 	'confirmer_desinstaller' => 'Attention, la désinstallation d’un plugin <b>efface</b> ses données de la base et est irréversible.<br />Si tu n’es pas certain, désactives simplement le plugin.',
 	'confirmer_telecharger_dans' => 'Le plugin sera chargé dans un répertoire (@dir@) qui existe déjà.
 	Cela écrasera le contenu de ce répertoire.
@@ -161,9 +145,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_actualise_le' => 'Actualisé le',
 	'label_archive' => 'URL de l’archive',
 	'label_branches_spip' => 'Compatible',
-	'label_categorie' => 'Catégorie',
 	'label_compatibilite_spip' => 'Compatiblité',
-	'label_critere_categorie' => 'Catégories',
 	'label_critere_depot' => 'Dépôts',
 	'label_critere_doublon' => 'Compatibilité',
 	'label_critere_etat' => 'États',
@@ -251,7 +233,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'onglet_depots' => 'Gérer les dépôts',
-	'option_categorie_toute' => 'Toutes les catégories',
 	'option_depot_tout' => 'Tous les dépôts',
 	'option_doublon_non' => 'La version la plus récente',
 	'option_doublon_oui' => 'Toutes les versions compatibles',

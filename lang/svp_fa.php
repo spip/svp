@@ -47,20 +47,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// C
 	'cacher_les_plugins_incompatibles' => 'پنهان ساختن پلاگين‌هاي ناسازگار ',
-	'categorie_aucune' => 'بدون مقوله',
-	'categorie_auteur' => 'تأييد، نويسنده، اختيار',
-	'categorie_communication' => 'ارتباط، تعامل، پيك',
-	'categorie_date' => 'يادداشت‌ها، تقويم، تاريخ',
-	'categorie_divers' => 'چيزهاي نو، خدمات داخلي',
-	'categorie_edition' => 'نشر، پرينت، نگارش',
-	'categorie_maintenance' => 'پيكربندي، نگهداري',
-	'categorie_multimedia' => 'تصويرها، گالري، چندرسانه',
-	'categorie_navigation' => 'ناوبري، جستجو، سازماندهي',
-	'categorie_outil' => 'ابزار توسعه',
-	'categorie_performance' => 'بهينه سازي، عملكرد، امنيت',
-	'categorie_squelette' => 'اسكلت',
-	'categorie_statistique' => 'ارجاع، آمارها',
-	'categorie_theme' => 'تم ',
 	'config_activer_log_verbeux' => 'فعال‌سازي ثبت‌هاي طولاني؟',
 	'config_activer_log_verbeux_explication' => 'اين گزينه‌ ثبت‌ اس.وي.پي را بسيار طولاني مي‌سازد...',
 	'config_activer_pas_a_pas' => 'فعال سازي حالت گام به گام؟',
@@ -156,9 +142,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_actualise_le' => 'فعال‌سازي شده',
 	'label_archive' => 'يو.آر.ال آرشيو',
 	'label_branches_spip' => 'سازگار',
-	'label_categorie' => 'مقوله',
 	'label_compatibilite_spip' => 'سازگاري',
-	'label_critere_categorie' => 'مقوله‌ها',
 	'label_critere_depot' => 'مخازن',
 	'label_critere_doublon' => 'سازگاري',
 	'label_critere_etat' => 'حالت‌ها',
@@ -245,7 +229,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// O
 	'onglet_depots' => 'مديريت مخازن',
-	'option_categorie_toute' => 'تمام مقوله‌ها',
 	'option_depot_tout' => 'تمام مخازن',
 	'option_doublon_non' => 'آخرين نسخه',
 	'option_doublon_oui' => 'تمام نسخه‌هاي در دسترس',
