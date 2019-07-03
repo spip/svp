@@ -74,11 +74,9 @@ function plugin_lire($prefixe, $informations = array()) {
 			}
 		}
 
-		if (is_string($informations)) {
-			if (in_array($informations, $champs_plugin)
-			and isset($plugin[$informations])) {
-				$plugin = $plugin[$informations];
-			}
+		if (is_string($informations)
+		and isset($plugin[$informations])) {
+			$plugin = $plugin[$informations];
 		}
  	}
 
