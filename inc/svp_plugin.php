@@ -62,6 +62,9 @@ function plugin_lire($prefixe, $informations = array()) {
 
 		// Extraction des seules informations demandées.
 		// Si un information n'est pas un champ valide elle n'est pas renvoyée sans monter d'erreur.
+		if (is_string($informations)) {
+			$informations = array($informations);
+		}
 		$plugin = array_intersect_key($plugin, array_flip($informations));
 	}
 
