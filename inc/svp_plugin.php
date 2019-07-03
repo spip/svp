@@ -26,30 +26,26 @@ function plugin_lire($prefixe, $informations = array()) {
 
 	// Initialisation du tableau de sortie
 	static $plugins = array();
+	static $champs_plugin = array();
 
 	// On passe le préfixe en majuscules pour être cohérent avec le stockage en base.
 	$prefixe = strtoupper($prefixe);
 
 	if (!isset($plugins[$prefixe])) {
-		// -- Identification des champs acceptables pour un plugin.
-		include_spip('base/objets');
-		$description_table = lister_tables_objets_sql('spip_plugins');
-		$champs_plugin = array_keys($description_table['field']);
-
-		// --Initialisation de la jointure entre plugins et dépôts.
+		// Initialisation de la jointure entre plugins et dépôts.
 		$from = array('spip_plugins', 'spip_depots_plugins');
 		$group_by = array('spip_plugins.id_plugin');
 
-		// -- Préfixe, jointure et conditions sur la table des dépots pour éviter les plugins installés.
+		// Préfixe, jointure et conditions sur la table des dépots pour éviter les plugins installés.
 		$where = array(
 			'spip_plugins.prefixe=' . sql_quote($prefixe),
 			'spip_depots_plugins.id_depot>0',
 			'spip_depots_plugins.id_plugin=spip_plugins.id_plugin'
 		);
 
-		// -- Acquisition de tous les champs acceptables du plugin.
+		// -- Acquisition de tous les champs du plugin.
 		$plugins[$prefixe] = array();
-		if ($plugin = sql_fetsel($champs_plugin, $from, $where, $group_by)) {
+		if ($plugin = sql_fetsel('*', $from, $where, $group_by)) {
 			$plugins[$prefixe] = $plugin;
 		}
 	}
@@ -57,6 +53,15 @@ function plugin_lire($prefixe, $informations = array()) {
 	// On ne retourne que les champs demandés
 	$plugin = $plugins[$prefixe];
 	if ($plugin and $informations) {
+		// Identification des champs acceptables pour un plugin.
+		if (!$champs_plugin) {
+			include_spip('base/objets');
+			$description_table = lister_tables_objets_sql('spip_plugins');
+			$champs_plugin = array_keys($description_table['field']);
+		}
+
+		// Extraction des seules informations demandées.
+		// Si un information n'est pas un champ valide elle n'est pas renvoyée sans monter d'erreur.
 		$plugin = array_intersect_key($plugin, array_flip($informations));
 	}
 
