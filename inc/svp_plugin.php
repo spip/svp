@@ -28,7 +28,6 @@ function plugin_lire($prefixe, $informations = array()) {
 
 	// Initialisation du tableau de sortie
 	static $plugins = array();
-	static $champs_plugin = array();
 
 	// On passe le préfixe en majuscules pour être cohérent avec le stockage en base.
 	$prefixe = strtoupper($prefixe);
@@ -55,13 +54,6 @@ function plugin_lire($prefixe, $informations = array()) {
 	// On ne retourne que les champs demandés
 	$plugin = $plugins[$prefixe];
 	if ($plugin and $informations) {
-		// Identification des champs acceptables pour un plugin.
-		if (!$champs_plugin) {
-			include_spip('base/objets');
-			$description_table = lister_tables_objets_sql('spip_plugins');
-			$champs_plugin = array_keys($description_table['field']);
-		}
-
 		// Extraction des seules informations demandées.
 		// -- si on demande une information unique on renvoie la valeur simple, sinon on renvoie un tableau.
 		// -- si une information n'est pas un champ valide elle n'est pas renvoyée sans monter d'erreur.
@@ -70,12 +62,14 @@ function plugin_lire($prefixe, $informations = array()) {
 				// Tableau d'une seule information : on revient à une chaine unique.
 				$informations = array_shift($informations);
 			} else {
+				// Tableau des informations valides
 				$plugin = array_intersect_key($plugin, array_flip($informations));
 			}
 		}
 
 		if (is_string($informations)
 		and isset($plugin[$informations])) {
+			// Valeur unique demandée.
 			$plugin = $plugin[$informations];
 		}
  	}
