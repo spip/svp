@@ -47,8 +47,8 @@ function svp_afficher_intervalle($intervalle, $logiciel) {
 		if (!strlen($majeure)) {
 			$version = _T('svp:info_logiciel_version', array(
 				'logiciel' => $logiciel,
-				'signe' => ($mineure_inc ? '&ge;' : '&gt;'),
-				'version' =>  $mineure,
+				'signe'    => ($mineure_inc ? '&ge;' : '&gt;'),
+				'version'  =>  $mineure
 			));
 		} else {
 			$version = _T('svp:info_logiciel_version_intervalle', array(
