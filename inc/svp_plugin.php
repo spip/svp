@@ -17,10 +17,12 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *        La valeur du préfixe du plugin.
  * @param array|string  $informations
  *        Identifiant d'un champ ou de plusieurs champs de la description d'un plugin.
- *        Si l'argument est vide, la fonction renvoie les descriptions complètes.
+ *        Si l'argument est vide, la fonction renvoie la description complète.
  *
- * @return array
- *         La description brute complète ou partielle du plugin.
+ * @return mixed
+ *         La description brute complète ou partielle du plugin :
+ *         - sous la forme d'une valeur simple si l'information demandée est unique (chaine)
+ *         - sous la forme d'un tabelau associatif indexé par le nom du champ sinon.
  */
 function plugin_lire($prefixe, $informations = array()) {
 
@@ -44,7 +46,7 @@ function plugin_lire($prefixe, $informations = array()) {
 		);
 
 		// -- Acquisition de tous les champs du plugin.
-		$plugins[$prefixe] = array();
+		$plugins[$prefixe] = false;
 		if ($plugin = sql_fetsel('*', $from, $where, $group_by)) {
 			$plugins[$prefixe] = $plugin;
 		}
@@ -61,12 +63,24 @@ function plugin_lire($prefixe, $informations = array()) {
 		}
 
 		// Extraction des seules informations demandées.
-		// Si un information n'est pas un champ valide elle n'est pas renvoyée sans monter d'erreur.
-		if (is_string($informations)) {
-			$informations = array($informations);
+		// -- si on demande une information unique on renvoie la valeur simple, sinon on renvoie un tableau.
+		// -- si une information n'est pas un champ valide elle n'est pas renvoyée sans monter d'erreur.
+		if (is_array($informations)) {
+			if (count($informations) == 1) {
+				// Tableau d'une seule information : on revient à une chaine unique.
+				$informations = array_shift($informations);
+			} else {
+				$plugin = array_intersect_key($plugin, array_flip($informations));
+			}
 		}
-		$plugin = array_intersect_key($plugin, array_flip($informations));
-	}
+
+		if (is_string($informations)) {
+			if (in_array($informations, $champs_plugin)
+			and isset($plugin[$informations])) {
+				$plugin = $plugin[$informations];
+			}
+		}
+ 	}
 
 	return $plugin;
 }
