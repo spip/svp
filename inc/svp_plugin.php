@@ -31,7 +31,7 @@ function plugin_lire($prefixe, $informations = array()) {
 	$prefixe = strtoupper($prefixe);
 
 	if (!isset($plugins[$prefixe])) {
-		// Identification des champs acceptables pour un plugin.
+		// -- Identification des champs acceptables pour un plugin.
 		include_spip('base/objets');
 		$description_table = lister_tables_objets_sql('spip_plugins');
 		$champs_plugin = array_keys($description_table['field']);
@@ -47,7 +47,7 @@ function plugin_lire($prefixe, $informations = array()) {
 			'spip_depots_plugins.id_plugin=spip_plugins.id_plugin'
 		);
 
-		// Acquisition de tous les champs acceptables du plugin.
+		// -- Acquisition de tous les champs acceptables du plugin.
 		$plugins[$prefixe] = array();
 		if ($plugin = sql_fetsel($champs_plugin, $from, $where, $group_by)) {
 			$plugins[$prefixe] = $plugin;
