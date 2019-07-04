@@ -67,10 +67,9 @@ function plugin_lire($prefixe, $informations = array()) {
 			}
 		}
 
-		if (is_string($informations)
-		and isset($plugin[$informations])) {
+		if (is_string($informations)) {
 			// Valeur unique demandée.
-			$plugin = $plugin[$informations];
+			$plugin = isset($plugin[$informations]) ? $plugin[$informations] : '';
 		}
  	}
 
