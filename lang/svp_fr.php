@@ -144,6 +144,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_archive' => 'URL de l’archive',
 	'label_branches_spip' => 'Compatible',
 	'label_compatibilite_spip' => 'Compatiblité',
+	'label_plugin_description' => 'Description de la version @version@',
 	'label_critere_depot' => 'Dépôts',
 	'label_critere_doublon' => 'Compatibilité',
 	'label_critere_etat' => 'États',
