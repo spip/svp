@@ -150,6 +150,7 @@ Wil je ze inactief maken dan moet je met de webmaster van de site contact opneme
 	'label_destination' => 'Pad vanaf map "auto" waar de plugin moet worden geplaatst',
 	'label_modifie_le' => 'Aangepast op',
 	'label_n_autres_contributions' => 'andere bijdragen',
+	'label_plugin_description' => 'Omschrijving van versie @version@',
 	'label_prefixe' => 'Prefix',
 	'label_selectionner_plugin' => 'Deze plugin kiezen',
 	'label_tags' => 'Tags',

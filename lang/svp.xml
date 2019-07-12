@@ -47,7 +47,7 @@
 		<traducteur nom="Julia14" lien="https://trad.spip.net/auteur/julia14" />
 		<traducteur nom="phante" lien="https://trad.spip.net/auteur/phante" />
 	</langue>
-	<langue code="nl" url="https://trad.spip.net/tradlang_module/svp?lang_cible=nl" total="235" traduits="234" relire="0" modifs="0" nouveaux="1" pourcent="99.57">
+	<langue code="nl" url="https://trad.spip.net/tradlang_module/svp?lang_cible=nl" total="235" traduits="235" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Hanjo" lien="https://trad.spip.net/auteur/hanjo" />
 		<traducteur nom="Suske" lien="https://trad.spip.net/auteur/suske" />
 	</langue>
