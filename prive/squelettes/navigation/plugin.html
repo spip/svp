@@ -1,4 +1,4 @@
-<BOUCLE_plugin_navigation(PLUGINS) {id_plugin}{si #ENV{exec}|=={plugin}}>
+<BOUCLE_plugin_navigation(PLUGINS) {id_plugin}{si #ENV{exec}|=={plugin}}{0, 1}>
 [(#REM) <!-- La boite d'infos du plugin --> ]
 #BOITE_OUVRIR{'', info}
 	<INCLURE{fond=prive/objets/infos/plugin,

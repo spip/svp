@@ -7,7 +7,7 @@
 	<a href="[(#URL_ECRIRE{#VAL{depot}|objet_info{table_objet}})]">
 		[(#VAL{depot}|objet_info{texte_objets}|_T)]
 	</a>
-<BOUCLE_plugin(PLUGINS) {id_plugin}>
+<BOUCLE_plugin(PLUGINS depots) {id_plugin}{0, 1}>
 	&gt;
 	<strong class="on">#NOM</strong>
 </BOUCLE_plugin>

@@ -1,4 +1,4 @@
-<BOUCLE_infos_plugin(PLUGINS) {id_plugin=#ENV{id}}>
+<BOUCLE_infos_plugin(PLUGINS) {id_plugin=#ENV{id}}{0, 1}>
 <div class="infos">
 	[(#REM) <!-- La reference du depot --> ]
 	#SET{titre_info, #ENV{type}|objet_info{texte_objet}|_T}

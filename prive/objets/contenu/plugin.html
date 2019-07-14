@@ -1,4 +1,4 @@
-<BOUCLE_contenu_plugin(PLUGINS) {id_plugin=#ENV{id}}>
+<BOUCLE_contenu_plugin(PLUGINS) {id_plugin=#ENV{id}}{0, 1}>
 <div class="champ contenu_titre[ (#NOM*|strlen|?{'',vide})]">
 	<div class="label"><:info_nom:></div>
 	<div dir="#LANG_DIR" class="titre">#NOM</div>
