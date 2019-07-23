@@ -50,10 +50,10 @@ function inc_where_compatible_spip($version, $table, $op) {
 				AND
 				CASE WHEN ' . $max . ' = \'\'
 				OR ' . $max . ' = \']\'
-				THEN \'99.99.99\' >= \'' . $version . '\'
+				THEN \'999.999.999\' >= \'' . $version . '\'
 				WHEN ' . $max . ' = \')\'
 				OR ' . $max . ' = \'[\'
-				THEN \'99.99.99\' > \'' . $version . '\'
+				THEN \'999.999.999\' > \'' . $version . '\'
 				WHEN RIGHT(' . $max . ', 1) = \')\'
 				OR RIGHT(' . $max . ', 1) = \'[\'
 				THEN LEFT(' . $max . ', LENGTH(' . $max . ') - 1) > \'' . $version . '\'

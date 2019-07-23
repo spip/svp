@@ -40,7 +40,7 @@ function svp_afficher_intervalle($intervalle, $logiciel) {
 	}
 
 	$mineure = $regs[1];
-	$majeure = preg_replace(',\.99$,', '.*', $regs[2]);
+	$majeure = preg_replace(',\.999$,', '.*', $regs[2]);
 	$mineure_inc = $intervalle{0} == "[";
 	$majeure_inc = substr($intervalle, -1) == "]";
 	if (strlen($mineure)) {
@@ -507,7 +507,7 @@ function svp_compter($entite, $id_depot = 0, $categorie = '', $compatible_spip =
  *
  * @example
  *     #SVP_BRANCHES_SPIP       : array('1.9', '2.0', '2.1', ....)
- *     #SVP_BRANCHES_SPIP{3.0}  : array('3.0.0', '3.0.99')
+ *     #SVP_BRANCHES_SPIP{3.0}  : array('3.0.0', '3.0.999')
  *
  * @balise
  * @see calcul_svp_branches_spip()
@@ -535,17 +535,19 @@ function balise_SVP_BRANCHES_SPIP($p) {
  *     Branche dont on veut récupérer les bornes mini et maxi
  * @return array
  *     Liste des branches array('1.9', '2.0', '2.1', ....)
- *     ou liste mini et maxi d'une branche array('3.0.0', '3.0.99')
+ *     ou liste mini et maxi d'une branche array('3.0.0', '3.0.999')
  **/
 function calcul_svp_branches_spip($branche) {
 
 	$retour = array();
-	include_spip('inc/svp_outiller'); // pour $GLOBALS['infos_branches_spip']
+
+	// pour $GLOBALS['infos_branches_spip']
+	include_spip('inc/svp_outiller');
 	$svp_branches = $GLOBALS['infos_branches_spip'];
 
 	if (is_array($svp_branches)) {
-		if (($branche) and in_array($branche, $svp_branches)) // On renvoie les bornes inf et sup de la branche specifiee
-		{
+		if (($branche) and in_array($branche, $svp_branches)) {
+			// On renvoie les bornes inf et sup de la branche specifiee
 			$retour = $svp_branches[$branche];
 		} else {
 			// On renvoie uniquement les numeros de branches
