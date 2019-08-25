@@ -196,7 +196,7 @@ function extraire_bornes($intervalle, $initialiser = false) {
 	) {
 		if ($matches[1]) {
 			$bornes['min']['valeur'] = trim($matches[1]);
-			$bornes['min']['incluse'] = ($intervalle{0} == "[");
+			$bornes['min']['incluse'] = ($intervalle[0] == "[");
 		}
 		if ($matches[2]) {
 			$bornes['max']['valeur'] = trim($matches[2]);

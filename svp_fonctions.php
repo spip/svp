@@ -40,8 +40,9 @@ function svp_afficher_intervalle($intervalle, $logiciel) {
 	}
 
 	$mineure = $regs[1];
+
 	$majeure = preg_replace(',\.99$,', '.*', $regs[2]);
-	$mineure_inc = $intervalle{0} == "[";
+	$mineure_inc = $intervalle[0] == "[";
 	$majeure_inc = substr($intervalle, -1) == "]";
 	if (strlen($mineure)) {
 		if (!strlen($majeure)) {
