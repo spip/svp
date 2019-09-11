@@ -151,6 +151,7 @@ is not created or is not writable.
 	'label_destination' => 'Path from the directory "auto" where to drop the plugin',
 	'label_modifie_le' => 'Edited on',
 	'label_n_autres_contributions' => 'other contributions',
+	'label_plugin_description' => 'Description of version @version@',
 	'label_prefixe' => 'Prefix',
 	'label_selectionner_plugin' => 'Sélect this plugin',
 	'label_tags' => 'Tags',
