@@ -1,7 +1,7 @@
 <paquet
 	prefix="svp"
 	categorie="maintenance"
-	version="2.0.9"
+	version="2.0.10"
 	etat="stable"
 	compatibilite="[3.3.0-dev;3.3.*]"
 	logo="svp-64.png"
@@ -28,4 +28,5 @@
 	<pipeline nom="ieconfig_metas" inclure="svp_ieconfig.php" />
 
 	<necessite nom="archiviste" compatibilite="[0.3.0;]" />
+	<necessite nom="php:openssl" />
 </paquet>
