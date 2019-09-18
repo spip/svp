@@ -346,7 +346,7 @@ class Decideur {
 					unset($d[$cle][0]);
 					foreach ($d[$cle] as $version => $dependences) {
 						if (svp_verifier_compatibilite_spip($version)) {
-							$dep = array_merge($dep[0], $dependences);
+							$dep[0] = array_merge($dep[0], $dependences);
 						}
 					}
 					$d[$cle] = $dep;
