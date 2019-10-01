@@ -152,6 +152,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_destination' => 'المسار من المجلد «auto» حيث سيتم وضع الملحق',
 	'label_modifie_le' => 'تم التعديل في',
 	'label_n_autres_contributions' => 'مشاركات أخرى',
+	'label_plugin_description' => 'وصف الإصدار @version@',
 	'label_prefixe' => 'بادئة',
 	'label_selectionner_plugin' => 'تحديد هذا الملحق',
 	'label_tags' => 'علامات',
