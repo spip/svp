@@ -117,7 +117,7 @@ function svp_descriptions_paquets_locaux(&$erreurs_xml = array()) {
 function svp_base_supprimer_paquets_locaux() {
 	sql_delete('spip_paquets', 'id_depot = ' . 0); //_paquets locaux en 0
 
-	$ids = sql_allfetsel('id_plugin', 'spip_paquets');
+	$ids = sql_allfetsel('DISTINCT(id_plugin)', 'spip_paquets');
 	$ids = array_column($ids, 'id_plugin');
 	sql_delete('spip_plugins', sql_in('id_plugin', $ids, 'NOT'));
 }
