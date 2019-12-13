@@ -144,15 +144,12 @@ function svp_pre_boucle($boucle) {
  * @param array $flux
  * @return array
  */
-function svp_lister_champs_selection_conditionnelle($flux) {
+function svp_exclure_id_conditionnel($flux) {
 	if (!in_array(
 		$flux['args']['table'],
 		array('spip_depots', 'spip_plugins', 'spip_paquets')
 	)) {
-		$flux['data'] = array_diff(
-			$flux['data'],
-			array('id_depot', 'id_paquet', 'id_plugin')
-		);
+		$flux['data'] = array_merge($flux['data'], array('id_depot', 'id_paquet', 'id_plugin'));
 	}
 	return $flux;
 }
