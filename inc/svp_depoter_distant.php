@@ -479,10 +479,13 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 			// On complete les informations du paquet et du plugin
 			$insert_paquet = array_merge($insert_paquet, $champs['paquet']);
 			$insert_plugin = $champs['plugin'];
-			// On construit l'url complete du logo
-			// Le logo est maintenant disponible a la meme adresse que le zip et porte le nom du zip.
-			// Son extension originale est conservee
-			if ($insert_paquet['logo']) {
+			// On construit l'url complete du logo :
+			// Si un logo est fourni il est inclus dans la balise <logo> du bloc <zip>.
+			if (!empty($_infos['logo'])) {
+				$insert_paquet['logo'] = $depot['url_archives'] . '/' . $_infos['logo'];
+			} elseif ($insert_paquet['logo']) {
+				// Par compatibilité ascendante pendant que SVP et SP soient synchro on conserve l'ancienne
+				// façon de construire le logo.
 				$insert_paquet['logo'] = $depot['url_archives'] . '/'
 					. basename($insert_paquet['nom_archive'], '.zip') . '.'
 					. pathinfo($insert_paquet['logo'], PATHINFO_EXTENSION);
@@ -648,7 +651,7 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 	// - on supprime toutes les urls plugin
 	// - on les regenere pour la liste des plugins mise a jour
 	if (!_SVP_MODE_RUNTIME) {
-		svp_actualiser_url_plugins($id_depot);
+		svp_actualiser_url_plugins();
 	}
 
 	// Calcul des compteurs de paquets, plugins et contributions
@@ -773,6 +776,7 @@ function svp_completer_plugins($ids_plugin) {
 
 		$plugin_en_cours = 0;
 		$inserts = array();
+		$complements = array('compatibilite_spip' => '', 'branches_spip' => '', 'date_crea' => 0, 'date_modif' => 0);
 
 		foreach ($resultats as $paquet) {
 			// On finalise le plugin en cours et on passe au suivant 

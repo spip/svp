@@ -358,7 +358,7 @@ function svp_phraser_plugin($dtd, $contenu) {
  *     - Index 'source' : arborescence relative des sources
  */
 function svp_phraser_zip($contenu) {
-	static $balises_zip = array('file', 'size', 'date', 'source', 'last_commit');
+	static $balises_zip = array('file', 'size', 'date', 'source', 'last_commit', 'logo');
 
 	$zip = array();
 	if (is_array($arbre = spip_xml_parse($contenu))) {
