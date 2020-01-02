@@ -29,9 +29,9 @@
 				<th class="date secondaire">[(#TRI{date_modif, <:svp:label_modifie_le:>, ajax})]</th>
 				<th class="intervalle"><:svp:label_compatibilite_spip:></th>
 				<th class="numero">[(#TRI{version, <:svp:label_version:>, ajax})]</th>
-				<th class="lien"><:svp:label_xml_plugin:></th>
 				<th class="lien"><:svp:titre_depot:></th>
-				<th class="id">[(#TRI{id_paquet, <:info_numero_abbreviation:>, ajax})]</th>
+				<th class="lien">&nbsp;</th>
+				<th class="lien">&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -47,16 +47,20 @@
 				<td class="intervalle">[(#COMPATIBILITE_SPIP|svp_afficher_intervalle{SPIP}|sinon{--})]</td>
 				<td class="numero">[(#_liste_paquets:VERSION)]</td>
 				<td class="lien">
+					<a[ href="(#ID_DEPOT|generer_url_entite{depot})"] title="<:svp:bulle_aller_depot:>">
+						[(#TITRE)]
+					</a>
+				</td>
+				<td class="lien">
 					<a class="mediabox boxIframe boxWidth-800px boxHeight-600px"[ href="(#URL_PAGE{paquet_xml,id_paquet=#ID_PAQUET})"] title="<:svp:bulle_afficher_xml_plugin:>">
 						[(#CHEMIN_IMAGE{plugin-16.png}|balise_img{'', icone})]
 					</a>
 				</td>
 				<td class="lien">
-					<a[ href="(#ID_DEPOT|generer_url_entite{depot})"] title="<:svp:bulle_aller_depot:>">
-						[(#TITRE)]
-					</a>
+					[<a href="(#LIEN_DOC)" title="<:svp:lien_documentation:>">
+						[(#CHEMIN_IMAGE{documentation-16.png}|balise_img{'', icone})]
+					</a>]
 				</td>
-				<td class="id">[(#ID_PAQUET)]</td>
 			</BOUCLE_depot_paquet>
 			</tr>
 </BOUCLE_liste_paquets>
