@@ -1,10 +1,7 @@
 <BOUCLE_plugin_navigation(PLUGINS) {id_plugin}{si #ENV{exec}|=={plugin}}{0, 1}>
 [(#REM) <!-- La boite d'infos du plugin --> ]
 #BOITE_OUVRIR{'', info}
-	<INCLURE{fond=prive/objets/infos/plugin,
-		type=#ENV{type-page},
-		id=#ID_PLUGIN,
-		env} />
+	#PIPELINE{boite_infos,#ARRAY{data,'',args,#ARRAY{'type','plugin','id',#ENV{id_plugin}}}}
 #BOITE_FERMER
 
 [(#REM) <!-- Le logo du plugin : celui du paquet le plus haut en version --> ]
