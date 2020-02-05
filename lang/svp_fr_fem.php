@@ -88,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'fieldset_debug' => 'Débug',
 	'fieldset_edition' => 'Édition',
 	'fieldset_fonctionnement' => 'Fonctionnement',
+	'fieldset_typologie' => 'Typologie des plugins',
 	'filtrer' => 'Filtrer',
 
 	// I
@@ -152,6 +153,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_destination' => 'Chemin depuis le répertoire « auto » où déposer le plugin',
 	'label_modifie_le' => 'Modifié le',
 	'label_n_autres_contributions' => 'autres contributions',
+	'label_plugin_description' => 'Description de la version @version@',
 	'label_prefixe' => 'Préfixe',
 	'label_selectionner_plugin' => 'Sélectionner ce plugin',
 	'label_tags' => 'Tags',
