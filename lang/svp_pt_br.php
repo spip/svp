@@ -86,6 +86,7 @@ Você precisa confirmar esta ação.',
 	'fieldset_debug' => 'Depuração',
 	'fieldset_edition' => 'Edição',
 	'fieldset_fonctionnement' => 'Funcionamento',
+	'fieldset_typologie' => 'Tipologia dos plugins',
 	'filtrer' => 'Filtrar',
 
 	// I
@@ -148,6 +149,7 @@ Se você desejar desativá-los, contate o webmaster do site, ou consulte <a href
 	'label_destination' => 'Caminho do diretório «auto», onde gravar o plugin',
 	'label_modifie_le' => 'Alterado em',
 	'label_n_autres_contributions' => 'outras contribuições',
+	'label_plugin_description' => 'Descrição da versão @version@',
 	'label_prefixe' => 'Prefixo',
 	'label_selectionner_plugin' => 'Selecionar este plugin',
 	'label_tags' => 'Tags',
