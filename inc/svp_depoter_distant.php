@@ -479,15 +479,16 @@ function svp_actualiser_paquets($id_depot, $paquets, &$nb_paquets, &$nb_plugins,
 			// On complete les informations du paquet et du plugin
 			$insert_paquet = array_merge($insert_paquet, $champs['paquet']);
 			$insert_plugin = $champs['plugin'];
-			// On construit l'url complete du logo :
-			// Si un logo est fourni il est inclus dans la balise <logo> du bloc <zip>.
+			// Le logo est normalement fourni dans les infos de zip
 			if (!empty($_infos['logo'])) {
 				$insert_paquet['logo'] = $depot['url_archives'] . '/' . $_infos['logo'];
-			} elseif ($insert_paquet['logo']) {
-				// Par compatibilité ascendante pendant que SVP et SP soient synchro on conserve l'ancienne
-				// façon de construire le logo.
+			}
+			elseif ($insert_paquet['logo']) {
+				// Sinon on construit l'url complete du logo
+				// Le logo est maintenant disponible a la meme adresse que le zip et porte le nom du zip.
+				// Son extension originale est conservee
 				$insert_paquet['logo'] = $depot['url_archives'] . '/'
-					. basename($insert_paquet['nom_archive'], '.zip') . '.'
+					. preg_replace(",\.zip$,i", "", $insert_paquet['nom_archive']) . '.'
 					. pathinfo($insert_paquet['logo'], PATHINFO_EXTENSION);
 			}
 
