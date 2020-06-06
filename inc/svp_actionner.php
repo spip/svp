@@ -1576,12 +1576,12 @@ class Actionneur {
 				}
 
 				// l'url est différente en fonction du téléporteur
-				$teleporteur = $this->choisir_teleporteur($adresses['type']);
-				if ($teleporteur == 'http') {
+				$teleporteur = $this->choisir_teleporteur($adresses['type'], $i['src_archive']);
+				if ($teleporteur === 'http') {
 					$url = $adresse . '/' . $i['nom_archive'];
 					$dest = $dest_future;
 				} else {
-					$url = $adresses['url_serveur'] . '/' . $i['src_archive'];
+					$url = $i['src_archive'];
 					$dest = $dest_ancien ? $dest_ancien : $dest_future;
 				}
 
@@ -1679,14 +1679,22 @@ class Actionneur {
 	 * sinon retourne le nom du téléporteur par défaut
 	 *
 	 * @param string $teleporteur Téléporteur VCS à tester
+	 * @param string $src_archive Nom ou chemin git de l’archive
 	 * @param string $defaut Téléporteur par défaut
 	 *
 	 * @return string Nom du téléporteur à utiliser
 	 **/
-	public function choisir_teleporteur($teleporteur, $defaut = 'http') {
+	public function choisir_teleporteur($teleporteur, $src_archive, $defaut = 'http') {
 		// Utiliser un teleporteur vcs si possible si demandé
 		if (defined('SVP_PREFERER_TELECHARGEMENT_PAR_VCS') and SVP_PREFERER_TELECHARGEMENT_PAR_VCS) {
 			if ($teleporteur) {
+				// dans le cas d’un dépot mixte, on ne connait pas l’url svn.
+				if ($teleporteur === 'svn|git') {
+					if (substr($src_archive, -4) !== '.git') {
+						return $defaut;
+					}
+					$teleporteur = 'git';
+				}
 				include_spip('teleporter/' . $teleporteur);
 				$tester_teleporteur = "teleporter_{$teleporteur}_tester";
 				if (function_exists($tester_teleporteur)) {

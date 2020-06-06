@@ -61,9 +61,19 @@ function teleporter_git_dist($methode, $source, $dest, $options = array()) {
 	}
 
 	if (!is_dir($dest)) {
+		// on clone depuis le répertoire parent...
+		$into = basename($dest);
+		$dir = dirname($dest);
+		if (!is_dir($dir)) {
+			@mkdir($dir, _SPIP_CHMOD, true);
+			if (!is_dir($dir)) {
+				spip_log("$dir impossible a créer pour clone $source.", "teleport");
+				return false;
+			}
+		}
 		$command = _GIT_COMMAND . " clone ";
-		$command .= escapeshellarg($source) . " " . escapeshellarg($dest);
-		teleporter_git_exec($dest, $command);
+		$command .= escapeshellarg($source) . " " . escapeshellarg($into);
+		teleporter_git_exec($dir, $command);
 		if (isset($options['revision'])) {
 			$command = _GIT_COMMAND . " checkout " . escapeshellarg($options['revision']);
 			teleporter_git_exec($dest, $command);
