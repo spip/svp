@@ -88,7 +88,7 @@ function svp_declarer_tables_objets_sql($tables) {
 		'type' => 'plugin',
 		'field' => array(
 			"id_plugin" => "bigint(21) NOT NULL",
-			"prefixe" => "varchar(30) DEFAULT '' NOT NULL",
+			"prefixe" => "varchar(48) DEFAULT '' NOT NULL",
 			"nom" => "text DEFAULT '' NOT NULL",
 			"slogan" => "text DEFAULT '' NOT NULL",
 			"vmax" => "varchar(24) DEFAULT '' NOT NULL", // version la plus elevee des paquets du plugin
@@ -137,7 +137,7 @@ function svp_declarer_tables_objets_sql($tables) {
 		'field' => array(
 			"id_paquet" => "bigint(21) NOT NULL",
 			"id_plugin" => "bigint(21) NOT NULL",
-			"prefixe" => "varchar(30) DEFAULT '' NOT NULL",
+			"prefixe" => "varchar(48) DEFAULT '' NOT NULL",
 			"logo" => "varchar(255) DEFAULT '' NOT NULL",
 			// chemin du logo depuis la racine du plugin
 			"version" => "varchar(24) DEFAULT '' NOT NULL",

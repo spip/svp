@@ -49,6 +49,11 @@ function svp_upgrade($nom_meta_base_version, $version_cible) {
 		array('sql_alter','TABLE spip_plugins DROP COLUMN tags'),
 	);
 
+	$maj['0.6.1'] = array(
+		array('sql_alter', "TABLE spip_plugins CHANGE prefixe prefixe VARCHAR(48) DEFAULT '' NOT NULL"),
+		array('sql_alter', "TABLE spip_paquets CHANGE prefixe prefixe VARCHAR(48) DEFAULT '' NOT NULL"),
+	);
+
 	include_spip('base/upgrade');
 	maj_plugin($nom_meta_base_version, $version_cible, $maj);
 }
