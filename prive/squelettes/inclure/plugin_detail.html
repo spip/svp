@@ -21,7 +21,7 @@
 	[(#AUTORISER{webmestre}|oui)
 	<dl class="tech">
 		<dt><:version:></dt>
-		<dd>#VERSION[ SVN \[(#CONST{#CONSTANTE}|concat{#SRC_ARCHIVE/}|version_svn_courante|abs|sinon{''})\]]</dd>
+		<dd>#VERSION[ (#CONST{#CONSTANTE}|concat{#SRC_ARCHIVE/}|version_vcs_courante)]</dd>
 		<dt><:svp:label_prefixe:></dt>
 		<dd>[(#PREFIXE|strtolower)]</dd>
 		<dt><:repertoire_plugins:></dt>
