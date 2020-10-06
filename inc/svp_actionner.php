@@ -509,7 +509,7 @@ class Actionneur {
 				foreach ($diff as $d) {
 					$k = array_search($d, $out);
 					$k = explode(":", $k);
-					$key[] = reset($k);
+					$key[] = intval(reset($k));
 				}
 				$key = max($key);
 				$this->log("- placer $p apres " . $this->middle['on'][$key]['p']);
@@ -527,7 +527,7 @@ class Actionneur {
 						foreach ($diff as $d) {
 							$k = array_search($d, $out);
 							$k = explode(":", $k);
-							$key[] = reset($k);
+							$key[] = intval(reset($k));
 						}
 						$key = min($key);
 						$this->log("- placer $p avant $prefix qui en depend ($key)");
