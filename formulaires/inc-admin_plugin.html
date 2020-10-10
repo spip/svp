@@ -26,6 +26,7 @@
 		#SET{details,#ENV{id_paquet,''}|=={#ID_PAQUET}|oui}
 		<li class="item[ (#GET{actif}|?{actif,inactif})][(#GET{obsolete}|ou{#GET{attente}}|ou{#GET{incompatible}}|oui) disabled][(#GET{incompatible}) incompatible][(#GET{verrou}) verrou][(#MAJ_VERSION|oui|et{#GET{autoriser_plugins_ajouter}|oui}|oui)up]"[
 			id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"][ data-id_paquet="(#ID_PAQUET)"]>
+
 			[(#GET{incompatible}|non|ou{#GET{attente}}|et{#GET{verrou}|non})
 				[(#GET{obsolete}|non)
 				<div class="check">
@@ -60,6 +61,24 @@
 				</div>]
 			</div>
 
+			[(#REM) Messages : mises à jour, vérouillage ]
+			<div class="messages">
+				[(#GET{obsolete}|non|et{#GET{verrou}}|non|et{#MAJ_VERSION}|et{#GET{autoriser_plugins_ajouter}}|oui)
+					#SET{xyz,#VERSION|svp_diff_xyz{#MAJ_VERSION}}
+					<span class="svp_message maj [maj_(#GET{xyz})]">
+						[(#GET{xyz}|oui)
+							[(#VAL{svp:plugin_info_up_#GET{xyz}}|_T{#ARRAY{version,#MAJ_VERSION}})]
+						][(#GET{xyz}|non)
+							<:svp:plugin_info_up{version=#MAJ_VERSION}:>
+						]
+					</span>
+				]
+				[(#GET{verrou})
+					<span class="svp_message verrou"><:svp:info_verrouille:></span>
+				]
+			</div>
+
+			[(#REM) Boutons d'actions ]
 			<div class="actions">
 			[(#REM) on peut desactiver un plugin - qu'il soit obsolete ou pas ]
 			[(#GET{verrou}|non|et{#GET{incompatible}|non}|oui)
@@ -89,9 +108,6 @@
 			]
 			[(#GET{actif}|non|et{[(#SRC_ARCHIVE|couper{5}|=={auto/})]})
 				<input type="submit" name="[(#ID_PAQUET|svp_nom_action{kill})]" class="btn submit" value="<:svp:bouton_supprimer:>" />
-			]
-			[(#GET{verrou})
-				<span class="svp_message"><:svp:info_verrouille:></span>
 			]
 			</div>
 			[(#GET{actif}|et{#GET{attente}|non}|oui) #SET{prefixe,#PREFIXE|strtolower}

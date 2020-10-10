@@ -807,3 +807,49 @@ function test_plugins_auto() {
 
 	return $test;
 }
+
+/**
+ * Compare 2 numéros de versions et indique le composant principal qui change : X, Y ou Z.
+ *
+ * @note
+ * Ne regarde pas si une version est plus récente qu'une autre, donne juste la différence.
+ *
+ * @note
+ * - X = version majeure
+ * - Y = version mineure
+ * - Z = patch
+ *
+ * @see https://semver.org/
+ *
+ * @param string $version1
+ *     Numéro de version initial
+ * @param string $version2
+ *     Numéro de version à comparer
+ * @return string
+ *     x | y | z
+ *     ou une chaîne vide si pas de différence ou erreur.
+ */
+function filtre_svp_diff_xyz($version1, $version2) {
+	$diff = '';
+	$versions = array($version1, $version2);
+
+	// Compléter les numéros si nécessaire : 1.0 → 1.0.0
+	foreach ($versions as $k => $version) {
+		if ($nb = count(explode('.', $version)) < 3) {
+			$versions[$k] = $version . str_repeat('.0', 3 - $nb);
+		}
+	}
+
+	list($x1, $y1, $z1) = explode('.', $versions[0]);
+	list($x2, $y2, $z2) = explode('.', $versions[1]);
+
+	if ($x1 != $x2) {
+		$diff = 'x';
+	} elseif ($y1 != $y2) {
+		$diff = 'y';
+	} elseif ($z1 != $z2) {
+		$diff = 'z';
+	}
+
+	return $diff;
+}
