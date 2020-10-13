@@ -142,7 +142,7 @@
 			var id_paquet = li.data('id_paquet');
 			// premier clic, on charge le contenu du bloc details en ajax
 			if (!$('div.details',li).html()) {
-				$(this).ajaxReload({args: {'id_paquet':id_paquet}}, {callback:function(){
+				$(this).ajaxReload({args: {'id_paquet':id_paquet}, callback:function(){
 					li.addClass('on');
 				}});
 			}
