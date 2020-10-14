@@ -46,7 +46,7 @@
 
 			[(#REM) <!-- Resume du plugin -->]
 			<div class="resume">
-				<h3 class="nom"><a href="[(#SELF|parametre_url{id_paquet,#GET{details}|?{'',#ID_PAQUET}})]" rel="info">[(#NOM|extraire_multi|svp_importer_charset)]</a></h3>
+				<h3 class="nom">[(#NOM|extraire_multi|svp_importer_charset)]</h3>
 				<span class="version">[(#VERSION)]</span>
 				<span class="etat">[ - (#ETAT)]</span>
 				[(#SET{erreur,[<span class="svp_message">(#GET{obsolete})<:svp:info_plugin_obsolete:></span> ]})]
@@ -77,6 +77,21 @@
 					<span class="svp_message verrou"><:svp:info_verrouille:></span>
 				]
 			</div>
+
+			[(#REM) Liens ]
+			#SET{liens,#ARRAY{
+				doc, #GET{actif}|et{#LIEN_DOC|oui},
+				demo,#GET{actif}|et{#LIEN_DEMO|oui},
+			}|array_filter}
+			<div class="links groupe-boutons">
+				<a href="[(#SELF|parametre_url{id_paquet,#GET{details}|?{'',#ID_PAQUET}})]" class="bouton link [(#GET{details}|?{fermer,ouvrir})]" rel="info" role="button" aria-expanded="[(#GET{details}|?{true,false})]" aria-controls="details_#ID_PAQUET">[(#GET{details}|?{<:svp:lien_details_moins:>,<:svp:lien_details_plus:>})]</a>
+				[(#GET{liens/doc}|oui)
+					[<a href="(#LIEN_DOC)" class="bouton link spip_out" title="<:svp:bulle_aller_documentation|attribut_html:>" rel="external"><:svp:lien_documentation:></a>]
+				][(#GET{liens/demo}|oui)
+					[<a href="(#LIEN_DEMO|svp_calculer_url_demo)" class="bouton link spip_out" title="<:svp:bulle_aller_demonstration|attribut_html:>" rel="external"><:svp:lien_demo:></a>]
+				]
+			</div>
+
 
 			[(#REM) Boutons d'actions ]
 			<div class="actions">
@@ -140,17 +155,28 @@
 		$('#liste_plugins').on('click','li.item a[rel=info]',function(){
 			var li = $(this).parents('li').eq(0);
 			var id_paquet = li.data('id_paquet');
+			var $bouton = $(this);
 			// premier clic, on charge le contenu du bloc details en ajax
 			if (!$('div.details',li).html()) {
 				$(this).ajaxReload({args: {'id_paquet':id_paquet}, callback:function(){
 					li.addClass('on');
+					$bouton.attr('aria-expanded', true);
 				}});
 			}
 			// clics suivants, masquer ou afficher les details
-			if ($('div.details',li).toggle().is(':visible'))
+			if ($('div.details',li).toggle().is(':visible')) {
 				li.addClass('on');
-			else
+				$bouton
+					.attr('aria-expanded', true)
+					.text("<:svp:lien_details_moins|texte_script:>")
+					.removeClass('ouvrir').addClass('fermer');
+			} else {
 				li.removeClass('on');
+				$bouton
+					.attr('aria-expanded', false)
+					.text("<:svp:lien_details_plus|texte_script:>")
+					.removeClass('fermer').addClass('ouvrir');
+			}
 			return false;
 		});
 		$('.plugins li.item input.checkbox').change(function(){

@@ -1,15 +1,7 @@
-<div class="details"><BOUCLE_pluginsdetail(PAQUETS plugins){tout}{id_paquet}>
+<B_pluginsdetail><div class="details" id="details_#ID_PAQUET"><BOUCLE_pluginsdetail(PAQUETS plugins){tout}{id_paquet}>
 	<dl class="description">
 		<dd class="desc">
 			[(#DESCRIPTION*|svp_importer_charset|extraire_multi|propre)]
-			[<em class="site">
-				<a href="(#LIEN_DOC)" class="spip_out" title="<:svp:bulle_aller_documentation:>"><:svp:lien_documentation:></a>
-			</em>]
-			[(#ACTIF|=={oui}|oui)
-				[ - <em class="site">
-					<a href="(#LIEN_DEMO|svp_calculer_url_demo)" class="spip_out" title="<:svp:bulle_aller_demonstration:>"><:svp:lien_demo:></a>
-				</em>]
-			]
 		</dd>
 		[<dt class="auteurs"><:public:par_auteur:></dt>
 		<dd class="auteurs">(#AUTEUR*|svp_afficher_credits|svp_importer_charset)</dd>]
@@ -29,4 +21,4 @@
 		[<dt><:plugin_info_necessite:></dt>
 		<dd>(#DEPENDANCES|svp_afficher_dependances{necessite, ', ', pluginspip})</dd>]
 	</dl>]
-</BOUCLE_pluginsdetail></div>
+</BOUCLE_pluginsdetail></div></B_pluginsdetail>
