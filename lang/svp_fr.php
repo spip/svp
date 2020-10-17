@@ -148,6 +148,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_critere_doublon' => 'Compatibilité',
 	'label_critere_etat' => 'États',
 	'label_critere_phrase' => 'Rechercher dans les plugins',
+	'label_etat' => 'État',
 	'label_destination' => 'Chemin depuis le répertoire « auto » où déposer le plugin',
 	'label_modifie_le' => 'Modifié le',
 	'label_n_autres_contributions' => 'autres contributions',

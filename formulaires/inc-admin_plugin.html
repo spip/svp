@@ -48,7 +48,6 @@
 			<div class="resume">
 				<h3 class="nom">[(#NOM|extraire_multi|svp_importer_charset)]</h3>
 				<span class="version">[(#VERSION)]</span>
-				<span class="etat">[ - (#ETAT)]</span>
 				[(#SET{erreur,[<span class="svp_message">(#GET{obsolete})<:svp:info_plugin_obsolete:></span> ]})]
 				[(#GET{attente}) [(#SET{erreur,#GET{erreur}|concat{#GET{erreur_attente}}})]   ]
 				[(#GET{incompatible})[(#SET{erreur,#GET{erreur}|concat{#GET{erreur_incompatible}}})]]
