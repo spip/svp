@@ -21,27 +21,56 @@
 		]
 			[(#REM) <!-- Resume du plugin -->]
 			<div class="resume">
-				<h3 class="nom"><a href="#" rel="info">[(#VALEUR{nom}|extraire_multi)]</a></h3>
+				<h3 class="nom">[(#VALEUR{nom}|extraire_multi)]</h3>
 				<span class="version">[(#VALEUR{version}|denormaliser_version)]</span>
-				<span class="etat[(#VALEUR{etat}|=={stable}|non) svp_message]">[ - (#VALEUR{etat})]</span>
-				[<span class="svp_message"> - (#VALEUR{installe}|oui)<:svp:info_plugin_installe:></span>]
 				<div class="short">[(#VALEUR{slogan}|extraire_multi)]</div>
-				<div class="icon">[(#VALEUR{logo}|image_reduire{32})]</div>
+				[<div class="icon">(#VALEUR{logo}|balise_img)</div>]
 			</div>
 
+
+			[(#REM) Messages ]
+			[(#SET{messages, #ARRAY{
+				installe,     #VALEUR{installe}|oui|?{<:svp:info_plugin_installe:>},
+			}|array_filter})]
+			[(#GET{messages}|oui)
+				<div class="messages">
+					[<span class="svp_message installe important">(#GET{messages/installe})</span>]
+				</div>
+			]
+
+			[(#REM) Liens ]
+			#SET{liens,#ARRAY{
+				doc, #VAL{#LIEN_DOC|oui},
+				demo,#VAL{#LIEN_DEMO|oui},
+			}|array_filter}
+			<div class="links groupe-boutons">
+				<a href="#" class="bouton link ouvrir" rel="info" role="button" aria-expanded="false" aria-controls="details_#KEY"><:svp:lien_details_plus:></a>
+				[(#GET{liens/doc}|oui)
+					[<a href="(#LIEN_DOC)" class="bouton link spip_out" title="<:svp:bulle_aller_documentation|attribut_html:>" rel="external"><:svp:lien_documentation:></a>]
+				][(#GET{liens/demo}|oui)
+					[<a href="(#LIEN_DEMO|svp_calculer_url_demo)" class="bouton link spip_out" title="<:svp:bulle_aller_demonstration|attribut_html:>" rel="external"><:svp:lien_demo:></a>]
+				]
+			</div>
+
+
 			[(#REM) <!-- Details du plugin -->]
-			<div class="details none-js">
-				<dl>
+			<div class="details none-js" id="details_#KEY">
+				<dl class="description">
 					<dd class="desc">
 						[(#VALEUR{description}|extraire_multi|propre)]
-						[<em class="site">
-							<a href="(#LIEN_DOC)" class="spip_out" title="<:svp:bulle_aller_documentation:>"><:svp:lien_documentation:></a>
-						</em>]
 					</dd>
 					[<dt class="auteurs"><:public:par_auteur:></dt>
 					<dd class="auteurs">(#AUTEUR*|svp_afficher_credits)</dd>]
 					[<dt class="licence"><:intitule_licence:></dt>
 					<dd class="licence">(#LICENCE|svp_afficher_credits{','})</dd>]
+				</dl>
+				<dl class="tech">
+					<dt class="etat"><:svp:label_etat:></dt>
+					<dd class="etat[(#VALEUR{etat}|=={stable}|non) svp_message]">[(#ETAT)]</dd>
+					<dt><:version:></dt>
+					<dd>[(#VERSION|denormaliser_version)]</dd>
+					<dt><:svp:label_prefixe:></dt>
+					<dd>[(#PREFIXE|strtolower)]</dd>
 				</dl>
 			</div>
 		</li>
@@ -50,29 +79,50 @@
 </div>
 </B_plugins_trouves>
 
+
 <script type="text/javascript">
 /*<![CDATA[*/
-	jQuery(function(){
-		jQuery('.plugins li.item a[rel=info]').click(function(){
-			var li = jQuery(this).parents('li').eq(0);
-			if (jQuery('div.details',li).toggle().is(':visible'))
-				li.addClass('on');
-			else
-				li.removeClass('on');
-			return false;
-		});
-		[(#REM) Déplier le bouton 'installer' et mettre le submit en premier dans le form
-			pour que l'appuie de la touche entree valide.
-			Le supprimer si l'on change un critere de recherche. ]
-		jQuery('.plugins li.item input.checkbox').change(function(){
-			$form = jQuery(this).parents('form').eq(0);
-			if (!$form.find('> input.submit').length) {
-				$form.find('.boutons.actions').slideDown().find('input.submit').clone().addClass('invisible').prependTo($form);
-				$form.find('.liste-recherche').change(function(){
-					jQuery(this).parents('form').eq(0).find('> input.submit').remove();
-				});
-			}
-		}); 
+(function($){
+	$('.plugins').find('li.item .icon span[data-reload]').each(function(){
+		var ajaxbloc = $(this).closest('.ajaxbloc');
+		$.spip.ajaxReload(ajaxbloc, {args: {'afficher':1}});
 	});
+	$('.plugins').on('click','li.item a[rel=info]',function(){
+		var li = $(this).parents('li').eq(0);
+		var $bouton = $(this);
+		// clics suivants, masquer ou afficher les details
+		if ($('div.details',li).toggle().is(':visible')) {
+			li.addClass('on');
+			$bouton
+				.attr('aria-expanded', true)
+				.text("<:svp:lien_details_moins|texte_script:>")
+				.removeClass('ouvrir').addClass('fermer');
+		} else {
+			li.removeClass('on');
+			$bouton
+				.attr('aria-expanded', false)
+				.text("<:svp:lien_details_plus|texte_script:>")
+				.removeClass('fermer').addClass('ouvrir');
+		}
+		return false;
+	});
+	[/* (#REM)
+		Déplier le bouton 'installer' et mettre le submit en premier dans le form
+		pour que l'appuie de la touche entree valide.
+		Le supprimer si l'on change un critere de recherche. 
+	*/]
+	$('.plugins li.item input.checkbox').on('change', function(){
+		$form = $(this).parents('form').eq(0);
+		if (!$form.find('> input.submit').length) {
+			$form.find('.boutons.actions').slideDown().find('input.submit').clone().addClass('invisible').prependTo($form);
+			$form.find('.liste-recherche').change(function(){
+				$(this).parents('form').eq(0).find('> input.submit').remove();
+			});
+		}
+	}); 
+})(jQuery);
+
+
+
 /*]]>*/
 </script>
