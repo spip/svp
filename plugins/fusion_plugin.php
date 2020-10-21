@@ -85,7 +85,7 @@ function plugins_fusion_plugin($plugins) {
 		if (!$fusion['categorie'] and $plugins[$cle_min_min]['categorie']) {
 			$fusion['categorie'] = $plugins[$cle_min_min]['categorie'];
 		}
-		if ((!isset($fusion['logo']) or !$fusion['logo']) and $plugins[$cle_min_min]['logo']) {
+		if (empty($fusion['logo']) and !empty($plugins[$cle_min_min]['logo'])) {
 			$fusion['logo'] = $plugins[$cle_min_min]['logo'];
 		}
 		$fusion['compatibilite'] = fusionner_intervalles($fusion['compatibilite'], $plugins[$cle_min_min]['compatibilite']);
