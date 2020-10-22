@@ -145,12 +145,13 @@
 .admin_plugin .verrou:hover {	background-color:#F0F0F0 !important; }
 */
 /* -- obsolete, incompatible */
-.admin_plugin .disabled { background:url(#CHEMIN_IMAGE{fond-obsolete.png}) repeat fixed 0 0 #ddd !important;}
-.admin_plugin .disabled:hover {	background-color:#ccc !important; }
-.liste-plugins .liste-items .item.disabled:hover .actions {background:url(#CHEMIN_IMAGE{fond-obsolete.png}) repeat fixed 0 0 #ccc !important}
+.admin_plugin .disabled { background-image: repeating-linear-gradient(-45deg,
+      transparent,
+      transparent 30px,
+      rgba(0, 0, 0, 5%) 30px,
+      rgba(0, 0, 0, 5%) 60px) !important;}
 
-.liste-plugins .liste-items .item.disabled h3 a { color: #aaa; }
-.liste-plugins .liste-items .item.disabled .icon {filter: alpha(opacity=60); -moz-opacity: 0.6; opacity: 0.6; }
+.liste-plugins .liste-items .item.disabled .icon { opacity: 0.6; }
 /* -- Notice d'information sur le plugin */
 
 .liste-plugins .liste-items .item .messages {
