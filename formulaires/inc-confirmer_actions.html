@@ -5,7 +5,14 @@
 	(#ENV**{erreurs/decideur_erreurs}|foreach{svp_presenter_actions})
 </div>]
 
-[<div id="charger_plugin_confirm">
+[
+<div id="charger_plugin_confirm_boutons_hidden"
+     style="position: absolute;left:-5000px;left:-200vw;width:1px;height1px;overflow: hidden">
+	<input type="submit" name="annuler_actions" class="btn submit annuler_actions" value="<:bouton_annuler:>" />
+	<input type="submit" name="valider_actions" class="btn submit valider_actions" value="<:bouton_valider:>" />
+</div>
+
+<div id="charger_plugin_confirm">
 	[<div class="reponse_formulaire notice">
 		(#ENV**{_notices/decideur_warning})
 	</div>]
@@ -31,10 +38,6 @@
 							   // mis dans la modale, on leur ajoute une classe 'fire'
 							   // et on lance la fermeture de la boite
 
-				- onCleanup    // avant la fermeture... on verifie que 'fire' est bien là
-							   // sinon c'est qu'on a appuyé ESC ou cliqué X
-							   // dans ce cas on met 'fire' sur annuler
-
 				- onClose	   // apres la fermeture, on clique le bouton ayant 'fire'
 						
 		]*/
@@ -43,18 +46,19 @@
 				if ($.modalbox !== 'undefined') {
 					$.modalboxload('#charger_plugin_confirm', {
 						overlayClose: false, // pas de click en dehors
-						onComplete: function() {
-							$('#cboxLoadedContent .boutons .submit').click(function(){
+						onShow: function() {
+							$('.box_mediabox .boutons .submit').click(function(){
 								$(this).addClass('fire'); $.mediaboxClose();
 							});
 						},
-						onCleanup: function() {
-							if (!$('#charger_plugin_confirm .boutons .submit.fire').length) {
-								$('#charger_plugin_confirm .boutons .submit.annuler_actions').addClass('fire');
+						onClose: function() {
+							var $action = $('#charger_plugin_confirm .submit.fire');
+							if (!$action.length) {
+								$action = $('#charger_plugin_confirm .boutons .submit.annuler_actions');
 							}
-							$('#charger_plugin_confirm').hide();
-						},
-						onClose: function() { $('#charger_plugin_confirm .submit.fire').click(); }
+							var name = $action.attr('name');
+							jQuery('#charger_plugin_confirm_boutons_hidden').find('input\[name='+name+'\]').click();
+						}
 					});
 				}
 			});
