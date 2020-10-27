@@ -7,10 +7,10 @@
 <B_plugins>
 [(#GET{incompatibles})
 	[(#ENV{afficher_incompatibles,''}|non)
-	<a id="afficher_incompatibles" href="[(#SELF|parametre_url{afficher_incompatibles,1})]"><:svp:afficher_les_plugins_incompatibles:></a>
+	<a class="bouton secondaire ouvrir" id="afficher_incompatibles" href="[(#SELF|parametre_url{afficher_incompatibles,1})]"><:svp:afficher_les_plugins_incompatibles:></a>
 	]
 	[(#ENV{afficher_incompatibles,''}|oui)
-	<a id="afficher_incompatibles" href="[(#SELF|parametre_url{afficher_incompatibles,''})]"><:svp:cacher_les_plugins_incompatibles:></a>
+	<a class="bouton secondaire fermer" id="afficher_incompatibles" href="[(#SELF|parametre_url{afficher_incompatibles,''})]"><:svp:cacher_les_plugins_incompatibles:></a>
 	]
 ]
 <div class="liste plugins" id="liste_plugins">
