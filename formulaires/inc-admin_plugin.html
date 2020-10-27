@@ -21,10 +21,16 @@
 		#SET{actif,#ACTIF|=={oui}|oui}
 		#SET{attente,#ATTENTE|=={oui}|oui}
 		[(#GET{incompatible})#SET{incompatibles,' '}]
-		[(#GET{incompatible}|non|ou{#ENV{afficher_incompatibles,''}}|ou{#GET{verrou}}|ou{#GET{actif}}|ou{#GET{attente}})
+		[(#SET{afficher,#GET{incompatible}|non
+			|ou{#ENV{afficher_incompatibles,''}}
+			|ou{#GET{verrou}}
+			|ou{#GET{actif}}
+			|ou{#GET{attente}}})]
+		<BOUCLE_si_affichage(CONDITION){si #GET{afficher}}>
+
 		#SET{obsolete,#OBSOLETE|=={oui}|oui}
 		#SET{details,#ENV{id_paquet,''}|=={#ID_PAQUET}|oui}
-		<li class="item[ (#GET{actif}|?{actif,inactif})][(#GET{obsolete}|ou{#GET{attente}}|ou{#GET{incompatible}}|oui) disabled][(#GET{incompatible}) incompatible][(#GET{verrou}) verrou][(#MAJ_VERSION|oui|et{#GET{autoriser_plugins_ajouter}|oui}|oui)up]"[
+		<li class="item[ (#GET{actif}|?{actif,inactif})][(#GET{obsolete}|ou{#GET{attente}}|ou{#GET{incompatible}}|oui) disabled][(#GET{incompatible}) incompatible][(#GET{verrou}) verrou][(#_plugins:MAJ_VERSION|oui|et{#GET{autoriser_plugins_ajouter}|oui}|oui)up]"[
 			id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"][ data-id_paquet="(#ID_PAQUET)"]>
 
 			[(#GET{incompatible}|non|ou{#GET{attente}}|et{#GET{verrou}|non})
@@ -47,7 +53,7 @@
 			[(#REM) <!-- Resume du plugin -->]
 			<div class="resume">
 				<h3 class="nom">[(#NOM|extraire_multi|svp_importer_charset)]</h3>
-				<span class="version">[(#VERSION)]</span>
+				<span class="version">[(#_plugins:VERSION)]</span>
 				[(#SET{erreur,[<span class="svp_message">(#GET{obsolete})<:svp:info_plugin_obsolete:></span> ]})]
 				[(#GET{attente}) [(#SET{erreur,#GET{erreur}|concat{#GET{erreur_attente}}})]   ]
 				[(#GET{incompatible})[(#SET{erreur,#GET{erreur}|concat{#GET{erreur_incompatible}}})]]
@@ -62,17 +68,16 @@
 
 			[(#REM) Messages : mises à jour, vérouillage ]
 			<div class="messages">
-				[(#GET{obsolete}|non|et{#GET{verrou}}|non|et{#MAJ_VERSION}|et{#GET{autoriser_plugins_ajouter}}|oui)
-					#SET{xyz,#VERSION|svp_diff_xyz{#MAJ_VERSION}}
+				[(#GET{obsolete}|non|et{#GET{verrou}}|non|et{#_plugins:MAJ_VERSION}|et{#GET{autoriser_plugins_ajouter}}|oui)
+					#SET{xyz,#_plugins:VERSION|svp_diff_xyz{#_plugins:MAJ_VERSION}}
 					<span class="svp_message maj [maj_(#GET{xyz})]">
 						[(#GET{xyz}|oui)
-							[(#VAL{svp:plugin_info_up_#GET{xyz}}|_T{#ARRAY{version,#MAJ_VERSION}})]
+							[(#VAL{svp:plugin_info_up_#GET{xyz}}|_T{#ARRAY{version,#_plugins:MAJ_VERSION}})]
 						][(#GET{xyz}|non)
-							<:svp:plugin_info_up{version=#MAJ_VERSION}:>
+							<:svp:plugin_info_up{version=#_plugins:MAJ_VERSION}:>
 						]
 					</span>
-				]
-				[(#GET{verrou})
+				][(#GET{verrou})
 					<span class="svp_message verrou"><:svp:info_verrouille:></span>
 				]
 			</div>
@@ -110,8 +115,8 @@
 				]
 			]
 			[(#GET{obsolete}|non|et{#GET{verrou}|non}|oui)
-				[(#MAJ_VERSION|oui|et{#GET{autoriser_plugins_ajouter}|oui}|oui)
-					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{up})]" class="btn submit" value="<:svp:bouton_up:> &rarr; #MAJ_VERSION" />
+				[(#_plugins:MAJ_VERSION|oui|et{#GET{autoriser_plugins_ajouter}|oui}|oui)
+					<input type="submit" name="[(#ID_PAQUET|svp_nom_action{up})]" class="btn submit" value="<:svp:bouton_up:> &rarr; #_plugins:MAJ_VERSION" />
 				]
 			]
 			[(#REM) si la configuration le permet, on peut activer un plugin obsolete ]
@@ -129,8 +134,8 @@
 				[(#INCLURE{fond=prive/squelettes/inclure/cfg,script=configurer_#GET{prefixe},nom=#NOM})]
 			]
 			[(#GET{verrou}|?{#GET{image_verrou}})]
-			[(#MAJ_VERSION|oui|et{#GET{autoriser_plugins_ajouter}|oui}|oui)
-			[(#CHEMIN_IMAGE{update-16.png}|balise_img{<:svp:plugin_info_up:>,picto_up}|inserer_attribut{title,<:svp:plugin_info_up{version=#MAJ_VERSION}:>})]
+			[(#_plugins:MAJ_VERSION|oui|et{#GET{autoriser_plugins_ajouter}|oui}|oui)
+			[(#CHEMIN_IMAGE{update-16.png}|balise_img{<:svp:plugin_info_up:>,picto_up}|inserer_attribut{title,<:svp:plugin_info_up{version=#_plugins:MAJ_VERSION}:>})]
 			]
 			[(#GET{obsolete}|ou{#GET{incompatible}}|ou{#GET{attente}}|oui)
 				[(#SET{image,#GET{attente}|?{erreur-16.png,plugin-dis-16.png}})]
@@ -141,7 +146,7 @@
 			[(#GET{details})
 				[(#INCLURE{fond=prive/squelettes/inclure/plugin_detail,id_paquet,ajax=detail_#ID_PAQUET,env})]
 			]
-			]
+			</BOUCLE_si_affichage>
 		</li>
 	</BOUCLE_plugins>
 	</ul>
