@@ -1,19 +1,7 @@
 [(#AUTORISER{ajouter,_plugins}|sinon_interdire_acces)]
 <h1 class="grostitre"><:icone_admin_plugin:></h1>
 
-
-[(#REM) <!-- Barre d'onglets de premier niveau --> ]
-[(#VAL{plugins}|barre_onglets{charger_plugin})]
-
-
-[(#REM) <!-- Barre d'onglets de second niveau de ajouter --> ]
-<div class="onglets_simple second clearfix">
-	<ul>
-		<li><strong><:svp:titre_plugins:></strong></li>
-		<li><a[ href="(#URL_ECRIRE{depots})"]><:svp:titre_depots:></a></li>
-	</ul>
-</div>
-
+<INCLURE{fond=prive/squelettes/inclure/svp_onglets, env}>
 
 [(#VAL|test_plugins_auto|non)
 <div class='notice'>

@@ -46,34 +46,6 @@ function autoriser_plugins_ajouter_dist($faire, $type, $id, $qui, $opt) {
 	return _AUTORISER_TELECHARGER_PLUGINS and autoriser('webmestre');
 }
 
-
-/**
- * Ajout de l'onglet 'Ajouter les plugins'
- *
- * L'URL dépend de l'existence ou pas d'un dépot de plugins.
- * En absence, on amène sur la page permettant de créer un premier dépot.
- *
- * @pipeline ajouter_onglets
- * @param array $flux Données du pipeline
- * @return array      Données du pipeline
- */
-function svp_ajouter_onglets($flux) {
-	if (($flux['args'] == 'plugins')
-		and (autoriser('ajouter', '_plugins'))
-	) {
-		$compteurs = svp_compter('depot');
-		$page = ($compteurs['depot'] == 0) ? 'depots' : 'charger_plugin';
-		$flux['data']['charger_plugin'] =
-			new Bouton(
-				find_in_theme('images/plugin-add-24.png'),
-				'plugin_titre_automatique_ajouter',
-				generer_url_ecrire($page));
-	}
-
-	return $flux;
-}
-
-
 /**
  * Ne pas afficher par défaut les paquets,dépots,plugins locaux dans les boucles
  *

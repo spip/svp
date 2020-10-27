@@ -24,7 +24,6 @@
 	<pipeline nom="taches_generales_cron" inclure="genie/svp_taches_generales_cron.php" />
 	<pipeline nom="autoriser" inclure="svp_pipelines.php" />
 	<pipeline nom="pre_boucle" inclure="svp_pipelines.php" />
-	<pipeline nom="ajouter_onglets" inclure="svp_pipelines.php" />
 	<pipeline nom="ieconfig_metas" inclure="svp_ieconfig.php" />
 	<pipeline nom="jquery_plugins" inclure="svp_pipelines.php" />
 	<pipeline nom="header_prive_css" inclure="svp_pipelines.php" />
