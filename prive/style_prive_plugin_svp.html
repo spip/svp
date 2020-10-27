@@ -37,8 +37,6 @@
 .liste-plugins fieldset,
 .liste-plugins .liste.plugins,
 .liste-plugins .liste.plugins .liste-items { margin-bottom: 0; }
-.liste-plugins .liste-items .item {padding-#ENV{right}:30px;}
-.liste-plugins .liste-items .item .check {float:#ENV{right};margin-#ENV{right}:-25px;}
 
 .liste-plugins .liste-items .item {
 	padding-left: 46px;
@@ -113,7 +111,13 @@
 .liste-plugins .liste-items .item.inactif:hover .actions { background: #eee; }
 
 
-.liste-plugins .liste-items .item .details { clear: both;}
+.liste-plugins .liste-items .item .details {
+	clear: both;
+	margin-bottom: 1em;
+	margin-top:.5em;
+	padding-top:.5em;
+	border-top: 1px solid #ddd;
+}
 .liste-plugins .liste-items .item .details dl { float: none; width: auto; margin-bottom: 0; }
 .liste-plugins .liste-items .item .details dl.tech { float: none; clear: both; width: auto; text-align: #ENV{left}; font-size: 1em; word-wrap: break-word; }
 .liste-plugins .liste-items .item .details dl dt { float: #ENV{left}; padding-#ENV{right}: 0.5em; }
@@ -153,8 +157,8 @@
       rgba(0, 0, 0, 5%) 60px) !important;}
 
 .liste-plugins .liste-items .item.disabled .icon { opacity: 0.6; }
-/* -- Notice d'information sur le plugin */
 
+/* -- Notice d'information sur le plugin */
 .liste-plugins .liste-items .item .messages {
 	margin-bottom: 0.5em;
 }
