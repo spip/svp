@@ -9,6 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'action_patienter' => 'Les actions sont en cours de traitement. Veuillez patienter…',
+	'actions' => 'Actions',
 	'actions_a_faire' => 'Actions à traiter',
 	'actions_demandees' => 'Actions demandées :',
 	'actions_en_erreur' => 'Erreurs survenues',
@@ -24,6 +25,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_actualiser' => 'Actualiser',
 	'bouton_actualiser_tout' => 'Actualiser les dépôts',
 	'bouton_appliquer' => 'Appliquer',
+	'bouton_configurer' => 'Configurer',
 	'bouton_confirmer' => 'Confirmer',
 	'bouton_desactiver' => 'Désactiver',
 	'bouton_desinstaller' => 'Désinstaller',
@@ -148,8 +150,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_critere_doublon' => 'Compatibilité',
 	'label_critere_etat' => 'États',
 	'label_critere_phrase' => 'Rechercher dans les plugins',
-	'label_etat' => 'État',
 	'label_destination' => 'Chemin depuis le répertoire « auto » où déposer le plugin',
+	'label_etat' => 'État',
 	'label_modifie_le' => 'Modifié le',
 	'label_n_autres_contributions' => 'autres contributions',
 	'label_plugin_description' => 'Description de la version @version@',
