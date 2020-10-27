@@ -153,3 +153,34 @@ function svp_exclure_id_conditionnel($flux) {
 	}
 	return $flux;
 }
+
+/**
+ * Ajoute Bootstrap dropdown aux plugins chargés
+ *
+ * @param array $flux
+ *     Liste des js chargés
+ * @return array
+ *     Liste complétée des js chargés
+**/
+function svp_jquery_plugins($flux) {
+	if (test_espace_prive()) {
+		$flux[] = 'lib/bootstrap/js/popper.js';
+		$flux[] = 'lib/bootstrap/js/util.js';
+		$flux[] = 'lib/bootstrap/js/dropdown.js';
+	}
+	return $flux;
+}
+
+/**
+ * Ajoute Bootstrap dropdown aux css chargées dans le privé
+ *
+ * @param string $flux Contenu du head HTML concernant les CSS
+ * @return string       Contenu du head HTML concernant les CSS
+**/
+function svp_header_prive_css($flux) {
+
+	$css = find_in_path('lib/bootstrap/css/dropdown.css');
+	$flux .= '<link rel="stylesheet" href="'.direction_css($css).'" type="text/css" media="all" />' . "\n";
+
+	return $flux;
+}
