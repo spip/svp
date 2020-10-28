@@ -13,179 +13,209 @@
 #HTTP_HEADER{Vary: Accept-Encoding}
 
 /* **************** EXEC ADMIN PLUGIN ***************** */
-.box .inner .hd h3 img.close { float: #ENV{right}; }
-.box .inner .hd h3 img.close:hover { cursor: pointer; }
-.admin_plugin .onglets_simple.second ul.verrouille li.first {margin-#ENV{left}:30px;}
-.admin_plugin .onglets_simple.second ul li span.off {
-	display: block;
-	float: left;
-	padding: 4px 7px;
-	margin-bottom: 5px;
-	margin-left: 0;
-	margin-right: 5px;
-	border: 1px solid #909090;
-	background-color: #eeeeee;
-	color: #6c6c6c;
-	opacity: 0.6;
-	border-top-left-radius: 5px;
-	border-top-right-radius: 5px;
+
+.box .inner .hd h3 img.close {
+	float: #ENV{right};
+}
+.box .inner .hd h3 img.close:hover {
+	cursor: pointer;
 }
 
 .admin_plugin .actions_multiples .boutons { }
-.admin_plugin .actions_multiples .action { width: 30%; }
+.admin_plugin .actions_multiples .action {
+	width: 30%;
+}
 
-.liste-plugins fieldset,
+/**
+ * Liste des plugins
+ */
+
 .liste-plugins .liste.plugins,
-.liste-plugins .liste.plugins .liste-items { margin-bottom: 0; }
+.liste-plugins .liste.plugins .liste-items {
+	margin-bottom: 0;
+}
 
+.liste-plugins .liste-items {
+	margin-left: -10px;
+	margin-right: -10px;
+}
+
+/* Item + états */
 .liste-plugins .liste-items .item {
-	padding-left: 46px;
+	padding-#ENV{left}: 46px;
+	padding-#ENV{right}: 10px;
 	overflow: initial;
 	clear: both;
 }
+.liste-plugins .item:last-child {
+	border: none;
+}
+.liste-plugins .item:hover {
+	background:#eee;
+}
+.liste-plugins .item.actif {
+	background: #ffffff;
+}
+.liste-plugins .item.actif:hover {
+	background:#eee;
+}
+.liste-plugins .item.verrou {
+	background: #e8e8e8;
+}
+.liste-plugins .item.inactif {
+	background: #f4f4f4;
+	}
+.liste-plugins .item.inactif:hover {
+	background: #eee;
+}
+.liste-plugins .item.inactif:hover .actions {
+	background: #eee;
+}
+.liste-plugins .item.disabled {
+	background-image: repeating-linear-gradient(-45deg,
+      transparent,
+      transparent 30px,
+      rgba(0, 0, 0, 5%) 30px,
+      rgba(0, 0, 0, 5%) 60px) !important;
+}
+.liste-plugins .item.disabled .icon {
+	opacity: 0.6;
+}
 
-.liste-plugins .liste-items .item:last-child { border: none; }
-
+/* Case à cocher */
 .liste-plugins .liste-items .item .check {
 	position: absolute;
-	left: 15px;
+	#ENV{left}: 15px;
+	#ENV{right}: initial;
 	top: 12px;
 	margin: 0;
 	font-size: .85em;
 }
 
-.liste-plugins .liste-items .item h3 a { color: #ENV{foncee}; }
-
-.liste-plugins .liste-items .item .bouton.config {
-	margin-right: .5em;
+/* Résumé : logo, nom, version, slogan */
+.liste-plugins .item .resume {
+	min-height: initial;
+	margin-bottom: 0.25em;
+	min-height: 2.25em;
+}
+.liste-plugins .liste-items .item .icon {
+	position: static;
+	float: #ENV{right};
+	margin-#ENV{left}: 10px;
 }
 
-/* Boutons actions + dropdown */
+/* Messages */
+.liste-plugins .messages {
+	margin-bottom: 0.5em;
+}
+.liste-plugins .svp_message {
+	display: block; 
+	font-weight: 500;
+	font-size: 0.9em;
+}
+.liste-plugins .svp_message.important {
+	color: #8A1F11;
+}
+.liste-plugins .svp_message.maj {
+	color: #42a145;
+}
+.liste-plugins .svp_message.maj.maj_x {
+	color: #ec681c;
+}
+
+/* Footer : boutons d'actions + dropdown Bootstrap */
+.liste-plugins .footer {
+	display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+	-webkit-box-pack: justify;
+	   -ms-flex-pack: justify;
+	 justify-content: space-between;
+}
 .liste-plugins .liste-items .item .actions {
 	visibility: visible;
 	display: flex;
+	margin-#ENV{left}: auto; /* s'assurer que ce soit à droite */
 }
-.liste-plugins .liste-items .item .actions > .bouton:last-of-type {
-	margin-right: 0;
+.liste-plugins .actions > .bouton:last-of-type {
+	margin-#ENV{right}: 0;
 }
-.liste-plugins .liste-items .item .actions >  .bouton:last-of-type + .dropdown {
-	margin-left: .5em;
+.liste-plugins .actions > .bouton:last-of-type + .dropdown {
+	margin-#ENV{left}: 0.5em;
 }
-
-/* Dropdown Bootstrap contenant des boutons .link */
-.liste-plugins .liste-items .dropdown{}
-.liste-plugins .liste-items .dropdown-menu {
+.liste-plugins .bouton.config {
+	margin-#ENV{right}: 0.5em;
+}
+.liste-plugins .dropdown{}
+.liste-plugins .dropdown-menu {
  padding: 0;
 }
-.liste-plugins .liste-items .dropdown-divider {
+.liste-plugins .dropdown-divider {
  margin: 0;
-}
-.liste-plugins .liste-items .dropdown .submit {
+ }
+.liste-plugins .dropdown .submit {
 	padding-#ENV{right}: 0.5em;
 	margin-bottom: 0;
 }
 
-/* Pictos adjacents aux logos */
-.liste-plugins .liste-items .item .picto_actif,
-.liste-plugins .liste-items .item .picto_err,
-.liste-plugins .liste-items .item .picto_verrou {
-	position: absolute;
-	#ENV{left}: 10px;
-}
-.liste-plugins .liste-items .item .picto_actif,
-.liste-plugins .liste-items .item .picto_err {
-	top: 10px;
-}
-.liste-plugins .liste-items .item .picto_verrou {
-	top: 30px;
-	opacity: 0.6;
-}
-
-/* États */
-.liste-plugins .liste-items .item:hover {background:#eee;}
-.liste-plugins .liste-items .item.actif {  background: #ffffff; }
-.liste-plugins .liste-items .item.actif:hover {background:#eee;}
-.liste-plugins .liste-items .item.verrou { background: #e8e8e8; }
-.liste-plugins .liste-items .item.inactif { background: #f4f4f4; }
-.liste-plugins .liste-items .item.inactif:hover { background: #eee;  }
-.liste-plugins .liste-items .item.inactif:hover .actions { background: #eee; }
-
-
-.liste-plugins .liste-items .item .details {
+/* Détails (visibles au clic) */
+.liste-plugins .details {
 	clear: both;
 	margin-bottom: 1em;
 	margin-top:.5em;
 	padding-top:.5em;
 	border-top: 1px solid #ddd;
 }
-.liste-plugins .liste-items .item .details dl { float: none; width: auto; margin-bottom: 0; }
-.liste-plugins .liste-items .item .details dl.tech { float: none; clear: both; width: auto; text-align: #ENV{left}; font-size: 1em; word-wrap: break-word; }
-.liste-plugins .liste-items .item .details dl dt { float: #ENV{left}; padding-#ENV{right}: 0.5em; }
-.liste-plugins .liste-items .item .details dd { margin-bottom:0;}
-.liste-plugins .liste-items .item .details .description .desc { margin-bottom: 10px; }
-
-
-.liste-plugins .liste-items .item .icon {
-	top: 10px;
-	right: 10px;
-	left: initial;
+.liste-plugins .liste-items .item .details dl {
+	float: none;
+	width: auto;
+	margin-bottom: 0;
+}
+.liste-plugins .liste-items .item .details dl.tech {
+	float: none;
+	clear: both;
+	width: auto;
+	text-align: #ENV{left};
+	font-size: 1em;
+	word-wrap: break-word;
+}
+.liste-plugins .liste-items .item .details dl dt {
+	float: #ENV{left};
+	padding-#ENV{right}: 0.5em;
+}
+.liste-plugins .liste-items .item .details dd {
+	margin-bottom: 0;
+}
+.liste-plugins .details .description .desc {
+	margin-bottom: 10px;
 }
 
-.liste-plugins .liste-items .item .resume {
-	min-height: initial;
-	margin-bottom: 0.25em;
-	min-height: 2.25em;
+/* Bouton afficher incompatibles (avant la liste) */
+#afficher_incompatibles {
+	float: #ENV{right};
+	padding: 0.5em 0;
 }
 
-.liste-plugins fieldset {border-top: 0;}
 
-#afficher_incompatibles { float: right; padding: 0.5em 0; }
-
-/* Styles des etats provoquant un affichage specifique des plugins */
-/* -- installe (donc actif) */
-.admin_plugin .installe { color: #999; background: url(#CHEMIN_IMAGE{fond-installe.png}) repeat fixed 0 0 !important; }
-.admin_plugin .installe:hover {	background-color:#F0F0F0 !important; }
-/* -- verrouille (plugins_dist)
-.admin_plugin .verrou { background:url(#CHEMIN_IMAGE{fond-verrou.png}) repeat fixed 0 0 #FDFDFD !important;}
-.admin_plugin .verrou:hover {	background-color:#F0F0F0 !important; }
-*/
-/* -- obsolete, incompatible */
-.admin_plugin .disabled { background-image: repeating-linear-gradient(-45deg,
-      transparent,
-      transparent 30px,
-      rgba(0, 0, 0, 5%) 30px,
-      rgba(0, 0, 0, 5%) 60px) !important;}
-
-.liste-plugins .liste-items .item.disabled .icon { opacity: 0.6; }
-
-/* -- Notice d'information sur le plugin */
-.liste-plugins .liste-items .item .messages {
-	margin-bottom: 0.5em;
-}
-.liste-plugins .liste-items .item .svp_message {
-	display: block; 
-	font-weight: 500;
-	font-size: 0.9em;
-}
-.liste-plugins .liste-items .item .svp_message.important {
-	color: #8A1F11;
-}
-.liste-plugins .liste-items .item .svp_message.maj {
-	color: #42a145;
-}
-.liste-plugins .liste-items .item .svp_message.maj.maj_x {
-	color: #ec681c;
-}
-
-/* Liste des depots */
+/**
+ * Liste des dépôts
+ */
 .liste-objets.depots .caption {
     background-image: url(#CHEMIN_IMAGE{depot-24.png});
     padding-#ENV{left}: 30px;
 }
 
-/* Validation des actions par popin */
-.box_mediabox #charger_plugin_confirm {font-size:110%; padding-bottom:25px;}
-.box_mediabox #charger_plugin_confirm .reponse_formulaire {margin-bottom:1em; line-height: 1.4em;}
+/**
+ * Validation des actions par popin
+ */
+.box_mediabox #charger_plugin_confirm {
+	font-size:110%;
+	padding-bottom:25px;
+}
+.box_mediabox #charger_plugin_confirm .reponse_formulaire {
+	margin-bottom:1em;
+	line-height: 1.4em;
+}
 .box_mediabox #charger_plugin_confirm .boutons {
 	font-size:120%;
 	margin-top:.5em; margin-bottom:0;
@@ -201,12 +231,21 @@
 	margin-#ENV{left}:0;
 }
 
-/* Presentation des actions effectuees */
-.svp_retour .fail {color:#c30000;}
-.svp_retour ul {margin-#ENV{left}: 0.5em;}
-.svp_retour li {list-style-type:square; margin-#ENV{left}: 0.5em;}
+/**
+ * Présentation des actions effectuées
+ */
+.svp_retour .fail {
+	color:#c30000;
+}
+.svp_retour ul {
+	margin-#ENV{left}: 0.5em;
+}
+.svp_retour li {
+	list-style-type: square;
+	margin-#ENV{left}: 0.5em;
+}
 
-/*Filtre*/
+/* Filtre */
 input#filtrer {
 	position: absolute;
 	z-index:1;
@@ -220,12 +259,25 @@ input#filtrer {
 	font-size: 90%;
 	padding: 3px;
 }
-input#filtrer::-webkit-input-placeholder { color:#FFF; opacity:1; }
-input#filtrer::-moz-placeholder { color:#FFF; opacity:1;}
-input#filtrer:-ms-input-placeholder { color:#FFF; opacity:1; }
-input#filtrer:-moz-placeholder { color:#FFF; opacity:1; }
+input#filtrer::-webkit-input-placeholder {
+	color:#FFF;
+	opacity:1;
+}
+input#filtrer::-moz-placeholder {
+	color:#FFF;
+	opacity:1;
+}
+input#filtrer:-ms-input-placeholder {
+	color:#FFF;
+	opacity:1;
+}
+input#filtrer:-moz-placeholder {
+	color:#FFF;
+	opacity:1;
+}
 
 /* **************** EXEC PLUGIN ***************** */
+
 /* Boite d'infos */
 #navigation .infos .numero  p.prefixe { font-size: 1.3em; text-transform: lowercase; }
 #navigation .info .branches { margin-top: 0.5em; }
