@@ -95,16 +95,14 @@
 				doc, #GET{actif}|et{#LIEN_DOC|oui},
 				demo,#GET{actif}|et{#LIEN_DEMO|oui},
 			}|array_filter}
-			[(#GET{liens}|oui)
-				<div class="links groupe-boutons">
-					<a href="[(#SELF|parametre_url{id_paquet,#GET{details}|?{'',#ID_PAQUET}})]" class="bouton link [(#GET{details}|?{fermer,ouvrir})]" rel="info" role="button" aria-expanded="[(#GET{details}|?{true,false})]" aria-controls="details_#ID_PAQUET">[(#GET{details}|?{<:svp:lien_details_moins:>,<:svp:lien_details_plus:>})]</a>
-					[(#GET{liens/doc}|oui)
-						[<a href="(#LIEN_DOC)" class="bouton link spip_out" title="<:svp:bulle_aller_documentation|attribut_html:>" rel="external"><:svp:lien_documentation:></a>]
-					][(#GET{liens/demo}|oui)
-						[<a href="(#LIEN_DEMO|svp_calculer_url_demo)" class="bouton link spip_out" title="<:svp:bulle_aller_demonstration|attribut_html:>" rel="external"><:svp:lien_demo:></a>]
-					]
-				</div>
-			]
+			<div class="links groupe-boutons">
+				<a href="[(#SELF|parametre_url{id_paquet,#GET{details}|?{'',#ID_PAQUET}})]" class="bouton link [(#GET{details}|?{fermer,ouvrir})]" rel="info" role="button" aria-expanded="[(#GET{details}|?{true,false})]" aria-controls="details_#ID_PAQUET">[(#GET{details}|?{<:svp:lien_details_moins:>,<:svp:lien_details_plus:>})]</a>
+				[(#GET{liens/doc}|oui)
+					[<a href="(#LIEN_DOC)" class="bouton link spip_out" title="<:svp:bulle_aller_documentation|attribut_html:>" rel="external"><:svp:lien_documentation:></a>]
+				][(#GET{liens/demo}|oui)
+					[<a href="(#LIEN_DEMO|svp_calculer_url_demo)" class="bouton link spip_out" title="<:svp:bulle_aller_demonstration|attribut_html:>" rel="external"><:svp:lien_demo:></a>]
+				]
+			</div>
 
 			[(#REM)
 				Boutons d'actions :
