@@ -148,6 +148,7 @@ Wil je ze inactief maken dan moet je met de webmaster van de site contact opneme
 	'label_critere_etat' => 'Status',
 	'label_critere_phrase' => 'In de plugins zoeken',
 	'label_destination' => 'Pad vanaf map "auto" waar de plugin moet worden geplaatst',
+	'label_etat' => 'Status',
 	'label_modifie_le' => 'Aangepast op',
 	'label_n_autres_contributions' => 'andere bijdragen',
 	'label_plugin_description' => 'Omschrijving van versie @version@',
@@ -239,7 +240,7 @@ Wil je ze inactief maken dan moet je met de webmaster van de site contact opneme
 	// P
 	'placeholder_phrase' => 'prefix, naam, slogan, omschrijving of auteur',
 	'plugin_info_actif' => 'Plugin actief',
-	'plugin_info_up' => 'Een update van de plugin is beschikbaar (versie @version@)',
+	'plugin_info_up' => 'Een update van de plugin is beschikbaar (versie @version@)', # MODIF
 	'plugin_info_verrouille' => 'Vergrendelde plugin',
 	'plugins_inactifs_liste' => 'Inactieve',
 	'plugins_non_verrouilles_liste' => 'Niet vergrendelde',
