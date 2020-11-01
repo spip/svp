@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'action_patienter' => 'Die Aktionen werden ausgeführt. Bitte warten …',
+	'actions' => 'Aktionen',
 	'actions_a_faire' => 'Auszuführende Aktionen',
 	'actions_demandees' => 'Angeforderte Aktionen:',
 	'actions_en_erreur' => 'Aufgetretene Fehler',
@@ -239,7 +240,7 @@ existiert nicht oder hat keinen Schreibrechte.
 	// P
 	'placeholder_phrase' => 'Präfix, Name, Slogan, Beschreibung oder Autor',
 	'plugin_info_actif' => 'aktives Plugin',
-	'plugin_info_up' => 'Eine Aktualisierung des Plugins ist verfügbar (Version@version@)',
+	'plugin_info_up' => 'Eine Aktualisierung des Plugins ist verfügbar (Version@version@)', # MODIF
 	'plugin_info_verrouille' => 'Plugin gesperrt',
 	'plugins_inactifs_liste' => 'Inaktiv',
 	'plugins_non_verrouilles_liste' => 'Nicht gesperrt',

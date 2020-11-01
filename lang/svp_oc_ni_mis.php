@@ -236,7 +236,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'placeholder_phrase' => 'prefis, noum, eslougan, descritiéu o autour',
 	'plugin_info_actif' => 'Plugin atiéu',
-	'plugin_info_up' => 'Una messa a jou dóu plugin es dispounible (versioun @version@)',
+	'plugin_info_up' => 'Una messa a jou dóu plugin es dispounible (versioun @version@)', # MODIF
 	'plugin_info_verrouille' => 'Plugin ferouiat',
 	'plugins_inactifs_liste' => 'Inatiéu',
 	'plugins_non_verrouilles_liste' => 'Noun ferouiat',

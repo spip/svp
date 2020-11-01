@@ -150,6 +150,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_critere_etat' => 'حالات',
 	'label_critere_phrase' => 'بحث في الملحقات',
 	'label_destination' => 'المسار من المجلد «auto» حيث سيتم وضع الملحق',
+	'label_etat' => 'الوضعية',
 	'label_modifie_le' => 'تم التعديل في',
 	'label_n_autres_contributions' => 'مشاركات أخرى',
 	'label_plugin_description' => 'وصف الإصدار @version@',
@@ -241,7 +242,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'placeholder_phrase' => 'بادئة، اسم، شعار، وصف او مؤلف',
 	'plugin_info_actif' => 'ملحق نشط',
-	'plugin_info_up' => 'هناك ترقية متوافرة للملحق (الإصدار @version@)',
+	'plugin_info_up' => 'هناك ترقية متوافرة للملحق (الإصدار @version@)', # MODIF
 	'plugin_info_verrouille' => 'ملحق مقفل',
 	'plugins_inactifs_liste' => 'غير نشطة',
 	'plugins_non_verrouilles_liste' => 'غير مقفلة',

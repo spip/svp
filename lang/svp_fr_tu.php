@@ -242,7 +242,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'placeholder_phrase' => 'préfixe, nom, slogan, description ou auteur',
 	'plugin_info_actif' => 'Plugin actif',
-	'plugin_info_up' => 'Une mise à jour du plugin est disponible (version @version@)',
+	'plugin_info_up' => 'Une mise à jour du plugin est disponible (version @version@)', # MODIF
 	'plugin_info_verrouille' => 'Plugin verrouillé',
 	'plugins_inactifs_liste' => 'Inactifs',
 	'plugins_non_verrouilles_liste' => 'Non verrouillés',

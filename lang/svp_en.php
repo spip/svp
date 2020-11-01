@@ -149,6 +149,7 @@ is not created or is not writable.
 	'label_critere_etat' => 'States',
 	'label_critere_phrase' => 'Search in plugins',
 	'label_destination' => 'Path from the directory "auto" where to drop the plugin',
+	'label_etat' => 'Status',
 	'label_modifie_le' => 'Edited on',
 	'label_n_autres_contributions' => 'other contributions',
 	'label_plugin_description' => 'Description of version @version@',
@@ -240,7 +241,7 @@ is not created or is not writable.
 	// P
 	'placeholder_phrase' => 'prefix, name, slogan, description or author',
 	'plugin_info_actif' => 'Active plugin',
-	'plugin_info_up' => 'An update of the plugin is available (version @version@)',
+	'plugin_info_up' => 'An update of the plugin is available (version @version@)', # MODIF
 	'plugin_info_verrouille' => 'Plugin locked',
 	'plugins_inactifs_liste' => 'Inactive',
 	'plugins_non_verrouilles_liste' => 'Not locked',

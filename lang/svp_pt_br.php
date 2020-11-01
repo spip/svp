@@ -238,7 +238,7 @@ Se você desejar desativá-los, contate o webmaster do site, ou consulte <a href
 	// P
 	'placeholder_phrase' => 'prefixo, nome, slogan, descrição ou autor',
 	'plugin_info_actif' => 'Plugin ativo',
-	'plugin_info_up' => 'Uma atualização do plugin está disponível (versão @version@)',
+	'plugin_info_up' => 'Uma atualização do plugin está disponível (versão @version@)', # MODIF
 	'plugin_info_verrouille' => 'Plugin bloqueado',
 	'plugins_inactifs_liste' => 'Inativos',
 	'plugins_non_verrouilles_liste' => 'Não bloqueados',

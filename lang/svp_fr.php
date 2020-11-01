@@ -171,8 +171,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_installer_plugins' => 'Installer des plugins',
 	'legende_rechercher_plugins' => 'Rechercher des plugins',
 	'lien_demo' => 'Démonstration',
-	'lien_details_plus' => 'Plus d’infos',
 	'lien_details_moins' => 'Moins d’infos',
+	'lien_details_plus' => 'Plus d’infos',
 	'lien_documentation' => 'Documentation',
 
 	// M

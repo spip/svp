@@ -232,7 +232,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'placeholder_phrase' => 'prefikso, nomo, frapfrazo, priskribo aŭ aŭtoro',
 	'plugin_info_actif' => 'Aktiva kromprogramo',
-	'plugin_info_up' => 'Ĝisdatigo de la kromprogramo disponeblas (versio @version@)',
+	'plugin_info_up' => 'Ĝisdatigo de la kromprogramo disponeblas (versio @version@)', # MODIF
 	'plugin_info_verrouille' => 'Ŝlosita kromprogramo',
 	'plugins_inactifs_liste' => 'Neaktivaj',
 	'plugins_non_verrouilles_liste' => 'Ne ŝlositaj',

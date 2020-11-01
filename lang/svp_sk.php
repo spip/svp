@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'action_patienter' => 'Vykonávajú sa akcie. Prosím, počkajte.',
+	'actions' => 'Akcie',
 	'actions_a_faire' => 'Akcie, ktoré treba vykonať',
 	'actions_demandees' => 'Vyžadované akcie:',
 	'actions_en_erreur' => 'Chyby, ktoré sa vyskytli',
@@ -163,6 +164,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_critere_etat' => 'Stavy',
 	'label_critere_phrase' => 'Vyhľadávať v zásuvných moduloch',
 	'label_destination' => 'Cesta z priečinka "auto" k zásuvnému modulu',
+	'label_etat' => 'Stav',
 	'label_modifie_le' => 'Zmenený',
 	'label_n_autres_contributions' => 'iné príspevky',
 	'label_prefixe' => 'Predpona',
@@ -254,7 +256,7 @@ alebo vytvoriť tento priečinok a nastaviť mu povolenie na zápis.',
 	// P
 	'placeholder_phrase' => 'predpona, názov, slogan, opis alebo autor',
 	'plugin_info_actif' => 'Aktívny zásuvný modul',
-	'plugin_info_up' => 'K dispozícii je aktualizácia zásuvného modulu (verzia @version@)',
+	'plugin_info_up' => 'K dispozícii je aktualizácia zásuvného modulu (verzia @version@)', # MODIF
 	'plugin_info_verrouille' => 'Zamknutý zásuvný modul',
 	'plugins_inactifs_liste' => 'Neaktívne',
 	'plugins_non_verrouilles_liste' => 'Nezamknuté',

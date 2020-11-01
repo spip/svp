@@ -231,7 +231,7 @@ Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controll
 	// P
 	'placeholder_phrase' => 'prefissi, nome, slogan, descrizione e autore',
 	'plugin_info_actif' => 'Plugin attivi',
-	'plugin_info_up' => 'Un’aggiornamento al plugin è disponibile (version @version@)',
+	'plugin_info_up' => 'Un’aggiornamento al plugin è disponibile (version @version@)', # MODIF
 	'plugin_info_verrouille' => 'Plugin bloccati',
 	'plugins_inactifs_liste' => 'Inattivo',
 	'plugins_non_verrouilles_liste' => 'Non bloccato',

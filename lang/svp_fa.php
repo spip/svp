@@ -148,6 +148,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_critere_etat' => 'حالت‌ها',
 	'label_critere_phrase' => 'جستجو در پلاگين‌ها',
 	'label_destination' => 'مسير از پوشه‌ي «auto» كه پلاگين در آن ذخيره مي‌شود',
+	'label_etat' => 'كشور',
 	'label_modifie_le' => 'اصلاح ...',
 	'label_n_autres_contributions' => 'كمك‌هاي ديگر',
 	'label_prefixe' => 'پيشوند',
@@ -237,7 +238,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'placeholder_phrase' => 'پيشوند،‌اسم، شعار، توصيف يا ديگر',
 	'plugin_info_actif' => 'پلاگين فعال ',
-	'plugin_info_up' => ' يك به‌ هنگام سازي شده‌ از اين پلاگين در دسترس است (نسخه@version@‌ )',
+	'plugin_info_up' => ' يك به‌ هنگام سازي شده‌ از اين پلاگين در دسترس است (نسخه@version@‌ )', # MODIF
 	'plugin_info_verrouille' => 'پلاگين قفل شده ',
 	'plugins_inactifs_liste' => 'غيرفعال‌ها',
 	'plugins_non_verrouilles_liste' => 'قفل نشده‌ها',

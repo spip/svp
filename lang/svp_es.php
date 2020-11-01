@@ -138,6 +138,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_critere_etat' => 'Estados',
 	'label_critere_phrase' => 'Buscar en los plugins',
 	'label_destination' => 'Ruta del directorio «auto» donde subir el plugin',
+	'label_etat' => 'Estado',
 	'label_modifie_le' => 'Modificado el',
 	'label_n_autres_contributions' => 'otras contribuciones',
 	'label_prefixe' => 'Prefijo',
@@ -226,7 +227,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'placeholder_phrase' => 'prefijo, nombre, eslogan, descripción o autor',
 	'plugin_info_actif' => 'Plugin activo',
-	'plugin_info_up' => 'Está disponible una actualización del plugin (versión @version@)',
+	'plugin_info_up' => 'Está disponible una actualización del plugin (versión @version@)', # MODIF
 	'plugin_info_verrouille' => 'Plugin bloqueado',
 	'plugins_inactifs_liste' => 'Inactivos',
 	'plugins_non_verrouilles_liste' => 'No bloqueados',

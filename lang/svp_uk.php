@@ -227,7 +227,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'placeholder_phrase' => 'префікс, назва, слоган, опис або автор',
 	'plugin_info_actif' => 'Плагін включено',
-	'plugin_info_up' => 'Доступна нова версія плагіну (версія @version@)',
+	'plugin_info_up' => 'Доступна нова версія плагіну (версія @version@)', # MODIF
 	'plugin_info_verrouille' => 'Системний плагін',
 	'plugins_inactifs_liste' => 'Вимкнені',
 	'plugins_non_verrouilles_liste' => 'Необов’язкові',
