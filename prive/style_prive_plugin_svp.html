@@ -54,32 +54,20 @@
 .liste-plugins .item:last-child {
 	border: none;
 }
-.liste-plugins .liste-items .item {
-	background: #ffffff !important;
-}
-.liste-plugins .liste-items .item:hover {
-	background:#f3f3f3 !important;
-}
-/*
-.liste-plugins .item.actif {
+
+.liste-plugins .item.actif,
+.liste-plugins .item.verrou {
 	background: #ffffff;
 }
-.liste-plugins .item.actif:hover {
+.liste-plugins .item.inactif {
+	background: #f6f6f6;
+	}
+.liste-plugins .liste-items .item.actif:hover, /* passer au dessus du style du core */
+.liste-plugins .item.inactif:hover,
+.liste-plugins .item.verrou:hover {
 	background:#eee;
 }
-.liste-plugins .item.verrou {
-	background: #e8e8e8;
-}
-.liste-plugins .item.inactif {
-	background: #f4f4f4;
-	}
-.liste-plugins .item.inactif:hover {
-	background: #eee;
-}
-.liste-plugins .item.inactif:hover .actions {
-	background: #eee;
-}
-*/
+
 .liste-plugins .item.disabled {
 	background-image: repeating-linear-gradient(-45deg,
       transparent,
