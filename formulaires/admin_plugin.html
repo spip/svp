@@ -24,7 +24,7 @@
 				#SET{dir_plugins_dist,#CONST{_DIR_PLUGINS_DIST}|joli_repertoire}
 				<:svp:info_admin_plugin_verrouille{dir_plugins_dist=#GET{dir_plugins_dist}}:>
 			][(#ENV{verrouille}|=={oui}|non)
-				[(#VAL{svp:info_admin_plugin}|concat{[_actif_(#ENV{actif, oui})], [_verrou_(#ENV{verrouille, non})]}|_T)]
+				[(#VAL{svp:info_admin_plugin}|concat{[_actif_(#ENV{actif})], [_verrou_(#ENV{verrouille, non})]}|_T)]
 			]
 			</p>
 			<INCLURE{fond=formulaires/inc-admin_plugin,env} />

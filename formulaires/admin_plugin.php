@@ -31,7 +31,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  * @return array
  *     Environnement du formulaire
  **/
-function formulaires_admin_plugin_charger_dist($voir = 'actif', $verrouille = 'non', $id_paquet = '', $redirect = '') {
+function formulaires_admin_plugin_charger_dist($voir = '', $verrouille = '', $id_paquet = '', $redirect = '') {
 	$valeurs = array();
 
 	// actualiser la liste des paquets locaux systematiquement
@@ -40,20 +40,25 @@ function formulaires_admin_plugin_charger_dist($voir = 'actif', $verrouille = 'n
 	$valeurs['_erreurs_xml'] = array();
 	svp_actualiser_paquets_locaux(false, $valeurs['_erreurs_xml']);
 
-	$valeurs['actif'] = 'oui';
-	if ($voir == 'inactif') {
+	$valeurs['actif'] = '';
+	if (!$voir or $voir === 'actif') {
+		$valeurs['actif'] = 'oui';
+	} elseif ($voir === 'inactif') {
 		$valeurs['actif'] = 'non';
-	}
-	if ($voir == 'tous') {
-		$valeurs['actif'] = '';
-	}
+	} 
 
-	$valeurs['constante'] = array('_DIR_PLUGINS', '_DIR_PLUGINS_SUPPL');
-	if ($verrouille == 'oui') {
+	$valeurs['constante'] = array();
+	if ($verrouille === 'oui') {
 		$valeurs['constante'] = array('_DIR_PLUGINS_DIST');
-	}
-	if ($verrouille == 'tous') {
-		$valeurs['constante'] = array();
+	} elseif (
+		$verrouille === 'non'
+		// sans précision de verrouillage, sur 'actif' c’est juste les plugins non verrouillés.
+		or (!$verrouille && in_array($voir, ['', 'actif', 'inactif']))
+	) {
+		$valeurs['constante'] = array('_DIR_PLUGINS', '_DIR_PLUGINS_SUPPL');
+	} elseif (!$verrouille) {
+		// historique pour chaine de langues...
+		$verrouille = 'tous';
 	}
 
 	$valeurs['verrouille'] = $verrouille;

@@ -53,6 +53,15 @@
 				</div>]
 				<h3 class="nom">[(#NOM|extraire_multi|svp_importer_charset)]</h3>
 				<small class="version">#_plugins:VERSION</small>
+				[(#ENV{verrouille}|=={tous}|oui)
+					[(#GET{actif}|oui) 
+						<small class="label label-etat label-etat--actif"><:svp:etat_actif:></small>
+					][(#GET{actif}|non) 
+						<small class="label label-etat label-etat--inactif"><:svp:etat_inactif:></small>
+					][(#GET{verrou}|oui)
+						<small class="label label-etat label-etat--verrouille"><:svp:etat_verrouille:></small>
+					]
+				]
 				[(#SET{slogan,#SLOGAN|extraire_multi|typo})]
 				[(#GET{slogan}|non)[(#SET{slogan,#DESCRIPTION|extraire_multi|propre|PtoBR|explode{'<br />'}|reset})]]
 				<div class="short">[(#GET{slogan}|couper{80}|svp_importer_charset)]</div>

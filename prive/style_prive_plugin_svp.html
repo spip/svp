@@ -21,6 +21,10 @@
 	cursor: pointer;
 }
 
+.onglets_simple--svp .onglet--espace {
+	margin-left:2em;
+}
+
 .admin_plugin .actions_multiples .boutons { }
 .admin_plugin .actions_multiples .action {
 	width: 30%;
@@ -50,9 +54,13 @@
 .liste-plugins .item:last-child {
 	border: none;
 }
-.liste-plugins .item:hover {
-	background:#eee;
+.liste-plugins .liste-items .item {
+	background: #ffffff !important;
 }
+.liste-plugins .liste-items .item:hover {
+	background:#f3f3f3 !important;
+}
+/*
 .liste-plugins .item.actif {
 	background: #ffffff;
 }
@@ -71,6 +79,7 @@
 .liste-plugins .item.inactif:hover .actions {
 	background: #eee;
 }
+*/
 .liste-plugins .item.disabled {
 	background-image: repeating-linear-gradient(-45deg,
       transparent,
@@ -102,6 +111,21 @@
 	position: static;
 	float: #ENV{right};
 	margin-#ENV{left}: 10px;
+}
+
+.liste-plugins .label-etat {
+	border:2px solid #ccc;
+	background-color: #fff3;
+	padding:0 5px;
+	border-radius: 3px;
+	margin-left: .25em;
+}
+.label-etat.label-etat--verrouille {
+	border-color: #e77b00;
+;
+}
+.label-etat.label-etat--actif {
+	border-color: #78a327;;
 }
 
 /* Messages */
