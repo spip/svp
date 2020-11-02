@@ -28,6 +28,7 @@
 			id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"][ data-id_paquet="(#ID_PAQUET)"]>
 
 			[(#REM) Checkbox pour actions groupées ]
+			<div class="col-check">
 			[(#GET{incompatible}|non|ou{#GET{attente}}|et{#GET{verrou}|non})
 				[(#GET{obsolete}|non)
 					<div class="check">
@@ -45,12 +46,14 @@
 					]
 				]
 			]
+			</div>
+
+			<div class="col-icon">[(#LOGO|oui)<div class="icon">
+				[(#CONST{#CONSTANTE}|concat{#SRC_ARCHIVE/#LOGO}|balise_img)]
+			</div>]</div>
 
 			[(#REM) Resume du plugin ]
 			<div class="resume">
-				[(#LOGO|oui)<div class="icon">
-					[(#CONST{#CONSTANTE}|concat{#SRC_ARCHIVE/#LOGO}|balise_img)]
-				</div>]
 				<h3 class="nom">[(#NOM|extraire_multi|svp_importer_charset)]</h3>
 				<small class="version">#_plugins:VERSION</small>
 				[(#ENV{verrouille}|=={tous}|oui)
@@ -158,7 +161,7 @@
 				</div>
 			]
 
-			</div>
+			</div>[(#REM) /.footer ]
 
 			[(#REM) Détails ]
 			[(#GET{details})
