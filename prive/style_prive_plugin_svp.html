@@ -22,7 +22,7 @@
 }
 
 .onglets_simple--svp .onglet--espace {
-	margin-left:2em;
+	margin-#ENV{left}:2em;
 }
 
 .admin_plugin .actions_multiples .boutons { }
@@ -56,13 +56,13 @@
 }
 .liste-plugins .item .col-check { 
 	width: 1.25em;
-	text-align: left;
+	text-align: #ENV{left};
 	padding: 0 5px;
 	align-self: center;
 }
 .liste-plugins .item .col-icon { 
 	width: 38px; 
-	padding-right: .75em; 
+	padding-#ENV{right}: .75em; 
 	align-self: center;
 }
 .liste-plugins .item .resume {
@@ -73,7 +73,7 @@
 .liste-plugins .item .footer,
 .liste-plugins .item .details {
 	flex-basis: 100%;
-	margin-left: calc(48px + 2em);
+	margin-#ENV{left}: calc(48px + 2em);
 }
 .liste-plugins .item .footer {
 	flex-wrap: wrap;
@@ -86,7 +86,7 @@
 	.liste-plugins .item .footer,
 	.liste-plugins .item .details {
 		flex-basis: 100%;
-		margin-left: calc(28px + 2em);
+		margin-#ENV{left}: calc(28px + 2em);
 		flex-wrap: wrap;
 	}
 }
@@ -150,7 +150,7 @@
 	background-color: #fff3;
 	padding:0 5px;
 	border-radius: 3px;
-	margin-left: .25em;
+	margin-#ENV{left}: .25em;
 	cursor: default;
 }
 .label-etat.label-etat--actif {
