@@ -58,6 +58,8 @@
 				<small class="version">#_plugins:VERSION</small>
 				[(#ENV{verrouille}|=={tous}|et{#GET{actif}}) 
 					<small class="label label-etat label-etat--actif" title="<:svp:plugin_info_actif|attribut_html:>"><:svp:etat_actif:></small>
+				][(#ENV{verrouille}|=={tous}|et{#GET{actif}|non}) 
+					<small class="label label-etat label-etat--inactif"><:svp:etat_inactif:></small>
 				][(#ENV{verrouille}|=={tous}|et{#GET{verrou}})
 					<small class="label label-etat label-etat--verrouille" title="<:svp:info_verrouille|attribut_html:>"><:svp:etat_verrouille:></small>
 				][(#GET{obsolete}|oui)
