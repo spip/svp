@@ -56,12 +56,12 @@
 			<div class="resume">
 				<h3 class="nom">[(#NOM|extraire_multi|svp_importer_charset)]</h3>
 				<small class="version">#_plugins:VERSION</small>
-				[(#ENV{verrouille}|=={tous}|oui)
-					[(#GET{actif}|oui) 
-						<small class="label label-etat label-etat--actif"><:svp:etat_actif:></small>
-					][(#GET{verrou}|oui)
-						<small class="label label-etat label-etat--verrouille"><:svp:etat_verrouille:></small>
-					]
+				[(#ENV{verrouille}|=={tous}|et{#GET{actif}}) 
+					<small class="label label-etat label-etat--actif" title="<:svp:plugin_info_actif|attribut_html:>"><:svp:etat_actif:></small>
+				][(#ENV{verrouille}|=={tous}|et{#GET{verrou}})
+					<small class="label label-etat label-etat--verrouille" title="<:svp:info_verrouille|attribut_html:>"><:svp:etat_verrouille:></small>
+				][(#GET{obsolete}|oui)
+					<small class="label label-etat label-etat--obsolete" title="<:svp:info_plugin_obsolete|attribut_html:>"><:svp:etat_obsolete:></small>
 				]
 				[(#SET{slogan,#SLOGAN|extraire_multi|typo})]
 				[(#GET{slogan}|non)[(#SET{slogan,#DESCRIPTION|extraire_multi|propre|PtoBR|explode{'<br />'}|reset})]]
@@ -70,10 +70,8 @@
 
 			[(#REM) Messages ]
 			[(#SET{erreurs, #ARRAY{
-				obsolete,     #GET{obsolete}|?{<:svp:info_plugin_obsolete:>},
 				attente,      #GET{attente}|?{#GET{autoriser_plugins_ajouter}|?{<:svp:info_plugin_attente_dependance:>,<:svp:info_plugin_attente_dependance_interdit:>}},
 				incompatible, #GET{incompatible}|?{<:svp:info_plugin_incompatible:>},
-				verrou,       #GET{verrou}|?{<:svp:info_verrouille:>},
 			}|array_filter})]
 			#SET{messages, #ARRAY{
 				maj,      #GET{obsolete}|non|et{#GET{verrou}|non}|et{#_plugins:MAJ_VERSION}|et{#GET{autoriser_plugins_ajouter}},

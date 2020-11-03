@@ -108,9 +108,8 @@
 .liste-plugins .item.verrou:hover {
 	background:#eee;
 }
-.liste-plugins .item.disabled .icon {
-	opacity: 0.6;
-	z-index: 1; /* opacity change la stack, et le dropdown échoue sinon */
+.liste-plugins .liste-items .item.disabled {
+    opacity: 1;
 }
 
 /* Case à cocher */
@@ -152,13 +151,18 @@
 	padding:0 5px;
 	border-radius: 3px;
 	margin-left: .25em;
+	cursor: default;
+}
+.label-etat.label-etat--actif {
+	border-color: #78a327;
 }
 .label-etat.label-etat--verrouille {
 	border-color: #e77b00;
-;
 }
-.label-etat.label-etat--actif {
-	border-color: #78a327;;
+.label-etat.label-etat--obsolete {
+	border-color: #444;
+	background-color: #444;
+	color: white;
 }
 
 /* Messages */
@@ -251,6 +255,8 @@
 /* Bouton afficher incompatibles (avant la liste) */
 #afficher_incompatibles {
 	float: #ENV{right};
+	margin-bottom: 1em;
+	margin-top: -.5em; /* compenser le paragraphe de présentation */
 }
 
 
