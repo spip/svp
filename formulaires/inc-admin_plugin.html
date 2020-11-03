@@ -59,8 +59,6 @@
 				[(#ENV{verrouille}|=={tous}|oui)
 					[(#GET{actif}|oui) 
 						<small class="label label-etat label-etat--actif"><:svp:etat_actif:></small>
-					][(#GET{actif}|non) 
-						<small class="label label-etat label-etat--inactif"><:svp:etat_inactif:></small>
 					][(#GET{verrou}|oui)
 						<small class="label label-etat label-etat--verrouille"><:svp:etat_verrouille:></small>
 					]

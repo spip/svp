@@ -108,16 +108,9 @@
 .liste-plugins .item.verrou:hover {
 	background:#eee;
 }
-
-.liste-plugins .item.disabled {
-	background-image: repeating-linear-gradient(-45deg,
-      transparent,
-      transparent 30px,
-      rgba(0, 0, 0, 5%) 30px,
-      rgba(0, 0, 0, 5%) 60px) !important;
-}
 .liste-plugins .item.disabled .icon {
 	opacity: 0.6;
+	z-index: 1; /* opacity change la stack, et le dropdown échoue sinon */
 }
 
 /* Case à cocher */
@@ -193,7 +186,8 @@
 	-webkit-box-pack: justify;
 	-ms-flex-pack: justify;
 	justify-content: space-between;
-	margin-top:.5em;
+	margin-top: .25em;
+	margin-bottom: -.25em; /* compenser la marge basse des groupes de boutons */
 }
 .liste-plugins .liste-items .item .actions {
 	visibility: visible;
@@ -225,8 +219,8 @@
 .liste-plugins .details {
 	clear: both;
 	margin-bottom: 1em;
-	margin-top:.5em;
-	padding-top:.5em;
+	margin-top:1em;
+	padding-top:1em;
 	border-top: 1px solid #ddd;
 }
 .liste-plugins .liste-items .item .details dl {
