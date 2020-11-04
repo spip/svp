@@ -46,7 +46,7 @@
 		<traducteur nom="denisb" lien="https://trad.spip.net/auteur/denisb" />
 		<traducteur nom="Teddy" lien="https://trad.spip.net/auteur/teddy" />
 	</langue>
-	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/svp?lang_cible=fr_tu" total="247" traduits="234" relire="0" modifs="1" nouveaux="12" pourcent="94.74">
+	<langue code="fr_tu" url="https://trad.spip.net/tradlang_module/svp?lang_cible=fr_tu" total="247" traduits="247" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="Cerf" lien="https://trad.spip.net/auteur/cerf" />
 		<traducteur nom="RealET" lien="https://trad.spip.net/auteur/realet" />
 	</langue>
