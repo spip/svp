@@ -65,10 +65,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		Vous devez confirmer cette action.',
 
 	// E
-	'etat_actif' => 'Actif',
-	'etat_inactif' => 'Inactif',
-	'etat_verrouille' => 'Verrouillé',
-	'etat_obsolete' => 'Obsolète',
 	'erreur_actions_non_traitees' => 'Certaines actions n’ont pas été réalisées. Cela peut provenir d’une erreur lors des actions à réaliser, ou d’un affichage de cette page alors que des actions sont encore en cours. Les actions avaient été lancées par @auteur@ le @date@.',
 	'erreur_auth_plugins_ajouter_lib' => 'Vous n’avez pas les droits nécessaires pour ajouter une bibliothèque.',
 	'erreur_dir_dib_ecriture' => 'Le répertoire des bibliothèques @dir@ n’est pas accessible en écriture. Impossible d’y charger une bibliothèque !',
@@ -86,6 +82,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_teleporter_methode_inconue' => 'Méthode @methode@ inconnue pour téléporter',
 	'erreur_teleporter_type_fichier_inconnu' => 'Type de fichier inconnu pour la source @source@',
 	'erreurs_xml' => 'Impossible de lire certaines descriptions XML',
+	'etat_actif' => 'Actif',
+	'etat_inactif' => 'Inactif',
+	'etat_obsolete' => 'Obsolète',
+	'etat_verrouille' => 'Verrouillé',
 	'explication_destination' => 'Le chemin sera calculé depuis le nom de l’archive si vous ne le remplissez pas.',
 
 	// F
