@@ -54,15 +54,15 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 }
-.liste-plugins .item .col-check { 
+.liste-plugins .item .col-check {
 	width: 1.25em;
 	text-align: #ENV{left};
 	padding: 0 5px;
 	align-self: center;
 }
-.liste-plugins .item .col-icon { 
-	width: 38px; 
-	padding-#ENV{right}: .75em; 
+.liste-plugins .item .col-icon {
+	width: 38px;
+	padding-#ENV{right}: .75em;
 	align-self: center;
 }
 .liste-plugins .item .resume {
@@ -79,7 +79,7 @@
 	flex-wrap: wrap;
 }
 @media (max-width: 500px) {
-	.liste-plugins .item .col-icon { 
+	.liste-plugins .item .col-icon {
 		width: 18px;
 	}
 	.liste-plugins .item .messages,
@@ -96,33 +96,36 @@
 	border: none;
 }
 
+
 .liste-plugins .item.actif,
 .liste-plugins .item.verrou {
 	background: #ffffff;
 }
+.liste-plugins .distants .item,
 .liste-plugins .item.inactif {
 	background: #f6f6f6;
 }
-.liste-plugins .liste-items .item.actif:hover, /* passer au dessus du style du core */
-.liste-plugins .item.inactif:hover,
-.liste-plugins .item.verrou:hover {
-	background:#eee;
+.liste-plugins .liste-items .item.on {
+	background: #f3f3f3;
+}
+.liste-plugins .item:hover {
+	background:#eee !important;
 }
 .liste-plugins .liste-items .item.disabled {
-    opacity: 1;
+	opacity: 1;
 }
 
 /* Case à cocher */
 .liste-plugins .liste-items .item .check {
 	font-size: 1em;
 	position: static;
-	padding:0 0 2px 0; 
+	padding:0 0 2px 0;
 	margin:0;
 }
 
 /* Résumé : logo, nom, version, slogan */
 .liste-plugins .liste-items .item .resume {
-	min-height: initial;	
+	min-height: initial;
 }
 .liste-plugins .liste-items .item .icon {
 	position: static;
@@ -168,7 +171,7 @@
 /* Messages */
 .liste-plugins .messages {}
 .liste-plugins .svp_message {
-	display: block; 
+	display: block;
 	font-weight: 500;
 	font-size: 0.9em;
 }
@@ -264,8 +267,8 @@
  * Liste des dépôts
  */
 .liste-objets.depots .caption {
-    background-image: url(#CHEMIN_IMAGE{depot-24.png});
-    padding-#ENV{left}: 30px;
+	background-image: url(#CHEMIN_IMAGE{depot-24.png});
+	padding-#ENV{left}: 30px;
 }
 
 /**

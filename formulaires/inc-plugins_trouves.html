@@ -11,20 +11,24 @@
 <div class="liste plugins distants">
 	<ul class="liste-items">
 <BOUCLE_plugins_trouves(DATA) {source table, #GET{plugins}}>
-		<li class="item[(#VALEUR{installe}|oui) installe]"[ id="(#VALEUR{prefixe}|strtolower)-#COMPTEUR_BOUCLE-#VALEUR{score}"]>
-		[(#REM) <!-- Checkbox action multiple -->]
-		[(#VALEUR{installe}|non|et{#VAL|test_plugins_auto})
-			<div class="check">
-				<input type="checkbox" class="checkbox" name="ids_paquet\[\]" value="#ID_PAQUET"
-					[(#ID_PAQUET|in_any{#ENV{ids_paquet}}) checked="checked"] />
+		<li class="item [(#VALEUR{installe}|oui) installe]"[ id="(#VALEUR{prefixe}|strtolower)-#COMPTEUR_BOUCLE-#VALEUR{score}"]>
+			[(#REM) <!-- Checkbox action multiple -->]
+			<div class="col-check">
+			[(#VALEUR{installe}|non|et{#VAL|test_plugins_auto})
+				<div class="check">
+					<input type="checkbox" class="checkbox" name="ids_paquet\[\]" value="#ID_PAQUET"
+						[(#ID_PAQUET|in_any{#ENV{ids_paquet}}) checked="checked"] />
+				</div>
+			]
 			</div>
-		]
+
+			<div class="col-icon">[<div class="icon">(#VALEUR{logo}|balise_img)</div>]</div>
+
 			[(#REM) <!-- Resume du plugin -->]
 			<div class="resume">
 				<h3 class="nom">[(#VALEUR{nom}|extraire_multi)]</h3>
 				<span class="version">[(#VALEUR{version}|denormaliser_version)]</span>
 				<div class="short">[(#VALEUR{slogan}|extraire_multi)]</div>
-				[<div class="icon">(#VALEUR{logo}|balise_img)</div>]
 			</div>
 
 
@@ -38,19 +42,22 @@
 				</div>
 			]
 
-			[(#REM) Liens ]
-			#SET{liens,#ARRAY{
-				doc, #VAL{#LIEN_DOC|oui},
-				demo,#VAL{#LIEN_DEMO|oui},
-			}|array_filter}
-			<div class="links groupe-boutons">
-				<a href="#" class="bouton link ouvrir" rel="info" role="button" aria-expanded="false" aria-controls="details_#KEY"><:svp:lien_details_plus:></a>
-				[(#GET{liens/doc}|oui)
-					[<a href="(#LIEN_DOC)" class="bouton link spip_out" title="<:svp:bulle_aller_documentation|attribut_html:>" rel="external"><:svp:lien_documentation:></a>]
-				][(#GET{liens/demo}|oui)
-					[<a href="(#LIEN_DEMO|svp_calculer_url_demo)" class="bouton link spip_out" title="<:svp:bulle_aller_demonstration|attribut_html:>" rel="external"><:svp:lien_demo:></a>]
-				]
-			</div>
+			[(#REM) Liens + boutons d'actions ]
+			<div class="footer">
+				[(#REM) Liens ]
+				#SET{liens,#ARRAY{
+					doc, #VAL{#LIEN_DOC|oui},
+					demo,#VAL{#LIEN_DEMO|oui},
+				}|array_filter}
+				<div class="links groupe-boutons">
+					<a href="#" class="bouton link ouvrir" rel="info" role="button" aria-expanded="false" aria-controls="details_#KEY"><:svp:lien_details_plus:></a>
+					[(#GET{liens/doc}|oui)
+						[<a href="(#LIEN_DOC)" class="bouton link spip_out" title="<:svp:bulle_aller_documentation|attribut_html:>" rel="external"><:svp:lien_documentation:></a>]
+					][(#GET{liens/demo}|oui)
+						[<a href="(#LIEN_DEMO|svp_calculer_url_demo)" class="bouton link spip_out" title="<:svp:bulle_aller_demonstration|attribut_html:>" rel="external"><:svp:lien_demo:></a>]
+					]
+				</div>
+			</div>[(#REM) .footer ]
 
 
 			[(#REM) <!-- Details du plugin -->]
@@ -109,7 +116,7 @@
 	[/* (#REM)
 		Déplier le bouton 'installer' et mettre le submit en premier dans le form
 		pour que l'appuie de la touche entree valide.
-		Le supprimer si l'on change un critere de recherche. 
+		Le supprimer si l'on change un critere de recherche.
 	*/]
 	$('.plugins li.item input.checkbox').on('change', function(){
 		$form = $(this).parents('form').eq(0);
@@ -119,7 +126,7 @@
 				$(this).parents('form').eq(0).find('> input.submit').remove();
 			});
 		}
-	}); 
+	});
 })(jQuery);
 
 
