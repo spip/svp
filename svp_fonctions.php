@@ -243,68 +243,6 @@ function svp_afficher_langues($langues, $sep = ', ') {
 	return $texte;
 }
 
-
-/**
- * Compile la balise `#SVP_BRANCHES_SPIP`
- *
- * Cette balise retourne une liste des branches de SPIP
- *
- * Avec un paramètre indiquant une branche, la balise retourne
- * une liste des bornes mini et maxi de cette branche.
- *
- * @example
- *     #SVP_BRANCHES_SPIP       : array('1.9', '2.0', '2.1', ....)
- *     #SVP_BRANCHES_SPIP{3.0}  : array('3.0.0', '3.0.999')
- *
- * @balise
- * @see calcul_svp_branches_spip()
- *
- * @param Champ $p
- *     Pile au niveau de la balise
- * @return Champ
- *     Pile complétée par le code à générer
- **/
-function balise_SVP_BRANCHES_SPIP($p) {
-	// nom d'une branche en premier argument
-	if (!$branche = interprete_argument_balise(1, $p)) {
-		$branche = "''";
-	}
-	$p->code = 'calcul_svp_branches_spip(' . $branche . ')';
-
-	return $p;
-}
-
-/**
- * Retourne une liste des branches de SPIP, ou les bornes mini et maxi
- * d'une branche donnée
- *
- * @param string $branche
- *     Branche dont on veut récupérer les bornes mini et maxi
- * @return array
- *     Liste des branches array('1.9', '2.0', '2.1', ....)
- *     ou liste mini et maxi d'une branche array('3.0.0', '3.0.999')
- **/
-function calcul_svp_branches_spip($branche) {
-
-	$retour = array();
-
-	// pour $GLOBALS['infos_branches_spip']
-	include_spip('inc/svp_outiller');
-	$svp_branches = $GLOBALS['infos_branches_spip'];
-
-	if (is_array($svp_branches)) {
-		if (($branche) and in_array($branche, $svp_branches)) {
-			// On renvoie les bornes inf et sup de la branche specifiee
-			$retour = $svp_branches[$branche];
-		} else {
-			// On renvoie uniquement les numeros de branches
-			$retour = array_keys($svp_branches);
-		}
-	}
-
-	return $retour;
-}
-
 /**
  * Traduit un type de dépot de plugin
  *
