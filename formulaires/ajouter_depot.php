@@ -20,7 +20,9 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  **/
 function formulaires_ajouter_depot_charger_dist() {
 	// On ne renvoie pas les valeurs saisies mais on fait un raz systematique
-	return array();
+	return array(
+		'nb_depots' => (int)sql_countsel('spip_depots'),
+	);
 }
 
 /**
