@@ -169,26 +169,6 @@ function svp_afficher_dependances($balise_serialisee, $dependance = 'necessite',
 	return $texte;
 }
 
-/**
- * Teste si un plugin possède des dépendances
- *
- * @param string $balise_serialisee
- *     Informations des dépendances (tableau sérialisé) tel que stocké
- *     en base dans la table spip_paquets
- * @return bool
- *     Le plugin possède t'il des dépendances ?
- **/
-function svp_dependances_existe($balise_serialisee) {
-	$dependances = unserialize($balise_serialisee);
-	foreach ($dependances as $_dependance) {
-		if ($_dependance) {
-			return true;
-		}
-	}
-
-	return false;
-}
-
 
 /**
  * Retourne un texte HTML présentant les crédits d'un plugin
