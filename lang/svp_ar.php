@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'action_patienter' => 'العمليات قيد التنفيذ. الرجاء الانتظار...',
+	'actions' => 'عمليات',
 	'actions_a_faire' => 'العمليات قيد التنفيذ',
 	'actions_demandees' => 'العمليات المطلوبة:',
 	'actions_en_erreur' => 'الأخطاء الحاصلة',
@@ -26,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_actualiser' => 'تحديث',
 	'bouton_actualiser_tout' => 'تحديث المستودعات',
 	'bouton_appliquer' => 'تطبيق',
+	'bouton_configurer' => 'إعداد',
 	'bouton_confirmer' => 'تأكيد',
 	'bouton_desactiver' => 'إيقاف',
 	'bouton_desinstaller' => 'إزالة التثبيت',
@@ -82,6 +84,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_teleporter_methode_inconue' => 'اسلوب @methode@ غير معروف للنقل البعيد',
 	'erreur_teleporter_type_fichier_inconnu' => 'نوع ملفات غير معروف للمصدر @source@',
 	'erreurs_xml' => 'لا يمكن قراءة عدد من أوصاف XML',
+	'etat_actif' => 'فعّال',
+	'etat_inactif' => 'معطّل',
+	'etat_obsolete' => 'قديم',
+	'etat_verrouille' => 'مقفل',
 	'explication_destination' => 'سيتم حساب المسار من اسم الأرشيف اذا لم تدخله.',
 
 	// F
@@ -170,6 +176,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_installer_plugins' => 'تثبيت ملحقات',
 	'legende_rechercher_plugins' => 'البحث عن ملحقات',
 	'lien_demo' => 'عرض توضيحي',
+	'lien_details_moins' => 'معلومات أقل',
+	'lien_details_plus' => 'معلومات أكثر',
 	'lien_documentation' => 'توثيق',
 
 	// M
@@ -242,7 +250,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'placeholder_phrase' => 'بادئة، اسم، شعار، وصف او مؤلف',
 	'plugin_info_actif' => 'ملحق نشط',
-	'plugin_info_up' => 'هناك ترقية متوافرة للملحق (الإصدار @version@)', # MODIF
+	'plugin_info_up' => 'هناك ترقية متوافرة (@version@)',
+	'plugin_info_up_x' => 'تحديث رئيسي متوافر (@version@). لا تنسوا التحقق من التوافقات.',
+	'plugin_info_up_y' => 'تحديث وظيفي متوافر (@version@).',
+	'plugin_info_up_z' => 'تحديث تصحيح أخطاء متوافر (@version@).',
 	'plugin_info_verrouille' => 'ملحق مقفل',
 	'plugins_inactifs_liste' => 'غير نشطة',
 	'plugins_non_verrouilles_liste' => 'غير مقفلة',

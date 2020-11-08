@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'action_patienter' => 'The actions are being processed. Please wait...',
+	'actions' => 'Actions',
 	'actions_a_faire' => 'Actions to process',
 	'actions_demandees' => 'Actions requested:',
 	'actions_en_erreur' => 'Occurring errors',
@@ -26,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_actualiser' => 'Refresh',
 	'bouton_actualiser_tout' => 'Refresh the repositories',
 	'bouton_appliquer' => 'Apply',
+	'bouton_configurer' => 'Configure',
 	'bouton_confirmer' => 'Confirm',
 	'bouton_desactiver' => 'Disable',
 	'bouton_desinstaller' => 'Uninstall',
@@ -82,6 +84,10 @@ is not created or is not writable.
 	'erreur_teleporter_methode_inconue' => 'Unknown method "@methode@" for teleport',
 	'erreur_teleporter_type_fichier_inconnu' => 'Unknown file type for the source @source@',
 	'erreurs_xml' => 'Unable to read some XML descriptions',
+	'etat_actif' => 'Enabled',
+	'etat_inactif' => 'Disabled',
+	'etat_obsolete' => 'Obsolete',
+	'etat_verrouille' => 'Locked',
 	'explication_destination' => 'The path will be calculated from the archive name if you don’t fill it.',
 
 	// F
@@ -169,6 +175,8 @@ is not created or is not writable.
 	'legende_installer_plugins' => 'Install plugins',
 	'legende_rechercher_plugins' => 'Search plugins',
 	'lien_demo' => 'Demo',
+	'lien_details_moins' => 'Less information',
+	'lien_details_plus' => 'More information',
 	'lien_documentation' => 'Documentation',
 
 	// M
@@ -241,7 +249,10 @@ is not created or is not writable.
 	// P
 	'placeholder_phrase' => 'prefix, name, slogan, description or author',
 	'plugin_info_actif' => 'Active plugin',
-	'plugin_info_up' => 'An update of the plugin is available (version @version@)', # MODIF
+	'plugin_info_up' => 'An update is available (@version@)',
+	'plugin_info_up_x' => 'A major update is available (@version@). Remember to check compatibilities.',
+	'plugin_info_up_y' => 'A features update is available (@version@).',
+	'plugin_info_up_z' => 'A fix update is available (@version@).',
 	'plugin_info_verrouille' => 'Plugin locked',
 	'plugins_inactifs_liste' => 'Inactive',
 	'plugins_non_verrouilles_liste' => 'Not locked',
