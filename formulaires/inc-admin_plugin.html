@@ -24,7 +24,7 @@
 		#SET{obsolete,#OBSOLETE|=={oui}|oui}
 		#SET{details,#ENV{id_paquet,''}|=={#ID_PAQUET}|oui}
 
-		<li class="item clearfix[ (#GET{actif}|?{actif,inactif})][(#GET{obsolete}|ou{#GET{attente}}|ou{#GET{incompatible}}|oui) disabled][(#GET{incompatible}) incompatible][(#GET{verrou}) verrou][(#_plugins:MAJ_VERSION|oui|et{#GET{autoriser_plugins_ajouter}|oui}|oui)up]"[
+		<li class="item clearfix[ (#GET{actif}|?{actif,inactif})][(#GET{obsolete}|ou{#GET{attente}}|ou{#GET{incompatible}}|oui) disabled][(#GET{incompatible}) incompatible][(#GET{verrou}) verrou][(#_plugins:MAJ_VERSION|oui|et{#GET{autoriser_plugins_ajouter}|oui}|oui)up][(#GET{details}|oui)on]"[
 			id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"][ data-id_paquet="(#ID_PAQUET)"]>
 
 			[(#REM) Checkbox pour actions groupées ]
