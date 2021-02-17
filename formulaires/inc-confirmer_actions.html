@@ -1,7 +1,7 @@
 
 <input type="hidden" name="_todo" class='hidden' value="[(#ENV{_todo})]" />
 
-[<div class="reponse_formulaire reponse_formulaire_erreur">
+[<div class="reponse_formulaire reponse_formulaire_erreur" role="alert">
 	(#ENV**{erreurs/decideur_erreurs}|foreach{svp_presenter_actions})
 </div>]
 
@@ -17,11 +17,11 @@
 		(#ENV**{_notices/decideur_warning})
 	</div>]
 
-	<div class="reponse_formulaire reponse_formulaire_ok">
+	<div class="reponse_formulaire reponse_formulaire_ok" role="status">
 		<strong><:svp:actions_demandees:></strong>
 		<ul>(#ENV**{_libelles_actions/decideur_demandes}|foreach{svp_presenter_actions})</ul>
 	</div>
-	[<div class="reponse_formulaire reponse_formulaire_ok">
+	[<div class="reponse_formulaire reponse_formulaire_ok" role="status">
 		<strong><:svp:actions_necessaires:></strong>
 		<ul>(#ENV**{_libelles_actions/decideur_propositions}|foreach{svp_presenter_actions})</ul>
 	</div>]

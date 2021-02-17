@@ -13,8 +13,8 @@
 <div class="formulaire_spip formulaire_admin_plugin" id="formulaire_admin_plugin">
 	<h3 class="titrem">[(#CHEMIN_IMAGE{plugin-24.png}|balise_img{icone plugin-24,cadre-icone})]<span id="nbr_plugin"><:plugins_liste:></span> </h3>
 	<input type="input" id="filtrer" placeholder="<:svp:filtrer|attribut_html:>">
-	[<p class="reponse_formulaire reponse_formulaire_erreur">(#ENV*{message_erreur})</p>]
-	[<p class="reponse_formulaire reponse_formulaire_ok">(#ENV*{message_ok})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_erreur" role="alert">(#ENV*{message_erreur})</p>]
+	[<p class="reponse_formulaire reponse_formulaire_ok" role="status">(#ENV*{message_ok})</p>]
 	<form method="post" action="#ENV{action}">
 		<INCLURE{fond=formulaires/inc-confirmer_actions, env} />
 		#ACTION_FORMULAIRE
