@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'action_patienter' => 'Les actions sont en cours de traitement. Veuillez patienter…',
+	'actions' => 'Actions',
 	'actions_a_faire' => 'Actions à traiter',
 	'actions_demandees' => 'Actions demandées :',
 	'actions_en_erreur' => 'Erreurs survenues',
@@ -26,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_actualiser' => 'Actualiser',
 	'bouton_actualiser_tout' => 'Actualiser les dépôts',
 	'bouton_appliquer' => 'Appliquer',
+	'bouton_configurer' => 'Configurer',
 	'bouton_confirmer' => 'Confirmer',
 	'bouton_desactiver' => 'Désactiver',
 	'bouton_desinstaller' => 'Désinstaller',
@@ -82,6 +84,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_teleporter_methode_inconue' => 'Méthode @methode@ inconnue pour téléporter',
 	'erreur_teleporter_type_fichier_inconnu' => 'Type de fichier inconnu pour la source @source@',
 	'erreurs_xml' => 'Impossible de lire certaines descriptions XML',
+	'etat_actif' => 'Actif',
+	'etat_inactif' => 'Inactif',
+	'etat_obsolete' => 'Obsolète',
+	'etat_verrouille' => 'Verrouillé',
 	'explication_destination' => 'Le chemin sera calculé depuis le nom de l’archive si vous ne le remplissez pas.',
 
 	// F
@@ -151,6 +157,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_critere_etat' => 'États',
 	'label_critere_phrase' => 'Rechercher dans les plugins',
 	'label_destination' => 'Chemin depuis le répertoire « auto » où déposer le plugin',
+	'label_etat' => 'État',
 	'label_modifie_le' => 'Modifié le',
 	'label_n_autres_contributions' => 'autres contributions',
 	'label_plugin_description' => 'Description de la version @version@',
@@ -170,6 +177,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_installer_plugins' => 'Installer des plugins',
 	'legende_rechercher_plugins' => 'Rechercher des plugins',
 	'lien_demo' => 'Démonstration',
+	'lien_details_moins' => 'Moins d’infos',
+	'lien_details_plus' => 'Plus d’infos',
 	'lien_documentation' => 'Documentation',
 
 	// M
@@ -242,7 +251,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'placeholder_phrase' => 'préfixe, nom, slogan, description ou auteur',
 	'plugin_info_actif' => 'Plugin actif',
-	'plugin_info_up' => 'Une mise à jour du plugin est disponible (version @version@)', # MODIF
+	'plugin_info_up' => 'Une mise à jour est disponible (@version@)',
+	'plugin_info_up_x' => 'Une mise à jour majeure est disponible (@version@). Pensez à vérifier les incompatibilités.',
+	'plugin_info_up_y' => 'Une mise à jour fonctionnelle est disponible (@version@).',
+	'plugin_info_up_z' => 'Une mise à jour corrective est disponible (@version@).',
 	'plugin_info_verrouille' => 'Plugin verrouillé',
 	'plugins_inactifs_liste' => 'Inactifs',
 	'plugins_non_verrouilles_liste' => 'Non verrouillés',
