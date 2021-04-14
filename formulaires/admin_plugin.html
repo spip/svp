@@ -31,10 +31,10 @@
 		</div>
 		<div class="actions_multiples">
 			[<div class="boutons">(#CONST{_DIR_PLUGINS_DIST}|in_array{#ENV{constante,#ARRAY}}|non)
-				<p class="cocher groupe-boutons bloc">
-					<a class="bouton link" role="button" href="#" id="select_tous"><:svp:tout_cocher:></a>
-					<a class="bouton link" role="button" href="#" id="select_aucun"><:svp:tout_decocher:></a>
-					<a class="bouton link" role="button" href="#" id="select_up"><:svp:tout_cocher_up:></a>
+				<p class="cocher groupe-btns groupe-btns_bloc">
+					<a class="btn btn_link" role="button" href="#" id="select_tous"><:svp:tout_cocher:></a>
+					<a class="btn btn_link" role="button" href="#" id="select_aucun"><:svp:tout_decocher:></a>
+					<a class="btn btn_link" role="button" href="#" id="select_up"><:svp:tout_cocher_up:></a>
 				</p>
 				<select id="action_globale" class="action" name="action_globale">
 					[(#ENV{actif}|=={oui}|non)<option value="on"><:svp:bouton_activer:></option>]
