@@ -6,8 +6,8 @@
 		<:titre_cadre_numero_objet{objet=#GET{titre_info}}:>
 		<p>#ID_DEPOT</p>
 	</div>
-	<div class="groupe-boutons vertical bloc">
-		[(#BOUTON_ACTION{<:svp:bouton_actualiser:>, #URL_ACTION_AUTEUR{actualiser_depot,#ID_DEPOT, #SELF}, actualiser, '', <:svp:bulle_actualiser_depot:>})]
+	<div class="groupe-btns groupe-btns_vertical groupe-btns_bloc">
+		[(#BOUTON_ACTION{<:svp:bouton_actualiser:>, #URL_ACTION_AUTEUR{actualiser_depot,#ID_DEPOT, #SELF}, btn_actualiser, '', <:svp:bulle_actualiser_depot:>})]
 		[(#BOUTON_ACTION{<:svp:bouton_supprimer:>, #URL_ACTION_AUTEUR{supprimer_depot,#ID_DEPOT, #URL_ECRIRE{depots}}, del, '', <:svp:bulle_supprimer_depot:>})]
 	</div>
 

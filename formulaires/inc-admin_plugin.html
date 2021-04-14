@@ -5,10 +5,10 @@
 <B_plugins>
 [(#GET{incompatibles})
 	[(#ENV{afficher_incompatibles,''}|non)
-	<a class="bouton secondaire ouvrir" id="afficher_incompatibles" href="[(#SELF|parametre_url{afficher_incompatibles,1})]"><:svp:afficher_les_plugins_incompatibles:></a>
+	<a class="btn btn_secondaire ouvrir" id="afficher_incompatibles" href="[(#SELF|parametre_url{afficher_incompatibles,1})]"><:svp:afficher_les_plugins_incompatibles:></a>
 	]
 	[(#ENV{afficher_incompatibles,''}|oui)
-	<a class="bouton secondaire fermer" id="afficher_incompatibles" href="[(#SELF|parametre_url{afficher_incompatibles,''})]"><:svp:cacher_les_plugins_incompatibles:></a>
+	<a class="btn btn_secondaire fermer" id="afficher_incompatibles" href="[(#SELF|parametre_url{afficher_incompatibles,''})]"><:svp:cacher_les_plugins_incompatibles:></a>
 	]
 ]
 <div class="liste plugins" id="liste_plugins">
@@ -105,12 +105,12 @@
 				doc, #GET{actif}|et{#LIEN_DOC|oui},
 				demo,#GET{actif}|et{#LIEN_DEMO|oui},
 			}|array_filter}
-			<div class="links groupe-boutons">
-				<a href="[(#SELF|parametre_url{id_paquet,#GET{details}|?{'',#ID_PAQUET}})]" class="bouton link [(#GET{details}|?{fermer,ouvrir})]" rel="info" role="button" aria-expanded="[(#GET{details}|?{true,false})]" aria-controls="details_#ID_PAQUET">[(#GET{details}|?{<:svp:lien_details_moins:>,<:svp:lien_details_plus:>})]</a>
+			<div class="links groupe-btns">
+				<a href="[(#SELF|parametre_url{id_paquet,#GET{details}|?{'',#ID_PAQUET}})]" class="btn btn_link [(#GET{details}|?{fermer,ouvrir})]" rel="info" role="button" aria-expanded="[(#GET{details}|?{true,false})]" aria-controls="details_#ID_PAQUET">[(#GET{details}|?{- <:svp:lien_details_moins:>,+ <:svp:lien_details_plus:>})]</a>
 				[(#GET{liens/doc}|oui)
-					[<a href="(#LIEN_DOC)" class="bouton link spip_out" title="<:svp:bulle_aller_documentation|attribut_html:>" rel="external"><:svp:lien_documentation:></a>]
+					[<a href="(#LIEN_DOC)" class="btn btn_link spip_out" title="<:svp:bulle_aller_documentation|attribut_html:>" rel="external"><:svp:lien_documentation:></a>]
 				][(#GET{liens/demo}|oui)
-					[<a href="(#LIEN_DEMO|svp_calculer_url_demo)" class="bouton link spip_out" title="<:svp:bulle_aller_demonstration|attribut_html:>" rel="external"><:svp:lien_demo:></a>]
+					[<a href="(#LIEN_DEMO|svp_calculer_url_demo)" class="btn btn_link spip_out" title="<:svp:bulle_aller_demonstration|attribut_html:>" rel="external"><:svp:lien_demo:></a>]
 				]
 			</div>
 
@@ -137,25 +137,25 @@
 			[(#GET{actions}|oui)
 				<div class="actions">
 					[(#GET{actions/configurer}|oui)
-						<a href="#URL_ECRIRE{#GET{fond_configurer}}" class="bouton config secondaire"><:svp:bouton_configurer:></a>
+						<a href="#URL_ECRIRE{#GET{fond_configurer}}" class="btn btn_config btn_secondaire"><:svp:bouton_configurer:></a>
 					][(#GET{actions/dropdown}|oui)
 						[(#GET{dropdown}|count|=={1}|et{#GET{dropdown/activer}})
-							<input type="submit" name="[(#ID_PAQUET|svp_nom_action{on})]" class="submit ok principal" value="<:svp:bouton_activer|attribut_html:>" />
+							<input type="submit" name="[(#ID_PAQUET|svp_nom_action{on})]" class="submit ok" value="<:svp:bouton_activer|attribut_html:>" />
 						][(#GET{dropdown}|count|=={1}|et{#GET{dropdown/activer}}|non)
 						<div class="dropdown">
-							<a role="button" id="dropdown_#ID_PAQUET" href="#" class="dropdown-toggle bouton principal" data-toggle="dropdown"><:svp:actions:></a>
+							<a role="button" id="dropdown_#ID_PAQUET" href="#" class="dropdown-toggle btn" data-toggle="dropdown"><:svp:actions:></a>
 							<div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown_#ID_PAQUET">
 								[(#GET{dropdown/maj}|oui)
-									<input type="submit" name="[(#ID_PAQUET|svp_nom_action{up})]" class="dropdown-item submit actualiser link" value="<:svp:bouton_up|attribut_html:> &rarr; #_plugins:MAJ_VERSION" />
+									<input type="submit" name="[(#ID_PAQUET|svp_nom_action{up})]" class="dropdown-item submit actualiser btn_link" value="<:svp:bouton_up|attribut_html:> &rarr; #_plugins:MAJ_VERSION" />
 									<div class="dropdown-divider"></div>
 								][(#GET{dropdown/desactiver}|oui)
-									<input type="submit" name="[(#ID_PAQUET|svp_nom_action{off})]" class="dropdown-item submit supprimer link" value="<:svp:bouton_desactiver|attribut_html:>" />
+									<input type="submit" name="[(#ID_PAQUET|svp_nom_action{off})]" class="dropdown-item submit btn_link" value="<:svp:bouton_desactiver|attribut_html:>" />
 								][(#GET{dropdown/desinstaller}|oui)
-									<input type="submit" name="[(#ID_PAQUET|svp_nom_action{stop})]" class="dropdown-item submit del link" value="<:svp:bouton_desinstaller|attribut_html:>" />
+									<input type="submit" name="[(#ID_PAQUET|svp_nom_action{stop})]" class="dropdown-item submit btn_link" value="<:svp:bouton_desinstaller|attribut_html:>" />
 								][(#GET{dropdown/activer}|oui)
-									<input type="submit" name="[(#ID_PAQUET|svp_nom_action{on})]" class="dropdown-item submit ok link" value="<:svp:bouton_activer|attribut_html:>" />
+									<input type="submit" name="[(#ID_PAQUET|svp_nom_action{on})]" class="dropdown-item submit btn_link" value="<:svp:bouton_activer|attribut_html:>" />
 								][(#GET{dropdown/supprimer}|oui)
-									<input type="submit" name="[(#ID_PAQUET|svp_nom_action{kill})]" class="dropdown-item submit del link" value="<:svp:bouton_supprimer|attribut_html:>" />
+									<input type="submit" name="[(#ID_PAQUET|svp_nom_action{kill})]" class="dropdown-item submit btn_link" value="<:svp:bouton_supprimer|attribut_html:>" />
 								]
 							</div>
 						</div>]

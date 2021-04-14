@@ -188,7 +188,25 @@
 	color: #ec681c;
 }
 
-/* Footer : boutons d'actions + dropdown Bootstrap */
+/* Footer */
+.liste-plugins .footer {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	margin-top: .25em;
+	margin-bottom: -.25em; /* compenser la marge basse des groupes de boutons */
+}
+
+/* Footer : liens */
+.liste-plugins .footer .links {
+	margin-#LEFT: calc(var(--spip-btn-padding-x) * -1);
+	margin-botom: 0;
+}
+
+/* Footer : boutons d'actions */
 .liste-plugins .footer {
 	display: -webkit-box;
 	display: -ms-flexbox;
@@ -204,26 +222,37 @@
 	display: flex;
 	margin-#ENV{left}: auto; /* s'assurer que ce soit à droite */
 }
-.liste-plugins .actions > .bouton:last-of-type {
+.liste-plugins .actions > .btn {
+	margin: 0;
+}
+.liste-plugins .actions > .btn:last-of-type {
 	margin-#ENV{right}: 0;
 }
-.liste-plugins .actions > .bouton:last-of-type + .submit,
-.liste-plugins .actions > .bouton:last-of-type + .dropdown {
+.liste-plugins .actions > .btn:last-of-type + .submit,
+.liste-plugins .actions > .btn:last-of-type + .dropdown {
 	margin-#ENV{left}: 0.5em;
 }
-.liste-plugins .bouton.config {
+.liste-plugins .btn_config {
 	margin-#ENV{right}: 0.5em;
 }
-.liste-plugins .dropdown{}
+
+/* Footer : Dropdown Bootstrap */
+.liste-plugins .dropdown {
+	display: flex;
+}
+.liste-plugins .dropdown-toggle {
+	margin: 0;
+}
 .liste-plugins .dropdown-menu {
- padding: 0;
+	padding: 0;
 }
 .liste-plugins .dropdown-divider {
- margin: 0;
- }
-.liste-plugins .dropdown .submit {
-	padding-#ENV{right}: 0.5em;
+	margin: 0;
+}
+.liste-plugins input.dropdown-item {
 	margin-bottom: 0;
+	width: 100%;
+	text-align: var(--spip-css-left);
 }
 
 /* Détails (visibles au clic) */

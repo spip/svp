@@ -51,7 +51,7 @@
 				<td class="date secondaire">[(#MAJ|affdate{d-m H:i})]</td>]
 				<td class="id">[(#ID_DEPOT)]</td>
 				[(#ENV{affichage}|=={complet}|oui)
-				<td class="action">[(#BOUTON_ACTION{<:svp:bouton_supprimer:>, #URL_ACTION_AUTEUR{supprimer_depot,#ID_DEPOT, #SELF}, '', '', <:svp:bulle_supprimer_depot:>})]</td>]
+				<td class="action">[(#BOUTON_ACTION{<:svp:bouton_supprimer:>, #URL_ACTION_AUTEUR{supprimer_depot,#ID_DEPOT, #SELF}, btn_mini btn_secondaire, '', <:svp:bulle_supprimer_depot:>})]</td>]
 			</tr>
 </BOUCLE_liste_depots>
 		</tbody>
