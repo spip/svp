@@ -49,12 +49,12 @@
 					doc, #VAL{#LIEN_DOC|oui},
 					demo,#VAL{#LIEN_DEMO|oui},
 				}|array_filter}
-				<div class="links groupe-boutons">
-					<a href="#" class="bouton link ouvrir" rel="info" role="button" aria-expanded="false" aria-controls="details_#KEY"><:svp:lien_details_plus:></a>
+				<div class="links groupe-btns">
+					<a href="#" class="btn btn_link ouvrir" rel="info" role="button" aria-expanded="false" aria-controls="details_#KEY"><:svp:lien_details_plus:></a>
 					[(#GET{liens/doc}|oui)
-						[<a href="(#LIEN_DOC)" class="bouton link spip_out" title="<:svp:bulle_aller_documentation|attribut_html:>" rel="external"><:svp:lien_documentation:></a>]
+						[<a href="(#LIEN_DOC)" class="btn btn_link spip_out" title="<:svp:bulle_aller_documentation|attribut_html:>" rel="external"><:svp:lien_documentation:></a>]
 					][(#GET{liens/demo}|oui)
-						[<a href="(#LIEN_DEMO|svp_calculer_url_demo)" class="bouton link spip_out" title="<:svp:bulle_aller_demonstration|attribut_html:>" rel="external"><:svp:lien_demo:></a>]
+						[<a href="(#LIEN_DEMO|svp_calculer_url_demo)" class="btn btn_link spip_out" title="<:svp:bulle_aller_demonstration|attribut_html:>" rel="external"><:svp:lien_demo:></a>]
 					]
 				</div>
 			</div>[(#REM) .footer ]
