@@ -8,12 +8,12 @@
 <script type="text/javascript">
 	/*<![CDATA[*/
 	jQuery(function(){
-		jQuery('#contenu .svp_retour').on('mouseenter',function(){
+		jQuery('#contenu .svp_retour').each(function(){
 			if (jQuery('.msg-alert__close', this).length == 0) {
 				jQuery('.msg-alert__text', this)
 					.append("[(#CHEMIN_IMAGE{fermer-16.png}|balise_img{'',msg-alert__close})]")
 					.on('click',function(){
-						jQuery(this).parents('.msg-alert').remove();
+						jQuery(this).parents('.msg-alert').fadeOut('fast', function() { $(this).remove(); });
 					});
 			}
 		});
