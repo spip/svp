@@ -111,19 +111,21 @@ function exec_admin_plugin_dist() {
 
 	echo gros_titre(_T('icone_admin_plugin'), '');
 
-	//  alerte si mode de compatibilité forcée
+	// Alerte si mode de compatibilité forcée
 	if (defined('_DEV_VERSION_SPIP_COMPAT')) {
-		echo '<div class="notice">'
-				. '<strong>' .  _T('svp:alerte_compatibilite') . '</strong><br />'
-				. _T('svp:alerte_compatibilite_version_autorisee', array('version' => _DEV_VERSION_SPIP_COMPAT))
-			. '</div>';
+		include_spip('inc/filtres_alertes');
+		echo message_alerte(
+			_T('svp:alerte_compatibilite_version_autorisee', array('version' => _DEV_VERSION_SPIP_COMPAT)),
+			_T('svp:alerte_compatibilite')
+		);
 	}
 
-	// message d'erreur au retour d'une operation
+	// Message d'erreur au retour d'une opération
 	if ($erreur_activation) {
-		include_spip('inc/filtres_boites');
-		echo "<div class='svp_retour'>" . boite_ouvrir(_T('svp:actions_en_erreur'),
-				'error') . $erreur_activation . boite_fermer() . "</div>";
+		include_spip('inc/filtres_alertes');
+		echo "<div class='svp_retour'>"
+			. message_alerte($erreur_activation, _T('svp:actions_en_erreur'), 'error')
+			. '</div>';
 	}
 
 	// afficher les actions realisees s'il y en a eu

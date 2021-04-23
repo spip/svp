@@ -1,13 +1,12 @@
 <B_erreurs_xml>
 <div class='svp_retour'>
-	[(#BOITE_OUVRIR{<:svp:actions_en_erreur:>, error})]
-	<:svp:erreurs_xml:>
-	<ul>
-<BOUCLE_erreurs_xml(DATA){source tableau,#ENV{_erreurs_xml}}>
-	<li>#VALEUR*</li>
-</BOUCLE_erreurs_xml>
-	</ul>
-	#BOITE_FERMER
+	[(#ALERTE_OUVRIR{<:svp:actions_en_erreur:>, error, <:svp:erreurs_xml:>})]
+		<ul>
+			<BOUCLE_erreurs_xml(DATA){source tableau,#ENV{_erreurs_xml}}>
+			<li>#VALEUR*</li>
+			</BOUCLE_erreurs_xml>
+		</ul>
+	#ALERTE_FERMER
 </div>
 </B_erreurs_xml>
 <div class="formulaire_spip formulaire_admin_plugin" id="formulaire_admin_plugin">

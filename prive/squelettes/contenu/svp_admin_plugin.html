@@ -9,11 +9,11 @@
 	/*<![CDATA[*/
 	jQuery(function(){
 		jQuery('#contenu .svp_retour').on('mouseenter',function(){
-			if (jQuery('.box .inner .hd h3 img.close', this).length == 0) {
-				jQuery('.box .inner .hd h3', this)
-					.append("[(#CHEMIN_IMAGE{fermer-16.png}|balise_img|inserer_attribut{class,close})]")
+			if (jQuery('.msg-alert__close', this).length == 0) {
+				jQuery('.msg-alert__text', this)
+					.append("[(#CHEMIN_IMAGE{fermer-16.png}|balise_img{'',msg-alert__close})]")
 					.on('click',function(){
-						jQuery(this).parents('.box').remove();
+						jQuery(this).parents('.msg-alert').remove();
 					});
 			}
 		});

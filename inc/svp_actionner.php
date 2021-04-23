@@ -696,7 +696,7 @@ class Actionneur {
 	public function presenter_actions($fin = false) {
 		$affiche = "";
 
-		include_spip('inc/filtres_boites');
+		include_spip('inc/filtres_alertes');
 
 		if (count($this->err)) {
 			$erreurs = "<ul>";
@@ -704,7 +704,7 @@ class Actionneur {
 				$erreurs .= "\t<li class='erreur'>" . $i . "</li>\n";
 			}
 			$erreurs .= "</ul>";
-			$affiche .= boite_ouvrir(_T('svp:actions_en_erreur'), 'error') . $erreurs . boite_fermer();
+			$affiche .= message_alerte_ouvrir(_T('svp:actions_en_erreur'), 'error') . $erreurs . message_alerte_fermer();
 		}
 
 		if (count($this->done)) {
@@ -744,7 +744,7 @@ class Actionneur {
 				}
 			}
 			$done .= "</ul>";
-			$affiche .= boite_ouvrir(_T('svp:actions_realises'), ($oks ? 'success' : 'notice')) . $done . boite_fermer();
+			$affiche .= message_alerte_ouvrir(_T('svp:actions_realises'), ($oks ? 'success' : 'notice')) . $done . message_alerte_fermer();
 		}
 
 		if (count($this->end)) {
@@ -779,7 +779,7 @@ class Actionneur {
 				$todo .= "<a href='" . parametre_url(self(), 'nettoyer_actions',
 						'1') . "'>" . _T('svp:nettoyer_actions') . "</a>\n";
 			}
-			$affiche .= boite_ouvrir($titre, 'notice') . $todo . boite_fermer();
+			$affiche .= message_alerte_ouvrir($titre, 'notice') . $todo . message_alerte_fermer();
 		}
 
 		if ($affiche) {
