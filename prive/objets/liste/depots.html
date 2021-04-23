@@ -60,8 +60,8 @@
 </div>
 </B_liste_depots>
 [(#ENV{affichage}|=={complet}|oui)
-	#BOITE_OUVRIR{'','notice'}
-		<p><:svp:info_aucun_depot_ajoute:></p>
-	#BOITE_FERMER
+	#ALERTE_OUVRIR{'','notice'}
+		<:svp:info_aucun_depot_ajoute:>
+	#ALERTE_FERMER
 ]
 <//B_liste_depots>
