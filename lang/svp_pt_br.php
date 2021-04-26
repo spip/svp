@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'action_patienter' => 'As ações estão sendo processadas. Por favor, aguarde...',
+	'actions' => 'Ações',
 	'actions_a_faire' => 'Ações a tratar',
 	'actions_demandees' => 'Ações solicitadas:',
 	'actions_en_erreur' => 'Erros ocorridos',
@@ -26,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_actualiser' => 'Atualisar',
 	'bouton_actualiser_tout' => 'Atualizar os repositórios',
 	'bouton_appliquer' => 'Aplicar',
+	'bouton_configurer' => 'Configurar',
 	'bouton_confirmer' => 'Confirmar',
 	'bouton_desactiver' => 'Desativar',
 	'bouton_desinstaller' => 'Desinstalar',
@@ -80,6 +82,10 @@ Você precisa confirmar esta ação.',
 	'erreur_teleporter_methode_inconue' => 'Método @methode@ desconhecido pelo teleportador',
 	'erreur_teleporter_type_fichier_inconnu' => 'Tipo de arquivo desconhecido para a fonte @source@',
 	'erreurs_xml' => 'Impossível ler alguma descrições XML',
+	'etat_actif' => 'Ativo',
+	'etat_inactif' => 'Inativo',
+	'etat_obsolete' => 'Obsoleto',
+	'etat_verrouille' => 'Bloqueado',
 	'explication_destination' => 'O caminho será calculado a partir do nome do arquivo se você não indicar outro.',
 
 	// F
@@ -147,6 +153,7 @@ Se você desejar desativá-los, contate o webmaster do site, ou consulte <a href
 	'label_critere_etat' => 'Estados',
 	'label_critere_phrase' => 'Buscar nos plugins',
 	'label_destination' => 'Caminho do diretório «auto», onde gravar o plugin',
+	'label_etat' => 'Status',
 	'label_modifie_le' => 'Alterado em',
 	'label_n_autres_contributions' => 'outras contribuições',
 	'label_plugin_description' => 'Descrição da versão @version@',
@@ -166,6 +173,8 @@ Se você desejar desativá-los, contate o webmaster do site, ou consulte <a href
 	'legende_installer_plugins' => 'Instalar plugins',
 	'legende_rechercher_plugins' => 'Buscar plugins',
 	'lien_demo' => 'Démonstração',
+	'lien_details_moins' => 'Menos informações',
+	'lien_details_plus' => 'Mais informações',
 	'lien_documentation' => 'Documentação',
 
 	// M
@@ -238,7 +247,10 @@ Se você desejar desativá-los, contate o webmaster do site, ou consulte <a href
 	// P
 	'placeholder_phrase' => 'prefixo, nome, slogan, descrição ou autor',
 	'plugin_info_actif' => 'Plugin ativo',
-	'plugin_info_up' => 'Uma atualização do plugin está disponível (versão @version@)', # MODIF
+	'plugin_info_up' => 'Uma atualização está disponível (@version@)',
+	'plugin_info_up_x' => 'Há uma atualização importante disponível (@version@). Considere verificar as incompatibilidades.',
+	'plugin_info_up_y' => 'Há uma atualização funcional disponível (@version@).',
+	'plugin_info_up_z' => 'Há uma atualização corretiva disponível (@version@).',
 	'plugin_info_verrouille' => 'Plugin bloqueado',
 	'plugins_inactifs_liste' => 'Inativos',
 	'plugins_non_verrouilles_liste' => 'Não bloqueados',
