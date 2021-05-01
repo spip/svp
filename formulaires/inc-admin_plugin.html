@@ -28,19 +28,22 @@
 			id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"][ data-id_paquet="(#ID_PAQUET)"]>
 
 			[(#REM) Checkbox pour actions groupées ]
+			#SET{has_check,0}
 			<div class="col-check">
 			[(#GET{incompatible}|non|ou{#GET{attente}}|et{#GET{verrou}|non})
 				[(#GET{obsolete}|non)
+					#SET{has_check,1}
 					<div class="check">
-						<input type="checkbox" class="checkbox select_plugin" name="ids_paquet\[\]" value="#ID_PAQUET"
+						<input type="checkbox" class="checkbox select_plugin" name="ids_paquet\[\]" value="#ID_PAQUET" id="check_plugin#ID_PAQUET"
 							[(#ID_PAQUET|in_any{#ENV{ids_paquet}}) checked="checked"] />
 					</div>
 				]
 				[(#REM) si la configuration le permet, on peut activer un plugin obsolete ]
 				[(#GET{obsolete}|et{#GET{incompatible}|non})
 					[(#CONFIG{svp/autoriser_activer_paquets_obsoletes}|=={oui}|oui)
+						#SET{has_check,1}
 						<div class="check">
-							<input type="checkbox" class="checkbox select_plugin" name="ids_paquet\[\]" value="#ID_PAQUET"
+							<input type="checkbox" class="checkbox select_plugin" name="ids_paquet\[\]" value="#ID_PAQUET" id="check_plugin#ID_PAQUET"
 								[(#ID_PAQUET|in_any{#ENV{ids_paquet}}) checked="checked"] />
 						</div>
 					]
@@ -54,8 +57,10 @@
 
 			[(#REM) Resume du plugin ]
 			<div class="resume">
+				[(#GET{has_check}|oui)<label for="check_plugin#ID_PAQUET">]
 				<h3 class="nom">[(#NOM|extraire_multi|svp_importer_charset)]</h3>
 				<small class="version">#_plugins:VERSION</small>
+				[(#GET{has_check}|oui)</label>]
 				[(#ENV{verrouille}|=={tous}|et{#GET{actif}}) 
 					<small class="label label-etat label-etat--actif" title="<:svp:plugin_info_actif|attribut_html:>"><:svp:etat_actif:></small>
 				][(#ENV{verrouille}|=={tous}|et{#GET{actif}|non}) 
@@ -206,6 +211,15 @@
 					.removeClass('fermer').addClass('ouvrir');
 			}
 			return false;
+		});
+		$('#liste_plugins').on('click','li.item',function(e){
+			const li = $(this);
+			const checkbox = li.find('input.select_plugin');
+			const $target = $(e.target);
+			if (!$target.is('input') && !$target.is('a') && !$target.is('button')) { 
+				checkbox.prop("checked", !checkbox.prop("checked"));
+				return false;
+			}
 		});
 		$('.plugins li.item input.checkbox').change(function(){
 			$(this).parents('form').eq(0).find('.boutons').slideDown();

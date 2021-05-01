@@ -14,9 +14,11 @@
 		<li class="item [(#VALEUR{installe}|oui) installe]"[ id="(#VALEUR{prefixe}|strtolower)-#COMPTEUR_BOUCLE-#VALEUR{score}"]>
 			[(#REM) <!-- Checkbox action multiple -->]
 			<div class="col-check">
+			#SET{has_check,0}
 			[(#VALEUR{installe}|non|et{#VAL|test_plugins_auto})
+			#SET{has_check,1}
 				<div class="check">
-					<input type="checkbox" class="checkbox" name="ids_paquet\[\]" value="#ID_PAQUET"
+					<input type="checkbox" class="checkbox select_plugin" name="ids_paquet\[\]" value="#ID_PAQUET" id="check_plugin#ID_PAQUET"
 						[(#ID_PAQUET|in_any{#ENV{ids_paquet}}) checked="checked"] />
 				</div>
 			]
@@ -26,8 +28,10 @@
 
 			[(#REM) <!-- Resume du plugin -->]
 			<div class="resume">
+				[(#GET{has_check}|oui)<label for="check_plugin#ID_PAQUET">]
 				<h3 class="nom">[(#VALEUR{nom}|extraire_multi)]</h3>
 				<span class="version">[(#VALEUR{version}|denormaliser_version)]</span>
+				[(#GET{has_check}|oui)</label>]
 				<div class="short">[(#VALEUR{slogan}|extraire_multi)]</div>
 			</div>
 
@@ -112,6 +116,16 @@
 				.removeClass('fermer').addClass('ouvrir');
 		}
 		return false;
+	});
+	$('.plugins').on('click', 'li.item', function(e){
+		const li = $(this);
+		const checkbox = li.find('input.select_plugin');
+		const $target = $(e.target);
+		if (!$target.is('input') && !$target.is('a') && !$target.is('button')) { 
+			checkbox.prop("checked", !checkbox.prop("checked"));
+			checkbox.change();
+			return false;
+		}
 	});
 	[/* (#REM)
 		Déplier le bouton 'installer' et mettre le submit en premier dans le form
