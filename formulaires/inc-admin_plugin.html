@@ -15,6 +15,7 @@
 	<ul class="liste-items">
 	<BOUCLE_plugins(PAQUETS plugins){tout}{par multi nom, paquets.prefixe}{!par constante, actif}{id_depot=0}{actif ?}{constante ?IN #ENV{constante}}>
 		#SET{incompatible, #COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}, spip}|non}
+		#SET{compat_forcee,	#CONST{_DEV_VERSION_SPIP_COMPAT}|?{#COMPATIBILITE_SPIP|plugin_version_compatible{#CONST{_DEV_VERSION_SPIP_COMPAT}, spip}, ''}}
 		#SET{verrou,#CONSTANTE|=={_DIR_PLUGINS_DIST}|oui}
 		#SET{actif,#ACTIF|=={oui}|oui}
 		#SET{attente,#ATTENTE|=={oui}|oui}
@@ -24,7 +25,7 @@
 		#SET{obsolete,#OBSOLETE|=={oui}|oui}
 		#SET{details,#ENV{id_paquet,''}|=={#ID_PAQUET}|oui}
 
-		<li class="item clearfix[ (#GET{actif}|?{actif,inactif})][(#GET{obsolete}|ou{#GET{attente}}|ou{#GET{incompatible}}|oui) disabled][(#GET{attente}) attente][(#GET{incompatible}) incompatible][(#GET{verrou}) verrou][(#_plugins:MAJ_VERSION|oui|et{#GET{autoriser_plugins_ajouter}|oui}|oui)up][(#GET{details}|oui)on]"[
+		<li class="item clearfix[ (#GET{actif}|?{actif,inactif})][(#GET{obsolete}|ou{#GET{attente}}|ou{#GET{incompatible}}|oui) disabled][(#GET{attente}) attente][(#GET{incompatible}) incompatible][(#GET{compat_forcee}|oui) compat-forcee][(#GET{verrou}) verrou][(#_plugins:MAJ_VERSION|oui|et{#GET{autoriser_plugins_ajouter}|oui}|oui)up][(#GET{details}|oui)on]"[
 			id="(#PREFIXE|strtolower)-#COMPTEUR_BOUCLE"][ data-id_paquet="(#ID_PAQUET)"]>
 
 			[(#REM) Checkbox pour actions groupées ]
@@ -79,6 +80,7 @@
 			[(#SET{erreurs, #ARRAY{
 				attente,      #GET{attente}|?{#GET{autoriser_plugins_ajouter}|?{<:svp:info_plugin_attente_dependance:>,<:svp:info_plugin_attente_dependance_interdit:>}},
 				incompatible, #GET{incompatible}|?{<:svp:info_plugin_incompatible:>},
+				compat_forcee, #GET{compat_forcee}|?{<:svp:info_plugin_compat_forcee:>},
 			}|array_filter})]
 			#SET{messages, #ARRAY{
 				maj,      #GET{obsolete}|non|et{#GET{verrou}|non}|et{#_plugins:MAJ_VERSION}|et{#GET{autoriser_plugins_ajouter}},
