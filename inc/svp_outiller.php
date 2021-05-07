@@ -192,17 +192,18 @@ function extraire_bornes($intervalle, $initialiser = false) {
 		$bornes = array('min' => $borne_vide, 'max' => $borne_vide);
 	}
 
-	if ($intervalle
-		and preg_match(',^[\[\(\]]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-\*]*)[\]\)\[]$,Uis', $intervalle, $matches)
-	) {
-		if ($matches[1]) {
-			$bornes['min']['valeur'] = trim($matches[1]);
-			$bornes['min']['incluse'] = ($intervalle[0] == "[");
+
+	if ($intervalle) {
+		if (preg_match(',^[\[\(\]]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-\*]*)[\]\)\[]$,Uis', $intervalle, $matches)) {
+			if ($matches[1]) {
+				$bornes['min']['valeur'] = trim($matches[1]);
+			}
+			if ($matches[2]) {
+				$bornes['max']['valeur'] = trim($matches[2]);
+			}
 		}
-		if ($matches[2]) {
-			$bornes['max']['valeur'] = trim($matches[2]);
-			$bornes['max']['incluse'] = (substr($intervalle, -1) == "]");
-		}
+		$bornes['min']['incluse'] = (substr($intervalle, 0, 1) === "[");
+		$bornes['max']['incluse'] = (substr($intervalle, -1) === "]");
 	}
 
 	return $bornes;
