@@ -1159,9 +1159,6 @@ class Decideur {
 					}
 				}
 
-				if ($this->sera_invalide($info['p'])) {
-					break;
-				}
 			}
 			unset($n, $v, $p, $ninfo, $present, $conflit, $erreur, $err);
 
