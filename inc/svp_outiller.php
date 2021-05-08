@@ -192,7 +192,6 @@ function extraire_bornes($intervalle, $initialiser = false) {
 		$bornes = array('min' => $borne_vide, 'max' => $borne_vide);
 	}
 
-
 	if ($intervalle) {
 		if (preg_match(',^[\[\(\]]([0-9.a-zRC\s\-]*)[;]([0-9.a-zRC\s\-\*]*)[\]\)\[]$,Uis', $intervalle, $matches)) {
 			if ($matches[1]) {
@@ -247,70 +246,81 @@ function compiler_branches_spip($intervalle) {
 	global $infos_branches_spip;
 	$liste_branches_spip = array_keys($GLOBALS['infos_branches_spip']);
 
-	$bornes = extraire_bornes($intervalle, false);
-	// On traite d'abord les cas ou l'intervalle est :
-	// - vide 
-	// - non vide mais avec les deux bornes vides
-	// Dans ces cas la compatibilite est totale, on renvoie toutes les branches
-	if (!$intervalle or (!$bornes['min']['valeur'] and !$bornes['max']['valeur'])) {
-		return implode(',', $liste_branches_spip);
-	}
-
 	// On force l'initialisation des bornes et on les nettoie des suffixes d'etat
 	$bornes = extraire_bornes($intervalle, true);
-	// Si les bornes sont en dehors de l'intervalle [_SVP_VERSION_SPIP_MIN;_SVP_VERSION_SPIP_MAX] on le reduit
+	// -- Si les bornes sont en dehors de l'intervalle [_SVP_VERSION_SPIP_MIN;_SVP_VERSION_SPIP_MAX] on le reduit
+	//    en incluant forcément les bornes
 	if (spip_version_compare($bornes['min']['valeur'], _SVP_VERSION_SPIP_MIN, '<')) {
 		$bornes['min']['valeur'] = _SVP_VERSION_SPIP_MIN;
 		$bornes['min']['incluse'] = true;
 	}
-	if (spip_version_compare(_SVP_VERSION_SPIP_MAX, $bornes['max']['valeur'], '<=')) {
+	if (spip_version_compare(_SVP_VERSION_SPIP_MAX, $bornes['max']['valeur'], '<')) {
 		$bornes['max']['valeur'] = _SVP_VERSION_SPIP_MAX;
 		$bornes['max']['incluse'] = true;
 	}
-	// On les nettoie des suffixes d'etat
-	$borne_inf = strtolower(preg_replace(',([0-9])[\s.-]?(dev|alpha|a|beta|b|rc|pl|p),i', '\\1',
-		$bornes['min']['valeur']));
-	$borne_sup = strtolower(preg_replace(',([0-9])[\s.-]?(dev|alpha|a|beta|b|rc|pl|p),i', '\\1',
-		$bornes['max']['valeur']));
+	// -- On extrait les bornes en gardant les suffixes éventuels :
+	$borne_inf = $bornes['min']['valeur'];
+	$borne_sup = $bornes['max']['valeur'];
 
 	// On determine les branches inf et sup issues du phrasage de l'intervalle
 	// -- on initialise la branche inf de l'intervalle que l'on va preciser ensuite
 	$t = explode('.', $borne_inf);
 	$branche_inf = $t[0] . '.' . $t[1];
-	// -- pour eviter toutes erreur fatale on verifie que la branche est bien dans la liste des possibles
-	// -- -> si non, on renvoie vide
-	if (!in_array($branche_inf, $liste_branches_spip)) {
+	// -- on vérifie si la branche est bien référencée dans la liste spip.
+	//    sinon, on renvoie vide car l'intervalle est en erreur
+	$index_inf = array_search($branche_inf, $liste_branches_spip);
+	if ($index_inf === false) {
 		return '';
 	}
-	// -- on complete la borne inf de l'intervalle de x.y en x.y.z et on determine la vraie branche
-	if (!isset($t[2]) or !$t[2]) {
-		if ($bornes['min']['incluse']) {
-			$borne_inf = $infos_branches_spip[$branche_inf][0];
-		} else {
-			$branche_inf = $liste_branches_spip[array_search($branche_inf, $liste_branches_spip) + 1];
-			$borne_inf = $infos_branches_spip[$branche_inf][0];
+	// -- si le z est vide ou absent on complète la borne inf de l'intervalle avec le min de la branche spip.
+	//    si le z est une étoile on considère que l'intervalle est invalide.
+	if (!isset($t[2])) {
+		$borne_inf = $infos_branches_spip[$branche_inf][0];
+	} elseif ($t[2] === '*') {
+		return '';
+	}
+	// -- vérification de l'inclusion de la borne et calcul de la vraie branche inf.
+	if (!$bornes['min']['incluse']) {
+		if ($borne_inf === $infos_branches_spip[$branche_inf][1]) {
+			// alors on passe sur la branche suivante
+			if (isset($liste_branches_spip[$index_inf + 1])) {
+				$branche_inf = $liste_branches_spip[$index_inf + 1];
+				$borne_inf = $infos_branches_spip[$branche_inf][0];
+			} else {
+				return '';
+			}
 		}
 	}
+	$index_inf = array_search($branche_inf, $liste_branches_spip);
 
-	// -- on initialise la branche sup de l'intervalle que l'on va preciser ensuite
+	// -- on initialise la branche sup de l'intervalle que l'on va preciser ensuite	: on considère que le x et le y sont
+		// toujours des valeurs numériques, jamais une étoile ou une absence.
 	$t = explode('.', $borne_sup);
 	// des gens mettent juste * (pas glop)
 	$branche_sup = $t[0] . (isset($t[1]) ? '.' . $t[1] : '');
-
-	// -- pour eviter toutes erreur fatale on verifie que la branche est bien dans la liste des possibles
-	// -- -> si non, on renvoie vide
-	if (!in_array($branche_sup, $liste_branches_spip)) {
+	// -- on vérifie si la branche est bien référencée dans la liste spip.
+	//    sinon, on renvoie vide car l'intervalle est en erreur
+	$index_sup = array_search($branche_sup, $liste_branches_spip);
+	if ($index_sup === false) {
 		return '';
 	}
-	// -- on complete la borne sup de l'intervalle de x.y en x.y.z et on determine la vraie branche
-	if (!isset($t[2]) or !$t[2]) {
-		if ($bornes['max']['incluse']) {
-			$borne_sup = $infos_branches_spip[$branche_sup][1];
-		} else {
-			$branche_sup = $liste_branches_spip[array_search($branche_sup, $liste_branches_spip) - 1];
-			$borne_sup = $infos_branches_spip[$branche_sup][1];
+	// -- si le z est vide ou absent ou est une étoile, on complète la borne inf de l'intervalle avec le max de la branche spip.
+	if (!isset($t[2]) or ($t[2] === '*')) {
+		$borne_sup = $infos_branches_spip[$branche_sup][1];
+	}
+	// -- vérification de l'inclusion de la borne et calcul de la vraie branche sup.
+	if (!$bornes['max']['incluse']) {
+		if ($borne_sup === $infos_branches_spip[$branche_sup][0]) {
+			// alors on passe sur la branche précente
+			if (isset($liste_branches_spip[$index_sup - 1])) {
+				$branche_sup = $liste_branches_spip[$index_sup - 1];
+				$borne_sup = $infos_branches_spip[$branche_sup][1];
+			} else {
+				return '';
+			}
 		}
 	}
+	$index_sup = array_search($branche_sup, $liste_branches_spip);
 
 	// -- on verifie que les bornes sont bien dans l'ordre : 
 	//    -> sinon on retourne la branche sup uniquement
@@ -321,8 +331,6 @@ function compiler_branches_spip($intervalle) {
 	// A ce stade, on a un intervalle ferme en bornes ou en branches
 	// Il suffit de trouver les branches qui y sont incluses, sachant que les branches inf et sup 
 	// le sont a coup sur maintenant
-	$index_inf = array_search($branche_inf, $liste_branches_spip);
-	$index_sup = array_search($branche_sup, $liste_branches_spip);
 	$liste = array();
 	for ($i = $index_inf; $i <= $index_sup; $i++) {
 		$liste[] = $liste_branches_spip[$i];
