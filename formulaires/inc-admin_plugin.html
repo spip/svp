@@ -15,7 +15,10 @@
 	<ul class="liste-items">
 	<BOUCLE_plugins(PAQUETS plugins){tout}{par multi nom, paquets.prefixe}{!par constante, actif}{id_depot=0}{actif ?}{constante ?IN #ENV{constante}}>
 		#SET{incompatible, #COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}, spip}|non}
-		#SET{compat_forcee,	#CONST{_DEV_VERSION_SPIP_COMPAT}|?{#COMPATIBILITE_SPIP|plugin_version_compatible{#CONST{_DEV_VERSION_SPIP_COMPAT}, spip}, ''}}
+		#SET{compat_spip, #COMPATIBILITE_SPIP|plugin_version_compatible{#GET{vspip}}}
+		#SET{compat_forcee,#GET{compat_spip}|non|et{#CONST{_DEV_VERSION_SPIP_COMPAT}}
+			|?{#COMPATIBILITE_SPIP|plugin_version_compatible{#CONST{_DEV_VERSION_SPIP_COMPAT}}, ''}}
+
 		#SET{verrou,#CONSTANTE|=={_DIR_PLUGINS_DIST}|oui}
 		#SET{actif,#ACTIF|=={oui}|oui}
 		#SET{attente,#ATTENTE|=={oui}|oui}
