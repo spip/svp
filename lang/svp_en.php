@@ -131,6 +131,7 @@ is not created or is not writable.
 	'info_nb_plugins' => '@nb@ plugins',
 	'info_paquets_disponibles' => '@total_paquets@ available package(s)',
 	'info_plugin_attente_dependance' => 'missing dependencies',
+	'info_plugin_compat_forcee' => 'Version not compatible : forced compatibility',
 	'info_plugin_incompatible' => 'incompatible version',
 	'info_plugin_installe' => 'already installed',
 	'info_plugin_obsolete' => 'obsolete version',

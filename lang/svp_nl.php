@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'action_patienter' => 'De acties worden uitgevoerd. Een ogenblik geduld…',
+	'actions' => 'Acties',
 	'actions_a_faire' => 'Uit te voeren acties',
 	'actions_demandees' => 'Gevraagde acties:',
 	'actions_en_erreur' => 'Opgetreden fouten',
@@ -26,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_actualiser' => 'Actualiseren',
 	'bouton_actualiser_tout' => 'Vernieuw de depots',
 	'bouton_appliquer' => 'Toepassen',
+	'bouton_configurer' => 'Configureren',
 	'bouton_confirmer' => 'Bevestigen',
 	'bouton_desactiver' => 'Deactiveren',
 	'bouton_desinstaller' => 'Desinstalleren',
@@ -81,6 +83,10 @@ Je moet deze actie bevestigen.',
 	'erreur_teleporter_methode_inconue' => 'Methode @methode@ is onbekend bij het teleporteren',
 	'erreur_teleporter_type_fichier_inconnu' => 'Onbekend bestandstype voor bron @source@',
 	'erreurs_xml' => 'Bepaalde XML omschrijvingen kunnen niet worden gelezen',
+	'etat_actif' => 'Actief',
+	'etat_inactif' => 'Inactief',
+	'etat_obsolete' => 'Obsoleet',
+	'etat_verrouille' => 'Vergrendeld',
 	'explication_destination' => 'Wanneer je het niet vermeldt, wordt het pad berekend uit het archief.',
 
 	// F
@@ -124,6 +130,7 @@ Wil je ze inactief maken dan moet je met de webmaster van de site contact opneme
 	'info_nb_plugins' => '@nb@ plugins',
 	'info_paquets_disponibles' => '@total_paquets@ beschikbare pakketten',
 	'info_plugin_attente_dependance' => 'ontbrekende afhankelijke plugins',
+	'info_plugin_compat_forcee' => 'Niet compatibele versie : geforceerde compatibiliteit',
 	'info_plugin_incompatible' => 'incompatibele versie',
 	'info_plugin_installe' => 'al geïnstalleerd',
 	'info_plugin_obsolete' => 'verouderde versie',
@@ -168,6 +175,8 @@ Wil je ze inactief maken dan moet je met de webmaster van de site contact opneme
 	'legende_installer_plugins' => 'Plugins installeren',
 	'legende_rechercher_plugins' => 'Plugins zoeken',
 	'lien_demo' => 'Voorbeeld',
+	'lien_details_moins' => 'Minder infos',
+	'lien_details_plus' => 'Meer infos',
 	'lien_documentation' => 'Documentatie',
 
 	// M
@@ -240,7 +249,10 @@ Wil je ze inactief maken dan moet je met de webmaster van de site contact opneme
 	// P
 	'placeholder_phrase' => 'prefix, naam, slogan, omschrijving of auteur',
 	'plugin_info_actif' => 'Plugin actief',
-	'plugin_info_up' => 'Een update van de plugin is beschikbaar (versie @version@)', # MODIF
+	'plugin_info_up' => 'Een update is beschikbaar (@version@)',
+	'plugin_info_up_x' => 'Een grote update is beschikbaar (@version@). Vergeet niet te controleren op incompatibiliteit.',
+	'plugin_info_up_y' => 'Een functionele update is beschikbaar (@version@).',
+	'plugin_info_up_z' => 'Een corrigerende update is beschikbaar (@version@). ',
 	'plugin_info_verrouille' => 'Vergrendelde plugin',
 	'plugins_inactifs_liste' => 'Inactieve',
 	'plugins_non_verrouilles_liste' => 'Niet vergrendelde',
