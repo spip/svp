@@ -38,12 +38,12 @@ if (!defined('_SVP_VERSION_SPIP_MAX')) {
  */
 $GLOBALS['infos_branches_spip'] = array(
 	'1.9' => array(_SVP_VERSION_SPIP_MIN, '1.9.2'),
-	'2.0' => array('2.0.0', '2.0.999'),
-	'2.1' => array('2.1.0', '2.1.999'),
-	'3.0' => array('3.0.0', '3.0.999'),
+	'2.0' => array('2.0.0', '2.0.26'),
+	'2.1' => array('2.1.0', '2.1.30'),
+	'3.0' => array('3.0.0', '3.0.28'),
 	'3.1' => array('3.1.0', '3.1.999'),
 	'3.2' => array('3.2.0', '3.2.999'),
-	'4.0' => array('4.0.0', _SVP_VERSION_SPIP_MAX),
+	'4.0' => array('4.0.0-alpha', _SVP_VERSION_SPIP_MAX),
 );
 # define('_INFOS_BRANCHES_SPIP', serialize($infos_branches_spip));
 
