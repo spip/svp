@@ -43,6 +43,7 @@ $GLOBALS['infos_branches_spip'] = array(
 	'3.0' => array('3.0.0', '3.0.28'),
 	'3.1' => array('3.1.0', '3.1.999'),
 	'3.2' => array('3.2.0', '3.2.999'),
+	'3.3' => array('3.3.0-dev', '3.3.0-dev'),
 	'4.0' => array('4.0.0-alpha', _SVP_VERSION_SPIP_MAX),
 );
 # define('_INFOS_BRANCHES_SPIP', serialize($infos_branches_spip));
