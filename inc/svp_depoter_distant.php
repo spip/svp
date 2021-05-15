@@ -764,12 +764,13 @@ function svp_completer_plugins($ids_plugin) {
 		$inserts = $complements = array();
 
 		foreach ($resultats as $paquet) {
-			// On finalise le plugin en cours et on passe au suivant 
+			// On finalise le plugin en cours et on passe au suivant
 			if ($plugin_en_cours != $paquet['id_plugin']) {
 				// On met a jour le plugin en cours
 				if ($plugin_en_cours) {
-					// On deduit maintenant les branches de la compatibilite globale
-					$complements['branches_spip'] = compiler_branches_spip($complements['compatibilite_spip']);
+					// On finalise maintenant les branches de la compatibilite globale du plugin
+					$branches = explode(',', $complements['branches_spip']);
+					$complements['branches_spip'] = implode(',', array_unique($branches));
 					$inserts[$plugin_en_cours] = $complements;
 				}
 				// On passe au plugin suivant
@@ -777,8 +778,7 @@ function svp_completer_plugins($ids_plugin) {
 				$complements = array('compatibilite_spip' => '', 'branches_spip' => '', 'date_crea' => 0, 'date_modif' => 0);
 			}
 
-			// On compile les compléments du plugin avec le paquet courant sauf les branches
-			// qui sont deduites en fin de compilation de la compatibilite
+			// On compile les compléments du plugin avec le paquet courant
 			if ($paquet['date_modif'] > $complements['date_modif']) {
 				$complements['date_modif'] = $paquet['date_modif'];
 			}
@@ -795,9 +795,13 @@ function svp_completer_plugins($ids_plugin) {
 						$complements['compatibilite_spip']);
 				}
 			}
+			if ($branches_paquet = compiler_branches_spip($paquet['compatibilite_spip'])) {
+				$complements['branches_spip'] .= ($complements['branches_spip'] ? ',' : '') . $branches_paquet;
+			}
 		}
-		// On finalise le dernier plugin en cours
-		$complements['branches_spip'] = compiler_branches_spip($complements['compatibilite_spip']);
+		// On finalise le dernier paquet en cours
+		$branches = explode(',', $complements['branches_spip']);
+		$complements['branches_spip'] = implode(',', array_unique($branches));
 		$inserts[$plugin_en_cours] = $complements;
 
 		// On insere, en encapsulant pour sqlite...
