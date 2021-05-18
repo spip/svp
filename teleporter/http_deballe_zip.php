@@ -91,11 +91,17 @@ function teleporter_http_charger_zip($quoi = array()) {
 		return 0;
 	}
 
-	include_spip('inc/pclzip');
-	$zip = new PclZip($fichier);
-	$list = $zip->listContent();
+	include_spip('inc/archives');
+	$zip = new Spip\Archives\SpipArchives($fichier);
 
-	$racine = http_deballe_recherche_racine($list);
+	if (!$infos = $zip->informer()) {
+		spip_log('charger_decompresser erreur zip ' . $zip->erreur() . ' ' . $zip->message() . ' pour paquet: ' . $quoi['archive'],
+			"teleport" . _LOG_ERREUR);
+
+		return $zip->message();
+	}
+
+	$racine = $infos['proprietes']['racine'];
 	$quoi['remove'] = $racine;
 
 	// si pas de racine commune, reprendre le nom du fichier zip
@@ -119,31 +125,27 @@ function teleporter_http_charger_zip($quoi = array()) {
 	if (is_dir($target)) {
 		supprimer_repertoire($target);
 	}
+	// mais creer le repertoire vide
+	$target = sous_repertoire(dirname($target), basename($target));
 
-	// et enfin on extrait
-	$ok = $zip->extract(
-		PCLZIP_OPT_PATH,
-		$target,
-		PCLZIP_OPT_SET_CHMOD, _SPIP_CHMOD,
-		PCLZIP_OPT_REPLACE_NEWER,
-		PCLZIP_OPT_REMOVE_PATH, $quoi['remove']
-	);
-	if ($zip->error_code < 0) {
-		spip_log('charger_decompresser erreur zip ' . $zip->error_code . ' pour paquet: ' . $quoi['archive'],
+	if (!$zip->deballer($target)) {
+		spip_log('charger_decompresser erreur zip ' . $zip->erreur() . ' ' . $zip->message() . ' pour paquet: ' . $quoi['archive'],
 			"teleport" . _LOG_ERREUR);
 
-		return //$zip->error_code
-			$zip->errorName(true);
+		return $zip->message();
 	}
 
 	spip_log('charger_decompresser OK pour paquet: ' . $quoi['archive'], "teleport");
 
-	$size = $compressed_size = 0;
-	$removex = ',^' . preg_quote($quoi['remove'], ',') . ',';
-	foreach ($list as $a => $f) {
+	$size = 0;
+	$list = [];
+	foreach ($infos['fichiers'] as $k => $f) {
 		$size += $f['size'];
-		$compressed_size += $f['compressed_size'];
-		$list[$a] = preg_replace($removex, '', $f['filename']);
+		$filename = $f['filename'];
+		if ($infos['proprietes']['racine'] and strpos($filename, $infos['proprietes']['racine']) === 0) {
+			$filename = substr($filename, strlen($infos['proprietes']['racine']));
+		}
+		$list[] = $filename;
 	}
 
 	// Indiquer par un fichier install.log
@@ -158,7 +160,7 @@ function teleporter_http_charger_zip($quoi = array()) {
 	return array(
 		'files' => $list,
 		'size' => $size,
-		'compressed_size' => $compressed_size,
+		'compressed_size' => 0,
 		'dirname' => $dir_export,
 		'tmpname' => $tmpname,
 		'target' => $target,

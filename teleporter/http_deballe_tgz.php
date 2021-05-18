@@ -92,24 +92,24 @@ function teleporter_http_charger_tgz($quoi = array()) {
 		return 0;
 	}
 
-	include_spip('inc/pcltar');
+	include_spip('inc/archives');
+	$zip = new Spip\Archives\SpipArchives($fichier);
 
-	$racine = '';
-	if ($list = PclTarList($fichier)) {
-		$racine = http_deballe_recherche_racine($list);
-		$quoi['remove'] = $racine;
-	} else {
-		spip_log('charger_decompresser erreur lecture liste tar ' . PclErrorString() . ' pour paquet: ' . $quoi['archive'],
+	if (!$infos = $zip->informer()) {
+		spip_log('charger_decompresser erreur tar ' . $zip->erreur() . ' ' . $zip->message() . ' pour paquet: ' . $quoi['archive'],
 			"teleport" . _LOG_ERREUR);
 
-		return PclErrorString();
+		return $zip->message();
 	}
+
+	$racine = $infos['proprietes']['racine'];
+	$quoi['remove'] = $racine;
 
 	// si pas de racine commune, reprendre le nom du fichier zip
 	// en lui enlevant la racine h+md5 qui le prefixe eventuellement
 	// cf action/charger_plugin L74
 	if (!strlen($nom = basename($racine))) {
-		$nom = preg_replace(",^h[0-9a-f]{8}-,i", "", basename($fichier, '.zip'));
+		$nom = preg_replace(",^h[0-9a-f]{8}-,i", "", basename($fichier, '.tgz'));
 	}
 
 	$dir_export = $quoi['root_extract']
@@ -126,23 +126,27 @@ function teleporter_http_charger_tgz($quoi = array()) {
 	if (is_dir($target)) {
 		supprimer_repertoire($target);
 	}
+	// mais creer le repertoire vide
+	$target = sous_repertoire(dirname($target), basename($target));
 
-	$ok = PclTarExtract($fichier, $target, $quoi['remove']);
-	if ($ok == 0) {
-		spip_log('charger_decompresser erreur tar ' . PclErrorString() . ' pour paquet: ' . $quoi['archive'],
+	if (!$zip->deballer($target)) {
+		spip_log('charger_decompresser erreur tar ' . $zip->erreur() . ' ' . $zip->message() . ' pour paquet: ' . $quoi['archive'],
 			"teleport" . _LOG_ERREUR);
 
-		return PclErrorString();
+		return $zip->message();
 	}
 
 	spip_log('charger_decompresser OK pour paquet: ' . $quoi['archive'], "teleport");
 
-	$size = $compressed_size = 0;
-	$removex = ',^' . preg_quote($quoi['remove'], ',') . ',';
-	foreach ($list as $a => $f) {
+	$size = 0;
+	$list = [];
+	foreach ($infos['fichiers'] as $k => $f) {
 		$size += $f['size'];
-		# $compressed_size += $f['compressed_size'];
-		$list[$a] = preg_replace($removex, '', $f['filename']);
+		$filename = $f['filename'];
+		if ($infos['proprietes']['racine'] and strpos($filename, $infos['proprietes']['racine']) === 0) {
+			$filename = substr($filename, strlen($infos['proprietes']['racine']));
+		}
+		$list[] = $filename;
 	}
 
 	// Indiquer par un fichier install.log
@@ -157,7 +161,7 @@ function teleporter_http_charger_tgz($quoi = array()) {
 	return array(
 		'files' => $list,
 		'size' => $size,
-		'compressed_size' => $compressed_size,
+		'compressed_size' => 0,
 		'dirname' => $dir_export,
 		'tmpname' => $tmpname,
 		'target' => $target,
