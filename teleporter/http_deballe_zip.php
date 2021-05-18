@@ -58,7 +58,7 @@ function teleporter_http_deballe_zip_dist($archive, $dest, $tmp) {
 /**
  * Charger un zip à partir d'un tableau d'options descriptives
  *
- * @uses  http_deballe_recherche_racine()
+ * @uses Spip\Archives\SpipArchives
  *
  * @param array $quoi
  *     Tableau d'options
