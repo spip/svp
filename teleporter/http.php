@@ -86,7 +86,14 @@ function teleporter_http_recuperer_source($source, $dest_tmp) {
 	#	en chargeant son entete car l'url initiale peut etre une simple
 	# redirection et ne pas comporter d'extension .zip
 	include_spip('inc/distant');
-	$head = recuperer_page($source, false, true, 0);
+	$options = [
+		'methode' => 'HEAD',
+		'follow_location' => 10,
+		'taille_max' => 0
+	];
+
+	$res = recuperer_url($source, $options);
+	$head = $res['headers'];
 
 	if (preg_match(",^Content-Type:\s*?(.*)$,Uims", $head, $m)
 		and include_spip('base/typedoc')

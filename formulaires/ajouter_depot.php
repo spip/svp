@@ -107,5 +107,4 @@ function svp_verifier_adresse_depot($url) {
 	// si on le recupere ici, il sera deja a jour pour le prochain copie_locale
 	// lors du traitement.
 	return (copie_locale($url) ? true : false);
-	#return (!$xml = recuperer_page($url)) ? false : true;
 }
