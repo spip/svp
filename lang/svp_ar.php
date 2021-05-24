@@ -132,6 +132,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_nb_plugins' => '@nb@ ملحق',
 	'info_paquets_disponibles' => '@total_paquets@ حزمة متوافرة',
 	'info_plugin_attente_dependance' => 'اعتمادات غير موجودة',
+	'info_plugin_compat_forcee' => 'إصدار غير متوافق: فرض التوافق',
 	'info_plugin_incompatible' => 'إصدار غير متوافق',
 	'info_plugin_installe' => 'مثبت',
 	'info_plugin_obsolete' => 'إصدار قديم',
