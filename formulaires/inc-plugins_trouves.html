@@ -10,7 +10,7 @@
 <B_plugins_trouves>
 <div class="liste plugins distants">
 	<ul class="liste-items">
-<BOUCLE_plugins_trouves(DATA) {source table, #GET{plugins}}>
+<BOUCLE_plugins_trouves(DATA){source table, #GET{plugins}}>
 		<li class="item [(#VALEUR{installe}|oui) installe]"[ id="(#VALEUR{prefixe}|strtolower)-#COMPTEUR_BOUCLE-#VALEUR{score}"]>
 			[(#REM) <!-- Checkbox action multiple -->]
 			<div class="col-check">
