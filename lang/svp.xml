@@ -75,7 +75,8 @@
 	<langue code="sk" url="https://trad.spip.net/tradlang_module/svp?lang_cible=sk" total="248" traduits="233" relire="0" modifs="2" nouveaux="13" pourcent="93.95">
 		<traducteur nom="jaro" lien="https://trad.spip.net/auteur/jaro" />
 	</langue>
-	<langue code="uk" url="https://trad.spip.net/tradlang_module/svp?lang_cible=uk" total="248" traduits="223" relire="0" modifs="4" nouveaux="21" pourcent="89.92">
+	<langue code="uk" url="https://trad.spip.net/tradlang_module/svp?lang_cible=uk" total="248" traduits="248" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="olly" lien="https://trad.spip.net/auteur/olly" />
+		<traducteur nom="Serge Markitanenko" lien="https://trad.spip.net/auteur/serge-markitanenko" />
 	</langue>
 </traduction>

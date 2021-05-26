@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'action_patienter' => 'Виконуються операції. Будь ласка, трохи зачекайте...',
+	'actions' => 'Операції',
 	'actions_a_faire' => 'Виконати операцію',
 	'actions_demandees' => 'Необхідно виконати операцію:',
 	'actions_en_erreur' => 'Сталися помилки',
@@ -19,12 +20,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'actions_realises' => 'Операцію виконано',
 	'afficher_les_plugins_incompatibles' => 'Показати несумісні плагіни',
 	'alerte_compatibilite' => 'Примусова сумісність',
+	'alerte_compatibilite_version_autorisee' => 'Ввімкненими можуть бути плагіни сумісні з  SPIP <code>@version@</code>.',
 
 	// B
 	'bouton_activer' => 'Увімкнути',
 	'bouton_actualiser' => 'Поновити',
 	'bouton_actualiser_tout' => 'Поновити репозиторії',
 	'bouton_appliquer' => 'Застосувати',
+	'bouton_configurer' => 'Налаштування',
 	'bouton_confirmer' => 'Підтвердити',
 	'bouton_desactiver' => 'Відключити',
 	'bouton_desinstaller' => 'Видалити',
@@ -68,7 +71,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_dir_dib_indefini' => 'Не задано значення _DIR_LIB. Неможливо завантажити бібліотеку!',
 	'erreur_dir_plugins_auto' => 'Папку „plugins/auto”, яка дозволяє додавати плагіни з адміністративної частни сайту, не створено або не вистачає прав для запису в неї. Якщо ви хочете мати таку можливість, то <strong>вам необхідно її створити або встановити права доступу 777 (якщо така папка існує)</strong>.',
 	'erreur_dir_plugins_auto_ecriture' => 'Відсутні права на запис в папці @dir@. Неможливо завантажити пакет!',
-	'erreur_dir_plugins_auto_indefini' => 'Не вказано папку _DIR_PLUGIN_AUTO. Неможливо завантажити плагін!', # MODIF
+	'erreur_dir_plugins_auto_indefini' => 'Не вказано папку _DIR_PLUGIN_AUTO. Неможливо завантажити плагін!',
 	'erreur_dir_plugins_auto_titre' => 'недоступна папка „plugins/auto”!',
 	'erreur_teleporter_chargement_source_impossible' => 'Неможливо завантажити джерело @source@',
 	'erreur_teleporter_destination_erreur' => 'Папка @dir@ недоступна для завантажування файлів',
@@ -77,12 +80,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_teleporter_methode_inconue' => 'Невідомий метод @methode@ для завантажувача файлів',
 	'erreur_teleporter_type_fichier_inconnu' => 'Невідомий тип файлу для джерела @source@',
 	'erreurs_xml' => 'Неможливо прочитати деякі XML описи',
+	'etat_actif' => 'Ввікнено',
+	'etat_inactif' => 'Вимкнено',
+	'etat_obsolete' => 'Застарілий',
+	'etat_verrouille' => 'Заблокований',
 	'explication_destination' => 'Якщо ви не заповните, то шлях буде задано за ім’ям архівного файлу.',
 
 	// F
 	'fieldset_debug' => 'Налагодження',
 	'fieldset_edition' => 'Редагування',
 	'fieldset_fonctionnement' => 'Функціонування',
+	'fieldset_typologie' => 'Типологія плагіна',
+	'filtrer' => 'Фільтр',
 
 	// I
 	'info_0_plugin' => 'Нема плагінів',
@@ -95,7 +104,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_admin_plugin_actif_oui_verrou_tous' => 'Список усіх включених плагінів, встановлених і системних.',
 	'info_admin_plugin_verrou_non' => 'Список усіх плагінів, крім системних. Включені і відключені.',
 	'info_admin_plugin_verrou_tous' => 'Список усіх плагінів на сайті.',
-	'info_admin_plugin_verrouille' => 'На цій сторінці ви бачите список усіх включених і системних плагінів (встановлених в папці <code>@dir_plugins_dist@</code>). Якщо ви хочете відключити плагін - зв’яжіться з розробниками сайту або проконсультуйтеся в  <a href="http://programmer.spip.org/repertoire_plugins_dist">документації</a>.', # MODIF
+	'info_admin_plugin_verrouille' => 'Перелік системних та включених плагінів вашого сайту (встановлених в папці <code>@dir_plugins_dist@</code>). Якщо ви хочете відключити плагін - зв’яжіться з розробниками сайту або проконсультуйтеся в  <a href="http://programmer.spip.org
+repertoire_plugins_dist">документації</a>.',
 	'info_adresse_spipzone' => 'Плагіни SPIP-Zone',
 	'info_ajouter_depot' => 'Додавши репозиторій на сайт ви отримуєте можливість одержати інформацію про всі плагіни, які знаходяться в репозиторії. <br />Назва та опис плагінів містяться в  XML файлі репозиторію.',
 	'info_aucun_depot' => 'Нема репозиторію',
@@ -110,11 +120,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_critere_phrase' => 'Задайте слово для пошуку в назві, описі, слогані, префіксі або серед імен розробників плагінів.',
 	'info_depots_disponibles' => '@total_depots@ репозиторіїв',
 	'info_fichier_depot' => 'Вкажіть посилання на XML-файл репозиторія. <br />Аби додати репозиторій  „Плагіни SPIP-Zone” просто натисніть на посилання: ',
+	'info_logiciel_version' => '@logiciel@ @signe@ @version@',
+	'info_logiciel_version_intervalle' => '@logiciel@ @signe_min@ @version_min@ і @signe_max@ @version_max@',
 	'info_nb_depots' => '@nb@ репозиторіїв',
 	'info_nb_paquets' => '@nb@ пакетів',
 	'info_nb_plugins' => '@nb@ плагінів',
 	'info_paquets_disponibles' => 'доступно @total_paquets@ пакетів',
 	'info_plugin_attente_dependance' => 'не вистачає залежних пакетів',
+	'info_plugin_compat_forcee' => 'Несумісна версія: примусова сумісність',
 	'info_plugin_incompatible' => 'несумісна версія',
 	'info_plugin_installe' => 'уже встановленоо',
 	'info_plugin_obsolete' => 'застаріла версія',
@@ -139,8 +152,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_critere_etat' => 'Статус',
 	'label_critere_phrase' => 'Найти плагін',
 	'label_destination' => 'Шлях відносно папки „auto” для завантаження плагіну',
+	'label_etat' => 'Статус',
 	'label_modifie_le' => 'Змінювалося',
 	'label_n_autres_contributions' => 'інші розробки',
+	'label_plugin_description' => 'Опис версії @version@',
 	'label_prefixe' => 'Префікс',
 	'label_selectionner_plugin' => 'Вибрати плагін',
 	'label_tags' => 'Теги',
@@ -157,6 +172,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_installer_plugins' => 'Установить плагін',
 	'legende_rechercher_plugins' => 'Пошук плагінів',
 	'lien_demo' => 'Демонстрація',
+	'lien_details_moins' => 'сховати опис',
+	'lien_details_plus' => 'показати опис',
 	'lien_documentation' => 'Документація',
 
 	// M
@@ -190,7 +207,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_action_stop' => 'Видалити плагін „@plugin@” (версія: @version@)',
 	'message_action_up' => 'Поновити плагін „@plugin@” (з @version@ до @version_maj@)',
 	'message_action_upon' => 'Поновлення і активація плагіну „@plugin@” (версія: @version@)',
-	'message_dependance_plugin' => 'Для @plugin@ необхідно @dependance@.', # MODIF
+	'message_dependance_extension_php' => 'Для роботи плагіну @plugin@ необхідно розширення PHP @dependance@.',
+	'message_dependance_php' => 'Для роботи @plugin@ необхідно @dependance@',
+	'message_dependance_plugin' => 'Для роботи @plugin@ необхідно встановити @dependance@.',
 	'message_erreur_aucun_plugin_selectionne' => 'Жодного плагіну не обрано.',
 	'message_erreur_ecriture_lib' => 'Для встановлення плагіну @plugin@ необхідна бібліотека <a href="@lib_url@">@lib@</a>. Бібліотеки повинні знаходитися в папці <var>lib/</var> в корені сайту. Але або цієї папки не існує, або не вистачає прав на запис. Необхідно або створити папку, або встановити права на запис (зазвичай 777).',
 	'message_erreur_maj_inconnu' => 'Неможливо поновити невідомий плагін (@id@).',
@@ -227,7 +246,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'placeholder_phrase' => 'префікс, назва, слоган, опис або автор',
 	'plugin_info_actif' => 'Плагін включено',
-	'plugin_info_up' => 'Доступна нова версія плагіну (версія @version@)', # MODIF
+	'plugin_info_up' => 'Доступна нова версія плагіну (версія @version@)',
+	'plugin_info_up_x' => 'Доступне великий пакет оновлень (@version@). Перевірте сумісність плагінів.',
+	'plugin_info_up_y' => 'Доступне оновлення функціоналу (@version@).',
+	'plugin_info_up_z' => 'Доступне оновлення з виправленням помилок (@version@).',
 	'plugin_info_verrouille' => 'Системний плагін',
 	'plugins_inactifs_liste' => 'Вимкнені',
 	'plugins_non_verrouilles_liste' => 'Необов’язкові',
