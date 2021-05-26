@@ -1,11 +1,11 @@
 
 <input type="hidden" name="_todo" class='hidden' value="[(#ENV{_todo})]" />
 
-[<div class="reponse_formulaire reponse_formulaire_erreur" role="alert">
-	(#ENV**{erreurs/decideur_erreurs}|foreach{svp_presenter_actions})
-</div>]
+<BOUCLE_erreurs(DATA){source table, #ENV**{erreurs/decideur_erreurs}}>
+	&bull;&nbsp;#VALEUR<br />
+</BOUCLE_erreurs>
 
-[
+<B_demandes>
 <div id="charger_plugin_confirm_boutons_hidden"
      style="position: absolute;left:-5000px;left:-200vw;width:1px;height1px;overflow: hidden">
 	<input type="submit" name="annuler_actions" class="btn submit annuler_actions" value="<:bouton_annuler:>" />
@@ -19,12 +19,22 @@
 
 	<div class="reponse_formulaire reponse_formulaire_ok" role="status">
 		<strong><:svp:actions_demandees:></strong>
-		<ul>(#ENV**{_libelles_actions/decideur_demandes}|foreach{svp_presenter_actions})</ul>
+		<ul>
+			<BOUCLE_demandes(DATA){source table, #ENV**{_libelles_actions/decideur_demandes}}>
+				<li>#VALEUR</li>
+			</BOUCLE_demandes>
+		</ul>
 	</div>
-	[<div class="reponse_formulaire reponse_formulaire_ok" role="status">
-		<strong><:svp:actions_necessaires:></strong>
-		<ul>(#ENV**{_libelles_actions/decideur_propositions}|foreach{svp_presenter_actions})</ul>
-	</div>]
+	<B_propositions>
+		<div class="reponse_formulaire reponse_formulaire_ok" role="status">
+			<strong><:svp:actions_necessaires:></strong>
+			<ul>
+				<BOUCLE_propositions(DATA){source table, #ENV**{_libelles_actions/decideur_propositions}}>
+					<li>#VALEUR</li>
+				</BOUCLE_propositions>
+			</ul>
+		</div>
+	</B_propositions>
 	<p class="boutons">
 		<input type="submit" name="annuler_actions" class="btn submit annuler_actions" value="<:bouton_annuler:>" />
 		<input type="submit" name="valider_actions" class="btn submit valider_actions" value="<:bouton_valider:>" />
@@ -65,4 +75,5 @@
 		})(jQuery);
 		/*\]\]>*/
 	</script>
-</div>]
+</div>
+</B_demandes>
