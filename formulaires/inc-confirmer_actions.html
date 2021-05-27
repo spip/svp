@@ -1,9 +1,13 @@
 
 <input type="hidden" name="_todo" class='hidden' value="[(#ENV{_todo})]" />
 
+<B_erreurs>
+	<div class="reponse_formulaire reponse_formulaire_erreur" role="alert">
 <BOUCLE_erreurs(DATA){source table, #ENV**{erreurs/decideur_erreurs}}>
-	&bull;&nbsp;#VALEUR<br />
+		&bull;&nbsp;#VALEUR<br />
 </BOUCLE_erreurs>
+	</div>
+</B_erreurs>
 
 <B_demandes>
 <div id="charger_plugin_confirm_boutons_hidden"
