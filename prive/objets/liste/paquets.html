@@ -31,7 +31,6 @@
 				<th class="numero">[(#TRI{version, <:svp:label_version:>, ajax})]</th>
 				<th class="lien"><:svp:titre_depot:></th>
 				<th class="lien">&nbsp;</th>
-				<th class="lien">&nbsp;</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -49,11 +48,6 @@
 				<td class="lien">
 					<a[ href="(#ID_DEPOT|generer_url_entite{depot})"] title="<:svp:bulle_aller_depot:>">
 						[(#TITRE)]
-					</a>
-				</td>
-				<td class="lien">
-					<a class="mediabox boxIframe boxWidth-800px boxHeight-600px"[ href="(#URL_PAGE{paquet_xml,id_paquet=#ID_PAQUET})"] title="<:svp:bulle_afficher_xml_plugin:>">
-						[(#CHEMIN_IMAGE{plugin-16.png}|balise_img{'', icone})]
 					</a>
 				</td>
 				<td class="lien">
