@@ -28,6 +28,6 @@
 	<pipeline nom="jquery_plugins" inclure="svp_pipelines.php" />
 	<pipeline nom="header_prive_css" inclure="svp_pipelines.php" />
 
-	<necessite nom="archiviste" compatibilite="[4.0.0-beta;4.0.*]" />
+	<necessite nom="archiviste" compatibilite="[0.3.0;]" />
 	<necessite nom="php:openssl" />
 </paquet>
