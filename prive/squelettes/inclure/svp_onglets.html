@@ -7,7 +7,7 @@
 	|et{#ENV{verrouille}|non}
 	|et{#ENV{exec}|=={admin_plugin}}
 	|?{actif}})]
-<div class="onglets_simple onglets_simple--svp clearfix">
+<div class="onglets_simple onglets_simple--svp">
 	<ul>
 		<li class="onglet_actif">
 			[(#URL_ECRIRE{admin_plugin}|parametre_url{voir,actif}|parametre_url{verrouille,''}|lien_ou_expose{<:plugins_actifs_liste:>,#ENV{voir,#GET{actif_defaut}}|=={actif}})]
@@ -21,7 +21,9 @@
 		<li class="onglet_tous">
 			[(#URL_ECRIRE{admin_plugin}|parametre_url{voir,tous}|parametre_url{verrouille,''}|lien_ou_expose{<:plugins_tous_liste:>,#ENV{voir}|=={tous}})]
 		</li>
-		<li class="onglet_ajouter onglet--espace">
+	</ul>
+	<ul>
+		<li class="onglet_ajouter">
 			[(#URL_ECRIRE{charger_plugin}|lien_ou_expose{<:plugin_titre_automatique_ajouter:>,#ENV{exec}|=={charger_plugin}})]
 		</li>
 		<li class="onglet_depots">
