@@ -41,7 +41,7 @@ include_spip('inc/presentation');
  */
 function exec_admin_plugin_dist() {
 
-	if (!autoriser('configurer', 'plugins')) {
+	if (!autoriser('configurer', '_plugins')) {
 		include_spip('inc/minipres');
 		echo minipres();
 	}
