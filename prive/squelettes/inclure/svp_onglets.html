@@ -22,6 +22,7 @@
 			[(#URL_ECRIRE{admin_plugin}|parametre_url{voir,tous}|parametre_url{verrouille,''}|lien_ou_expose{<:plugins_tous_liste:>,#ENV{voir}|=={tous}})]
 		</li>
 	</ul>
+	[(#AUTORISER{ajouter,_plugins}|oui)
 	<ul>
 		<li class="onglet_ajouter">
 			[(#URL_ECRIRE{charger_plugin}|lien_ou_expose{<:plugin_titre_automatique_ajouter:>,#ENV{exec}|=={charger_plugin}})]
@@ -30,4 +31,5 @@
 			[(#URL_ECRIRE{depots}|lien_ou_expose{<:svp:titre_depots:>,#ENV{exec}|=={depots}})]
 		</li>
 	</ul>
+	]
 </div>
