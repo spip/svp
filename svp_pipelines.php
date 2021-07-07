@@ -29,7 +29,7 @@ function autoriser_depot_iconifier_dist($faire, $type, $id, $qui, $opt) {
 }
 
 /**
- * Autoriser l'ajout d'un plugin ou d'un dépôt
+ * Autoriser l'ajout d'un plugin
  *
  * @param  string $faire Action demandée
  * @param  string $type Type d'objet sur lequel appliquer l'action
@@ -44,6 +44,29 @@ function autoriser_plugins_ajouter_dist($faire, $type, $id, $qui, $opt) {
 	}
 
 	return _AUTORISER_TELECHARGER_PLUGINS and autoriser('webmestre');
+}
+
+/**
+ * Autoriser l'ajout d'un dépôt
+ *
+ * Soit on a l'autorisation de voir un plugin, soit SVP est en mode non runtime
+ * 
+ * @param  string $faire Action demandée
+ * @param  string $type Type d'objet sur lequel appliquer l'action
+ * @param  int $id Identifiant de l'objet
+ * @param  array $qui Description de l'auteur demandant l'autorisation
+ * @param  array $opt Options de cette autorisation
+ * @return bool          true s'il a le droit, false sinon
+ */
+function autoriser_depots_ajouter_dist($faire, $type, $id, $qui, $opt) {
+	if (autoriser('ajouter', '_plugins', $id, $qui, $opt)) {
+		return true;
+	}
+	// en mode non runtime (site d'api de plugin), on autorise le choix des depots aux webmestres
+	if (autoriser('webmestre') and (lire_config('svp/mode_runtime', 'oui') === 'oui' ? false : true)) {
+		return true;
+	}
+	return false;
 }
 
 /**

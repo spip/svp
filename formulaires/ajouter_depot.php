@@ -20,7 +20,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  **/
 function formulaires_ajouter_depot_charger_dist() {
 
-	if (!autoriser('ajouter', '_plugins')) {
+	if (!autoriser('ajouter', '_depots')) {
 		return false;
 	}
 
