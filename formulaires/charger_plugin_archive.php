@@ -19,6 +19,11 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  *     Environnement du formulaire
  **/
 function formulaires_charger_plugin_archive_charger_dist() {
+
+	if (!autoriser('ajouter', '_plugins')) {
+		return false;
+	}
+
 	return array(
 		'archive' => '',
 		'destination' => ''

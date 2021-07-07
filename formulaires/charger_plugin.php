@@ -23,6 +23,11 @@ include_spip('exec/admin_plugin');
  *     Environnement du formulaire
  **/
 function formulaires_charger_plugin_charger_dist() {
+
+	if (!autoriser('ajouter', '_plugins')) {
+		return false;
+	}
+
 	return array(
 		'phrase' => _request('phrase'),
 		'etat' => _request('etat'),

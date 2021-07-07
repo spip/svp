@@ -34,6 +34,10 @@ if (!defined("_ECRIRE_INC_VERSION")) {
 function formulaires_admin_plugin_charger_dist($voir = '', $verrouille = '', $id_paquet = '', $redirect = '') {
 	$valeurs = array();
 
+	if (!autoriser('configurer', '_plugins')) {
+		return false;
+	}
+
 	// actualiser la liste des paquets locaux systematiquement
 	include_spip('inc/svp_depoter_local');
 	// sans forcer tout le recalcul en base, mais en récupérant les erreurs XML

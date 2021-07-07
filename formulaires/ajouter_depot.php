@@ -19,6 +19,11 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  *     Environnement du formulaire
  **/
 function formulaires_ajouter_depot_charger_dist() {
+
+	if (!autoriser('ajouter', '_plugins')) {
+		return false;
+	}
+
 	// On ne renvoie pas les valeurs saisies mais on fait un raz systematique
 	return array(
 		'nb_depots' => (int)sql_countsel('spip_depots'),
