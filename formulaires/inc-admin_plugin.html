@@ -1,5 +1,5 @@
 #SET{vspip, #EVAL{$GLOBALS['spip_version_branche']}}
-#SET{autoriser_plugins_ajouter,#AUTORISER{plugins_ajouter}}
+#SET{autoriser_plugins_ajouter,#AUTORISER{ajouter,_plugins}}
 #SET{autoriser_webmestre,#AUTORISER{webmestre}}
 [(#SET{image_verrou,[(#CHEMIN_IMAGE{cadenas-16.png}|balise_img{<:svp:plugin_info_verrouille:>,picto_verrou}|inserer_attribut{title,<:svp:plugin_info_verrouille:>})]})]
 <B_plugins>
@@ -134,7 +134,7 @@
 				maj,          #GET{obsolete}|non|et{#GET{verrou}|non}|et{#_plugins:MAJ_VERSION}|et{#GET{autoriser_plugins_ajouter}},
 				activer,      #GET{obsolete}|?{
 				              #GET{actif}|non|et{#GET{verrou}|non}|et{#GET{incompatible}|non}|et{#CONFIG{svp/autoriser_activer_paquets_obsoletes}|=={oui}},
-				              #GET{actif}|non|ou{#GET{attente}}|et{#GET{verrou}|non}|et{#GET{incompatible}|non}|et{#GET{autoriser_plugins_ajouter}},
+				              #GET{actif}|non|ou{#GET{attente}}|et{#GET{verrou}|non}|et{#GET{incompatible}|non},
 				},
 				desactiver,   #GET{actif}|et{#GET{verrou}|non}|et{#GET{incompatible}|non},
 				desinstaller, #GET{actif}|et{#GET{verrou}|non}|et{#GET{incompatible}|non}|et{#INSTALLE|=={oui}}|et{#GET{autoriser_webmestre}},
