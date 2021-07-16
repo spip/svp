@@ -838,7 +838,7 @@ class Actionneur {
 	 **/
 	public function verrouiller() {
 		$this->lock = array(
-			'id_auteur' => $GLOBALS['visiteur_session']['id_auteur'],
+			'id_auteur' => $GLOBALS['visiteur_session']['id_auteur'] ?? 0,
 			'time' => time(),
 		);
 	}
