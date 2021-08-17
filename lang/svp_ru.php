@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'action_patienter' => 'Выполняются операции. Пожалуйста, подождите немного…',
+	'actions' => 'Действия',
 	'actions_a_faire' => 'Выполнить операцию',
 	'actions_demandees' => 'Необходимо выполнить операцию:',
 	'actions_en_erreur' => 'Произошли ошибки',
@@ -71,7 +72,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_dir_dib_indefini' => 'Не задано значение _DIR_LIB. Невозможно загрузить библиотеку!',
 	'erreur_dir_plugins_auto' => 'Папка «plugins/auto» позволяющая добавлять плагины из административной части сайта не создана или не хватает прав для записи в нее. Если вы хотите иметь такую возможность, то <strong>вам необходимо ее создать или установить права доступа 777 ( если такая папка существует)</strong>.',
 	'erreur_dir_plugins_auto_ecriture' => 'Отсутствуют права на запись в папке @dir@. Невозможно загрузить пакет!',
-	'erreur_dir_plugins_auto_indefini' => 'Не указана папка _DIR_PLUGIN_AUTO. Невозможно загрузить плагин!', # MODIF
+	'erreur_dir_plugins_auto_indefini' => 'Не указана папка _DIR_PLUGIN_AUTO. Невозможно загрузить плагин!',
 	'erreur_dir_plugins_auto_titre' => 'недоступна папка «plugins/auto»!',
 	'erreur_teleporter_chargement_source_impossible' => 'Невозможно загрузить источник @source@',
 	'erreur_teleporter_destination_erreur' => 'Папка @dir@ недоступна для  загрузчика файлов',
@@ -99,7 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_admin_plugin_verrou_non' => 'Список всех плагинов, кроме системных. Включенные и отключенные.',
 	'info_admin_plugin_verrou_tous' => 'Список всех плагинов на сайте.',
 	'info_admin_plugin_verrouille' => 'На этой странице вы видите список всех включенных и системных плагинов (установленных в папке <code>@dir_plugins_dist@</code>).
-Если вы хотите отключить плагин - свяжитесь с разработчиками сайта или проконсультируйтесь в  <a href="http://programmer.spip.org/repertoire_plugins_dist">документации</a>.', # MODIF
+Если вы хотите отключить плагин - свяжитесь с разработчиками сайта или проконсультируйтесь в  <a href="http://programmer.spip.org/repertoire_plugins_dist">документации</a>.',
 	'info_adresse_spipzone' => 'Плагины SPIP-Zone',
 	'info_ajouter_depot' => 'Добавив репозиторий на сайт вы получаете возможность получить информацию о всех плагинах, которые находятся в репозитории. <br /> Название и описание плагинов содержится в  XML файле репозитория.',
 	'info_aucun_depot' => 'Нет репозитория',
@@ -194,7 +195,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_action_stop' => 'Удалить плагин «@plugin@» (версия: @version@)',
 	'message_action_up' => 'Обновить плагин «@plugin@» (с @version@ до @version_maj@)',
 	'message_action_upon' => 'Обновление и активация плагина «@plugin@» (версия: @version@)',
-	'message_dependance_plugin' => 'Для  @plugin@ необходим @dependance@.', # MODIF
+	'message_dependance_plugin' => 'Для работы @plugin@ необходимо установить  @dependance@.',
 	'message_erreur_aucun_plugin_selectionne' => 'Ни один плагин не выбран.',
 	'message_erreur_ecriture_lib' => 'Для установки плагина @plugin@ необходима библиотека <a href="@lib_url@">@lib@</a>. Библиотеки должны находится в папке <var>lib/</var> в корне сайта. Но либо этой папки не существует, либо не хватает прав на запись. Необходимо или создать папку, или установить права на запись (обычно 777).',
 	'message_erreur_maj_inconnu' => 'Невозможно обновить неизвестный плагин (@id@).',
@@ -231,7 +232,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'placeholder_phrase' => 'префикс, название, слоган, описание или автор',
 	'plugin_info_actif' => 'Плагин включен',
-	'plugin_info_up' => 'Доступна новая версия плагина(версия @version@)', # MODIF
+	'plugin_info_up' => 'Доступна новая версия плагина (@version@)',
 	'plugin_info_verrouille' => 'Системный плагин',
 	'plugins_inactifs_liste' => 'Выключенные',
 	'plugins_non_verrouilles_liste' => 'Не обязательные',
