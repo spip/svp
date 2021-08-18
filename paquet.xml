@@ -27,6 +27,7 @@
 	<pipeline nom="ieconfig_metas" inclure="svp_ieconfig.php" />
 	<pipeline nom="jquery_plugins" inclure="svp_pipelines.php" />
 	<pipeline nom="header_prive_css" inclure="svp_pipelines.php" />
+	<pipeline nom="svp_afficher_paquet" action="" />
 
 	<necessite nom="archiviste" compatibilite="[0.3.0;]" />
 	<necessite nom="php:openssl" />

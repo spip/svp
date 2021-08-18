@@ -538,3 +538,19 @@ function filtre_svp_diff_xyz($version1, $version2) {
 
 	return $diff;
 }
+
+/**
+ * Appel a un pipeline pour filtrer eventuellement l'affichage de certains plugins
+ * (ie si on a zen-garden actif, les themes ne sont plus affiches dans la gestion des plugins, mais dans le zen garden)
+ *
+ * @param int $id_paquet
+ * @return bool
+ */
+function filtre_svp_affichage_filtrer_paquets_dist(int $id_paquet) : bool {
+	$affiche = pipeline('svp_afficher_paquet', [
+		'args' => ['id_paquet' => $id_paquet],
+		'data' => true
+	]);
+
+	return ($affiche ? true : false);
+}

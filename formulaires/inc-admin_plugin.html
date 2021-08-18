@@ -24,7 +24,7 @@
 		#SET{attente,#ATTENTE|=={oui}|oui}
 		[(#GET{incompatible})#SET{incompatibles,' '}]
 		#SET{afficher,#GET{incompatible}|non|ou{#ENV{afficher_incompatibles,''}}|ou{#GET{verrou}}|ou{#GET{actif}}|ou{#GET{attente}}}
-		<BOUCLE_afficher(CONDITION) {si #GET{afficher}}>
+		<BOUCLE_afficher(CONDITION) {si #GET{afficher}|et{#ID_PAQUET|svp_affichage_filtrer_paquets}}>
 		#SET{obsolete,#OBSOLETE|=={oui}|oui}
 		#SET{details,#ENV{id_paquet,''}|=={#ID_PAQUET}|oui}
 
