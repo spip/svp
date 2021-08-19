@@ -129,6 +129,7 @@ Se você desejar desativá-los, contate o webmaster do site, ou consulte <a href
 	'info_nb_plugins' => '@nb@ plugins',
 	'info_paquets_disponibles' => '@total_paquets@ pacote(s) disponível(eis)',
 	'info_plugin_attente_dependance' => 'dependências em falta',
+	'info_plugin_compat_forcee' => 'Versão incompatível: compatibilidade forçada',
 	'info_plugin_incompatible' => 'versão incompativel',
 	'info_plugin_installe' => 'já instalado',
 	'info_plugin_obsolete' => 'versão obsoleta',
