@@ -78,7 +78,9 @@
 					var cocher_plugins_up = function(){
 						if ($(".plugins li.item.up").length != 0) {
 							$("#select_up").click(function(){
-								$(".plugins li.item.up input.select_plugin").prop("checked",true);
+								$(".plugins li.item.up input.select_plugin")
+									.prop("checked",true)
+									.parents("li.item.up").siblings(":not(.up)").find("input.select_plugin").prop("checked",false);
 								$("select#action_globale>option#option_up").prop("selected",true);
 								return false;
 							});
