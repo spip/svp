@@ -112,7 +112,7 @@
 
 			[(#REM) Liens ]
 			#SET{liens,#ARRAY{
-				doc, #GET{actif}|et{#LIEN_DOC|oui},
+				doc, (#LIEN_DOC|oui),
 				demo,#GET{actif}|et{#LIEN_DEMO|oui},
 			}|array_filter}
 			<div class="links groupe-btns">
