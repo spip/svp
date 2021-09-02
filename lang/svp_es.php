@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'action_patienter' => 'Las acciones solicitadas se están procesando. Por favor, espere...',
+	'actions' => 'Acciones',
 	'actions_a_faire' => 'Acciones a ejecutar',
 	'actions_demandees' => 'Acciones solicitadas:',
 	'actions_en_erreur' => 'Errores que se produjeron',
@@ -19,12 +20,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'actions_realises' => 'Acciones ejecutadas',
 	'afficher_les_plugins_incompatibles' => 'Mostrar los plugins incompatibles',
 	'alerte_compatibilite' => 'Compatibilidad forzada',
+	'alerte_compatibilite_version_autorisee' => 'Se pueden activar los plugins compatibles con SPIP <code>@version@</code>.',
 
 	// B
 	'bouton_activer' => 'Activar',
 	'bouton_actualiser' => 'Actualizar',
 	'bouton_actualiser_tout' => 'Actualizar los repositorios',
 	'bouton_appliquer' => 'Aplicar',
+	'bouton_configurer' => 'Configurar',
 	'bouton_confirmer' => 'Confirmar',
 	'bouton_desactiver' => 'Desactivar',
 	'bouton_desinstaller' => 'Desinstalar',
@@ -67,7 +70,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_dir_dib_indefini' => 'El directorio _DIR_LIB no está définido. ¡Imposible cargar una biblioteca!',
 	'erreur_dir_plugins_auto' => 'El directorio «plugins/auto» que permite descargar paquetes no está creado o no tenemos acceso en escritura 		<strong>Debe crearlo para poder instalar nuevos plugins desde esta interfaz.</strong>',
 	'erreur_dir_plugins_auto_ecriture' => 'El directorio de paquetes @dir@ no está accesible en escritura. ¡Imposible cargar en él un paquete!',
-	'erreur_dir_plugins_auto_indefini' => 'La carpeta _DIR_PLUGIN_AUTO no está definida. ¡No es posible cargar el paquete! ', # MODIF
+	'erreur_dir_plugins_auto_indefini' => 'La carpeta _DIR_PLUGIN_AUTO no está definida. ¡No es posible cargar el paquete! ',
 	'erreur_dir_plugins_auto_titre' => '¡No se puede acceder a "plugins/auto"!',
 	'erreur_teleporter_chargement_source_impossible' => 'Descarga imposible desde la fuente @source@',
 	'erreur_teleporter_destination_erreur' => 'Carpeta @dir@ no accesible para subir archivos',
@@ -76,12 +79,18 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_teleporter_methode_inconue' => 'Método @methode@ desconocido para teleportar',
 	'erreur_teleporter_type_fichier_inconnu' => 'Tipo de archivo desconocido para  @source@',
 	'erreurs_xml' => 'Imposible leer ciertas descripciones XML',
+	'etat_actif' => 'Activo',
+	'etat_inactif' => 'Inactivo',
+	'etat_obsolete' => 'Obsoleto',
+	'etat_verrouille' => 'Bloqueado',
 	'explication_destination' => 'El camino será calculado a partir del nombre del archivo, si no lo indica.',
 
 	// F
 	'fieldset_debug' => 'Depurar',
 	'fieldset_edition' => 'Edición',
 	'fieldset_fonctionnement' => 'Funcionamiento',
+	'fieldset_typologie' => 'Tipos de plugins',
+	'filtrer' => 'Filtrar',
 
 	// I
 	'info_0_plugin' => 'ningún plugin',
@@ -94,7 +103,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_admin_plugin_actif_oui_verrou_tous' => 'Esta página lista todos los plugins activos del sitio, bloqueados o no.',
 	'info_admin_plugin_verrou_non' => 'Esta página lista todos los plugins no bloqueados del sitio, activos o no.',
 	'info_admin_plugin_verrou_tous' => 'Esta página muestra todos los plugins del sitio.',
-	'info_admin_plugin_verrouille' => 'Esta página lista los plugins activos y bloqueados (situados en la carpeta <code>@dir_plugins_dist@</code>). Si quiere desactivarlos, contacte al administrador del sitio, o consulte <a href="http://programmer.spip.net/repertoire_plugins-dist">la documentación</a>.', # MODIF
+	'info_admin_plugin_verrouille' => 'Esta página muestra los plugins activos y bloqueados (situados en la carpeta <code>@dir_plugins_dist@</code>). Si quiere desactivarlos, contacte al administrador del sitio, o consulte <a href="http://programmer.spip.net/repertoire_plugins-dist">la documentación</a>.',
 	'info_adresse_spipzone' => 'SPIP-Zone - Plugins',
 	'info_ajouter_depot' => 'Agregando repositorios a su base, tendrá la posibilidad de obtener información y realizar búsquedas sobre todos los paquetes alojados en los repositorios agregados.<br />Un repositorio se describe por un archivo XML que contiene informaciones sobre el repositorio y todos sus paquetes.',
 	'info_aucun_depot' => 'ningún repositorio',
@@ -109,11 +118,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'info_critere_phrase' => 'Ingrese las palabras clave que quiere buscar en el prefijo, el nombre, el eslogan, la descripción y los autores de los plugins',
 	'info_depots_disponibles' => '@total_depots@ repositorio(s)',
 	'info_fichier_depot' => 'Ingrese la URL del archivo de descripción del repositorio a agregar.<br />Para agregar el repositorio «SPIP-Zone - Plugins» visite el siguiente enlace: ',
+	'info_logiciel_version' => '@logiciel@ @signe@ @version@',
+	'info_logiciel_version_intervalle' => '@logiciel@ @signe_min@ @version_min@ y @signe_max@ @version_max@',
 	'info_nb_depots' => '@nb@ repositorios',
 	'info_nb_paquets' => '@nb@ paquetes',
 	'info_nb_plugins' => '@nb@ plugins',
 	'info_paquets_disponibles' => '@total_paquets@ paquete(s) disponible(s)',
 	'info_plugin_attente_dependance' => 'dependencias ausentes',
+	'info_plugin_compat_forcee' => 'Versión incompatible: compatibilidad forzada',
 	'info_plugin_incompatible' => 'versión incompatible',
 	'info_plugin_installe' => 'ya instalado',
 	'info_plugin_obsolete' => 'versión obsoleta',
@@ -141,6 +153,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'label_etat' => 'Estado',
 	'label_modifie_le' => 'Modificado el',
 	'label_n_autres_contributions' => 'otras contribuciones',
+	'label_plugin_description' => 'Descripción de la versión @version@',
 	'label_prefixe' => 'Prefijo',
 	'label_selectionner_plugin' => 'Seleccionar este plugin',
 	'label_tags' => 'Etiquetas',
@@ -157,6 +170,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'legende_installer_plugins' => 'Instalar plugins',
 	'legende_rechercher_plugins' => 'Buscar plugins',
 	'lien_demo' => 'Demostración',
+	'lien_details_moins' => 'Menos información',
+	'lien_details_plus' => 'Más información',
 	'lien_documentation' => 'Documentación',
 
 	// M
@@ -190,7 +205,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'message_action_stop' => 'Desinstalar el plugin "@plugin@" (versión: @version@)',
 	'message_action_up' => 'Actualización del plugin "@plugin@" (de la versión @version@ a la  @version_maj@)',
 	'message_action_upon' => 'Actualización y activación del plugin "@plugin@" (versión: @version@)',
-	'message_dependance_plugin' => 'El plugin @plugin@ depende de @dependance@.', # MODIF
+	'message_dependance_extension_php' => 'El plugin @plugin@ necesita la extensión PHP @dependance@.',
+	'message_dependance_php' => 'El plugin @plugin@ necesita @dependance@',
+	'message_dependance_plugin' => 'El plugin @plugin@ depende de @dependance@.',
 	'message_erreur_aucun_plugin_selectionne' => 'No se ha seleccionado ningún plugin.',
 	'message_erreur_ecriture_lib' => '@plugin@ necesita la biblioteca <a href="@lib_url@">@lib@</a> situada en la carpeta <var>lib/</var> en la raíz de su sitio. Sin embargo, esta carpeta no existe o no está accesible en escritura. Tiene que instalarla manualmente o crear este repertorio dándole derechos de escritura.',
 	'message_erreur_maj_inconnu' => 'No se puede actualizar un plugin desconocido.',
@@ -227,7 +244,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	// P
 	'placeholder_phrase' => 'prefijo, nombre, eslogan, descripción o autor',
 	'plugin_info_actif' => 'Plugin activo',
-	'plugin_info_up' => 'Está disponible una actualización del plugin (versión @version@)', # MODIF
+	'plugin_info_up' => 'Está disponible una actualización del plugin (versión @version@)',
+	'plugin_info_up_x' => 'Hay una actualización mayor disponible (@version@). No olvide comprobar las incompatibilidades.',
+	'plugin_info_up_y' => 'Hay una actualización funcional disponible (@version@).',
+	'plugin_info_up_z' => 'Hay una actualización correctiva disponible (@version@).',
 	'plugin_info_verrouille' => 'Plugin bloqueado',
 	'plugins_inactifs_liste' => 'Inactivos',
 	'plugins_non_verrouilles_liste' => 'No bloqueados',
