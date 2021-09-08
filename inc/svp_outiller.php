@@ -36,16 +36,16 @@ if (!defined('_SVP_VERSION_SPIP_MAX')) {
  *
  * @global array $GLOBALS ['infos_branches_spip']
  */
-$GLOBALS['infos_branches_spip'] = array(
-	'1.9' => array(_SVP_VERSION_SPIP_MIN, '1.9.2'),
-	'2.0' => array('2.0.0', '2.0.26'),
-	'2.1' => array('2.1.0', '2.1.30'),
-	'3.0' => array('3.0.0', '3.0.28'),
-	'3.1' => array('3.1.0', '3.1.999'),
-	'3.2' => array('3.2.0', '3.2.999'),
-	'3.3' => array('3.3.0-dev', '3.3.0-dev'),
-	'4.0' => array('4.0.0-alpha', _SVP_VERSION_SPIP_MAX),
-);
+$GLOBALS['infos_branches_spip'] = [
+	'1.9' => [_SVP_VERSION_SPIP_MIN, '1.9.2'],
+	'2.0' => ['2.0.0', '2.0.26'],
+	'2.1' => ['2.1.0', '2.1.30'],
+	'3.0' => ['3.0.0', '3.0.28'],
+	'3.1' => ['3.1.0', '3.1.999'],
+	'3.2' => ['3.2.0', '3.2.999'],
+	'3.3' => ['3.3.0-dev', '3.3.0-dev'],
+	'4.0' => ['4.0.0-alpha', _SVP_VERSION_SPIP_MAX],
+];
 # define('_INFOS_BRANCHES_SPIP', serialize($infos_branches_spip));
 
 /**
@@ -53,54 +53,54 @@ $GLOBALS['infos_branches_spip'] = array(
  *
  * @global array $GLOBALS ['licences_plugin']
  */
-$GLOBALS['licences_plugin'] = array(
-	'apache' => array(
-		'versions' => array('2.0', '1.1', '1.0'),
+$GLOBALS['licences_plugin'] = [
+	'apache' => [
+		'versions' => ['2.0', '1.1', '1.0'],
 		'nom' => 'Apache licence, version @version@',
 		'url' => 'http://www.apache.org/licenses/LICENSE-@version@'
-	),
-	'art' => array(
-		'versions' => array('1.3'),
+	],
+	'art' => [
+		'versions' => ['1.3'],
 		'nom' => 'Art libre @version@',
 		'url' => 'http://artlibre.org/licence/lal'
-	),
-	'mit' => array(
-		'versions' => array(),
+	],
+	'mit' => [
+		'versions' => [],
 		'nom' => 'MIT',
 		'url' => 'http://opensource.org/licenses/mit-license.php'
-	),
-	'bsd' => array(
-		'versions' => array(),
+	],
+	'bsd' => [
+		'versions' => [],
 		'nom' => 'BSD',
 		'url' => 'http://www.freebsd.org/copyright/license.html'
-	),
-	'agpl' => array(
-		'versions' => array('3'),
+	],
+	'agpl' => [
+		'versions' => ['3'],
 		'nom' => 'AGPL @version@',
 		'url' => 'http://www.gnu.org/licenses/agpl.html'
-	),
-	'fdl' => array(
-		'versions' => array('1.3', '1.2', '1.1'),
+	],
+	'fdl' => [
+		'versions' => ['1.3', '1.2', '1.1'],
 		'nom' => 'FDL @version@',
 		'url' => 'http://www.gnu.org/licenses/fdl-@version@.html'
-	),
-	'lgpl' => array(
-		'versions' => array('3.0', '2.1'),
-		'nom' => array('3.0' => 'LGPL 3', '2.1' => 'LGPL 2.1'),
+	],
+	'lgpl' => [
+		'versions' => ['3.0', '2.1'],
+		'nom' => ['3.0' => 'LGPL 3', '2.1' => 'LGPL 2.1'],
 		'url' => 'http://www.gnu.org/licenses/lgpl-@version@.html'
-	),
-	'gpl' => array(
-		'versions' => array('3', '2', '1'),
+	],
+	'gpl' => [
+		'versions' => ['3', '2', '1'],
 		'nom' => 'GPL @version@',
 		'url' => 'http://www.gnu.org/licenses/gpl-@version@.0.html'
-	),
-	'ccby' => array(
-		'versions' => array('2.0', '2.5', '3.0'),
-		'suffixes' => array('-sa', '-nc', '-nd', '-nc-nd', '-nc-sa'),
+	],
+	'ccby' => [
+		'versions' => ['2.0', '2.5', '3.0'],
+		'suffixes' => ['-sa', '-nc', '-nd', '-nc-nd', '-nc-sa'],
 		'nom' => 'CC BY@suffixe@ @version@',
 		'url' => 'http://creativecommons.org/licenses/by@suffixe@/@version@/'
-	)
-);
+	]
+];
 # define('_LICENCES_PLUGIN', serialize($licences_plugin));
 
 /**
@@ -183,14 +183,14 @@ function fusionner_intervalles($intervalle_a, $intervalle_b) {
  *     Le sous index 'incluse' vaut true si cette borne est incluse dans l'intervalle.
  **/
 function extraire_bornes($intervalle, $initialiser = false) {
-	static $borne_vide = array('valeur' => '', 'incluse' => false);
-	static $borne_inf_init = array('valeur' => _SVP_VERSION_SPIP_MIN, 'incluse' => true);
-	static $borne_sup_init = array('valeur' => _SVP_VERSION_SPIP_MAX, 'incluse' => true);
+	static $borne_vide = ['valeur' => '', 'incluse' => false];
+	static $borne_inf_init = ['valeur' => _SVP_VERSION_SPIP_MIN, 'incluse' => true];
+	static $borne_sup_init = ['valeur' => _SVP_VERSION_SPIP_MAX, 'incluse' => true];
 
 	if ($initialiser) {
-		$bornes = array('min' => $borne_inf_init, 'max' => $borne_sup_init);
+		$bornes = ['min' => $borne_inf_init, 'max' => $borne_sup_init];
 	} else {
-		$bornes = array('min' => $borne_vide, 'max' => $borne_vide);
+		$bornes = ['min' => $borne_vide, 'max' => $borne_vide];
 	}
 
 	if ($intervalle) {
@@ -202,8 +202,8 @@ function extraire_bornes($intervalle, $initialiser = false) {
 				$bornes['max']['valeur'] = trim($matches[2]);
 			}
 		}
-		$bornes['min']['incluse'] = (substr($intervalle, 0, 1) === "[");
-		$bornes['max']['incluse'] = (substr($intervalle, -1) === "]");
+		$bornes['min']['incluse'] = (substr($intervalle, 0, 1) === '[');
+		$bornes['max']['incluse'] = (substr($intervalle, -1) === ']');
 	}
 
 	return $bornes;
@@ -323,16 +323,16 @@ function compiler_branches_spip($intervalle) {
 	}
 	$index_sup = array_search($branche_sup, $liste_branches_spip);
 
-	// -- on verifie que les bornes sont bien dans l'ordre : 
+	// -- on verifie que les bornes sont bien dans l'ordre :
 	//    -> sinon on retourne la branche sup uniquement
 	if (spip_version_compare($borne_inf, $borne_sup, '>=')) {
 		return $branche_sup;
 	}
 
 	// A ce stade, on a un intervalle ferme en bornes ou en branches
-	// Il suffit de trouver les branches qui y sont incluses, sachant que les branches inf et sup 
+	// Il suffit de trouver les branches qui y sont incluses, sachant que les branches inf et sup
 	// le sont a coup sur maintenant
-	$liste = array();
+	$liste = [];
 	for ($i = $index_inf; $i <= $index_sup; $i++) {
 		$liste[] = $liste_branches_spip[$i];
 	}
@@ -409,13 +409,14 @@ function balise_identique($balise1, $balise2) {
  */
 function definir_licence($prefixe, $nom, $suffixe, $version) {
 	global $licences_plugin;
-	$licence = array();
+	$licence = [];
 
 	$prefixe = strtolower($prefixe);
 	$nom = strtolower($nom);
 	$suffixe = strtolower($suffixe);
 
-	if (((trim($prefixe) == 'creative common') and ($nom == 'attribution'))
+	if (
+		((trim($prefixe) == 'creative common') and ($nom == 'attribution'))
 		or (($prefixe == 'cc') and ($nom == 'by'))
 	) {
 		$nom = 'ccby';
@@ -466,7 +467,7 @@ function definir_licence($prefixe, $nom, $suffixe, $version) {
  *     Tableau de couples (nom de la librairie => répertoire de la librairie)
  **/
 function svp_lister_librairies() {
-	$libs = array();
+	$libs = [];
 	foreach (array_reverse(creer_chemin()) as $d) {
 		if (is_dir($dir = $d . 'lib/') and $t = opendir($dir)) {
 			while (($f = readdir($t)) !== false) {
@@ -501,7 +502,7 @@ function normaliser_version($version = '') {
 	if (preg_match(',([0-9.]+)[\s.-]?(dev|alpha|a|beta|b|rc|pl|p)?,i', $version, $matches)) {
 		if (isset($matches[1]) and $matches[1]) {
 			$v = explode('.', $matches[1]);
-			$vn = array();
+			$vn = [];
 			foreach ($v as $_nombre) {
 				$vn[] = str_pad($_nombre, 3, '0', STR_PAD_LEFT);
 			}

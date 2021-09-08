@@ -38,13 +38,14 @@
  * @return string
  *     Temps d'exécution
  **/
-function svp_actualiser_paquets_locaux($force = false, &$erreurs_xml = array()) {
+function svp_actualiser_paquets_locaux($force = false, &$erreurs_xml = []) {
 
 	spip_timer('paquets_locaux');
 	$paquets = svp_descriptions_paquets_locaux($erreurs_xml);
 
 	// un mode pour tout recalculer sans désinstaller le plugin... !
-	if ($force
+	if (
+		$force
 		or _request('var_mode') == 'vider_paquets_locaux'
 		or _request('var_mode') == 'recalcul'
 	) {
@@ -58,8 +59,7 @@ function svp_actualiser_paquets_locaux($force = false, &$erreurs_xml = array()) 
 	$temps = spip_timer('paquets_locaux');
 #spip_log('svp_actualiser_paquets_locaux', 'SVP');
 #spip_log($temps, 'SVP');
-	return "Éxécuté en : " . $temps;
-
+	return 'Éxécuté en : ' . $temps;
 }
 
 
@@ -77,24 +77,24 @@ function svp_actualiser_paquets_locaux($force = false, &$erreurs_xml = array()) 
  *     constante, puis par chemin.
  *     array[_DIR_PLUGIN*][$chemin] = description
  **/
-function svp_descriptions_paquets_locaux(&$erreurs_xml = array()) {
+function svp_descriptions_paquets_locaux(&$erreurs_xml = []) {
 	include_spip('inc/plugin');
 	liste_plugin_files(_DIR_PLUGINS);
 	liste_plugin_files(_DIR_PLUGINS_DIST);
 	$get_infos = charger_fonction('get_infos', 'plugins');
-	$paquets_locaux = array(
-		'_DIR_PLUGINS' => $get_infos(array(), false, _DIR_PLUGINS),
-		'_DIR_PLUGINS_DIST' => $get_infos(array(), false, _DIR_PLUGINS_DIST),
-	);
+	$paquets_locaux = [
+		'_DIR_PLUGINS' => $get_infos([], false, _DIR_PLUGINS),
+		'_DIR_PLUGINS_DIST' => $get_infos([], false, _DIR_PLUGINS_DIST),
+	];
 	if (defined('_DIR_PLUGINS_SUPPL') and _DIR_PLUGINS_SUPPL) {
 		liste_plugin_files(_DIR_PLUGINS_SUPPL);
-		$paquets_locaux['_DIR_PLUGINS_SUPPL'] = $get_infos(array(), false, _DIR_PLUGINS_SUPPL);
+		$paquets_locaux['_DIR_PLUGINS_SUPPL'] = $get_infos([], false, _DIR_PLUGINS_SUPPL);
 	}
 
 	// creer la liste des signatures
 	foreach ($paquets_locaux as $const_dir => $paquets) {
 		foreach ($paquets as $chemin => $paquet) {
-			// on propose le paquet uniquement s'il n'y a pas eu d'erreur de lecture XML bloquante 
+			// on propose le paquet uniquement s'il n'y a pas eu d'erreur de lecture XML bloquante
 			if (!isset($paquet['erreur'])) {
 				$paquets_locaux[$const_dir][$chemin]['signature'] = md5($const_dir . $chemin . serialize($paquet));
 			} else {
@@ -140,27 +140,33 @@ function svp_base_modifier_paquets_locaux($paquets_locaux) {
 
 	// On ne va modifier QUE les paquets locaux qui ont change
 	// Et cela en comparant les md5 des informations fournies.
-	$signatures = array();
+	$signatures = [];
 
-	// recuperer toutes les signatures 
+	// recuperer toutes les signatures
 	foreach ($paquets_locaux as $const_dir => $paquets) {
 		foreach ($paquets as $chemin => $paquet) {
-			$signatures[$paquet['signature']] = array(
+			$signatures[$paquet['signature']] = [
 				'constante' => $const_dir,
 				'chemin' => $chemin,
 				'paquet' => $paquet,
-			);
+			];
 		}
 	}
 
 	// tous les paquets du depot qui ne font pas parti des signatures
-	$anciens_paquets = sql_allfetsel('id_paquet', 'spip_paquets',
-		array('id_depot=' . sql_quote(0), sql_in('signature', array_keys($signatures), 'NOT')));
+	$anciens_paquets = sql_allfetsel(
+		'id_paquet',
+		'spip_paquets',
+		['id_depot=' . sql_quote(0), sql_in('signature', array_keys($signatures), 'NOT')]
+	);
 	$anciens_paquets = array_column($anciens_paquets, 'id_paquet');
 
 	// tous les plugins correspondants aux anciens paquets
-	$anciens_plugins = sql_allfetsel('p.id_plugin', array('spip_plugins AS p', 'spip_paquets AS pa'),
-		array('p.id_plugin=pa.id_plugin', sql_in('pa.id_paquet', $anciens_paquets)));
+	$anciens_plugins = sql_allfetsel(
+		'p.id_plugin',
+		['spip_plugins AS p', 'spip_paquets AS pa'],
+		['p.id_plugin=pa.id_plugin', sql_in('pa.id_paquet', $anciens_paquets)]
+	);
 	$anciens_plugins = array_column($anciens_plugins, 'id_plugin');
 
 	// suppression des anciens paquets
@@ -175,10 +181,10 @@ function svp_base_modifier_paquets_locaux($paquets_locaux) {
 	$signatures = array_diff_key($signatures, array_flip($signatures_base));
 
 	// on recree la liste des paquets locaux a inserer
-	$paquets_locaux = array();
+	$paquets_locaux = [];
 	foreach ($signatures as $s => $infos) {
 		if (!isset($paquets_locaux[$infos['constante']])) {
-			$paquets_locaux[$infos['constante']] = array();
+			$paquets_locaux[$infos['constante']] = [];
 		}
 		$paquets_locaux[$infos['constante']][$infos['chemin']] = $infos['paquet'];
 	}
@@ -214,7 +220,7 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 
 	// On initialise les informations specifiques au paquet :
 	// l'id du depot et les infos de l'archive
-	$paquet_base = array(
+	$paquet_base = [
 		'id_depot' => 0,
 		'nom_archive' => '',
 		'nbo_archive' => '',
@@ -223,16 +229,16 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 		'date_modif' => '',
 		'maj_version' => '',
 		'signature' => '',
-	);
+	];
 
 	$preparer_sql_paquet = charger_fonction('preparer_sql_paquet', 'plugins');
 
 	// pour chaque decouverte, on insere les paquets en base.
 	// on evite des requetes individuelles, tres couteuses en sqlite...
-	$cle_plugins = array(); // prefixe => id
-	$insert_plugins = array(); // insertion prefixe...
-	$insert_plugins_vmax = array(); // vmax des nouveaux plugins...
-	$insert_paquets = array(); // insertion de paquet...
+	$cle_plugins = []; // prefixe => id
+	$insert_plugins = []; // insertion prefixe...
+	$insert_plugins_vmax = []; // vmax des nouveaux plugins...
+	$insert_paquets = []; // insertion de paquet...
 
 	include_spip('inc/config');
 	$recents = lire_config('plugins_interessants');
@@ -256,7 +262,7 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 			}
 
 			// On met les neccesite, utilise, procure, dans la clé 0
-			// pour être homogène avec le résultat d'une extraction de paquet xml 
+			// pour être homogène avec le résultat d'une extraction de paquet xml
 			// dans une source d'archives. cf svp_phraser_plugin()
 			$paquet = svp_adapter_structure_dependances($paquet);
 
@@ -265,7 +271,6 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 			#$le_paquet['traductions'] = serialize($paquet['traductions']);
 
 			if ($champs = $preparer_sql_paquet($paquet)) {
-
 				// Eclater les champs recuperes en deux sous tableaux, un par table (plugin, paquet)
 				$champs = eclater_plugin_paquet($champs);
 
@@ -280,7 +285,7 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 				// on fait attention lorqu'on cherche ou ajoute un plugin
 				// le nom et slogan est TOUJOURS celui de la plus haute version
 				// et il faut donc possiblement mettre a jour la base...
-				// 
+				//
 				// + on est tolerant avec les versions identiques de plugin deja presentes
 				//   on permet le recalculer le titre...
 				if (!isset($cle_plugins[$prefixe])) {
@@ -309,30 +314,34 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 				$le_paquet['constante'] = $const_dir;
 				$le_paquet['src_archive'] = $chemin;
 				$le_paquet['recent'] = isset($recents[$chemin]) ? $recents[$chemin] : 0;
-				$le_paquet['installe'] = is_array($chemin) && in_array($chemin,
-					$installes) ? 'oui' : 'non'; // est desinstallable ?
+				$le_paquet['installe'] = is_array($chemin) && in_array(
+					$chemin,
+					$installes
+				) ? 'oui' : 'non'; // est desinstallable ?
 				$le_paquet['obsolete'] = 'non';
 				$le_paquet['signature'] = $paquet['signature'];
 
 				// le plugin est il actuellement actif ?
-				$actif = "non";
-				if (isset($actifs[$prefixe])
+				$actif = 'non';
+				if (
+					isset($actifs[$prefixe])
 					and ($actifs[$prefixe]['dir_type'] == $const_dir)
 					and ($actifs[$prefixe]['dir'] == $chemin)
 				) {
-					$actif = "oui";
+					$actif = 'oui';
 				}
 				$le_paquet['actif'] = $actif;
 
 				// le plugin etait il actif mais temporairement desactive
 				// parce qu'une dependence a disparue ?
-				$attente = "non";
-				if (isset($attentes[$prefixe])
+				$attente = 'non';
+				if (
+					isset($attentes[$prefixe])
 					and ($attentes[$prefixe]['dir_type'] == $const_dir)
 					and ($attentes[$prefixe]['dir'] == $chemin)
 				) {
-					$attente = "oui";
-					$le_paquet['actif'] = "oui"; // il est presenté dans la liste des actifs (en erreur).
+					$attente = 'oui';
+					$le_paquet['actif'] = 'oui'; // il est presenté dans la liste des actifs (en erreur).
 				}
 				$le_paquet['attente'] = $attente;
 
@@ -348,16 +357,15 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 
 	if ($insert_plugins) {
 		sql_insertq_multi('spip_plugins', $insert_plugins);
-		$pls = sql_allfetsel(array('id_plugin', 'prefixe'), 'spip_plugins', sql_in('prefixe', array_keys($insert_plugins)));
+		$pls = sql_allfetsel(['id_plugin', 'prefixe'], 'spip_plugins', sql_in('prefixe', array_keys($insert_plugins)));
 		foreach ($pls as $p) {
 			$cle_plugins[$p['prefixe']] = $p['id_plugin'];
 		}
 	}
 
 	if ($insert_paquets) {
-
 		// sert pour le calcul d'obsolescence
-		$id_plugin_concernes = array();
+		$id_plugin_concernes = [];
 
 		foreach ($insert_paquets as $c => $p) {
 			$insert_paquets[$c]['id_plugin'] = $cle_plugins[$p['prefixe']];
@@ -374,17 +382,17 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 /**
  * Adapte la structure des dépendances d'un paquet xml lu par SPIP
  * à une structure attendue par SVP.
- * 
+ *
  * C'est à dire, met les necessite, utilises, lib, procure dans une sous clé 0
- * 
+ *
  * @note
- *     Cette clé 0 indique la description principale du paquet.xml 
- *     mais d'autres clés semblent pouvoir exister 
+ *     Cette clé 0 indique la description principale du paquet.xml
+ *     mais d'autres clés semblent pouvoir exister
  *     si la balise `<spip>` est présente dedans
- * 
+ *
  * @see svp_phraser_plugin() côté SVP
  * @see plugins_fusion_paquet() côté SVP
- * 
+ *
  * @see plugins_get_infos_dist() côté SPIP (extractions de tous les paquets d'un dossier)
  *
  * @param array $paquet Description d'un paquet
@@ -392,9 +400,9 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 **/
 function svp_adapter_structure_dependances($paquet) {
 	// mettre les necessite, utilise, librairie dans la cle 0
-	foreach (array('necessite', 'utilise', 'lib', 'procure') as $dep) {
+	foreach (['necessite', 'utilise', 'lib', 'procure'] as $dep) {
 		if (!empty($paquet[$dep])) {
-			$paquet[$dep] = array($paquet[$dep]);
+			$paquet[$dep] = [$paquet[$dep]];
 		}
 	}
 	return $paquet;
@@ -410,48 +418,51 @@ function svp_base_actualiser_paquets_actifs() {
 	$attentes = lire_config('plugin_attente');
 
 	$locaux = sql_allfetsel(
-		array('id_paquet', 'prefixe', 'actif', 'installe', 'attente', 'constante', 'src_archive'),
+		['id_paquet', 'prefixe', 'actif', 'installe', 'attente', 'constante', 'src_archive'],
 		'spip_paquets',
-		'id_depot=' . sql_quote(0));
-	$changements = array();
+		'id_depot=' . sql_quote(0)
+	);
+	$changements = [];
 
 	foreach ($locaux as $l) {
 		$copie = $l;
 		$prefixe = strtoupper($l['prefixe']);
 		// actif ?
-		if (isset($actifs[$prefixe])
+		if (
+			isset($actifs[$prefixe])
 			and ($actifs[$prefixe]['dir_type'] == $l['constante'])
 			and ($actifs[$prefixe]['dir'] == $l['src_archive'])
 		) {
-			$copie['actif'] = "oui";
+			$copie['actif'] = 'oui';
 		} else {
-			$copie['actif'] = "non";
+			$copie['actif'] = 'non';
 		}
 
 		// attente ?
-		if (isset($attentes[$prefixe])
+		if (
+			isset($attentes[$prefixe])
 			and ($attentes[$prefixe]['dir_type'] == $l['constante'])
 			and ($attentes[$prefixe]['dir'] == $l['src_archive'])
 		) {
-			$copie['attente'] = "oui";
-			$copie['actif'] = "oui"; // il est presente dans la liste des actifs (en erreur). 
+			$copie['attente'] = 'oui';
+			$copie['actif'] = 'oui'; // il est presente dans la liste des actifs (en erreur).
 		} else {
-			$copie['attente'] = "non";
+			$copie['attente'] = 'non';
 		}
 
 		// installe ?
 		if (in_array($l['src_archive'], $installes)) {
-			$copie['installe'] = "oui";
+			$copie['installe'] = 'oui';
 		} else {
-			$copie['installe'] = "non";
+			$copie['installe'] = 'non';
 		}
 
 		if ($copie != $l) {
-			$changements[$l['id_paquet']] = array(
+			$changements[$l['id_paquet']] = [
 				'actif' => $copie['actif'],
 				'installe' => $copie['installe'],
 				'attente' => $copie['attente']
-			);
+			];
 		}
 	}
 
@@ -469,7 +480,6 @@ function svp_base_actualiser_paquets_actifs() {
 			sql_terminer_transaction();
 		}
 	}
-
 }
 
 /**
@@ -487,13 +497,13 @@ function svp_base_actualiser_paquets_actifs() {
  */
 function svp_compiler_multis($prefixe, $dir_source) {
 
-	$multis = array();
+	$multis = [];
 	// ici on cherche le fichier et les cles avec un prefixe en minuscule systematiquement...
 	$prefixe = strtolower($prefixe);
 	$module = "paquet-$prefixe";
-	$item_nom = $prefixe . "_nom";
-	$item_slogan = $prefixe . "_slogan";
-	$item_description = $prefixe . "_description";
+	$item_nom = $prefixe . '_nom';
+	$item_slogan = $prefixe . '_slogan';
+	$item_description = $prefixe . '_description';
 
 	// On cherche tous les fichiers de langue destines a la traduction du paquet.xml
 	if ($fichiers_langue = glob($dir_source . "/lang/{$module}_*.php")) {
@@ -548,13 +558,13 @@ function svp_compiler_multis($prefixe, $dir_source) {
  *     Liste d'identifiants de plugins
  *     En cas d'absence, passera sur tous les paquets locaux
  **/
-function svp_corriger_obsolete_paquets($ids_plugin = array()) {
+function svp_corriger_obsolete_paquets($ids_plugin = []) {
 	// on minimise au maximum le nombre de requetes.
 	// 1 pour lister les paquets
 	// 1 pour mettre à jour les obsoletes à oui
 	// 1 pour mettre à jour les obsoletes à non
 
-	$where = array('pa.id_plugin = pl.id_plugin', 'id_depot=' . sql_quote(0));
+	$where = ['pa.id_plugin = pl.id_plugin', 'id_depot=' . sql_quote(0)];
 	if ($ids_plugin) {
 		$where[] = sql_in('pl.id_plugin', $ids_plugin);
 	}
@@ -563,27 +573,30 @@ function svp_corriger_obsolete_paquets($ids_plugin = array()) {
 	// certains sont peut etre devenus obsoletes
 	// parmis tous les plugins locaux presents
 	// concernes par les memes prefixes que les plugins ajoutes.
-	$obsoletes = array();
-	$changements = array();
+	$obsoletes = [];
+	$changements = [];
 
 	$paquets = sql_allfetsel(
-		array('pa.id_paquet', 'pl.prefixe', 'pa.version', 'pa.etatnum', 'pa.obsolete', 'pa.compatibilite_spip'),
-		array('spip_paquets AS pa', 'spip_plugins AS pl'),
-		$where);
+		['pa.id_paquet', 'pl.prefixe', 'pa.version', 'pa.etatnum', 'pa.obsolete', 'pa.compatibilite_spip'],
+		['spip_paquets AS pa', 'spip_plugins AS pl'],
+		$where
+	);
 
 	// L'obsolescence doit tenir compte de la compatibilité avec notre version de SPIP en cours
 	foreach ($paquets as $c => $p) {
-		$paquets[$c]['compatible'] = plugin_version_compatible($p['compatibilite_spip'], $GLOBALS['spip_version_branche'],
-			'spip');
+		$paquets[$c]['compatible'] = plugin_version_compatible(
+			$p['compatibilite_spip'],
+			$GLOBALS['spip_version_branche'],
+			'spip'
+		);
 	}
 
 	foreach ($paquets as $c => $p) {
-
 		$obsoletes[$p['prefixe']][] = $c;
 
 		// si 2 paquet locaux ont le meme prefixe,
 		// mais pas la meme version,
-		// sont compatibles avec notre SPIP, 
+		// sont compatibles avec notre SPIP,
 		// l'un est obsolete : la version la plus ancienne
 		// Si version et etat sont egaux, on ne decide pas d'obsolescence.
 		if (count($obsoletes[$p['prefixe']]) > 1) {
@@ -625,7 +638,6 @@ function svp_corriger_obsolete_paquets($ids_plugin = array()) {
 						}
 					}
 				}
-
 			}
 		} else {
 			if ($paquets[$c]['obsolete'] != 'non') {
@@ -636,7 +648,7 @@ function svp_corriger_obsolete_paquets($ids_plugin = array()) {
 	}
 
 	if (count($changements)) {
-		$oui = $non = array();
+		$oui = $non = [];
 		foreach ($changements as $c => $null) {
 			if ($paquets[$c]['obsolete'] == 'oui') {
 				$oui[] = $paquets[$c]['id_paquet'];
@@ -646,10 +658,10 @@ function svp_corriger_obsolete_paquets($ids_plugin = array()) {
 		}
 
 		if ($oui) {
-			sql_updateq('spip_paquets', array('obsolete' => 'oui'), sql_in('id_paquet', $oui));
+			sql_updateq('spip_paquets', ['obsolete' => 'oui'], sql_in('id_paquet', $oui));
 		}
 		if ($non) {
-			sql_updateq('spip_paquets', array('obsolete' => 'non'), sql_in('id_paquet', $non));
+			sql_updateq('spip_paquets', ['obsolete' => 'non'], sql_in('id_paquet', $non));
 		}
 	}
 }
@@ -666,8 +678,11 @@ function svp_corriger_obsolete_paquets($ids_plugin = array()) {
 function svp_supprimer_plugins_orphelins($ids_plugin) {
 	// tous les plugins encore lies a des depots...
 	if ($ids_plugin) {
-		$p = sql_allfetsel('DISTINCT(p.id_plugin)', array('spip_plugins AS p', 'spip_paquets AS pa'),
-			array(sql_in('p.id_plugin', $ids_plugin), 'p.id_plugin=pa.id_plugin'));
+		$p = sql_allfetsel(
+			'DISTINCT(p.id_plugin)',
+			['spip_plugins AS p', 'spip_paquets AS pa'],
+			[sql_in('p.id_plugin', $ids_plugin), 'p.id_plugin=pa.id_plugin']
+		);
 		$p = array_column($p, 'id_plugin');
 		$diff = array_diff($ids_plugin, $p);
 		// pour chaque plugin non encore utilise, on les vire !
@@ -676,7 +691,7 @@ function svp_supprimer_plugins_orphelins($ids_plugin) {
 		return $p; // les plugins encore en vie !
 	}
 
-	return array();
+	return [];
 }
 
 
@@ -695,19 +710,20 @@ function svp_supprimer_plugins_orphelins($ids_plugin) {
  **/
 function svp_rechercher_maj_version($prefixe, $version, $etatnum) {
 
-	$maj_version = "";
+	$maj_version = '';
 
-	if ($res = sql_allfetsel(
-		array('pl.id_plugin', 'pa.version'),
-		array('spip_plugins AS pl', 'spip_paquets AS pa'),
-		array(
+	if (
+		$res = sql_allfetsel(
+			['pl.id_plugin', 'pa.version'],
+			['spip_plugins AS pl', 'spip_paquets AS pa'],
+			[
 			'pl.id_plugin = pa.id_plugin',
 			'pa.id_depot>' . sql_quote(0),
 			'pl.prefixe=' . sql_quote($prefixe),
 			'pa.etatnum>=' . sql_quote($etatnum)
-		))
+			]
+		)
 	) {
-
 		foreach ($res as $paquet_distant) {
 			// si version superieure et etat identique ou meilleur,
 			// c'est que c'est une mise a jour possible !
@@ -732,17 +748,19 @@ function svp_rechercher_maj_version($prefixe, $version, $etatnum) {
  * @uses  svp_rechercher_maj_version()
  **/
 function svp_actualiser_maj_version() {
-	$update = array();
+	$update = [];
 	// tous les paquets locaux
-	if ($locaux = sql_allfetsel(
-		array('id_paquet', 'prefixe', 'version', 'maj_version', 'etatnum'),
-		array('spip_paquets'),
-		array('id_depot=' . sql_quote(0)))
+	if (
+		$locaux = sql_allfetsel(
+			['id_paquet', 'prefixe', 'version', 'maj_version', 'etatnum'],
+			['spip_paquets'],
+			['id_depot=' . sql_quote(0)]
+		)
 	) {
 		foreach ($locaux as $paquet) {
 			$new_maj_version = svp_rechercher_maj_version($paquet['prefixe'], $paquet['version'], $paquet['etatnum']);
 			if ($new_maj_version != $paquet['maj_version']) {
-				$update[$paquet['id_paquet']] = array('maj_version' => $new_maj_version);
+				$update[$paquet['id_paquet']] = ['maj_version' => $new_maj_version];
 			}
 		}
 	}

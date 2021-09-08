@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Gestion du téléporteur HTTP \ Zip.
  *
@@ -25,29 +26,30 @@
  */
 function teleporter_http_deballe_zip_dist($archive, $dest, $tmp) {
 	$status = teleporter_http_charger_zip(
-		array(
+		[
 			'archive' => $archive, // normalement l'url source mais on l'a pas ici
 			'fichier' => $archive,
 			'dest' => $dest,
 			'tmp' => $tmp,
 			'extract' => true,
 			'root_extract' => true, # extraire a la racine de dest
-		)
+		]
 	);
 	// le fichier .zip est la et bien forme
-	if (is_array($status)
+	if (
+		is_array($status)
 		and is_dir($status['target'])
 	) {
 		return $status['target'];
 	} // fichier absent
 	else {
 		if ($status == -1) {
-			spip_log("dezip de $archive impossible : fichier absent", "teleport" . _LOG_ERREUR);
+			spip_log("dezip de $archive impossible : fichier absent", 'teleport' . _LOG_ERREUR);
 
 			return false;
 		} // fichier la mais pas bien dezippe
 		else {
-			spip_log("probleme lors du dezip de $archive", "teleport" . _LOG_ERREUR);
+			spip_log("probleme lors du dezip de $archive", 'teleport' . _LOG_ERREUR);
 
 			return false;
 		}
@@ -71,19 +73,20 @@ function teleporter_http_deballe_zip_dist($archive, $dest, $tmp) {
  *     - tmpname : répertoire temporaire où les fichiers sont décompressés
  *     - target : cible sur laquelle décompresser les fichiers...
  */
-function teleporter_http_charger_zip($quoi = array()) {
+function teleporter_http_charger_zip($quoi = []) {
 	if (!$quoi) {
 		return false;
 	}
 
-	foreach (array(
-		         'remove' => 'spip',
-		         'rename' => array(),
-		         'edit' => array(),
-		         'root_extract' => false, # extraire a la racine de dest ?
-		         'tmp' => sous_repertoire(_DIR_CACHE, 'chargeur')
-	         )
-	         as $opt => $def) {
+	foreach (
+		[
+				'remove' => 'spip',
+				'rename' => [],
+				'edit' => [],
+				'root_extract' => false, # extraire a la racine de dest ?
+				'tmp' => sous_repertoire(_DIR_CACHE, 'chargeur')
+		] as $opt => $def
+	) {
 		isset($quoi[$opt]) || ($quoi[$opt] = $def);
 	}
 
@@ -95,8 +98,10 @@ function teleporter_http_charger_zip($quoi = array()) {
 	$zip = new Spip\Archives\SpipArchives($fichier);
 
 	if (!$infos = $zip->informer()) {
-		spip_log('charger_decompresser erreur zip ' . $zip->erreur() . ' ' . $zip->message() . ' pour paquet: ' . $quoi['archive'],
-			"teleport" . _LOG_ERREUR);
+		spip_log(
+			'charger_decompresser erreur zip ' . $zip->erreur() . ' ' . $zip->message() . ' pour paquet: ' . $quoi['archive'],
+			'teleport' . _LOG_ERREUR
+		);
 
 		return $zip->message();
 	}
@@ -108,7 +113,7 @@ function teleporter_http_charger_zip($quoi = array()) {
 	// en lui enlevant la racine h+md5 qui le prefixe eventuellement
 	// cf action/charger_plugin L74
 	if (!strlen($nom = basename($racine))) {
-		$nom = preg_replace(",^h[0-9a-f]{8}-,i", "", basename($fichier, '.zip'));
+		$nom = preg_replace(',^h[0-9a-f]{8}-,i', '', basename($fichier, '.zip'));
 	}
 
 	$dir_export = $quoi['root_extract']
@@ -129,13 +134,15 @@ function teleporter_http_charger_zip($quoi = array()) {
 	$target = sous_repertoire(dirname($target), basename($target));
 
 	if (!$zip->deballer($target)) {
-		spip_log('charger_decompresser erreur zip ' . $zip->erreur() . ' ' . $zip->message() . ' pour paquet: ' . $quoi['archive'],
-			"teleport" . _LOG_ERREUR);
+		spip_log(
+			'charger_decompresser erreur zip ' . $zip->erreur() . ' ' . $zip->message() . ' pour paquet: ' . $quoi['archive'],
+			'teleport' . _LOG_ERREUR
+		);
 
 		return $zip->message();
 	}
 
-	spip_log('charger_decompresser OK pour paquet: ' . $quoi['archive'], "teleport");
+	spip_log('charger_decompresser OK pour paquet: ' . $quoi['archive'], 'teleport');
 
 	$size = 0;
 	$list = [];
@@ -150,19 +157,20 @@ function teleporter_http_charger_zip($quoi = array()) {
 
 	// Indiquer par un fichier install.log
 	// a la racine que c'est chargeur qui a installe ce plugin
-	ecrire_fichier($target . 'install.log',
+	ecrire_fichier(
+		$target . 'install.log',
 		"installation: charger_plugin\n"
-		. "date: " . gmdate('Y-m-d\TH:i:s\Z', time()) . "\n"
-		. "source: " . $quoi['archive'] . "\n"
+		. 'date: ' . gmdate('Y-m-d\TH:i:s\Z', time()) . "\n"
+		. 'source: ' . $quoi['archive'] . "\n"
 	);
 
 
-	return array(
+	return [
 		'files' => $list,
 		'size' => $size,
 		'compressed_size' => 0,
 		'dirname' => $dir_export,
 		'tmpname' => $tmpname,
 		'target' => $target,
-	);
+	];
 }

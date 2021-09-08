@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Gestion du téléporteur GIT.
  *
@@ -29,34 +30,35 @@ if (!defined('_GIT_COMMAND')) {
  * @return bool
  *     True si l'opération réussie, false sinon.
  */
-function teleporter_git_dist($methode, $source, $dest, $options = array()) {
+function teleporter_git_dist($methode, $source, $dest, $options = []) {
 
 	$branche = (isset($options['branche']) ? $options['branche'] : 'master');
 	if (is_dir($dest)) {
-		$infos = teleporter_git_read($dest, array('format' => 'assoc'));
+		$infos = teleporter_git_read($dest, ['format' => 'assoc']);
 		if (!$infos) {
-			spip_log("Suppression de $dest qui n'est pas au format GIT", "teleport");
+			spip_log("Suppression de $dest qui n'est pas au format GIT", 'teleport');
 			$old = teleporter_nettoyer_vieille_version($dest);
 		} elseif ($infos['source'] !== $source) {
-			spip_log("Suppression de $dest qui n'est pas sur le bon repository GIT", "teleport");
+			spip_log("Suppression de $dest qui n'est pas sur le bon repository GIT", 'teleport');
 			$old = teleporter_nettoyer_vieille_version($dest);
-		} elseif (!isset($options['revision'])
+		} elseif (
+			!isset($options['revision'])
 			or $options['revision'] != $infos['revision']
 		) {
-			$command = _GIT_COMMAND . " checkout " . escapeshellarg($branche);
+			$command = _GIT_COMMAND . ' checkout ' . escapeshellarg($branche);
 			teleporter_git_exec($dest, $command);
-			$command = _GIT_COMMAND . " pull --all";
+			$command = _GIT_COMMAND . ' pull --all';
 			teleporter_git_exec($dest, $command);
 
 			if (isset($options['revision'])) {
-				$command = _GIT_COMMAND . " checkout " . escapeshellarg($options['revision']);
+				$command = _GIT_COMMAND . ' checkout ' . escapeshellarg($options['revision']);
 				teleporter_git_exec($dest, $command);
 			} else {
-				$command = _GIT_COMMAND . " checkout " . escapeshellarg($branche);
+				$command = _GIT_COMMAND . ' checkout ' . escapeshellarg($branche);
 				teleporter_git_exec($dest, $command);
 			}
 		} else {
-			spip_log("$dest deja sur GIT $source Revision " . $options['revision'], "teleport");
+			spip_log("$dest deja sur GIT $source Revision " . $options['revision'], 'teleport');
 		}
 	}
 
@@ -67,15 +69,15 @@ function teleporter_git_dist($methode, $source, $dest, $options = array()) {
 		if (!is_dir($dir)) {
 			@mkdir($dir, _SPIP_CHMOD, true);
 			if (!is_dir($dir)) {
-				spip_log("$dir impossible a créer pour clone $source.", "teleport");
+				spip_log("$dir impossible a créer pour clone $source.", 'teleport');
 				return false;
 			}
 		}
-		$command = _GIT_COMMAND . " clone ";
-		$command .= escapeshellarg($source) . " " . escapeshellarg($into);
+		$command = _GIT_COMMAND . ' clone ';
+		$command .= escapeshellarg($source) . ' ' . escapeshellarg($into);
 		teleporter_git_exec($dir, $command);
 		if (isset($options['revision'])) {
-			$command = _GIT_COMMAND . " checkout " . escapeshellarg($options['revision']);
+			$command = _GIT_COMMAND . ' checkout ' . escapeshellarg($options['revision']);
 			teleporter_git_exec($dest, $command);
 		}
 	}
@@ -106,49 +108,49 @@ function teleporter_git_dist($methode, $source, $dest, $options = array()) {
  *     -- revision : Révision du dépot
  *     -- dest : Répertoire du dépot.
  */
-function teleporter_git_read($dest, $options = array()) {
+function teleporter_git_read($dest, $options = []) {
 
 	if (!is_dir("$dest/.git")) {
-		return "";
+		return '';
 	}
 
 	$curdir = getcwd();
 	chdir($dest);
 
-	exec(_GIT_COMMAND . " remote -v", $output);
+	exec(_GIT_COMMAND . ' remote -v', $output);
 	$output = implode("\n", $output);
 
-	$source = "";
-	if (preg_match(",(\w+://.*)\s+\(fetch\)$,Uims", $output, $m)) {
+	$source = '';
+	if (preg_match(',(\w+://.*)\s+\(fetch\)$,Uims', $output, $m)) {
 		$source = $m[1];
-	} elseif (preg_match(",([^@\s]+@[^:\s]+:.*)\s+\(fetch\)$,Uims", $output, $m)) {
+	} elseif (preg_match(',([^@\s]+@[^:\s]+:.*)\s+\(fetch\)$,Uims', $output, $m)) {
 		$source = $m[1];
 	}
 
 	if (!$source) {
 		chdir($curdir);
 
-		return "";
+		return '';
 	}
 
 	$source = $m[1];
 
-	exec(_GIT_COMMAND . " log -1", $output);
-	$hash = explode(" ", reset($output));
+	exec(_GIT_COMMAND . ' log -1', $output);
+	$hash = explode(' ', reset($output));
 	$hash = end($hash);
 
 	// [TODO] lire la branche ?
 	chdir($curdir);
 
-	if (preg_match(",[^0-9a-f],i", $hash)) {
+	if (preg_match(',[^0-9a-f],i', $hash)) {
 		return false;
 	}
 
-	return array(
+	return [
 		'source' => $source,
 		'revision' => substr($hash, 0, 7),
 		'dest' => $dest
-	);
+	];
 }
 
 
@@ -162,7 +164,7 @@ function teleporter_git_read($dest, $options = array()) {
  * @return void
  */
 function teleporter_git_exec($dest, $command) {
-	spip_log("{$dest}:{$command}", "teleport");
+	spip_log("{$dest}:{$command}", 'teleport');
 	$curdir = getcwd();
 	chdir($dest);
 	exec($command);
@@ -179,7 +181,7 @@ function teleporter_git_exec($dest, $command) {
 function teleporter_git_tester() {
 	static $erreurs = null;
 	if (is_null($erreurs)) {
-		exec(_GIT_COMMAND . " --version", $output, $erreurs);
+		exec(_GIT_COMMAND . ' --version', $output, $erreurs);
 	}
 
 	return !$erreurs;

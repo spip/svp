@@ -9,7 +9,7 @@
  * @package SPIP\SVP\Formulaires
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -28,7 +28,7 @@ function formulaires_charger_plugin_charger_dist() {
 		return false;
 	}
 
-	return array(
+	return [
 		'phrase' => _request('phrase'),
 		'etat' => _request('etat'),
 		'depot' => _request('depot'),
@@ -39,7 +39,7 @@ function formulaires_charger_plugin_charger_dist() {
 		'_libelles_actions' => _request('_libelles_actions'),
 		// on présente les actions réalisées ici au retour, lorsqu'il n'y avait eu que des Téléchargement demandés (sans activation)
 		'_actions_realisees' => (_request('todo') or _AJAX) ? '' : svp_presenter_actions_realisees()
-	);
+	];
 }
 
 /**
@@ -62,20 +62,17 @@ function formulaires_charger_plugin_charger_dist() {
  **/
 function formulaires_charger_plugin_verifier_dist() {
 
-	$erreurs = array();
-	$a_installer = array();
+	$erreurs = [];
+	$a_installer = [];
 
 	if (_request('annuler_actions')) {
 		// Requete : Annulation des actions d'installation en cours
 		// -- On vide la liste d'actions en cours
 		set_request('_todo', '');
-
 	} elseif (_request('valider_actions')) {
-
-
 	} elseif (_request('rechercher')) {
 		// annuler les selections si nouvelle recherche
-		set_request('ids_paquet', array());
+		set_request('ids_paquet', []);
 	} else {
 		// Requete : Installation d'un ou de plusieurs plugins
 		// -- On construit le tableau des ids de paquets conformement a l'interface du decideur
@@ -122,20 +119,19 @@ function formulaires_charger_plugin_verifier_dist() {
  **/
 function formulaires_charger_plugin_traiter_dist() {
 
-	$retour = array();
+	$retour = [];
 
 	if (_request('rechercher') or _request('annuler_actions')) {
-
 	} elseif (_request('valider_actions')) {
 		#refuser_traiter_formulaire_ajax();
 		// Ajout de la liste des actions à l'actionneur
 		// c'est lui qui va effectuer rellement les actions
-		// lors de l'appel de action/actionner 
+		// lors de l'appel de action/actionner
 		$actions = unserialize(_request('_todo'));
 		include_spip('inc/svp_actionner');
 		// si toutes les actions sont des téléchargements (pas d'activation), on reste sur cette page
 		$redirect = null;
-		if (!array_diff($actions, array('get'))) {
+		if (!array_diff($actions, ['get'])) {
 			$redirect = self();
 		}
 		svp_actionner_traiter_actions_demandees($actions, $retour, $redirect);

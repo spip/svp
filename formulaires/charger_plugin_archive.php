@@ -8,7 +8,7 @@
  * @package SPIP\SVP\Formulaires
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -24,10 +24,10 @@ function formulaires_charger_plugin_archive_charger_dist() {
 		return false;
 	}
 
-	return array(
+	return [
 		'archive' => '',
 		'destination' => ''
-	);
+	];
 }
 
 /**
@@ -41,7 +41,7 @@ function formulaires_charger_plugin_archive_charger_dist() {
  **/
 function formulaires_charger_plugin_archive_verifier_dist() {
 	include_spip('inc/plugin'); // _DIR_PLUGINS_AUTO
-	$erreurs = array();
+	$erreurs = [];
 	if (!$archive = _request('archive')) {
 		$erreurs['archive'] = _T('info_obligatoire');
 	} else {
@@ -63,10 +63,10 @@ function formulaires_charger_plugin_archive_verifier_dist() {
 				$base = dirname($dir);
 				$nom = basename($dir);
 				$backup = "$base/.$nom.bck";
-				$erreurs['confirmer'] = _T("svp:confirmer_telecharger_dans", array(
+				$erreurs['confirmer'] = _T('svp:confirmer_telecharger_dans', [
 					'dir' => joli_repertoire($dir),
 					'dir_backup' => joli_repertoire($backup)
-				));
+				]);
 			}
 		}
 	}
@@ -83,7 +83,7 @@ function formulaires_charger_plugin_archive_verifier_dist() {
  *     Retours du traitement
  **/
 function formulaires_charger_plugin_archive_traiter_dist() {
-	$retour = array();
+	$retour = [];
 
 	$archive = _request('archive');
 	$dest = _request('destination');
@@ -94,8 +94,10 @@ function formulaires_charger_plugin_archive_traiter_dist() {
 	if ($ok !== true) {
 		$retour['message_erreur'] = $ok;
 	} else {
-		$retour['message_ok'] = _T('svp:message_telechargement_archive_effectue',
-			array('dir' => joli_repertoire(_DIR_PLUGINS_AUTO . $dest)));
+		$retour['message_ok'] = _T(
+			'svp:message_telechargement_archive_effectue',
+			['dir' => joli_repertoire(_DIR_PLUGINS_AUTO . $dest)]
+		);
 	}
 	$retour['editable'] = true;
 

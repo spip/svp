@@ -1,9 +1,11 @@
 <?php
+
 /**
  * Ce fichier contient l'API de gestion de l'objet plugin.
  *
  * @package SPIP\SVP\PLUGIN\API
  */
+
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -20,11 +22,11 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *               - sous la forme d'une valeur simple si l'information demandée est unique (chaine)
  *               - sous la forme d'un tabelau associatif indexé par le nom du champ sinon.
  */
-function plugin_lire($plugin, $informations = array()) {
+function plugin_lire($plugin, $informations = []) {
 
 	// Initialisation des tableaux statiques
-	static $descriptions_plugin = array();
-	static $prefixes = array();
+	static $descriptions_plugin = [];
+	static $prefixes = [];
 
 	// On détermine si on a passé l'id ou le préfixe du plugin :
 	// -- si c'est le préfixe on le passe en majuscules pour être cohérent avec le stockage en base.
@@ -39,14 +41,14 @@ function plugin_lire($plugin, $informations = array()) {
 
 	if (!$index or !isset($descriptions_plugin[$index])) {
 		// Initialisation de la jointure entre plugins et dépôts.
-		$from = array('spip_plugins', 'spip_depots_plugins');
-		$group_by = array('spip_plugins.id_plugin');
+		$from = ['spip_plugins', 'spip_depots_plugins'];
+		$group_by = ['spip_plugins.id_plugin'];
 
 		// Préfixe, jointure et conditions sur la table des dépots pour éviter les plugins installés.
-		$where = array(
+		$where = [
 			'spip_depots_plugins.id_depot>0',
 			'spip_depots_plugins.id_plugin=spip_plugins.id_plugin'
-		);
+		];
 		// Condition sur le préfixe ou l'id.
 		$where[] = $id_plugin
 			? 'spip_plugins.id_plugin=' . $id_plugin
@@ -61,13 +63,13 @@ function plugin_lire($plugin, $informations = array()) {
 			}
 			$descriptions_plugin[$index] = $description;
 		} elseif ($index) {
-			$descriptions_plugin[$index] = array();
+			$descriptions_plugin[$index] = [];
 		}
 	}
 
 	// Si il y a eu une erreur lors du fetsel et que l'index est indéterminé (première lecture par id)
 	// on renvoie une description vide.
-	$description = $index ? $descriptions_plugin[$index] : array();
+	$description = $index ? $descriptions_plugin[$index] : [];
 
 	// On ne retourne que les champs demandés
 	if ($description and $informations) {

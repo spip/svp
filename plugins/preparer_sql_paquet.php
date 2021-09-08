@@ -8,6 +8,7 @@
  * @license GPL
  * @package SPIP\SVP\Plugins
  **/
+
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
@@ -27,21 +28,23 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function plugins_preparer_sql_paquet($plugin) {
 	include_spip('inc/svp_outiller');
 
-	$champs = array();
+	$champs = [];
 	// Se méfier des plugins en erreur
 	if (!$plugin or !empty($plugin[1]['erreur'])) {
 		return $champs;
 	}
 
 	// On initialise les champs ne necessitant aucune transformation
-	foreach (array(
-		         'etat' => 'etat',
-		         'version_base' => 'schema',
-		         'logo' => 'logo',
-		         'lien_doc' => 'documentation',
-		         'lien_demo' => 'demonstration',
-		         'lien_dev' => 'developpement'
-	         ) as $cle_champ => $cle_plugin) {
+	foreach (
+		[
+				 'etat' => 'etat',
+				 'version_base' => 'schema',
+				 'logo' => 'logo',
+				 'lien_doc' => 'documentation',
+				 'lien_demo' => 'demonstration',
+				 'lien_dev' => 'developpement'
+			 ] as $cle_champ => $cle_plugin
+	) {
 		$champs[$cle_champ] = (isset($plugin[$cle_plugin]) and $plugin[$cle_plugin])
 			? $plugin[$cle_plugin]
 			: '';
@@ -57,16 +60,18 @@ function plugins_preparer_sql_paquet($plugin) {
 	$champs['prefixe'] = strtoupper($plugin['prefix']);
 
 	// Indicateurs d'etat numerique (pour simplifier la recherche des maj de STP)
-	static $num = array('stable' => 4, 'test' => 3, 'dev' => 2, 'experimental' => 1);
+	static $num = ['stable' => 4, 'test' => 3, 'dev' => 2, 'experimental' => 1];
 	$champs['etatnum'] = isset($num[$plugin['etat']]) ? $num[$plugin['etat']] : 0;
 
 
 	// On passe en utf-8 avec le bon charset les champs pouvant contenir des entites html
-	foreach (array(
-		         'nom' => 'nom',
-		         'description' => 'description',
-		         'slogan' => 'slogan'
-	         ) as $cle_champ => $cle_plugin) {
+	foreach (
+		[
+				 'nom' => 'nom',
+				 'description' => 'description',
+				 'slogan' => 'slogan'
+			 ] as $cle_champ => $cle_plugin
+	) {
 		$champs[$cle_champ] = (isset($plugin[$cle_plugin]) and $plugin[$cle_plugin])
 			? entite2charset($plugin[$cle_plugin], 'utf-8')
 			: '';
@@ -75,12 +80,14 @@ function plugins_preparer_sql_paquet($plugin) {
 	// Cles necessitant d'etre serialisees
 	// Tags : liste de mots-cles
 	// Traitement des auteurs, credits, licences et copyright
-	foreach (array(
-		         'auteur' => 'auteur',
-		         'credit' => 'credit',
-		         'licence' => 'licence',
-		         'copyright' => 'copyright',
-	         ) as $cle_champ => $cle_plugin) {
+	foreach (
+		[
+				 'auteur' => 'auteur',
+				 'credit' => 'credit',
+				 'licence' => 'licence',
+				 'copyright' => 'copyright',
+			 ] as $cle_champ => $cle_plugin
+	) {
 		$champs[$cle_champ] = (isset($plugin[$cle_plugin]) and $plugin[$cle_plugin])
 			? serialize($plugin[$cle_plugin])
 			: '';
@@ -103,7 +110,7 @@ function plugins_preparer_sql_paquet($plugin) {
 	// Calculer le champ 'procure' (tableau sérialisé prefixe => version)
 	$champs['procure'] = '';
 	if (!empty($plugin['procure'][0])) {
-		$champs['procure'] = array();
+		$champs['procure'] = [];
 		foreach ($plugin['procure'][0] as $procure) {
 			$p = strtoupper($procure['nom']);
 			if (

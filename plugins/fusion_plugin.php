@@ -38,7 +38,7 @@ include_spip('inc/svp_outiller');
 function plugins_fusion_plugin($plugins) {
 	global $balises_techniques;
 
-	$fusion = array();
+	$fusion = [];
 	if (!$plugins) {
 		return $fusion;
 	}
@@ -52,7 +52,7 @@ function plugins_fusion_plugin($plugins) {
 				unset($fusion[$_btech]);
 				$fusion[$_btech][0] = $balise;
 			} else {
-				$fusion[$_btech] = array();
+				$fusion[$_btech] = [];
 			}
 		}
 	} else {
@@ -95,14 +95,14 @@ function plugins_fusion_plugin($plugins) {
 		foreach ($balises_techniques as $_btech) {
 			if (!isset($fusion[$_btech]) and !isset($plugins[$cle_min_min][$_btech])) {
 				// Aucun des tableaux ne contient cette balise technique : on la positionne a un array vide
-				$fusion[$_btech] = array();
+				$fusion[$_btech] = [];
 			} else {
 				if (!isset($fusion[$_btech]) or !$fusion[$_btech]) {
 					if ($plugins[$cle_min_min][$_btech]) {
 						// La balise technique est vide dans le tableau de fusion mais non vide dans la deuxieme balise plugin
 						// On range cette balise dans le tableau fusion de sa compatibilite et on cree la cle commune vide
 						$fusion[$_btech][$plugins[$cle_min_min]['compatibilite']] = $plugins[$cle_min_min][$_btech];
-						$fusion[$_btech][0] = array();
+						$fusion[$_btech][0] = [];
 					}
 				} else {
 					if (!isset($plugins[$cle_min_min][$_btech]) or !$plugins[$cle_min_min][$_btech]) {
@@ -111,7 +111,7 @@ function plugins_fusion_plugin($plugins) {
 						$balise = $fusion[$_btech];
 						unset($fusion[$_btech]);
 						$fusion[$_btech][$plugins[$cle_min_max]['compatibilite']] = $balise;
-						$fusion[$_btech][0] = array();
+						$fusion[$_btech][0] = [];
 					} else {
 						// Les deux tableaux contiennent une balise technique non vide : il faut fusionner cette balise technique !
 						// On parcourt le premier tableau (fusion) en verifiant une egalite avec le deuxieme tableau
@@ -133,7 +133,7 @@ function plugins_fusion_plugin($plugins) {
 								unset($fusion[$_btech][$_cle0]);
 							}
 							if (!isset($fusion[$_btech][0])) {
-								$fusion[$_btech][0] = array();
+								$fusion[$_btech][0] = [];
 							}
 						}
 
@@ -147,7 +147,6 @@ function plugins_fusion_plugin($plugins) {
 				}
 			}
 		}
-
 	}
 
 	return $fusion;

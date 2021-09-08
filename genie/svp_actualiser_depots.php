@@ -8,7 +8,7 @@
  * @package SPIP\SVP\Genie
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -31,7 +31,7 @@ function genie_svp_actualiser_depots_dist($last) {
 	if ($resultats = sql_allfetsel('id_depot', 'spip_depots')) {
 		foreach ($resultats as $depot) {
 			svp_actualiser_depot($depot['id_depot']);
-			spip_log("ACTION ACTUALISER DEPOT (automatique) : id_depot = " . $depot['id_depot'], 'svp_actions.' . _LOG_INFO);
+			spip_log('ACTION ACTUALISER DEPOT (automatique) : id_depot = ' . $depot['id_depot'], 'svp_actions.' . _LOG_INFO);
 		}
 	}
 

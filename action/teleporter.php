@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Gestion de l'action teleporter
  *
@@ -24,7 +25,7 @@
  *   String : texte d'une erreur
  *   true si l'opération est correctement réalisée
  */
-function action_teleporter_composant_dist($methode, $source, $dest, $options = array()) {
+function action_teleporter_composant_dist($methode, $source, $dest, $options = []) {
 
 	# Si definie a '', le chargeur est interdit ; mais on n'aurait de toutes
 	# facons jamais pu venir ici avec toutes les securisations faites :^)
@@ -34,16 +35,16 @@ function action_teleporter_composant_dist($methode, $source, $dest, $options = a
 	}
 
 	// verifier que la methode est connue
-	if (!$teleporter = charger_fonction($methode, "teleporter", true)) {
-		spip_log("Methode $methode inconnue pour teleporter $source vers $dest", "teleport" . _LOG_ERREUR);
+	if (!$teleporter = charger_fonction($methode, 'teleporter', true)) {
+		spip_log("Methode $methode inconnue pour teleporter $source vers $dest", 'teleport' . _LOG_ERREUR);
 
-		return _T('svp:erreur_teleporter_methode_inconue', array('methode' => $methode));
+		return _T('svp:erreur_teleporter_methode_inconue', ['methode' => $methode]);
 	}
 
 	if (!$dest = teleporter_verifier_destination($d = $dest)) {
-		spip_log("Rerpertoire $d non accessible pour teleporter $source vers $d", "teleport" . _LOG_ERREUR);
+		spip_log("Rerpertoire $d non accessible pour teleporter $source vers $d", 'teleport' . _LOG_ERREUR);
 
-		return _T('svp:erreur_teleporter_destination_erreur', array('dir' => $d));
+		return _T('svp:erreur_teleporter_destination_erreur', ['dir' => $d]);
 		#$texte = "<p>"._T('plugin_erreur_droit1',array('dest'=>$dest))."</p>"
 		#  . "<p>"._T('plugin_erreur_droit2').aider('install0')."</p>";
 	}
@@ -64,10 +65,10 @@ function action_teleporter_composant_dist($methode, $source, $dest, $options = a
  *     Chemin du répertoire sinon
  */
 function teleporter_verifier_destination($dest) {
-	$dest = rtrim($dest, "/");
+	$dest = rtrim($dest, '/');
 	$final = basename($dest);
 	$base = dirname($dest);
-	$create = array();
+	$create = [];
 	// on cree tout le chemin jusqu'a dest non inclus
 	while (!is_dir($base)) {
 		$create[] = basename($base);
@@ -104,7 +105,7 @@ function teleporter_verifier_destination($dest) {
  *     Chaîne vide sinon
  **/
 function teleporter_nettoyer_vieille_version($dest) {
-	$old = "";
+	$old = '';
 	if (is_dir($dest)) {
 		$dir = dirname($dest);
 		$base = basename($dest);

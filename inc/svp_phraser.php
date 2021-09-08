@@ -9,7 +9,7 @@
  * @package SPIP\SVP\Plugins
  **/
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -51,7 +51,7 @@ define('_SVP_REGEXP_BALISE_MULTIS', '#<multis[^>]*>(.*)</multis>#Uims');
 
 
 /** Liste des balises techniques autorisées dans la balise <spip> */
-$GLOBALS['balises_techniques'] = array(
+$GLOBALS['balises_techniques'] = [
 	'menu',
 	'chemin',
 	'lib',
@@ -63,15 +63,15 @@ $GLOBALS['balises_techniques'] = array(
 	'options',
 	'fonctions',
 	'install'
-);
+];
 # define('_BALISES_TECHNIQUES', serialize($balises_techniques));
 
 /** Liste des balises autorisant une traduction */
-$GLOBALS['balises_multis'] = array(
+$GLOBALS['balises_multis'] = [
 	'nom',
 	'slogan',
 	'description'
-);
+];
 # define('_BALISES_MULTIS', serialize($balises_multis));
 
 
@@ -102,18 +102,18 @@ function svp_phraser_depot($fichier_xml) {
 
 	// Initialisation du tableau des informations
 	// -- Si aucun bloc depot n'est trouve le titre et le type prennent une valeur par defaut
-	$infos = array(
-		'depot' => array(
+	$infos = [
+		'depot' => [
 			'titre' => _T('svp:titre_nouveau_depot'),
 			'type' => 'manuel'
-		),
-		'paquets' => array()
-	);
+		],
+		'paquets' => []
+	];
 
 
 	// Extraction et phrasage du bloc depot si il existe
 	// -- Si le bloc <depot> n'est pas renseigne on ne considere pas cela comme une erreur
-	$balises_depot = array('titre', 'descriptif', 'type', 'url_serveur', 'url_brouteur', 'url_archives', 'url_commits');
+	$balises_depot = ['titre', 'descriptif', 'type', 'url_serveur', 'url_brouteur', 'url_archives', 'url_commits'];
 	if (preg_match(_SVP_REGEXP_BALISE_DEPOT, $xml, $matches)) {
 		if (is_array($arbre_depot = spip_xml_parse($matches[1]))) {
 			$infos['depot'] = svp_aplatir_balises($balises_depot, $arbre_depot, 'nonvide', $infos['depot']);
@@ -121,7 +121,7 @@ function svp_phraser_depot($fichier_xml) {
 	}
 
 	// Extraction et phrasage du bloc des archives si il existe
-	// -- Le bloc <archives> peut etre une chaine de grande taille et provoquer une erreur 
+	// -- Le bloc <archives> peut etre une chaine de grande taille et provoquer une erreur
 	// sur une recherche de regexp. On ne teste donc pas l'existence de cette balise
 	// -- Si aucun bloc <archive> c'est aussi une erreur
 	if (!preg_match_all(_SVP_REGEXP_BALISE_ARCHIVE, $xml, $matches)) {
@@ -129,12 +129,13 @@ function svp_phraser_depot($fichier_xml) {
 	}
 
 	// lire le cache des md5 pour ne parser que ce qui a change
-	$fichier_xml_md5 = $fichier_xml . ".md5.txt";
+	$fichier_xml_md5 = $fichier_xml . '.md5.txt';
 	lire_fichier($fichier_xml_md5, $cache_md5);
-	if (!$cache_md5
+	if (
+		!$cache_md5
 		or !$cache_md5 = unserialize($cache_md5)
 	) {
-		$cache_md5 = array();
+		$cache_md5 = [];
 	}
 
 	$infos['paquets'] = svp_phraser_archives($matches[0], $cache_md5);
@@ -170,12 +171,12 @@ function svp_phraser_depot($fichier_xml) {
  *     Tableau décrivant chaque archive, avec en index l'url de l'archive.
  *     Tableau (url => Tableau de description de l'archive)
  */
-function svp_phraser_archives($archives, &$md5_cache = array()) {
+function svp_phraser_archives($archives, &$md5_cache = []) {
 	include_spip('inc/plugin');
-	$seen = array();
+	$seen = [];
 
-	$paquets = array();
-	$version_spip = $GLOBALS['spip_version_branche'] . "." . $GLOBALS['spip_version_code'];
+	$paquets = [];
+	$version_spip = $GLOBALS['spip_version_branche'] . '.' . $GLOBALS['spip_version_code'];
 
 	// On verifie qu'il existe au moins une archive
 	if (!$archives) {
@@ -194,14 +195,12 @@ function svp_phraser_archives($archives, &$md5_cache = array()) {
 			} // ce paquet est connu
 			$seen[] = $md5;
 		} elseif (preg_match(_SVP_REGEXP_BALISE_ZIP, $_archive, $matches)) {
-
 			// Extraction de la balise <zip>
 			$zip = svp_phraser_zip($matches[1]);
 
 			if ($zip) {
-
 				// Extraction de la balise traductions
-				$traductions = array();
+				$traductions = [];
 				if (preg_match(_SVP_REGEXP_BALISE_TRADUCTIONS, $_archive, $matches)) {
 					$traductions = svp_phraser_traductions($matches[1]);
 				}
@@ -220,9 +219,13 @@ function svp_phraser_archives($archives, &$md5_cache = array()) {
 				// Si on est en mode runtime, on est seulement interesse par les plugins compatibles avec
 				// la version courant de SPIP. On ne stocke donc pas les autres plugins.
 				// Si on est pas en mode runtime on prend tout !
-				if (!_SVP_MODE_RUNTIME
-					or (_SVP_MODE_RUNTIME and isset($xml['compatibilite']) and plugin_version_compatible($xml['compatibilite'],
-							$version_spip, 'spip'))
+				if (
+					!_SVP_MODE_RUNTIME
+					or (_SVP_MODE_RUNTIME and isset($xml['compatibilite']) and plugin_version_compatible(
+						$xml['compatibilite'],
+						$version_spip,
+						'spip'
+					))
 				) {
 					$paquets[$zip['file']] = $zip;
 					$paquets[$zip['file']]['traductions'] = $traductions;
@@ -271,14 +274,14 @@ function svp_phraser_archives($archives, &$md5_cache = array()) {
  **/
 function svp_phraser_plugin($dtd, $contenu) {
 	global $balises_multis;
-	static $informer = array();
+	static $informer = [];
 
-	$plugin = array();
+	$plugin = [];
 
 	// On initialise les informations du plugin avec le contenu du plugin.xml ou paquet.xml
 	$regexp = ($dtd == 'plugin') ? _SVP_REGEXP_BALISE_PLUGIN : _SVP_REGEXP_BALISE_PAQUET;
 	if ($nb_balises = preg_match_all($regexp, $contenu, $matches)) {
-		$plugins = array();
+		$plugins = [];
 		// Pour chacune des occurences de la balise on extrait les infos
 		foreach ($matches[0] as $_balise_plugin) {
 			// Extraction des informations du plugin suivant le standard SPIP
@@ -309,7 +312,7 @@ function svp_phraser_plugin($dtd, $contenu) {
 		// Pour la DTD paquet, les traductions du nom, slogan et description sont compilees dans une balise
 		// du fichier archives.xml. Il faut donc completer les informations precedentes avec cette balise
 		if (($dtd == _SVP_DTD_PAQUET) and (preg_match(_SVP_REGEXP_BALISE_MULTIS, $contenu, $matches))) {
-			$multis = array();
+			$multis = [];
 			if (is_array($arbre = spip_xml_parse($matches[1]))) {
 				$multis = svp_aplatir_balises($balises_multis, $arbre);
 			}
@@ -346,9 +349,9 @@ function svp_phraser_plugin($dtd, $contenu) {
  *     - Index 'logo' : nom du logo
  */
 function svp_phraser_zip($contenu) {
-	static $balises_zip = array('file', 'size', 'date', 'source', 'last_commit', 'logo');
+	static $balises_zip = ['file', 'size', 'date', 'source', 'last_commit', 'logo'];
 
-	$zip = array();
+	$zip = [];
 	if (is_array($arbre = spip_xml_parse($contenu))) {
 		$zip = svp_aplatir_balises($balises_zip, $arbre);
 	}
@@ -373,7 +376,7 @@ function svp_phraser_zip($contenu) {
  */
 function svp_phraser_traductions($contenu) {
 
-	$traductions = array();
+	$traductions = [];
 	if (is_array($arbre = spip_xml_parse($contenu))) {
 		foreach ($arbre as $_tag => $_langues) {
 			// On commence par les balises <traduction> et leurs attributs
@@ -386,7 +389,7 @@ function svp_phraser_traductions($contenu) {
 			if (is_array($_langues[0])) {
 				foreach ($_langues[0] as $_tag_trad => $_traducteurs) {
 					list($tag, $attributs_langue) = spip_xml_decompose_tag($_tag_trad);
-					$traducteurs = array();
+					$traducteurs = [];
 					if (is_array($_traducteurs[0])) {
 						foreach ($_traducteurs[0] as $_tag_lang => $_vide) {
 							list($tag, $attributs_traducteur) = spip_xml_decompose_tag($_tag_lang);
@@ -428,8 +431,8 @@ function svp_phraser_traductions($contenu) {
  *     Tableau initial pouvant contenir des valeurs par défaut à affecter
  *     à chaque balise avec 'x' => 'valeur'
  */
-function svp_aplatir_balises($balises, $arbre_xml, $mode = 'vide_et_nonvide', $tableau_initial = array()) {
-	$tableau_aplati = array();
+function svp_aplatir_balises($balises, $arbre_xml, $mode = 'vide_et_nonvide', $tableau_initial = []) {
+	$tableau_aplati = [];
 
 	if (!$balises) {
 		return $tableau_initial;
@@ -441,7 +444,8 @@ function svp_aplatir_balises($balises, $arbre_xml, $mode = 'vide_et_nonvide', $t
 		if (isset($arbre_xml[$tag])) {
 			$valeur_aplatie = trim(spip_xml_aplatit($arbre_xml[$tag]));
 		}
-		if (($mode == 'vide_et_nonvide')
+		if (
+			($mode == 'vide_et_nonvide')
 			or (($mode == 'nonvide') and $valeur_aplatie)
 		) {
 			$tableau_aplati[$_valeur] = $valeur_aplatie;

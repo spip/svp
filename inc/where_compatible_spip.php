@@ -8,7 +8,7 @@
  * @package SPIP\SVP\Recherche
  **/
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -73,12 +73,12 @@ function inc_where_compatible_spip($version, $table, $op) {
 				$where_liste .= ($where_liste ? ' AND ' : '') . 'LOCATE(\'' . $_branche . '\', ' . $table . '.branches_spip) ' . $op . ' 0';
 			}
 		}
-		
+
 		// Si non vide, on renvoie le where calculé.
 		if ($where_liste) {
 			$where = $where_liste;
 		}
 	}
-	
+
 	return $where;
 }

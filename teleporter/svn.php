@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Gestion du téléporteur HTTP.
  *
@@ -7,9 +8,8 @@
  * @package SPIP\SVP\Teleporteur
  */
 
-
 if (!defined('_SVN_COMMAND')) {
-	define('_SVN_COMMAND', "svn");
+	define('_SVN_COMMAND', 'svn');
 } // Securite : mettre le chemin absolu dans mes_options.php
 
 /**
@@ -33,45 +33,46 @@ if (!defined('_SVN_COMMAND')) {
  * @return bool
  *     True si l'opération réussie, false sinon.
  */
-function teleporter_svn_dist($methode, $source, $dest, $options = array()) {
+function teleporter_svn_dist($methode, $source, $dest, $options = []) {
 	if (is_dir($dest)) {
 		$infos = teleporter_svn_read($dest);
 		if (!$infos) {
-			spip_log("Suppression de $dest qui n'est pas au format SVN", "teleport");
+			spip_log("Suppression de $dest qui n'est pas au format SVN", 'teleport');
 			$old = teleporter_nettoyer_vieille_version($dest);
 		} elseif ($infos['source'] !== $source) {
-			spip_log("Suppression de $dest qui n'est pas sur le bon repository SVN", "teleport");
+			spip_log("Suppression de $dest qui n'est pas sur le bon repository SVN", 'teleport');
 			$old = teleporter_nettoyer_vieille_version($dest);
-		} elseif (!isset($options['revision'])
+		} elseif (
+			!isset($options['revision'])
 			or $options['revision'] != $infos['revision']
 		) {
-			$command = _SVN_COMMAND . " up ";
+			$command = _SVN_COMMAND . ' up ';
 			if (isset($options['revision'])) {
-				$command .= escapeshellarg("-r" . $options['revision']) . " ";
+				$command .= escapeshellarg('-r' . $options['revision']) . ' ';
 			}
 			if (isset($options['ignore-externals'])) {
-				$command .= "--ignore-externals ";
+				$command .= '--ignore-externals ';
 			}
 
 			$command .= escapeshellarg($dest);
-			spip_log($command, "teleport");
+			spip_log($command, 'teleport');
 			exec($command);
 		} else {
 			// Rien a faire !
-			spip_log("$dest deja a jour (Revision " . $options['revision'] . " SVN de $source)", "teleport");
+			spip_log("$dest deja a jour (Revision " . $options['revision'] . " SVN de $source)", 'teleport');
 		}
 	}
 
 	if (!is_dir($dest)) {
-		$command = _SVN_COMMAND . " co ";
+		$command = _SVN_COMMAND . ' co ';
 		if (isset($options['revision'])) {
-			$command .= escapeshellarg("-r" . $options['revision']) . " ";
+			$command .= escapeshellarg('-r' . $options['revision']) . ' ';
 		}
 		if (isset($options['ignore-externals'])) {
-			$command .= "--ignore-externals ";
+			$command .= '--ignore-externals ';
 		}
-		$command .= escapeshellarg($source) . " " . escapeshellarg($dest);
-		spip_log($command, "teleport");
+		$command .= escapeshellarg($source) . ' ' . escapeshellarg($dest);
+		spip_log($command, 'teleport');
 		exec($command);
 	}
 
@@ -99,37 +100,37 @@ function teleporter_svn_dist($methode, $source, $dest, $options = array()) {
  *     - revision : numéro de la révision SVN
  *     - dest : Chemin du répertoire
  */
-function teleporter_svn_read($dest, $options = array()) {
+function teleporter_svn_read($dest, $options = []) {
 
 	if (!is_dir("$dest/.svn")) {
-		return "";
+		return '';
 	}
 
 	// on veut lire ce qui est actuellement deploye
 	// et reconstituer la ligne de commande pour le deployer
-	exec(_SVN_COMMAND . " info " . escapeshellarg($dest), $output);
+	exec(_SVN_COMMAND . ' info ' . escapeshellarg($dest), $output);
 	$output = implode("\n", $output);
 
 	// URL
 	// URL: svn://trac.rezo.net/spip/spip
-	if (!preg_match(",^URL[^:\w]*:\s+(.*)$,Uims", $output, $m)) {
-		return "";
+	if (!preg_match(',^URL[^:\w]*:\s+(.*)$,Uims', $output, $m)) {
+		return '';
 	}
 	$source = $m[1];
 
 	// Revision
 	// Revision: 18763
-	if (!preg_match(",^R..?vision[^:\w]*:\s+(\d+)$,Uims", $output, $m)) {
-		return "";
+	if (!preg_match(',^R..?vision[^:\w]*:\s+(\d+)$,Uims', $output, $m)) {
+		return '';
 	}
 
 	$revision = $m[1];
 
-	return array(
+	return [
 		'source' => $source,
 		'revision' => $revision,
 		'dest' => $dest
-	);
+	];
 }
 
 
@@ -142,7 +143,7 @@ function teleporter_svn_read($dest, $options = array()) {
 function teleporter_svn_tester() {
 	static $erreurs = null;
 	if (is_null($erreurs)) {
-		exec(_SVN_COMMAND . " --version", $output, $erreurs);
+		exec(_SVN_COMMAND . ' --version', $output, $erreurs);
 	}
 
 	return !$erreurs;

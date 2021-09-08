@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Gestion de l'action actualiser_depot
  *
@@ -36,13 +37,13 @@ function action_actualiser_depot_dist() {
 				svp_actualiser_depot($_id_depot);
 			}
 			// On consigne l'action
-			spip_log("ACTION ACTUALISER TOUS LES DEPOTS (manuel)", 'svp_actions.' . _LOG_INFO);
+			spip_log('ACTION ACTUALISER TOUS LES DEPOTS (manuel)', 'svp_actions.' . _LOG_INFO);
 		}
 	} else {
 		if ($id_depot = intval($arg)) {
 			svp_actualiser_depot($id_depot);
 			// On consigne l'action
-			spip_log("ACTION ACTUALISER DEPOT (manuel) : id_depot = " . $id_depot, 'svp_actions.' . _LOG_INFO);
+			spip_log('ACTION ACTUALISER DEPOT (manuel) : id_depot = ' . $id_depot, 'svp_actions.' . _LOG_INFO);
 		}
 	}
 }

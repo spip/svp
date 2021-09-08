@@ -17,7 +17,7 @@
  * @license GPL
  * @package SPIP\SVP\Actions
  */
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -51,13 +51,17 @@ function action_editer_depot_dist() {
 		}
 
 		// On met a jour le depot avec les saisies
-		if (sql_updateq('spip_depots',
-			array(
+		if (
+			sql_updateq(
+				'spip_depots',
+				[
 				'titre' => _request('titre'),
 				'descriptif' => _request('descriptif'),
 				'type' => _request('type')
-			),
-			'id_depot=' . sql_quote($id_depot))) {
+				],
+				'id_depot=' . sql_quote($id_depot)
+			)
+		) {
 			;
 		}
 		// Enregistre l'envoi dans la BD
@@ -65,11 +69,11 @@ function action_editer_depot_dist() {
 		// par souci de coherence avec les autres editions d'objet et pour usage futur
 		$err = depots_set($id_depot);
 		if (!$err) {
-			spip_log("ACTION MODIFIER DEPOT (manuel) : id_depot = " . $id_depot, 'svp_actions.' . _LOG_INFO);
+			spip_log('ACTION MODIFIER DEPOT (manuel) : id_depot = ' . $id_depot, 'svp_actions.' . _LOG_INFO);
 		}
 	}
 
-	return array($id_depot, $err);
+	return [$id_depot, $err];
 }
 
 
