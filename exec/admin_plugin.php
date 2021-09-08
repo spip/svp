@@ -96,15 +96,16 @@ function exec_admin_plugin_dist() {
 	$erreur_activation = plugin_donne_erreurs();
 
 	$commencer_page = charger_fonction('commencer_page', 'inc');
-	echo $commencer_page(_T('icone_admin_plugin'), "configuration", "plugin");
+	echo $commencer_page(_T('icone_admin_plugin'), 'configuration', 'plugin');
 
 	echo debut_gauche();
 
-	echo pipeline('affiche_gauche',
-		array(
-			'args' => array('exec' => 'admin_plugin'),
+	echo pipeline(
+		'affiche_gauche',
+		[
+			'args' => ['exec' => 'admin_plugin'],
 			'data' => recuperer_fond('prive/squelettes/navigation/svp_admin_plugin')
-		)
+		]
 	);
 
 	echo debut_droite();
@@ -115,7 +116,7 @@ function exec_admin_plugin_dist() {
 	if (defined('_DEV_VERSION_SPIP_COMPAT')) {
 		include_spip('inc/filtres_alertes');
 		echo message_alerte(
-			_T('svp:alerte_compatibilite_version_autorisee', array('version' => _DEV_VERSION_SPIP_COMPAT)),
+			_T('svp:alerte_compatibilite_version_autorisee', ['version' => _DEV_VERSION_SPIP_COMPAT]),
 			_T('svp:alerte_compatibilite')
 		);
 	}
@@ -138,13 +139,14 @@ function exec_admin_plugin_dist() {
 
 	$args = $_REQUEST;
 
-	echo recuperer_fond('prive/squelettes/contenu/svp_admin_plugin', $args, array('ajax' => true));
+	echo recuperer_fond('prive/squelettes/contenu/svp_admin_plugin', $args, ['ajax' => true]);
 
-	echo pipeline('affiche_milieu',
-		array(
-			'args' => array('exec' => 'admin_plugin'),
+	echo pipeline(
+		'affiche_milieu',
+		[
+			'args' => ['exec' => 'admin_plugin'],
 			'data' => ''
-		)
+		]
 	);
 
 	echo fin_gauche(), fin_page();
@@ -186,5 +188,4 @@ function svp_presenter_actions_realisees() {
 	}
 
 	return $pres;
-
 }

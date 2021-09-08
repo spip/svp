@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Déclarations d'autorisations et utilisations de pipelines
  *
@@ -12,7 +13,8 @@
  *
  * @pipeline autoriser
  */
-function svp_autoriser() { }
+function svp_autoriser() {
+}
 
 /**
  * Autoriser l'iconification (mettre un logo) d'un dépot
@@ -50,7 +52,7 @@ function autoriser_plugins_ajouter_dist($faire, $type, $id, $qui, $opt) {
  * Autoriser l'ajout d'un dépôt
  *
  * Soit on a l'autorisation de voir un plugin, soit SVP est en mode non runtime
- * 
+ *
  * @param  string $faire Action demandée
  * @param  string $type Type d'objet sur lequel appliquer l'action
  * @param  int $id Identifiant de l'objet
@@ -94,10 +96,10 @@ function svp_pre_boucle($boucle) {
 		$m_id_depot = $id_table . '.id_depot';
 		// Restreindre aux depots distants
 		if (
-			#!isset($boucle->modificateur['criteres']['id_depot']) && 
-		!isset($boucle->modificateur['tout'])
+			#!isset($boucle->modificateur['criteres']['id_depot']) &&
+			!isset($boucle->modificateur['tout'])
 		) {
-			$boucle->where[] = array("'>'", "'$m_id_depot'", "'\"0\"'");
+			$boucle->where[] = ["'>'", "'$m_id_depot'", "'\"0\"'"];
 		}
 	} // PLUGINS
 	elseif ($boucle->type_requete == 'plugins') {
@@ -119,17 +121,16 @@ function svp_pre_boucle($boucle) {
 		*/
 		if (
 			#	!$id_depot &&
-		!isset($boucle->modificateur['tout'])
+			!isset($boucle->modificateur['tout'])
 		) {
 			// Restreindre aux plugins distant (id_depot > 0)
-			$boucle->from["depots_plugins"] = "spip_depots_plugins";
-			$boucle->where[] = array("'='", "'depots_plugins.id_plugin'", "'$id_table.id_plugin'");
-			$boucle->where[] = array("'>'", "'depots_plugins.id_depot'", "'\"0\"'");
+			$boucle->from['depots_plugins'] = 'spip_depots_plugins';
+			$boucle->where[] = ["'='", "'depots_plugins.id_plugin'", "'$id_table.id_plugin'"];
+			$boucle->where[] = ["'>'", "'depots_plugins.id_depot'", "'\"0\"'"];
 		}
 	}
 
 	return $boucle;
-
 }
 
 /**
@@ -140,11 +141,13 @@ function svp_pre_boucle($boucle) {
  * @return array
  */
 function svp_exclure_id_conditionnel($flux) {
-	if (!in_array(
-		$flux['args']['table'],
-		array('spip_depots', 'spip_plugins', 'spip_paquets')
-	)) {
-		$flux['data'] = array_merge($flux['data'], array('id_depot', 'id_paquet', 'id_plugin'));
+	if (
+		!in_array(
+			$flux['args']['table'],
+			['spip_depots', 'spip_plugins', 'spip_paquets']
+		)
+	) {
+		$flux['data'] = array_merge($flux['data'], ['id_depot', 'id_paquet', 'id_plugin']);
 	}
 	return $flux;
 }
@@ -175,7 +178,7 @@ function svp_jquery_plugins($flux) {
 function svp_header_prive_css($flux) {
 
 	$css = find_in_path('lib/bootstrap/css/dropdown.css');
-	$flux .= '<link rel="stylesheet" href="'.direction_css($css).'" type="text/css" media="all" />' . "\n";
+	$flux .= '<link rel="stylesheet" href="' . direction_css($css) . '" type="text/css" media="all" />' . "\n";
 
 	return $flux;
 }

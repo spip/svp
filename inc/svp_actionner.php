@@ -8,7 +8,7 @@
  * @package SPIP\SVP\Actionneur
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -43,7 +43,7 @@ class Actionneur {
 	 * @var array
 	 *     Tableau identifiant du paquet => type d'action
 	 */
-	public $start = array();
+	public $start = [];
 
 	/**
 	 * Actions en cours d'analyse
@@ -60,12 +60,12 @@ class Actionneur {
 	 *     Index 'on' : les paquets à activer (ordre des dépendances)
 	 *     Index 'neutre' : autres actions dont l'ordre a peu d'importance.
 	 */
-	public $middle = array(
-		'off' => array(),
-		'lib' => array(),
-		'on' => array(),
-		'neutre' => array(),
-	);
+	public $middle = [
+		'off' => [],
+		'lib' => [],
+		'on' => [],
+		'neutre' => [],
+	];
 
 	// actions à la fin (apres analyse, et dans l'ordre)
 
@@ -76,7 +76,7 @@ class Actionneur {
 	 *
 	 * @var array
 	 */
-	public $end = array();
+	public $end = [];
 
 	/**
 	 * Liste des actions faites
@@ -84,7 +84,7 @@ class Actionneur {
 	 *
 	 * @var array
 	 */
-	public $done = array(); // faites
+	public $done = []; // faites
 
 	/**
 	 * Actions en cours
@@ -92,14 +92,14 @@ class Actionneur {
 	 *
 	 * @var array
 	 */
-	public $work = array();
+	public $work = [];
 
 	/**
 	 * Liste des erreurs
 	 *
 	 * @var array Liste des erreurs
 	 */
-	public $err = array();
+	public $err = [];
 
 	/**
 	 * Verrou.
@@ -108,7 +108,7 @@ class Actionneur {
 	 * @var array
 	 *     Index 'id_auteur' : Identifiant de l'auteur ayant déclenché des actions
 	 *     Indix 'time' : timestamp de l'heure de déclenchement de l'action */
-	public $lock = array('id_auteur' => 0, 'time' => '');
+	public $lock = ['id_auteur' => 0, 'time' => ''];
 
 	/**
 	 * SVP (ce plugin) est-il à désactiver dans une des actions ?
@@ -171,15 +171,15 @@ class Actionneur {
 	 * Remet à zéro les tableaux d'actions
 	 */
 	public function clear() {
-		$this->middle = array(
-			'off' => array(),
-			'lib' => array(),
-			'on' => array(),
-			'neutre' => array(),
-		);
-		$this->end = array();
-		$this->done = array();
-		$this->work = array();
+		$this->middle = [
+			'off' => [],
+			'lib' => [],
+			'on' => [],
+			'neutre' => [],
+		];
+		$this->end = [];
+		$this->done = [];
+		$this->work = [];
 	}
 
 	/**
@@ -212,13 +212,13 @@ class Actionneur {
 	public function add_lib($nom, $source) {
 		if (!$this->decideur->est_presente_lib($nom)) {
 			if (is_writable(_DIR_LIB)) {
-				$this->middle['lib'][$nom] = array(
+				$this->middle['lib'][$nom] = [
 					'todo' => 'getlib',
 					'n' => $nom,
 					'p' => $nom,
 					'v' => $source,
 					's' => $source,
-				);
+				];
 			} else {
 				// erreur : impossible d'ecrire dans _DIR_LIB !
 				// TODO : message et retour d'erreur a gerer...
@@ -250,13 +250,13 @@ class Actionneur {
 	 * - puis les actions neutres
 	 */
 	public function ordonner_actions() {
-		$this->log("Ordonner les actions à réaliser");
+		$this->log('Ordonner les actions à réaliser');
 		// nettoyer le terrain
 		$this->clear();
 
 		// récupérer les descriptions de chaque paquet
-		$this->log("> Récupérer les descriptions des paquets concernés");
-		$infos = array();
+		$this->log('> Récupérer les descriptions des paquets concernés');
+		$infos = [];
 		foreach ($this->start as $id => $action) {
 			// seulement les identifiants de paquets (pas les librairies)
 			if (is_int($id)) {
@@ -265,14 +265,14 @@ class Actionneur {
 			}
 		}
 
-		// Calculer les dépendances (nécessite) profondes pour chaque paquet, 
+		// Calculer les dépendances (nécessite) profondes pour chaque paquet,
 		// si les plugins en questions sont parmis ceux actionnés
 		// (ie A dépend de B qui dépend de C => a dépend de B et C).
 		$infos = $this->calculer_necessites_complets($infos);
 
 		foreach ($this->start as $id => $action) {
 			// infos du paquet. Ne s'applique pas sur librairie ($id = md5)
-			$i = is_int($id) ? $infos[$id] : array(); 
+			$i = is_int($id) ? $infos[$id] : [];
 
 			switch ($action) {
 				case 'getlib':
@@ -314,7 +314,7 @@ class Actionneur {
 		// on le met comme derniere action...
 		// sinon on ne pourrait pas faire les suivantes !
 		if ($this->svp_off) {
-			$this->log("SVP a desactiver a la fin.");
+			$this->log('SVP a desactiver a la fin.');
 			foreach ($this->end as $c => $info) {
 				if ($info['p'] == 'SVP') {
 					unset($this->end[$c]);
@@ -324,7 +324,7 @@ class Actionneur {
 			}
 		}
 
-		$this->log("------------");
+		$this->log('------------');
 		#$this->log("Fin du tri :");
 		#$this->log($this->end);
 	}
@@ -334,21 +334,21 @@ class Actionneur {
 	 * Complète les infos des paquets actionnés pour qu'ils contiennent
 	 * en plus de leurs 'necessite' directs, tous les nécessite des
 	 * plugins dont ils dépendent, si ceux ci sont aussi actionnés.
-	 * 
-	 * Ie: si A indique dépendre de B, et B de C, la clé 
+	 *
+	 * Ie: si A indique dépendre de B, et B de C, la clé
 	 * 'dp' (dépendances prefixes). indiquera les préfixes
-	 * des plugins B et C 
-	 * 
+	 * des plugins B et C
+	 *
 	 * On ne s'occupe pas des versions de compatibilité ici
 	 *
 	 * @param array $infos (identifiant => description courte du plugin)
 	 * @return array $infos
 	**/
 	public function calculer_necessites_complets($infos) {
-		$this->log("> Calculer les dépendances nécessités sur paquets concernés");
+		$this->log('> Calculer les dépendances nécessités sur paquets concernés');
 
 		// prefixe => array(prefixes)
-		$necessites = array();
+		$necessites = [];
 
 		// 1) déjà les préfixes directement nécessités
 		foreach ($infos as $i => $info) {
@@ -356,8 +356,8 @@ class Actionneur {
 				$necessites[$info['p']] = array_column($info['dn'], 'nom');
 			}
 			// préparer la clé dp (dépendances préfixes) et 'dmp' (dépendent de moi) vide
-			$infos[$i]['dp'] = array();
-			$infos[$i]['dmp'] = array();
+			$infos[$i]['dp'] = [];
+			$infos[$i]['dmp'] = [];
 		}
 
 		if ($nb = count($necessites)) {
@@ -374,7 +374,7 @@ class Actionneur {
 
 			// 4) calculer une clé 'dmp' : liste des paquets actionnés qui dépendent de moi
 			foreach ($infos as $i => $info) {
-				$dmp = array();
+				$dmp = [];
 				foreach ($necessites as $prefixe => $liste) {
 					if (in_array($info['p'], $liste)) {
 						$dmp[] = $prefixe;
@@ -391,8 +391,8 @@ class Actionneur {
 
 	/**
 	 * Fonction récursive pour calculer la liste de tous les préfixes
-	 * de plugins nécessités par un autre. 
-	 * 
+	 * de plugins nécessités par un autre.
+	 *
 	 * Avec une liste fermée connue d'avance des possibilités de plugins
 	 * (ceux qui seront actionnés)
 	 *
@@ -423,7 +423,7 @@ class Actionneur {
 		}
 
 		if ($changement and $profondeur > 10) {
-			$this->log("! Problème de calcul de dépendances complètes : récursion probable. On stoppe.");
+			$this->log('! Problème de calcul de dépendances complètes : récursion probable. On stoppe.');
 		}
 
 		return $necessites;
@@ -456,7 +456,7 @@ class Actionneur {
 		$this->log("ON: $p $action");
 
 		// si dependance, il faut le mettre avant !
-		$in = $out = $prov = $deps = $deps_all = array();
+		$in = $out = $prov = $deps = $deps_all = [];
 		// raz des cles pour avoir les memes que $out (utile reellement ?)
 		$this->middle['on'] = array_values($this->middle['on']);
 		// ajout des dependances
@@ -495,20 +495,17 @@ class Actionneur {
 
 
 		if (!$in) {
-
 			// pas de dependance, on le met en premier !
 			$this->log("- placer $p tout en haut");
 			array_unshift($this->middle['on'], $info);
-
 		} else {
-
 			// intersection = dependance presente aussi
 			// on place notre action juste apres la derniere dependance
 			if ($diff = array_intersect($in, $out)) {
-				$key = array();
+				$key = [];
 				foreach ($diff as $d) {
 					$k = array_search($d, $out);
-					$k = explode(":", $k);
+					$k = explode(':', $k);
 					$key[] = intval(reset($k));
 				}
 				$key = max($key);
@@ -516,7 +513,7 @@ class Actionneur {
 				if ($key == count($this->middle['on'])) {
 					$this->middle['on'][] = $info;
 				} else {
-					array_splice($this->middle['on'], $key + 1, 0, array($info));
+					array_splice($this->middle['on'], $key + 1, 0, [$info]);
 				}
 
 				// intersection = plugin dependant de celui-ci
@@ -526,7 +523,7 @@ class Actionneur {
 					if ($diff = array_intersect($prov, $deps_all)) {
 						foreach ($diff as $d) {
 							$k = array_search($d, $out);
-							$k = explode(":", $k);
+							$k = explode(':', $k);
 							$key[] = intval(reset($k));
 						}
 						$key = min($key);
@@ -534,7 +531,7 @@ class Actionneur {
 						if ($key == 0) {
 							array_unshift($this->middle['on'], $info);
 						} else {
-							array_splice($this->middle['on'], $key, 0, array($info));
+							array_splice($this->middle['on'], $key, 0, [$info]);
 						}
 						break;
 					}
@@ -599,7 +596,7 @@ class Actionneur {
 		}
 
 		// si dependance, il faut le mettre avant !
-		$in = $out = array();
+		$in = $out = [];
 		// raz des cles pour avoir les memes que $out (utile reellement ?)
 		$this->middle['off'] = array_values($this->middle['off']);
 		// in : si un plugin en dépend, il faudra désactiver celui là avant.
@@ -620,17 +617,17 @@ class Actionneur {
 			// intersection = dependance presente aussi
 			// on place notre action juste avant la premiere dependance
 			if ($diff = array_intersect($in, $out)) {
-				$key = array();
+				$key = [];
 				foreach ($diff as $d) {
 					$key[] = array_search($d, $out);
 				}
 				$key = min($key);
 				$this->log("- placer $p avant " . $this->middle['off'][$key]['p']);
-				array_splice($this->middle['off'], $key, 0, array($info));
+				array_splice($this->middle['off'], $key, 0, [$info]);
 			// inversement des plugins dépendants de ce plugin sont présents…
 			// on le met juste après le dernier
 			} elseif ($diff = array_intersect($info['dmp'], $out)) {
-				$key = array();
+				$key = [];
 				foreach ($diff as $d) {
 					$key[] = array_search($d, $out);
 				}
@@ -639,14 +636,14 @@ class Actionneur {
 				if ($key == count($this->middle['off'])) {
 					$this->middle['off'][] = $info;
 				} else {
-					array_splice($this->middle['off'], $key + 1, 0, array($info));
+					array_splice($this->middle['off'], $key + 1, 0, [$info]);
 				}
 			} else {
 				// aucune des dependances n'est a desactiver
 				// (du moins à ce tour ci),
 				// on le met en premier !
 				$this->log("- placer $p tout en haut");
-				array_unshift($this->middle['off'], $info); 
+				array_unshift($this->middle['off'], $info);
 			}
 		}
 		unset($diff, $in, $out);
@@ -666,10 +663,10 @@ class Actionneur {
 			$oks = &$ok;
 			$ok_texte = $ok ? 'ok' : 'fail';
 			$cle_t = 'svp:message_action_finale_' . $i['todo'] . '_' . $ok_texte;
-			$trads = array(
+			$trads = [
 				'plugin' => $i['n'],
 				'version' => denormaliser_version($i['v']),
-			);
+			];
 			if (isset($i['maj'])) {
 				$trads['version_maj'] = denormaliser_version($i['maj']);
 			}
@@ -694,31 +691,31 @@ class Actionneur {
 	 *     Bilan des actions au format HTML
 	 **/
 	public function presenter_actions($fin = false) {
-		$affiche = "";
+		$affiche = '';
 
 		include_spip('inc/filtres_alertes');
 
 		if (count($this->err)) {
-			$erreurs = "<ul>";
+			$erreurs = '<ul>';
 			foreach ($this->err as $i) {
 				$erreurs .= "\t<li class='erreur'>" . $i . "</li>\n";
 			}
-			$erreurs .= "</ul>";
+			$erreurs .= '</ul>';
 			$affiche .= message_alerte_ouvrir(_T('svp:actions_en_erreur'), 'error') . $erreurs . message_alerte_fermer();
 		}
 
 		if (count($this->done)) {
 			$oks = true;
-			$done = "<ul>";
+			$done = '<ul>';
 			foreach ($this->done as $i) {
 				$ok = ($i['done'] ? true : false);
 				$oks = &$ok;
 				$ok_texte = $ok ? 'ok' : 'fail';
 				$cle_t = 'svp:message_action_finale_' . $i['todo'] . '_' . $ok_texte;
-				$trads = array(
+				$trads = [
 					'plugin' => $i['n'],
 					'version' => denormaliser_version($i['v']),
-				);
+				];
 				if (isset($i['maj'])) {
 					$trads['version_maj'] = denormaliser_version($i['maj']);
 				}
@@ -729,32 +726,32 @@ class Actionneur {
 				// si le plugin a ete active dans le meme lot, on remplace le message 'active' par le message 'installe'
 				if ($i['todo'] == 'install' and $ok_texte == 'ok') {
 					$cle_t = 'svp:message_action_finale_' . 'on' . '_' . $ok_texte;
-					$texte_on = _T($cle_t, array(
+					$texte_on = _T($cle_t, [
 						'plugin' => $i['n'],
 						'version' => denormaliser_version($i['v']),
 						'version_maj' => denormaliser_version($i['maj'])
-					));
+					]);
 					if (strpos($done, $texte_on) !== false) {
 						$done = str_replace($texte_on, $texte, $done);
-						$texte = "";
+						$texte = '';
 					}
 				}
 				if ($texte) {
 					$done .= "\t<li class='$ok_texte'>$texte</li>\n";
 				}
 			}
-			$done .= "</ul>";
+			$done .= '</ul>';
 			$affiche .= message_alerte_ouvrir(_T('svp:actions_realises'), ($oks ? 'success' : 'notice')) . $done . message_alerte_fermer();
 		}
 
 		if (count($this->end)) {
-			$todo = "<ul>";
+			$todo = '<ul>';
 			foreach ($this->end as $i) {
-				$todo .= "\t<li>" . _T('svp:message_action_' . $i['todo'], array(
+				$todo .= "\t<li>" . _T('svp:message_action_' . $i['todo'], [
 						'plugin' => $i['n'],
 						'version' => denormaliser_version($i['v']),
 						'version_maj' => denormaliser_version($i['maj'])
-					)) . "</li>\n";
+					]) . "</li>\n";
 			}
 			$todo .= "</ul>\n";
 			$titre = ($fin ? _T('svp:actions_non_traitees') : _T('svp:actions_a_faire'));
@@ -772,12 +769,15 @@ class Actionneur {
 				}
 				$date = date('Y-m-d H:i:s', $time);
 				$todo .= "<br />\n";
-				$todo .= "<p class='error'>" . _T('svp:erreur_actions_non_traitees', array(
+				$todo .= "<p class='error'>" . _T('svp:erreur_actions_non_traitees', [
 						'auteur' => sql_getfetsel('nom', 'spip_auteurs', 'id_auteur=' . sql_quote($this->lock['id_auteur'])),
 						'date' => affdate_heure($date)
-					)) . "</p>\n";
-				$todo .= "<a href='" . parametre_url(self(), 'nettoyer_actions',
-						'1') . "'>" . _T('svp:nettoyer_actions') . "</a>\n";
+					]) . "</p>\n";
+				$todo .= "<a href='" . parametre_url(
+					self(),
+					'nettoyer_actions',
+					'1'
+				) . "'>" . _T('svp:nettoyer_actions') . "</a>\n";
 			}
 			$affiche .= message_alerte_ouvrir($titre, 'notice') . $todo . message_alerte_fermer();
 		}
@@ -837,20 +837,20 @@ class Actionneur {
 	 * @see Actionneur::sauver_actions()
 	 **/
 	public function verrouiller() {
-		$this->lock = array(
+		$this->lock = [
 			'id_auteur' => $GLOBALS['visiteur_session']['id_auteur'] ?? 0,
 			'time' => time(),
-		);
+		];
 	}
 
 	/**
 	 * Enlève le verrou
 	 **/
 	public function deverrouiller() {
-		$this->lock = array(
+		$this->lock = [
 			'id_auteur' => 0,
 			'time' => '',
-		);
+		];
 	}
 
 	/**
@@ -865,13 +865,13 @@ class Actionneur {
 	 * @see Actionneur::get_actions()
 	 **/
 	public function sauver_actions() {
-		$contenu = serialize(array(
+		$contenu = serialize([
 			'todo' => $this->end,
 			'done' => $this->done,
 			'work' => $this->work,
 			'err' => $this->err,
 			'lock' => $this->lock,
-		));
+		]);
 		ecrire_fichier(_DIR_TMP . 'stp_actions.txt', $contenu);
 	}
 
@@ -904,10 +904,10 @@ class Actionneur {
 	 * Remet tout à zéro pour pouvoir repartir d'un bon pied.
 	 **/
 	public function nettoyer_actions() {
-		$this->end = array();
-		$this->done = array();
-		$this->work = array();
-		$this->err = array();
+		$this->end = [];
+		$this->done = [];
+		$this->work = [];
+		$this->err = [];
 		$this->deverrouiller();
 		$this->sauver_actions();
 	}
@@ -986,7 +986,7 @@ class Actionneur {
 			$this->log("Faire $todo avec $do[n]");
 			$do['done'] = $this->$todo($do);
 			$this->done[] = $do;
-			$this->work = array();
+			$this->work = [];
 			$this->sauver_actions();
 		}
 	}
@@ -1011,7 +1011,7 @@ class Actionneur {
 			return true;
 		}
 
-		$this->log("GetOn : Erreur de chargement du paquet " . $info['n']);
+		$this->log('GetOn : Erreur de chargement du paquet ' . $info['n']);
 
 		return false;
 	}
@@ -1035,7 +1035,7 @@ class Actionneur {
 
 		// a activer uniquement
 		// il faudra prendre en compte les autres _DIR_xx
-		if (in_array($i['constante'], array('_DIR_PLUGINS', '_DIR_PLUGINS_SUPPL'))) {
+		if (in_array($i['constante'], ['_DIR_PLUGINS', '_DIR_PLUGINS_SUPPL'])) {
 			$dossier = rtrim($i['src_archive'], '/');
 			$this->activer_plugin_dossier($dossier, $i, $i['constante']);
 
@@ -1070,17 +1070,21 @@ class Actionneur {
 
 		// on cherche la mise a jour...
 		// c'est a dire le paquet source que l'on met a jour.
-		if ($maj = sql_fetsel('pa.*',
-			array('spip_paquets AS pa', 'spip_plugins AS pl'),
-			array(
+		if (
+			$maj = sql_fetsel(
+				'pa.*',
+				['spip_paquets AS pa', 'spip_plugins AS pl'],
+				[
 				'pl.prefixe=' . sql_quote($info['p']),
 				'pa.version=' . sql_quote($info['maj']),
 				'pa.id_plugin = pl.id_plugin',
 				'pa.id_depot>' . sql_quote(0)
-			),
-			'', 'pa.etatnum DESC', '0,1')
+				],
+				'',
+				'pa.etatnum DESC',
+				'0,1'
+			)
 		) {
-
 			// si dans auto, on autorise à mettre à jour depuis auto pour les VCS
 			$dir_actuel_dans_auto = '';
 			if (substr($i['src_archive'], 0, 5) == 'auto/') {
@@ -1148,11 +1152,11 @@ class Actionneur {
 	public function do_off($info) {
 		$i = sql_fetsel('*', 'spip_paquets', 'id_paquet=' . sql_quote($info['i']));
 		// il faudra prendre en compte les autres _DIR_xx
-		if (in_array($i['constante'], array('_DIR_PLUGINS', '_DIR_PLUGINS_SUPPL'))) {
+		if (in_array($i['constante'], ['_DIR_PLUGINS', '_DIR_PLUGINS_SUPPL'])) {
 			include_spip('inc/plugin');
 			$dossier = rtrim($i['src_archive'], '/');
-			ecrire_plugin_actifs(array(rtrim($dossier, '/')), false, 'enleve');
-			sql_updateq('spip_paquets', array('actif' => 'non', 'installe' => 'non'), 'id_paquet=' . sql_quote($info['i']));
+			ecrire_plugin_actifs([rtrim($dossier, '/')], false, 'enleve');
+			sql_updateq('spip_paquets', ['actif' => 'non', 'installe' => 'non'], 'id_paquet=' . sql_quote($info['i']));
 			$this->actualiser_plugin_interessants();
 			// ce retour est un rien faux...
 			// il faudrait que la fonction ecrire_plugin_actifs()
@@ -1175,7 +1179,7 @@ class Actionneur {
 	public function do_stop($info) {
 		$i = sql_fetsel('*', 'spip_paquets', 'id_paquet=' . sql_quote($info['i']));
 		// il faudra prendre en compte les autres _DIR_xx
-		if (in_array($i['constante'], array('_DIR_PLUGINS', '_DIR_PLUGINS_SUPPL'))) {
+		if (in_array($i['constante'], ['_DIR_PLUGINS', '_DIR_PLUGINS_SUPPL'])) {
 			include_spip('inc/plugin');
 			$dossier = rtrim($i['src_archive'], '/');
 
@@ -1187,13 +1191,13 @@ class Actionneur {
 			$infos = $installer_plugins($dossier, 'uninstall', $i['constante']);
 			if (is_bool($infos) or !$infos['install_test'][0]) {
 				include_spip('inc/plugin');
-				ecrire_plugin_actifs(array($dossier), false, 'enleve');
-				sql_updateq('spip_paquets', array('actif' => 'non', 'installe' => 'non'), 'id_paquet=' . sql_quote($info['i']));
+				ecrire_plugin_actifs([$dossier], false, 'enleve');
+				sql_updateq('spip_paquets', ['actif' => 'non', 'installe' => 'non'], 'id_paquet=' . sql_quote($info['i']));
 
 				return true;
 			} else {
 				// echec
-				$this->log("Échec de la désinstallation de " . $i['src_archive']);
+				$this->log('Échec de la désinstallation de ' . $i['src_archive']);
 			}
 		}
 		$this->actualiser_plugin_interessants();
@@ -1216,10 +1220,10 @@ class Actionneur {
 		// cette option est encore plus delicate que les autres...
 		$i = sql_fetsel('*', 'spip_paquets', 'id_paquet=' . sql_quote($info['i']));
 
-		if (in_array($i['constante'], array('_DIR_PLUGINS', '_DIR_PLUGINS_SUPPL'))
+		if (
+			in_array($i['constante'], ['_DIR_PLUGINS', '_DIR_PLUGINS_SUPPL'])
 			and substr($i['src_archive'], 0, 5) == 'auto/'
 		) {
-
 			$dir = constant($i['constante']) . $i['src_archive'];
 			if (supprimer_repertoire($dir)) {
 				$id_plugin = sql_getfetsel('id_plugin', 'spip_paquets', 'id_paquet=' . sql_quote($info['i']));
@@ -1230,15 +1234,16 @@ class Actionneur {
 				// ainsi que le plugin s'il n'est plus utilise
 				$utilise = sql_allfetsel(
 					'pl.id_plugin',
-					array('spip_paquets AS pa', 'spip_plugins AS pl'),
-					array('pa.id_plugin = pl.id_plugin', 'pa.id_plugin=' . sql_quote($id_plugin)));
+					['spip_paquets AS pa', 'spip_plugins AS pl'],
+					['pa.id_plugin = pl.id_plugin', 'pa.id_plugin=' . sql_quote($id_plugin)]
+				);
 				if (!$utilise) {
 					sql_delete('spip_plugins', 'id_plugin=' . sql_quote($id_plugin));
 				} else {
 					// on met a jour d'eventuels obsoletes qui ne le sont plus maintenant
 					// ie si on supprime une version superieure à une autre qui existe en local...
 					include_spip('inc/svp_depoter_local');
-					svp_corriger_obsolete_paquets(array($id_plugin));
+					svp_corriger_obsolete_paquets([$id_plugin]);
 				}
 
 				// on tente un nettoyage jusqu'a la racine de auto/
@@ -1288,24 +1293,24 @@ class Actionneur {
 	public function do_getlib($info) {
 		if (!defined('_DIR_LIB') or !_DIR_LIB) {
 			$this->err(_T('svp:erreur_dir_dib_indefini'));
-			$this->log("/!\ Pas de _DIR_LIB defini !");
+			$this->log('/!\ Pas de _DIR_LIB defini !');
 
 			return false;
 		}
 		if (!is_writable(_DIR_LIB)) {
-			$this->err(_T('svp:erreur_dir_dib_ecriture', array('dir' => _DIR_LIB)));
-			$this->log("/!\ Ne peut pas écrire dans _DIR_LIB !");
+			$this->err(_T('svp:erreur_dir_dib_ecriture', ['dir' => _DIR_LIB]));
+			$this->log('/!\ Ne peut pas écrire dans _DIR_LIB !');
 
 			return false;
 		}
 		if (!autoriser('plugins_ajouter')) {
 			$this->err(_T('svp:erreur_auth_plugins_ajouter_lib'));
-			$this->log("/!\ Pas autorisé à ajouter des libs !");
+			$this->log('/!\ Pas autorisé à ajouter des libs !');
 
 			return false;
 		}
 
-		$this->log("Recuperer la librairie : " . $info['n']);
+		$this->log('Recuperer la librairie : ' . $info['n']);
 
 		// on recupere la mise a jour...
 		include_spip('action/teleporter');
@@ -1316,7 +1321,7 @@ class Actionneur {
 		}
 
 		$this->err($ok);
-		$this->log("Téléporteur en erreur : " . $ok);
+		$this->log('Téléporteur en erreur : ' . $ok);
 
 		return false;
 	}
@@ -1391,19 +1396,19 @@ class Actionneur {
 		}
 
 		include_spip('inc/plugin');
-		ecrire_plugin_actifs(array($dossier), false, 'ajoute');
+		ecrire_plugin_actifs([$dossier], false, 'ajoute');
 		$installe = $i['version_base'] ? 'oui' : 'non';
 		if ($installe == 'oui') {
 			if (!$i['constante']) {
 				$i['constante'] = '_DIR_PLUGINS';
 			}
 			// installer le plugin au prochain tour
-			$new_action = array_merge($this->work, array(
+			$new_action = array_merge($this->work, [
 				'todo' => 'install',
 				'dossier' => rtrim($dossier, '/'),
 				'constante' => $i['constante'],
 				'v' => $i['version'], // pas forcement la meme version qu'avant lors d'une mise a jour.
-			));
+			]);
 			array_unshift($this->end, $new_action);
 			$this->log("Demande d'installation de $dossier");
 			#$this->installer_plugin($dossier);
@@ -1431,11 +1436,11 @@ class Actionneur {
 		// jusqu'a ce qu'il tombe dans l'oubli.
 		$plugins_interessants = @unserialize($GLOBALS['meta']['plugins_interessants']);
 		if (!is_array($plugins_interessants)) {
-			$plugins_interessants = array();
+			$plugins_interessants = [];
 		}
 
-		$dossiers = array();
-		$dossiers_old = array();
+		$dossiers = [];
+		$dossiers_old = [];
 		foreach ($plugins_interessants as $p => $score) {
 			if (--$score > 0) {
 				$plugins_interessants[$p] = $score;
@@ -1449,7 +1454,7 @@ class Actionneur {
 		// enlever les anciens
 		if ($dossiers_old) {
 			// ATTENTION, il faudra prendre en compte les _DIR_xx
-			sql_updateq('spip_paquets', array('recent' => 0), sql_in('src_archive', array_keys($dossiers_old)));
+			sql_updateq('spip_paquets', ['recent' => 0], sql_in('src_archive', array_keys($dossiers_old)));
 		}
 
 		$plugs = sql_allfetsel('src_archive', 'spip_paquets', 'actif=' . sql_quote('oui'));
@@ -1459,7 +1464,7 @@ class Actionneur {
 			$plugins_interessants[rtrim($dossier, '/')] = 30; // score initial
 		}
 
-		$plugs = sql_updateq('spip_paquets', array('recent' => 1), sql_in('src_archive', array_keys($dossiers)));
+		$plugs = sql_updateq('spip_paquets', ['recent' => 1], sql_in('src_archive', array_keys($dossiers)));
 		ecrire_meta('plugins_interessants', serialize($plugins_interessants));
 	}
 
@@ -1476,7 +1481,7 @@ class Actionneur {
 	public function ajouter_plugin_interessants_meta($dir) {
 		$plugins_interessants = @unserialize($GLOBALS['meta']['plugins_interessants']);
 		if (!is_array($plugins_interessants)) {
-			$plugins_interessants = array();
+			$plugins_interessants = [];
 		}
 		$plugins_interessants[$dir] = 30;
 		ecrire_meta('plugins_interessants', serialize($plugins_interessants));
@@ -1500,7 +1505,7 @@ class Actionneur {
 				if (!is_array($infos) or $infos['install_test'][0]) {
 					$meta_plug_installes = @unserialize($GLOBALS['meta']['plugin_installes']);
 					if (!$meta_plug_installes) {
-						$meta_plug_installes = array();
+						$meta_plug_installes = [];
 					}
 					$meta_plug_installes[] = $plug;
 					ecrire_meta('plugin_installes', serialize($meta_plug_installes), 'non');
@@ -1516,8 +1521,10 @@ class Actionneur {
 						return true;
 					}
 					// l'installation est en erreur
-					$this->err(_T('svp:message_action_finale_install_fail',
-							array('plugin' => $info['n'], 'version' => denormaliser_version($info['v']))) . "<br />" . $trace);
+					$this->err(_T(
+						'svp:message_action_finale_install_fail',
+						['plugin' => $info['n'], 'version' => denormaliser_version($info['v'])]
+					) . '<br />' . $trace);
 				}
 			}
 		}
@@ -1541,7 +1548,7 @@ class Actionneur {
 	 *     - dir : Chemin du paquet téléchargé depuis la racine
 	 *     - dossier : Chemin du paquet téléchargé, depuis _DIR_PLUGINS
 	 */
-	public function get_paquet_id($id_or_row, $dest_ancien = "") {
+	public function get_paquet_id($id_or_row, $dest_ancien = '') {
 		// on peut passer direct le row sql...
 		if (!is_array($id_or_row)) {
 			$i = sql_fetsel('*', 'spip_paquets', 'id_paquet=' . sql_quote($id_or_row));
@@ -1555,14 +1562,18 @@ class Actionneur {
 			// on récupère les informations intéressantes du dépot :
 			// - url des archives
 			// - éventuellement : type de serveur (svn, git) et url de la racine serveur (svn://..../)
-			$adresses = sql_fetsel(array('url_archives', 'type', 'url_serveur'), 'spip_depots',
-				'id_depot=' . sql_quote($i['id_depot']));
+			$adresses = sql_fetsel(
+				['url_archives', 'type', 'url_serveur'],
+				'spip_depots',
+				'id_depot=' . sql_quote($i['id_depot'])
+			);
 			if ($adresses and $adresse = $adresses['url_archives']) {
-
 				// destination : auto/prefixe/version (sinon auto/nom_archive/version)
-				$prefixe = sql_getfetsel('pl.prefixe',
-					array('spip_paquets AS pa', 'spip_plugins AS pl'),
-					array('pa.id_plugin = pl.id_plugin', 'pa.id_paquet=' . sql_quote($i['id_paquet'])));
+				$prefixe = sql_getfetsel(
+					'pl.prefixe',
+					['spip_paquets AS pa', 'spip_plugins AS pl'],
+					['pa.id_plugin = pl.id_plugin', 'pa.id_paquet=' . sql_quote($i['id_paquet'])]
+				);
 
 				// prefixe
 				$base = ($prefixe ? strtolower($prefixe) : substr($i['nom_archive'], 0, -4)); // enlever .zip ...
@@ -1595,15 +1606,15 @@ class Actionneur {
 						rename(_DIR_PLUGINS_AUTO . $dest, _DIR_PLUGINS_AUTO . $dest_future);
 					}
 
-					return array(
+					return [
 						'dir' => _DIR_PLUGINS_AUTO . $dest,
 						'dossier' => 'auto/' . $dest, // c'est depuis _DIR_PLUGINS ... pas bien en dur...
-					);
+					];
 				}
 				$this->err($ok);
-				$this->log("Téléporteur en erreur : " . $ok);
+				$this->log('Téléporteur en erreur : ' . $ok);
 			} else {
-				$this->log("Aucune adresse pour le dépot " . $i['id_depot']);
+				$this->log('Aucune adresse pour le dépot ' . $i['id_depot']);
 			}
 		}
 
@@ -1622,13 +1633,13 @@ class Actionneur {
 		include_spip('inc/plugin'); // pour _DIR_PLUGINS_AUTO
 		if (!defined('_DIR_PLUGINS_AUTO') or !_DIR_PLUGINS_AUTO) {
 			$this->err(_T('svp:erreur_dir_plugins_auto_indefini'));
-			$this->log("/!\ Pas de _DIR_PLUGINS_AUTO defini !");
+			$this->log('/!\ Pas de _DIR_PLUGINS_AUTO defini !');
 
 			return false;
 		}
 		if (!is_writable(_DIR_PLUGINS_AUTO)) {
-			$this->err(_T('svp:erreur_dir_plugins_auto_ecriture', array('dir' => _DIR_PLUGINS_AUTO)));
-			$this->log("/!\ Ne peut pas écrire dans _DIR_PLUGINS_AUTO !");
+			$this->err(_T('svp:erreur_dir_plugins_auto_ecriture', ['dir' => _DIR_PLUGINS_AUTO]));
+			$this->log('/!\ Ne peut pas écrire dans _DIR_PLUGINS_AUTO !');
 
 			return false;
 		}
@@ -1659,9 +1670,10 @@ class Actionneur {
 		if (is_dir($dir_dans_auto)) {
 			$base_files = scandir($dir_dans_auto);
 			if (is_array($base_files)) {
-				$base_files = array_diff($base_files, array('.', '..'));
+				$base_files = array_diff($base_files, ['.', '..']);
 				foreach ($base_files as $f) {
-					if (($f[0] != '.' and $f[0] != 'v') // commence pas par v
+					if (
+						($f[0] != '.' and $f[0] != 'v') // commence pas par v
 						or ($f[0] != '.' and !is_dir($dir_dans_auto . '/' . $f))
 					) { // commence par v mais pas repertoire
 						return true;
@@ -1723,9 +1735,10 @@ class Actionneur {
 	 **/
 	public function tester_si_svp_desactive() {
 		foreach ($this->done as $d) {
-			if ($d['p'] == 'SVP'
+			if (
+				$d['p'] == 'SVP'
 				and $d['done'] == true
-				and in_array($d['todo'], array('off', 'stop'))
+				and in_array($d['todo'], ['off', 'stop'])
 			) {
 				return true;
 			}
@@ -1733,7 +1746,6 @@ class Actionneur {
 
 		return false;
 	}
-
 }
 
 
@@ -1757,5 +1769,5 @@ function svp_actionner_traiter_actions_demandees($actions, &$retour, $redirect =
 	$redirect = $redirect ? $redirect : generer_url_ecrire('admin_plugin');
 	$retour['redirect'] = generer_url_action('actionner', 'redirect=' . urlencode($redirect));
 	set_request('_todo', '');
-	$retour['message_ok'] = _T("svp:action_patienter");
+	$retour['message_ok'] = _T('svp:action_patienter');
 }

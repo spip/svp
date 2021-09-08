@@ -5,6 +5,7 @@
  *
  * @package SPIP\SVP\Fonctions
  **/
+
 if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }

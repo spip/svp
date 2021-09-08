@@ -8,7 +8,7 @@
  * @package SPIP\SVP\Recherche
  **/
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 include_spip('inc/plugin');
@@ -57,7 +57,7 @@ function svp_rechercher_plugins_spip(
 	$etat,
 	$depot,
 	$version_spip = '',
-	$exclusions = array(),
+	$exclusions = [],
 	$afficher_exclusions = false,
 	$doublon = false,
 	$tri = 'nom'
@@ -65,16 +65,16 @@ function svp_rechercher_plugins_spip(
 
 	include_spip('inc/rechercher');
 
-	$plugins = array();
-	$scores = array();
-	$ids_paquets = array();
+	$plugins = [];
+	$scores = [];
+	$ids_paquets = [];
 
 	// On prepare l'utilisation de la recherche en base SPIP en la limitant aux tables spip_plugins
 	// et spip_paquets  si elle n'est pas vide
 	if ($phrase) {
 		$liste = liste_des_champs();
-		$tables = array('plugin' => $liste['plugin']);
-		$options = array('jointures' => true, 'score' => true);
+		$tables = ['plugin' => $liste['plugin']];
+		$options = ['jointures' => true, 'score' => true];
 
 		// On cherche dans tous les enregistrements de ces tables des correspondances les plugins qui
 		// correspondent a la phrase recherchee
@@ -83,7 +83,7 @@ function svp_rechercher_plugins_spip(
 		// -- On prepare le tableau des scores avec les paquets trouves par la recherche
 		if ($resultats) {
 			// -- On convertit les id de plugins en id de paquets
-			$ids = array();
+			$ids = [];
 			if (isset($resultats['plugin']) and $resultats['plugin']) {
 				$ids_plugin = array_keys($resultats['plugin']);
 				$where[] = sql_in('id_plugin', $ids_plugin);
@@ -123,8 +123,8 @@ function svp_rechercher_plugins_spip(
 	// si on a bien trouve des resultats precedemment ou si aucune phrase n'a ete saisie
 	// -- Preparation de la requete
 	if ($ids_paquets) {
-		$from = array('spip_plugins AS t1', 'spip_paquets AS t2', 'spip_depots AS t3');
-		$select = array(
+		$from = ['spip_plugins AS t1', 'spip_paquets AS t2', 'spip_depots AS t3'];
+		$select = [
 			't1.nom AS nom',
 			't1.slogan AS slogan',
 			't1.prefixe AS prefixe',
@@ -140,8 +140,8 @@ function svp_rechercher_plugins_spip(
 			't2.version AS version',
 			't2.nom_archive AS nom_archive',
 			't3.url_archives AS url_archives',
-		);
-		$where = array('t1.id_plugin=t2.id_plugin', 't2.id_depot=t3.id_depot');
+		];
+		$where = ['t1.id_plugin=t2.id_plugin', 't2.id_depot=t3.id_depot'];
 		if ($ids_paquets) {
 			$where[] = sql_in('t2.id_paquet', $ids_paquets);
 		}
@@ -183,14 +183,14 @@ function svp_rechercher_plugins_spip(
 						$paquets['installe'] = false;
 					}
 					// -- On traite les doublons (meme plugin, versions differentes)
-					if ($doublon) // ajout systematique du paquet
-					{
-						$plugins[] = $paquets;
+					if ($doublon) { // ajout systematique du paquet
+					$plugins[] = $paquets;
 					} else {
-						// ajout 
-						// - si pas encore trouve 
+						// ajout
+						// - si pas encore trouve
 						// - ou si sa version est inferieure (on garde que la derniere version)
-						if (!isset($plugins[$prefixe])
+						if (
+							!isset($plugins[$prefixe])
 							or !$plugins[$prefixe]
 							or ($plugins[$prefixe] and spip_version_compare($plugins[$prefixe]['version'], $version, '<'))
 						) {
@@ -254,7 +254,7 @@ function svp_lister_plugins_installes() {
  */
 function svp_verifier_compatibilite_spip($intervalle, $version_spip = '') {
 	if (!$version_spip) {
-		$version_spip = $GLOBALS['spip_version_branche'] . "." . $GLOBALS['spip_version_code'];
+		$version_spip = $GLOBALS['spip_version_branche'] . '.' . $GLOBALS['spip_version_code'];
 	}
 
 	return plugin_version_compatible($intervalle, $version_spip, 'spip');

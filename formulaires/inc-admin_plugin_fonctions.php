@@ -8,11 +8,11 @@
  * @package SPIP\SVP\Formulaires
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
-include_spip("inc/plugin");
+include_spip('inc/plugin');
 
 /**
  * Crée une valeur d'action pour l'attribut 'name' d'une saisie de formulaire
@@ -28,4 +28,3 @@ include_spip("inc/plugin");
 function filtre_svp_nom_action($id_paquet, $action) {
 	return "actions[$action][$id_paquet]";
 }
-

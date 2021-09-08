@@ -8,7 +8,7 @@
  * @package SPIP\SVP\Formulaires
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -25,9 +25,9 @@ function formulaires_ajouter_depot_charger_dist() {
 	}
 
 	// On ne renvoie pas les valeurs saisies mais on fait un raz systematique
-	return array(
+	return [
 		'nb_depots' => (int)sql_countsel('spip_depots'),
-	);
+	];
 }
 
 /**
@@ -42,7 +42,7 @@ function formulaires_ajouter_depot_charger_dist() {
  **/
 function formulaires_ajouter_depot_verifier_dist() {
 
-	$erreurs = array();
+	$erreurs = [];
 	$xml = trim(_request('xml_paquets'));
 
 	if (!$xml) {
@@ -50,10 +50,10 @@ function formulaires_ajouter_depot_verifier_dist() {
 		$erreurs['xml_paquets'] = _T('svp:message_nok_champ_obligatoire');
 	} elseif (!svp_verifier_adresse_depot($xml)) {
 		// L'url n'est pas correcte, le fichier xml n'a pas ete trouve
-		$erreurs['xml_paquets'] = _T('svp:message_nok_url_depot_incorrecte', array('url' => $xml));
+		$erreurs['xml_paquets'] = _T('svp:message_nok_url_depot_incorrecte', ['url' => $xml]);
 	} elseif (sql_countsel('spip_depots', 'xml_paquets=' . sql_quote($xml))) {
 		// L'url est deja ajoutee
-		$erreurs['xml_paquets'] = _T('svp:message_nok_depot_deja_ajoute', array('url' => $xml));
+		$erreurs['xml_paquets'] = _T('svp:message_nok_depot_deja_ajoute', ['url' => $xml]);
 	}
 
 	return $erreurs;
@@ -73,7 +73,7 @@ function formulaires_ajouter_depot_verifier_dist() {
 function formulaires_ajouter_depot_traiter_dist() {
 	include_spip('inc/svp_depoter_distant');
 
-	$retour = array();
+	$retour = [];
 	$xml = trim(_request('xml_paquets'));
 
 	// On ajoute le depot et ses plugins dans la base
@@ -86,8 +86,8 @@ function formulaires_ajouter_depot_traiter_dist() {
 	if (!$ok) {
 		$retour['message_erreur'] = $erreur;
 	} else {
-		$retour['message_ok'] = _T('svp:message_ok_depot_ajoute', array('url' => $xml));
-		spip_log("ACTION AJOUTER DEPOT (manuel) : url = " . $xml, 'svp_actions.' . _LOG_INFO);
+		$retour['message_ok'] = _T('svp:message_ok_depot_ajoute', ['url' => $xml]);
+		spip_log('ACTION AJOUTER DEPOT (manuel) : url = ' . $xml, 'svp_actions.' . _LOG_INFO);
 	}
 	$retour['editable'] = true;
 

@@ -29,7 +29,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 function plugins_preparer_sql_plugin($plugin) {
 	include_spip('inc/svp_outiller');
 
-	$champs = array();
+	$champs = [];
 	if (!$plugin) {
 		return $champs;
 	}
@@ -47,7 +47,7 @@ function plugins_preparer_sql_plugin($plugin) {
 	$champs['prefixe'] = strtoupper($plugin['prefix']);
 
 	// Indicateurs d'etat numerique (pour simplifier la recherche des maj de STP)
-	static $num = array('stable' => 4, 'test' => 3, 'dev' => 2, 'experimental' => 1);
+	static $num = ['stable' => 4, 'test' => 3, 'dev' => 2, 'experimental' => 1];
 	$champs['etatnum'] = (isset($plugin['etat']) and isset($num[$plugin['etat']])) ? $num[$plugin['etat']] : 0;
 
 	// On passe en utf-8 avec le bon charset les champs pouvant contenir des entites html
@@ -94,7 +94,7 @@ function plugins_preparer_sql_plugin($plugin) {
 	// Calculer le champ 'procure' (tableau sérialisé prefixe => version)
 	$champs['procure'] = '';
 	if (!empty($plugin['procure'][0])) {
-		$champs['procure'] = array();
+		$champs['procure'] = [];
 		foreach ($plugin['procure'][0] as $procure) {
 			$p = strtoupper($procure['nom']);
 			if (
@@ -137,7 +137,7 @@ function normaliser_nom($nom, $langue = '', $supprimer_numero = true) {
 
 	// On extrait les traductions de l'eventuel multi
 	// Si le nom n'est pas un multi alors le tableau renvoye est de la forme '' => 'nom'
-	$noms = extraire_trads(str_replace(array('<multi>', '</multi>'), array(), $nom, $nbr_replace));
+	$noms = extraire_trads(str_replace(['<multi>', '</multi>'], [], $nom, $nbr_replace));
 	$multi = ($nbr_replace > 0 and !$langue) ? true : false;
 
 	$nouveau_nom = '';
@@ -157,9 +157,8 @@ function normaliser_nom($nom, $langue = '', $supprimer_numero = true) {
 		}
 	}
 
-	if ($nouveau_nom) // On renvoie un nouveau nom multi ou pas sans la valeur de la branche
-	{
-		$nouveau_nom = (($multi) ? '<multi>' : '') . $nouveau_nom . (($multi) ? '</multi>' : '');
+	if ($nouveau_nom) { // On renvoie un nouveau nom multi ou pas sans la valeur de la branche
+	$nouveau_nom = (($multi) ? '<multi>' : '') . $nouveau_nom . (($multi) ? '</multi>' : '');
 	}
 
 	return $nouveau_nom;
@@ -212,7 +211,7 @@ function normaliser_auteur_licence($texte, $balise) {
 	// On extrait le multi si besoin et on selectionne la traduction francaise
 	$t = normaliser_multi($texte);
 
-	$res = array('auteur' => array(), 'licence' => array(), 'copyright' => array());
+	$res = ['auteur' => [], 'licence' => [], 'copyright' => []];
 	foreach (preg_split('@(<br */?>)|<li>|,|\s-|\n_*\s*|&amp;| & | et @', $t[_LANGUE_PAR_DEFAUT]) as $v) {
 		// On detecte d'abord si le bloc texte en cours contient un eventuel copyright
 		// -- cela generera une balise copyright et non auteur
@@ -260,9 +259,14 @@ function normaliser_auteur_licence($texte, $balise) {
 		// On detecte aussi si le bloc texte en cours contient une eventuelle licence
 		// -- cela generera une balise licence et non auteur
 		//    cette heuristique n'est pas deterministe car la phrase de licence n'est pas connue
-		$licence = array();
-		if (preg_match('/\b((gnu|free|creative\s+common|cc)*[\/|\s|-]*(apache|lgpl|agpl|gpl|fdl|mit|bsd|art\s+|attribution|by)(\s+licence|\-sharealike|-nc-nd|-nc-sa|-sa|-nc|-nd)*\s*v*(\d*[\.\d+]*))\b/i',
-			$v, $r)) {
+		$licence = [];
+		if (
+			preg_match(
+				'/\b((gnu|free|creative\s+common|cc)*[\/|\s|-]*(apache|lgpl|agpl|gpl|fdl|mit|bsd|art\s+|attribution|by)(\s+licence|\-sharealike|-nc-nd|-nc-sa|-sa|-nc|-nd)*\s*v*(\d*[\.\d+]*))\b/i',
+				$v,
+				$r
+			)
+		) {
 			if ($licence = definir_licence($r[2], $r[3], $r[4], $r[5])) {
 				$res['licence'][] = $licence;
 			}
@@ -270,14 +274,14 @@ function normaliser_auteur_licence($texte, $balise) {
 
 		// On finalise la balise auteur ou licence si on a pas trouve de licence prioritaire
 		if ($href) {
-			$href = !preg_match(',https?://,', $href, $matches) ? "http://" . $href : $href;
+			$href = !preg_match(',https?://,', $href, $matches) ? 'http://' . $href : $href;
 		}
 		$v = trim(textebrut($v));
 		if ((strlen($v) > 2) and !$licence) {
 			if ($balise == 'auteur') {
-				$res['auteur'][] = array('nom' => $v, 'url' => $href, 'mail' => $mail);
+				$res['auteur'][] = ['nom' => $v, 'url' => $href, 'mail' => $mail];
 			} else {
-				$res['licence'][] = array('nom' => $v, 'url' => $href);
+				$res['licence'][] = ['nom' => $v, 'url' => $href];
 			}
 		}
 	}
@@ -299,9 +303,9 @@ function normaliser_multi($texte) {
 	include_spip('inc/filtres');
 
 	if (!preg_match_all(_EXTRAIRE_MULTI, $texte, $regs, PREG_SET_ORDER)) {
-		return array(_LANGUE_PAR_DEFAUT => $texte);
+		return [_LANGUE_PAR_DEFAUT => $texte];
 	}
-	$trads = array();
+	$trads = [];
 	foreach ($regs as $reg) {
 		foreach (extraire_trads($reg[1]) as $k => $v) {
 			// Si le code de langue n'est pas précisé dans le multi c'est donc la langue par défaut

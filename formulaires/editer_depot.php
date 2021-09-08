@@ -8,7 +8,7 @@
  * @package SPIP\SVP\Formulaires
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -41,7 +41,7 @@ function formulaires_editer_depot_charger_dist($id_depot, $redirect) {
  *     Tableau des erreurs
  **/
 function formulaires_editer_depot_verifier_dist($id_depot, $redirect) {
-	$erreurs = formulaires_editer_objet_verifier('depot', $id_depot, array('titre'));
+	$erreurs = formulaires_editer_objet_verifier('depot', $id_depot, ['titre']);
 
 	return $erreurs;
 }
@@ -73,7 +73,7 @@ function depots_edit_config($row) {
 	global $spip_ecran, $spip_lang;
 
 	$config = $GLOBALS['meta'];
-	$config['lignes'] = ($spip_ecran == "large") ? 8 : 5;
+	$config['lignes'] = ($spip_ecran == 'large') ? 8 : 5;
 	$config['langue'] = $spip_lang;
 
 	return $config;

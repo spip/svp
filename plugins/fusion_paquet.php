@@ -32,7 +32,7 @@ include_spip('inc/svp_outiller');
 function plugins_fusion_paquet($plugins) {
 	global $balises_techniques;
 
-	$fusion = array();
+	$fusion = [];
 	// mefions nous des $plugins['erreur'] (mauvais xml du paquet.xml)
 	if (!$plugins or empty($plugins[0])) {
 		return $fusion;
@@ -64,7 +64,7 @@ function plugins_fusion_paquet($plugins) {
 				if ($_index and $_index != 'balise') {
 					$fusion[$_index][$_compatibilite] = $_balise;
 					if (!isset($fusion[$_index][0])) {
-						$fusion[$_index][0] = array();
+						$fusion[$_index][0] = [];
 					}
 				}
 			}

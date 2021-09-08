@@ -8,7 +8,7 @@
  * @package SPIP\SVP\Actions
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -75,7 +75,8 @@ function action_actionner_dist() {
 
 	foreach ($actionneur->done as $done) {
 		if ($done['todo'] == 'on') {
-			if ($voir = session_get('svp_admin_plugin_voir')
+			if (
+				$voir = session_get('svp_admin_plugin_voir')
 				and $voir == 'inactif'
 			) {
 				session_set('svp_admin_plugin_voir', 'actif');
@@ -102,7 +103,7 @@ function action_actionner_dist() {
  * @param string $texte Texte de l'action réalisée
  * @param string $progres
  */
-function svp_redirige_boucle($url, $texte, $progres){
+function svp_redirige_boucle($url, $texte, $progres) {
 	include_spip('inc/minipres');
 
 	//@apache_setenv('no-gzip', 1); // provoque page blanche chez certains hebergeurs donc ne pas utiliser
@@ -111,11 +112,11 @@ function svp_redirige_boucle($url, $texte, $progres){
 	@ini_set('implicit_flush', 1);
 	@ob_implicit_flush(1);
 
-	$pres = '<meta http-equiv="refresh" content="0;'.$url.'">';
-	$pres .="
+	$pres = '<meta http-equiv="refresh" content="0;' . $url . '">';
+	$pres .= "
 			<div class='derniere_action'>$texte</div>
-			<div class='progression'>" . round($progres*100) . "%</div>
-			<div class='bar'><div style='width:".round($progres*100)."%'></div></div>
+			<div class='progression'>" . round($progres * 100) . "%</div>
+			<div class='bar'><div style='width:" . round($progres * 100) . "%'></div></div>
 			";
 
 	$styles = "

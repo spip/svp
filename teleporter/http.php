@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Gestion du téléporteur HTTP.
  *
@@ -28,12 +29,12 @@
  *     Texte d'erreur si erreur,
  *     True si l'opération réussie.
  */
-function teleporter_http_dist($methode, $source, $dest, $options = array()) {
+function teleporter_http_dist($methode, $source, $dest, $options = []) {
 
 	$tmp = $options['dir_tmp'];
 	# on ne se contente pas du basename qui peut etre un simple v1
 	# exemple de l'url http://nodeload.github.com/kbjr/Git.php/zipball/v0.1.1-rc
-	$fichier = $tmp . (basename($dest) . "-" . substr(md5($source), 0, 8) . "-" . basename($source));
+	$fichier = $tmp . (basename($dest) . '-' . substr(md5($source), 0, 8) . '-' . basename($source));
 
 	$res = teleporter_http_recuperer_source($source, $fichier);
 	if (!is_array($res)) {
@@ -41,8 +42,8 @@ function teleporter_http_dist($methode, $source, $dest, $options = array()) {
 	}
 
 	list($fichier, $extension) = $res;
-	if (!$deballe = charger_fonction("http_deballe_" . preg_replace(",\W,", "_", $extension), "teleporter", true)) {
-		return _T('svp:erreur_teleporter_format_archive_non_supporte', array('extension' => $extension));
+	if (!$deballe = charger_fonction('http_deballe_' . preg_replace(',\W,', '_', $extension), 'teleporter', true)) {
+		return _T('svp:erreur_teleporter_format_archive_non_supporte', ['extension' => $extension]);
 	}
 
 	$old = teleporter_nettoyer_vieille_version($dest);
@@ -53,7 +54,7 @@ function teleporter_http_dist($methode, $source, $dest, $options = array()) {
 			rename($old, $dest);
 		}
 
-		return _T('svp:erreur_teleporter_echec_deballage_archive', array('fichier' => $fichier));
+		return _T('svp:erreur_teleporter_echec_deballage_archive', ['fichier' => $fichier]);
 	}
 
 	return true;
@@ -79,7 +80,7 @@ function teleporter_http_recuperer_source($source, $dest_tmp) {
 		spip_unlink($dest_tmp);
 	}
 
-	$extension = "";
+	$extension = '';
 
 	# si on ne dispose pas encore du fichier
 	# verifier que le zip en est bien un (sans se fier a son extension)
@@ -95,7 +96,8 @@ function teleporter_http_recuperer_source($source, $dest_tmp) {
 	$res = recuperer_url($source, $options);
 	$head = $res['headers'];
 
-	if (preg_match(",^Content-Type:\s*?(.*)$,Uims", $head, $m)
+	if (
+		preg_match(',^Content-Type:\s*?(.*)$,Uims', $head, $m)
 		and include_spip('base/typedoc')
 	) {
 		$mime = $m[1];
@@ -105,11 +107,13 @@ function teleporter_http_recuperer_source($source, $dest_tmp) {
 		}
 	}
 
-	if (!$extension
+	if (
+		!$extension
 		// cas des extensions incertaines car mime-type ambigu
-		or in_array($extension, array('bin', 'gz'))
+		or in_array($extension, ['bin', 'gz'])
 	) {
-		if (preg_match(",^Content-Disposition:\s*attachment;\s*filename=(.*)['\"]?$,Uims", $head, $m)
+		if (
+			preg_match(",^Content-Disposition:\s*attachment;\s*filename=(.*)['\"]?$,Uims", $head, $m)
 			and $e = teleporter_http_extension($m[1])
 		) {
 			$extension = $e;
@@ -123,27 +127,28 @@ function teleporter_http_recuperer_source($source, $dest_tmp) {
 
 	# format de fichier inconnu
 	if (!$extension) {
-		spip_log("Type de fichier inconnu pour la source $source", "teleport" . _LOG_ERREUR);
+		spip_log("Type de fichier inconnu pour la source $source", 'teleport' . _LOG_ERREUR);
 
-		return _T('svp:erreur_teleporter_type_fichier_inconnu', array('source' => $source));
+		return _T('svp:erreur_teleporter_type_fichier_inconnu', ['source' => $source]);
 	}
 
-	$dest_tmp = preg_replace(";\.[\w]{2,3}$;i", "", $dest_tmp) . ".$extension";
+	$dest_tmp = preg_replace(';\.[\w]{2,3}$;i', '', $dest_tmp) . ".$extension";
 
 	if (!defined('_SVP_PAQUET_MAX_SIZE')) {
 		define('_SVP_PAQUET_MAX_SIZE', 67108864);
 	} // 64Mo
 	include_spip('inc/distant');
 	$dest_tmp = copie_locale($source, 'force', $dest_tmp, _SVP_PAQUET_MAX_SIZE);
-	if (!$dest_tmp
+	if (
+		!$dest_tmp
 		or !file_exists($dest_tmp = _DIR_RACINE . $dest_tmp)
 	) {
-		spip_log("Chargement impossible de la source $source", "teleport" . _LOG_ERREUR);
+		spip_log("Chargement impossible de la source $source", 'teleport' . _LOG_ERREUR);
 
-		return _T('svp:erreur_teleporter_chargement_source_impossible', array('source' => $source));
+		return _T('svp:erreur_teleporter_chargement_source_impossible', ['source' => $source]);
 	}
 
-	return array($dest_tmp, $extension);
+	return [$dest_tmp, $extension];
 }
 
 /**
@@ -161,7 +166,8 @@ function teleporter_http_extension($file) {
 	$e = pathinfo($file, PATHINFO_EXTENSION);
 
 	// cas particuliers : redresser .tar.gz
-	if ($e == 'gz'
+	if (
+		$e == 'gz'
 		and preg_match(',tar\.gz,i', $file)
 	) {
 		$e = 'tgz';

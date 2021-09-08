@@ -8,7 +8,7 @@
  * @package SPIP\SVP\Formulaires
  */
 
-if (!defined("_ECRIRE_INC_VERSION")) {
+if (!defined('_ECRIRE_INC_VERSION')) {
 	return;
 }
 
@@ -32,7 +32,7 @@ if (!defined("_ECRIRE_INC_VERSION")) {
  *     Environnement du formulaire
  **/
 function formulaires_admin_plugin_charger_dist($voir = '', $verrouille = '', $id_paquet = '', $redirect = '') {
-	$valeurs = array();
+	$valeurs = [];
 
 	if (!autoriser('configurer', '_plugins')) {
 		return false;
@@ -41,7 +41,7 @@ function formulaires_admin_plugin_charger_dist($voir = '', $verrouille = '', $id
 	// actualiser la liste des paquets locaux systematiquement
 	include_spip('inc/svp_depoter_local');
 	// sans forcer tout le recalcul en base, mais en récupérant les erreurs XML
-	$valeurs['_erreurs_xml'] = array();
+	$valeurs['_erreurs_xml'] = [];
 	svp_actualiser_paquets_locaux(false, $valeurs['_erreurs_xml']);
 
 	$valeurs['actif'] = '';
@@ -49,17 +49,17 @@ function formulaires_admin_plugin_charger_dist($voir = '', $verrouille = '', $id
 		$valeurs['actif'] = 'oui';
 	} elseif ($voir === 'inactif') {
 		$valeurs['actif'] = 'non';
-	} 
+	}
 
-	$valeurs['constante'] = array();
+	$valeurs['constante'] = [];
 	if ($verrouille === 'oui') {
-		$valeurs['constante'] = array('_DIR_PLUGINS_DIST');
+		$valeurs['constante'] = ['_DIR_PLUGINS_DIST'];
 	} elseif (
 		$verrouille === 'non'
 		// sans précision de verrouillage, sur 'actif' c’est juste les plugins non verrouillés.
 		or (!$verrouille && in_array($voir, ['', 'actif', 'inactif']))
 	) {
-		$valeurs['constante'] = array('_DIR_PLUGINS', '_DIR_PLUGINS_SUPPL');
+		$valeurs['constante'] = ['_DIR_PLUGINS', '_DIR_PLUGINS_SUPPL'];
 	} elseif (!$verrouille) {
 		// historique pour chaine de langues...
 		$verrouille = 'tous';
@@ -67,7 +67,7 @@ function formulaires_admin_plugin_charger_dist($voir = '', $verrouille = '', $id
 
 	$valeurs['verrouille'] = $verrouille;
 	$valeurs['id_paquet'] = $id_paquet;
-	$valeurs['actions'] = array();
+	$valeurs['actions'] = [];
 	$valeurs['ids_paquet'] = _request('ids_paquet');
 	$valeurs['afficher_incompatibles'] = _request('afficher_incompatibles');
 	$valeurs['_todo'] = _request('_todo');
@@ -110,18 +110,18 @@ function formulaires_admin_plugin_charger_dist($voir = '', $verrouille = '', $id
  **/
 function formulaires_admin_plugin_verifier_dist($voir = 'actif', $verrouille = 'non', $id_paquet = '', $redirect = '') {
 
-	$erreurs = array();
+	$erreurs = [];
 
 	if (_request('annuler_actions')) {
 		// Requete : Annulation des actions d'installation en cours
 		// -- On vide la liste d'actions en cours
 		set_request('_todo', '');
 		// -- vider les paquets coches s'il y en a
-		set_request('ids_paquet', array());
+		set_request('ids_paquet', []);
 	} elseif (_request('valider_actions')) {
-		// ... 
+		// ...
 	} else {
-		$a_actionner = array();
+		$a_actionner = [];
 
 		// actions globales...
 		if ($action_globale = _request('action_globale') and _request('appliquer')) {
@@ -148,17 +148,16 @@ function formulaires_admin_plugin_verifier_dist($voir = 'actif', $verrouille = '
 		if (!$a_actionner) {
 			$erreurs['message_erreur'] = _T('svp:message_erreur_aucun_plugin_selectionne');
 		} else {
-
 			// On fait appel au decideur pour determiner la liste exacte des commandes apres
 			// verification des dependances
 			include_spip('inc/svp_decider');
 			svp_decider_verifier_actions_demandees($a_actionner, $erreurs);
-			$todo = _request('_todo') ? unserialize(_request('_todo')) : array();
-			$actions = _request('_decideur_actions') ? unserialize(_request('_decideur_actions')) : array();
+			$todo = _request('_todo') ? unserialize(_request('_todo')) : [];
+			$actions = _request('_decideur_actions') ? unserialize(_request('_decideur_actions')) : [];
 			// si c'est une action simple (hors suppression) sans rien a faire de plus que demande, on y go direct
 			if (in_array('stop', $todo) or in_array('kill', $todo)) {
 				if (in_array('stop', $todo)) {
-					$notices = array();
+					$notices = [];
 					$notices['decideur_warning'] = _T('svp:confirmer_desinstaller');
 					set_request('_notices', $notices);
 				}
@@ -204,13 +203,13 @@ function formulaires_admin_plugin_verifier_dist($voir = 'actif', $verrouille = '
  **/
 function formulaires_admin_plugin_traiter_dist($voir = 'actif', $verrouille = 'non', $id_paquet = '', $redirect = '') {
 
-	$retour = array();
+	$retour = [];
 
 	if (_request('valider_actions')) {
 		refuser_traiter_formulaire_ajax();
 		// Ajout de la liste des actions à l'actionneur
 		// c'est lui qui va effectuer rellement les actions
-		// lors de l'appel de action/actionner 
+		// lors de l'appel de action/actionner
 		$actions = unserialize(_request('_todo'));
 		include_spip('inc/svp_actionner');
 		svp_actionner_traiter_actions_demandees($actions, $retour, $redirect);

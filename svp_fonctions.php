@@ -41,33 +41,33 @@ function svp_afficher_intervalle($intervalle, $logiciel) {
 
 	$mineure = $regs[1];
 	$majeure = preg_replace(',\.999$,', '.*', $regs[2]);
-	$mineure_inc = $intervalle[0] == "[";
-	$majeure_inc = substr($intervalle, -1) == "]";
+	$mineure_inc = $intervalle[0] == '[';
+	$majeure_inc = substr($intervalle, -1) == ']';
 	if (strlen($mineure)) {
 		if (!strlen($majeure)) {
-			$version = _T('svp:info_logiciel_version', array(
+			$version = _T('svp:info_logiciel_version', [
 				'logiciel' => $logiciel,
 				'signe'    => ($mineure_inc ? '&ge;' : '&gt;'),
 				'version'  =>  $mineure
-			));
+			]);
 		} else {
-			$version = _T('svp:info_logiciel_version_intervalle', array(
+			$version = _T('svp:info_logiciel_version_intervalle', [
 				'logiciel' => $logiciel,
 				'signe_min' => ($mineure_inc ? '&ge;' : '&gt;'),
 				'version_min' => $mineure,
 				'signe_max' => ($majeure_inc ? '&le;' : '&lt;'),
 				'version_max' => $majeure,
-			));
+			]);
 		}
 	} else {
 		if (!strlen($majeure)) {
 			$version = $logiciel;
 		} else {
-			$version = _T('svp:info_logiciel_version', array(
+			$version = _T('svp:info_logiciel_version', [
 				'logiciel' => $logiciel,
 				'signe' => ($majeure_inc ? '&le;' : '&lt;'),
 				'version' => $majeure,
-			));
+			]);
 		}
 	}
 
@@ -126,8 +126,10 @@ function svp_afficher_dependances($balise_serialisee, $dependance = 'necessite',
 
 		foreach ($dependances as $_compatibilite => $_dependance) {
 			$compatibilite = ($_compatibilite !== 0)
-				? _T('svp:info_compatibilite_dependance',
-					array('compatibilite' => svp_afficher_intervalle($_compatibilite, 'SPIP')))
+				? _T(
+					'svp:info_compatibilite_dependance',
+					['compatibilite' => svp_afficher_intervalle($_compatibilite, 'SPIP')]
+				)
 				: '';
 			if ($compatibilite) {
 				$texte .= ($texte ? str_repeat($sep, 2) : '') . $compatibilite;
@@ -227,7 +229,7 @@ function svp_afficher_langues($langues, $sep = ', ') {
 			if ($texte) {
 				$texte .= $sep;
 			}
-			$traducteurs_langue = array();
+			$traducteurs_langue = [];
 			foreach ($_traducteurs as $_traducteur) {
 				if (is_array($_traducteur)) {
 					$traducteurs_langue[] =
@@ -358,7 +360,7 @@ function critere_compatible_spip_dist($idb, &$boucles, $crit) {
 		//   (ex 3.2,3.1)
 		foreach ($crit->param as $_param) {
 			if (isset($_param[0])) {
-				$version = calculer_liste(array($_param[0]), array(), $boucles, $boucle->id_parent);
+				$version = calculer_liste([$_param[0]], [], $boucles, $boucle->id_parent);
 				$boucle->hash .= '
 				$where' . $i . ' = $creer_where(' . $version . ', \'' . $table . '\', \'' . $op . '\');
 				';
@@ -412,7 +414,7 @@ function filtre_construire_recherche_plugins(
 	$afficher_doublons = ($afficher_doublons == 'oui') ? true : false;
 
 	$tri = ($phrase) ? 'score' : 'nom';
-	$version_spip = $GLOBALS['spip_version_branche'] . "." . $GLOBALS['spip_version_code'];
+	$version_spip = $GLOBALS['spip_version_branche'] . '.' . $GLOBALS['spip_version_code'];
 
 	// On recupere la liste des paquets:
 	// - sans doublons, ie on ne garde que la version la plus recente
@@ -422,11 +424,17 @@ function filtre_construire_recherche_plugins(
 	// tries par nom ou score
 	include_spip('inc/svp_rechercher');
 	$plugins = svp_rechercher_plugins_spip(
-		$phrase, $etat, $depot, $version_spip,
-		svp_lister_plugins_installes(), $afficher_exclusions, $afficher_doublons, $tri);
+		$phrase,
+		$etat,
+		$depot,
+		$version_spip,
+		svp_lister_plugins_installes(),
+		$afficher_exclusions,
+		$afficher_doublons,
+		$tri
+	);
 
 	return $plugins;
-
 }
 
 /**
@@ -516,7 +524,7 @@ function test_plugins_auto() {
  */
 function filtre_svp_diff_xyz($version1, $version2) {
 	$diff = '';
-	$versions = array($version1, $version2);
+	$versions = [$version1, $version2];
 
 	// Compléter les numéros si nécessaire : 1.0 → 1.0.0
 	foreach ($versions as $k => $version) {
@@ -546,7 +554,7 @@ function filtre_svp_diff_xyz($version1, $version2) {
  * @param int $id_paquet
  * @return bool
  */
-function filtre_svp_affichage_filtrer_paquets_dist(int $id_paquet) : bool {
+function filtre_svp_affichage_filtrer_paquets_dist(int $id_paquet): bool {
 	$affiche = pipeline('svp_afficher_paquet', [
 		'args' => ['id_paquet' => $id_paquet],
 		'data' => true
