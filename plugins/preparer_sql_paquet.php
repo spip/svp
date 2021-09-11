@@ -37,13 +37,13 @@ function plugins_preparer_sql_paquet($plugin) {
 	// On initialise les champs ne necessitant aucune transformation
 	foreach (
 		[
-				 'etat' => 'etat',
-				 'version_base' => 'schema',
-				 'logo' => 'logo',
-				 'lien_doc' => 'documentation',
-				 'lien_demo' => 'demonstration',
-				 'lien_dev' => 'developpement'
-			 ] as $cle_champ => $cle_plugin
+			'etat' => 'etat',
+			'version_base' => 'schema',
+			'logo' => 'logo',
+			'lien_doc' => 'documentation',
+			'lien_demo' => 'demonstration',
+			'lien_dev' => 'developpement'
+		] as $cle_champ => $cle_plugin
 	) {
 		$champs[$cle_champ] = (isset($plugin[$cle_plugin]) and $plugin[$cle_plugin])
 			? $plugin[$cle_plugin]
@@ -67,10 +67,10 @@ function plugins_preparer_sql_paquet($plugin) {
 	// On passe en utf-8 avec le bon charset les champs pouvant contenir des entites html
 	foreach (
 		[
-				 'nom' => 'nom',
-				 'description' => 'description',
-				 'slogan' => 'slogan'
-			 ] as $cle_champ => $cle_plugin
+			'nom' => 'nom',
+			'description' => 'description',
+			'slogan' => 'slogan'
+		] as $cle_champ => $cle_plugin
 	) {
 		$champs[$cle_champ] = (isset($plugin[$cle_plugin]) and $plugin[$cle_plugin])
 			? entite2charset($plugin[$cle_plugin], 'utf-8')
@@ -82,11 +82,11 @@ function plugins_preparer_sql_paquet($plugin) {
 	// Traitement des auteurs, credits, licences et copyright
 	foreach (
 		[
-				 'auteur' => 'auteur',
-				 'credit' => 'credit',
-				 'licence' => 'licence',
-				 'copyright' => 'copyright',
-			 ] as $cle_champ => $cle_plugin
+			'auteur' => 'auteur',
+			'credit' => 'credit',
+			'licence' => 'licence',
+			'copyright' => 'copyright',
+		] as $cle_champ => $cle_plugin
 	) {
 		$champs[$cle_champ] = (isset($plugin[$cle_plugin]) and $plugin[$cle_plugin])
 			? serialize($plugin[$cle_plugin])
