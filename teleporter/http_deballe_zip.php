@@ -80,11 +80,11 @@ function teleporter_http_charger_zip($quoi = []) {
 
 	foreach (
 		[
-				'remove' => 'spip',
-				'rename' => [],
-				'edit' => [],
-				'root_extract' => false, # extraire a la racine de dest ?
-				'tmp' => sous_repertoire(_DIR_CACHE, 'chargeur')
+			'remove' => 'spip',
+			'rename' => [],
+			'edit' => [],
+			'root_extract' => false, # extraire a la racine de dest ?
+			'tmp' => sous_repertoire(_DIR_CACHE, 'chargeur')
 		] as $opt => $def
 	) {
 		isset($quoi[$opt]) || ($quoi[$opt] = $def);
