@@ -13,23 +13,23 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 }
 
 
-if (!defined('_SVP_CRON_ACTUALISATION_DEPOTS')) {
+if (!defined('_SVP_CRON_ACTUALISATION_CACHE')) {
 	/**
 	 * Mise à jour automatique des depots (CRON)
 	 * true pour autoriser les actualisations automatique
 	 *
 	 * @var bool
 	 */
-	define('_SVP_CRON_ACTUALISATION_DEPOTS', true);
+	define('_SVP_CRON_ACTUALISATION_CACHE', true);
 }
 
-if (!defined('_SVP_PERIODE_ACTUALISATION_DEPOTS')) {
+if (!defined('_SVP_PERIODE_ACTUALISATION_CACHE')) {
 	/**
 	 * Période d'actualisation en nombre d'heures (de 1 a 24)
 	 *
 	 * @var int
 	 */
-	define('_SVP_PERIODE_ACTUALISATION_DEPOTS', 6);
+	define('_SVP_PERIODE_ACTUALISATION_CACHE', 6);
 }
 
 
@@ -48,8 +48,8 @@ function svp_taches_generales_cron($taches_generales) {
 	// Ajout de la tache CRON de mise a jour reguliere de tous les depots de la base
 	// Par defaut, toutes les 6h
 	// Conditionnee a la variable de configuration
-	if (_SVP_CRON_ACTUALISATION_DEPOTS) {
-		$taches_generales['svp_actualiser_depots'] = _SVP_PERIODE_ACTUALISATION_DEPOTS * 3600;
+	if (_SVP_CRON_ACTUALISATION_CACHE) {
+		$taches_generales['svp_actualiser_depots'] = _SVP_PERIODE_ACTUALISATION_CACHE * 3600;
 	}
 
 	return $taches_generales;
