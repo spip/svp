@@ -78,6 +78,10 @@ function svp_actualiser_paquets_locaux($force = false, &$erreurs_xml = []) {
  *     array[_DIR_PLUGIN*][$chemin] = description
  **/
 function svp_descriptions_paquets_locaux(&$erreurs_xml = []) {
+
+	// Mettre à jour les caches : celui de la liste des plugins présents dans les répertoires idoines (static) et
+	// celui de leur description (plugin_xml_cache.gz).
+	// Il faut ensuite rappeler get_infos pour obtenir les descriptions voulues sachant que le cache sera utilisé.
 	include_spip('inc/plugin');
 	liste_plugin_files(_DIR_PLUGINS);
 	liste_plugin_files(_DIR_PLUGINS_DIST);
@@ -91,7 +95,8 @@ function svp_descriptions_paquets_locaux(&$erreurs_xml = []) {
 		$paquets_locaux['_DIR_PLUGINS_SUPPL'] = $get_infos([], false, _DIR_PLUGINS_SUPPL);
 	}
 
-	// creer la liste des signatures
+	// Pour chaque description de plugin, on ajoute la signature basée sur le répertoire de plugin, le chemin et le contenu
+	// du paquet lui-même.
 	foreach ($paquets_locaux as $const_dir => $paquets) {
 		foreach ($paquets as $chemin => $paquet) {
 			// on propose le paquet uniquement s'il n'y a pas eu d'erreur de lecture XML bloquante
