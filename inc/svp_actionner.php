@@ -1303,6 +1303,7 @@ class Actionneur {
 
 			return false;
 		}
+		include_spip('inc/autoriser');
 		if (!autoriser('plugins_ajouter')) {
 			$this->err(_T('svp:erreur_auth_plugins_ajouter_lib'));
 			$this->log('/!\ Pas autorisé à ajouter des libs !');
