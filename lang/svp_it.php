@@ -11,6 +11,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 	// A
 	'action_patienter' => 'Le azioni sono in corso di esecuzione. Attendere prego ...',
+	'actions' => 'Azioni',
 	'actions_a_faire' => 'Azioni da processare',
 	'actions_demandees' => 'Azioni richieste:',
 	'actions_en_erreur' => 'Errori',
@@ -19,12 +20,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'actions_realises' => 'Azioni eseguite',
 	'afficher_les_plugins_incompatibles' => 'Mostra i plugin incompatibili',
 	'alerte_compatibilite' => 'Compatibilità forzata',
+	'alerte_compatibilite_version_autorisee' => 'E’ posibile attivare plugins compatibili con SPIP <code>@version@</code>.',
 
 	// B
 	'bouton_activer' => 'Attiva',
 	'bouton_actualiser' => 'Aggiorna',
 	'bouton_actualiser_tout' => 'Aggiorna il repository',
 	'bouton_appliquer' => 'Applica',
+	'bouton_configurer' => 'Configura',
 	'bouton_confirmer' => 'Conferma',
 	'bouton_desactiver' => 'Disattiva',
 	'bouton_desinstaller' => 'Disinstalla',
@@ -36,6 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bulle_actualiser_tout_depot' => 'Aggiorna i pacchetti di tutti i repository',
 	'bulle_afficher_xml_plugin' => 'Contenuto del file XML del plugin',
 	'bulle_ajouter_spipzone' => 'Aggiungi il repository SPIP-Zone',
+	'bulle_aller_demonstration' => 'Vai alla pagina demo',
 	'bulle_aller_depot' => 'Mostra la lista dei plugin del repository',
 	'bulle_aller_documentation' => 'Vai alla pagina della documentazione',
 	'bulle_aller_plugin' => 'Vai alla pagina dei plugin',
@@ -56,7 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'config_autoriser_activer_paquets_obsoletes_explication' => 'Pacchetti obsoleti sono pacchetti locali che sono più vecchi rispetto agli altri pacchetti locali. L’obsolescenza di un pacchetto è stabilita sulla base dello stato (stable, testing, dev) del pacchetto e in base della sua versione. Attivare questa opzione se si vuole attivare questi plugin obsoleti.',
 	'config_depot_editable' => 'Consentire la modifica dei repository?',
 	'config_depot_editable_explication' => 'Questo rende modificabili le informazioni di un repository e abilitata eventualmente l’associazione di parole chiave o documenti ad esso. Questa opzione non dovrebbe interessanre nessuno! Quindi lasciate "no"!',
-	'confirmer_desinstaller' => 'Attenzione, la disinstallazione di un plug-in ne <b>cancella</b> i dati dal database ed è irreversibile.<br />Se non sei sicuro, disattiva semplicemente il plug-in.', # MODIF
+	'confirmer_desinstaller' => 'Attenzione, la disinstallazione di un plug-in ne <b>cancella</b> i dati dal database ed è irreversibile.<br />Se non sei sicuro, disattiva semplicemente il plug-in.',
 	'confirmer_telecharger_dans' => 'Il plugin sarà caricato nella directory (@dir@) che esiste già.
 Questo sovrascriverà il contenuto della directory.
 Una copia dei vecchi file saranno salvati in "@dir_backup@".
@@ -70,7 +74,7 @@ Devi confermare questa azione.',
 	'erreur_dir_plugins_auto' => 'La directory "plugins/auto" che permette il download dei pacchetti non esiste oppure non è scrivibile
 <strong>Dovete crearla per consentire l’installazione di nuovi plugin a partire da questa interfaccia.</strong>',
 	'erreur_dir_plugins_auto_ecriture' => 'La directory dei pacchetti @dir@ non è accessibile e scrivibile. Impossibile caricare un pacchetto!',
-	'erreur_dir_plugins_auto_indefini' => 'La directory _DIR_PLUGIN_AUTO non è definita. Impossibile caricarvi un pacchetto !', # MODIF
+	'erreur_dir_plugins_auto_indefini' => 'La directory _DIR_PLUGIN_AUTO non è definita; impossibile caricarvi un pacchetto!',
 	'erreur_dir_plugins_auto_titre' => '"plugins/auto" non è accessibile!',
 	'erreur_teleporter_chargement_source_impossible' => 'Impossibile caricare la sorgente @source@',
 	'erreur_teleporter_destination_erreur' => 'La directory @dir@ non è accessibile',
@@ -79,6 +83,10 @@ Devi confermare questa azione.',
 	'erreur_teleporter_methode_inconue' => 'Metodo @methode@ sconosciuto',
 	'erreur_teleporter_type_fichier_inconnu' => 'Tipo di file sconosciuto per la sorgente @source@',
 	'erreurs_xml' => 'Impossibile leggere alcune descrizioni XML',
+	'etat_actif' => 'Attivo',
+	'etat_inactif' => 'Inattivo',
+	'etat_obsolete' => 'Obsoleto',
+	'etat_verrouille' => 'Bloccato',
 	'explication_destination' => 'Il percorso calcolato dal nome delle archivio se non viene compilato.
 ',
 
@@ -86,6 +94,8 @@ Devi confermare questa azione.',
 	'fieldset_debug' => 'Debug',
 	'fieldset_edition' => 'Modifica',
 	'fieldset_fonctionnement' => 'Funzionamento',
+	'fieldset_typologie' => 'Tipologia di plugin',
+	'filtrer' => 'Filtro',
 
 	// I
 	'info_0_plugin' => 'nessun plugin',
@@ -99,7 +109,7 @@ Devi confermare questa azione.',
 	'info_admin_plugin_verrou_non' => 'La pagina mostra tutti i plugin non bloccati del sito, sia attivi che non.',
 	'info_admin_plugin_verrou_tous' => 'La pagina lista tutti i plugin del sito.',
 	'info_admin_plugin_verrouille' => 'Questa pagina mostra la lista dei plugin attivi e bloccati (posizionati in <code>@dir_plugins_dist@</code>).
-Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controlla <a href="http://programmer.spip.net/repertoire_plugins-dist">la documentazione</a>.', # MODIF
+Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controlla <a href="http://programmer.spip.net/repertoire_plugins-dist">la documentazione</a>.',
 	'info_adresse_spipzone' => 'SPIP-Zone - Plugins',
 	'info_ajouter_depot' => 'Aggiungendo dei repository hai la possibilità di ottenere informazione e cercare su tutti i pacchetti gestiti dai repository aggiunti<br />Un repository è descritto da un file XML contenente le informazioni del deposito e di tutti i suoi pacchetti.',
 	'info_aucun_depot' => 'nessun repository',
@@ -114,11 +124,14 @@ Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controll
 	'info_critere_phrase' => 'Inserire le parole chiave per cercare nei prefissi, nel nome, lo slogan, la descrizione e gli autori del plugin.',
 	'info_depots_disponibles' => '@total_depots@ repository',
 	'info_fichier_depot' => 'Digita nell’url del file di descrizione del repository da aggiungere.<br />Per aggiungere il repository «SPIP-Zone - Plugins» cliccate su questo link: ',
+	'info_logiciel_version' => '@logiciel@ @signe@ @version@',
+	'info_logiciel_version_intervalle' => '@logiciel@ @signe_min@ @version_min@ e @signe_max@ @version_max@',
 	'info_nb_depots' => '@nb@ repository',
 	'info_nb_paquets' => '@nb@ pacchetti',
 	'info_nb_plugins' => '@nb@ plugin',
 	'info_paquets_disponibles' => '@total_paquets@ pacchetti disponibili',
 	'info_plugin_attente_dependance' => 'dipendenze mancanti',
+	'info_plugin_compat_forcee' => 'Versione incompatibile: compatibilità forzata',
 	'info_plugin_incompatible' => 'versione incompatibile',
 	'info_plugin_installe' => 'già installato',
 	'info_plugin_obsolete' => 'versione obsoleta',
@@ -143,8 +156,10 @@ Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controll
 	'label_critere_etat' => 'Stati',
 	'label_critere_phrase' => 'Cerca nei plugin',
 	'label_destination' => 'Percorso della directory "auto" dove inserire il plugin.',
+	'label_etat' => 'Stato',
 	'label_modifie_le' => 'Modificato su',
 	'label_n_autres_contributions' => 'altri contributi',
+	'label_plugin_description' => 'Descrizione della versione @version@',
 	'label_prefixe' => 'Prefisso',
 	'label_selectionner_plugin' => 'Seleziona questo plugin',
 	'label_tags' => 'Tag',
@@ -161,6 +176,8 @@ Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controll
 	'legende_installer_plugins' => 'Installa plugin',
 	'legende_rechercher_plugins' => 'Cerca plugin',
 	'lien_demo' => 'Dimostrazione',
+	'lien_details_moins' => 'Meno informazioni',
+	'lien_details_plus' => 'Altre informazioni',
 	'lien_documentation' => 'Documentazione',
 
 	// M
@@ -194,7 +211,9 @@ Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controll
 	'message_action_stop' => 'Disinstallando il plugin « @plugin@ » (versione : @version@)',
 	'message_action_up' => 'Aggiornando il plugin « @plugin@ » (dalla version @version@ a @version_maj@)',
 	'message_action_upon' => 'Aggiornando e attivando il pluin « @plugin@ » (versione : @version@)',
-	'message_dependance_plugin' => 'Il plugin @plugin@ dipende da @dependance@.', # MODIF
+	'message_dependance_extension_php' => 'Il plugin @plugin@ ha bisogno dell’estensione PHP @dependance@.',
+	'message_dependance_php' => 'Il plugin @plugin@ ha bisogno di @dependance@',
+	'message_dependance_plugin' => 'Il plugin @plugin@ dipende da @dependance@.',
 	'message_erreur_aucun_plugin_selectionne' => 'Nessun plugin selezionato.',
 	'message_erreur_ecriture_lib' => '@plugin@ richiede la libreria <a href="@lib_url@">@lib@</a> posizionata nella directory <var>lib/</var> sulla radice del vostro sito. Però questa directory non è accessibile in scrittura.  Dovete installarlo manualmente oppure dare i permessi di scrittura in questa directory.',
 	'message_erreur_maj_inconnu' => 'Impossibile aggiornare un plugin sconosciuto.',
@@ -231,7 +250,10 @@ Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controll
 	// P
 	'placeholder_phrase' => 'prefissi, nome, slogan, descrizione e autore',
 	'plugin_info_actif' => 'Plugin attivi',
-	'plugin_info_up' => 'Un’aggiornamento al plugin è disponibile (version @version@)', # MODIF
+	'plugin_info_up' => 'E’ disponibile un’aggiornamento del plugin (versione @version@)',
+	'plugin_info_up_x' => 'E’ disponibile un importante aggiornamento (@version@). Ricordati di verificare le eventuali incompatibilità.',
+	'plugin_info_up_y' => 'E’ disponibile un aggiornamento funzionale (@version@).',
+	'plugin_info_up_z' => 'E’ disponibile un’aggiornamento correttivo (@version@).',
 	'plugin_info_verrouille' => 'Plugin bloccati',
 	'plugins_inactifs_liste' => 'Inattivo',
 	'plugins_non_verrouilles_liste' => 'Non bloccato',
@@ -250,7 +272,7 @@ Se vuoi disabilitarla, per favore contatta il webmaster del sito oppure controll
 	'titre_form_charger_plugin' => 'Cerca e aggiungi i plugin',
 	'titre_form_charger_plugin_archive' => 'Scarica il plugin usando l’url dell’archivio',
 	'titre_form_configurer_svp' => 'Configurazione del server dei plugin',
-	'titre_liste_autres_contributions' => 'Template, libreria, set di icone', # MODIF
+	'titre_liste_autres_contributions' => 'Template, libreria, set di icone',
 	'titre_liste_autres_depots' => 'Altri repository',
 	'titre_liste_depots' => 'Lista dei repository disponibili',
 	'titre_liste_paquets_plugin' => 'Lista dei pacchetti del plugin',
