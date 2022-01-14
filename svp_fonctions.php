@@ -159,7 +159,7 @@ function svp_afficher_dependances($balise_serialisee, $dependance = 'necessite',
 					if (isset($_plugin['compatibilite'])) {
 						$intervalle = svp_afficher_intervalle($_plugin['compatibilite'], $logiciel);
 					}
-					$texte .= ($intervalle) ? $intervalle : $logiciel;
+					$texte .= $intervalle ?: $logiciel;
 				} else // On demande l'affichage des librairies
 				{
 					$texte .= '<a href="' . $_plugin['lien'] . '" title="' . _T('svp:bulle_telecharger_librairie') . '">' . $_plugin['nom'] . '</a>';
@@ -533,8 +533,8 @@ function filtre_svp_diff_xyz($version1, $version2) {
 		}
 	}
 
-	list($x1, $y1, $z1) = explode('.', $versions[0]);
-	list($x2, $y2, $z2) = explode('.', $versions[1]);
+	[$x1, $y1, $z1] = explode('.', $versions[0]);
+	[$x2, $y2, $z2] = explode('.', $versions[1]);
 
 	if ($x1 != $x2) {
 		$diff = 'x';

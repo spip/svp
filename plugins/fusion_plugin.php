@@ -65,7 +65,7 @@ function plugins_fusion_plugin($plugins) {
 				$borne_min = _SVP_VERSION_SPIP_MIN;
 			}
 			$bornes_spip = extraire_bornes($_plugin['compatibilite']);
-			$borne_min = ($bornes_spip['min']['valeur']) ? $bornes_spip['min']['valeur'] : _SVP_VERSION_SPIP_MIN;
+			$borne_min = $bornes_spip['min']['valeur'] ?: _SVP_VERSION_SPIP_MIN;
 			if (spip_version_compare($borne_min_max, $borne_min, '<=')) {
 				$cle_min_max = $_cle;
 				$borne_min_max = $borne_min;

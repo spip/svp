@@ -403,7 +403,7 @@ class Actionneur {
 	public function calculer_necessites_complets_rec($necessites, $profondeur = 0) {
 		$changement = false;
 		foreach ($necessites as $prefixe => $liste) {
-			$n = count($liste);
+			$n = is_countable($liste) ? count($liste) : 0;
 			foreach ($liste as $prefixe_necessite) {
 				// si un des plugins dépendants fait partie des plugins actionnés,
 				// il faut aussi lui ajouter ses dépendances…
@@ -412,7 +412,7 @@ class Actionneur {
 				}
 			}
 			$necessites[$prefixe] = $liste;
-			if ($n !== count($liste)) {
+			if ($n !== (is_countable($liste) ? count($liste) : 0)) {
 				$changement = true;
 			}
 		}
@@ -731,7 +731,7 @@ class Actionneur {
 						'version' => denormaliser_version($i['v']),
 						'version_maj' => denormaliser_version($i['maj'])
 					]);
-					if (strpos($done, $texte_on) !== false) {
+					if (strpos($done, (string) $texte_on) !== false) {
 						$done = str_replace($texte_on, $texte, $done);
 						$texte = '';
 					}
@@ -884,6 +884,7 @@ class Actionneur {
 	 * @see Actionneur::sauver_actions()
 	 **/
 	public function get_actions() {
+		$contenu = null;
 		if (
 			lire_fichier(_DIR_TMP . 'stp_actions.txt', $contenu)
 			and $contenu
@@ -1104,7 +1105,7 @@ class Actionneur {
 					// l'ancien repertoire a supprimer pouvait etre auto/X
 					// alors que le nouveau est auto/X/Y ...
 					// il faut prendre en compte ce cas particulier et ne pas ecraser auto/X !
-					if (substr($i['src_archive'], 0, 5) == 'auto/' and (false === strpos($dirs['dossier'], $i['src_archive']))) {
+					if (substr($i['src_archive'], 0, 5) == 'auto/' and (false === strpos($dirs['dossier'], (string) $i['src_archive']))) {
 						if (supprimer_repertoire(constant($i['constante']) . $i['src_archive'])) {
 							sql_delete('spip_paquets', 'id_paquet=' . sql_quote($info['i']));
 						}
@@ -1517,7 +1518,7 @@ class Actionneur {
 					return true;
 				} else {
 					// l'installation est neuve
-					list($ok, $trace) = $infos['install_test'];
+					[$ok, $trace] = $infos['install_test'];
 					if ($ok) {
 						return true;
 					}
@@ -1594,7 +1595,7 @@ class Actionneur {
 					$dest = $dest_future;
 				} else {
 					$url = $i['src_archive'];
-					$dest = $dest_ancien ? $dest_ancien : $dest_future;
+					$dest = $dest_ancien ?: $dest_future;
 				}
 
 				// on recupere la mise a jour...
@@ -1767,7 +1768,7 @@ function svp_actionner_traiter_actions_demandees($actions, &$retour, $redirect =
 	$actionneur->verrouiller();
 	$actionneur->sauver_actions();
 
-	$redirect = $redirect ? $redirect : generer_url_ecrire('admin_plugin');
+	$redirect = $redirect ?: generer_url_ecrire('admin_plugin');
 	$retour['redirect'] = generer_url_action('actionner', 'redirect=' . urlencode($redirect));
 	set_request('_todo', '');
 	$retour['message_ok'] = _T('svp:action_patienter');

@@ -97,6 +97,8 @@ $GLOBALS['balises_multis'] = [
  */
 function svp_phraser_depot($fichier_xml) {
 
+	$xml = null;
+	$cache_md5 = null;
 	// le fichier xml fournit sous forme de fichier
 	lire_fichier($fichier_xml, $xml);
 
@@ -208,7 +210,7 @@ function svp_phraser_archives($archives, &$md5_cache = []) {
 
 				// La balise <archive> peut posseder un attribut qui precise la DTD utilisee pour les plugins (plugin ou paquet)
 				// Sinon, c'est la DTD plugin qui est utilisee
-				list($tag, $attributs) = spip_xml_decompose_tag($_archive);
+				[$tag, $attributs] = spip_xml_decompose_tag($_archive);
 				// -- On stocke la DTD d'extraction des infos du plugin
 				$dtd = (isset($attributs['dtd']) and $attributs['dtd']) ? $attributs['dtd'] : _SVP_DTD_PLUGIN;
 
@@ -380,19 +382,19 @@ function svp_phraser_traductions($contenu) {
 	if (is_array($arbre = spip_xml_parse($contenu))) {
 		foreach ($arbre as $_tag => $_langues) {
 			// On commence par les balises <traduction> et leurs attributs
-			list($tag, $attributs_traduction) = spip_xml_decompose_tag($_tag);
+			[$tag, $attributs_traduction] = spip_xml_decompose_tag($_tag);
 			$traductions[$attributs_traduction['module']]['reference'] = $attributs_traduction['reference'];
-			$traductions[$attributs_traduction['module']]['gestionnaire'] = isset($attributs_traduction['gestionnaire']) ? $attributs_traduction['gestionnaire'] : '';
+			$traductions[$attributs_traduction['module']]['gestionnaire'] = $attributs_traduction['gestionnaire'] ?? '';
 
 			// On continue par les balises <langue> qui donnent le code en attribut
 			// et les balises <traducteur> qui donnent uniquement le nom en attribut
 			if (is_array($_langues[0])) {
 				foreach ($_langues[0] as $_tag_trad => $_traducteurs) {
-					list($tag, $attributs_langue) = spip_xml_decompose_tag($_tag_trad);
+					[$tag, $attributs_langue] = spip_xml_decompose_tag($_tag_trad);
 					$traducteurs = [];
 					if (is_array($_traducteurs[0])) {
 						foreach ($_traducteurs[0] as $_tag_lang => $_vide) {
-							list($tag, $attributs_traducteur) = spip_xml_decompose_tag($_tag_lang);
+							[$tag, $attributs_traducteur] = spip_xml_decompose_tag($_tag_lang);
 							$traducteurs[] = $attributs_traducteur;
 						}
 					}
@@ -450,7 +452,7 @@ function svp_aplatir_balises($balises, $arbre_xml, $mode = 'vide_et_nonvide', $t
 		) {
 			$tableau_aplati[$_valeur] = $valeur_aplatie;
 		} else {
-			$tableau_aplati[$_valeur] = isset($tableau_initial[$_valeur]) ? $tableau_initial[$_valeur] : '';
+			$tableau_aplati[$_valeur] = $tableau_initial[$_valeur] ?? '';
 		}
 	}
 

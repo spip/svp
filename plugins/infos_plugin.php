@@ -23,6 +23,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
 // lecture d'un texte ecrit en pseudo-xml issu d'un fichier plugin.xml
 // et conversion approximative en tableau PHP.
 function plugins_infos_plugin($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
+	$ret = [];
 	include_spip('inc/xml');
 	$arbre = spip_xml_parse($desc);
 
@@ -93,13 +94,13 @@ function plugins_infos_plugin($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 		$ret['meta'] = trim(spip_xml_aplatit($arbre['meta']));
 	}
 
-	$necessite = info_plugin_normalise_necessite(isset($arbre['necessite']) ? $arbre['necessite'] : '');
-	$ret['compatibilite'] = isset($necessite['compatible']) ? $necessite['compatible'] : '';
+	$necessite = info_plugin_normalise_necessite($arbre['necessite'] ?? '');
+	$ret['compatibilite'] = $necessite['compatible'] ?? '';
 	$ret['necessite'] = $necessite['necessite'];
 	$ret['lib'] = $necessite['lib'];
-	$ret['utilise'] = info_plugin_normalise_utilise(isset($arbre['utilise']) ? $arbre['utilise'] : '');
-	$ret['procure'] = info_plugin_normalise_procure(isset($arbre['procure']) ? $arbre['procure'] : '');
-	$ret['chemin'] = info_plugin_normalise_chemin(isset($arbre['path']) ? $arbre['path'] : '');
+	$ret['utilise'] = info_plugin_normalise_utilise($arbre['utilise'] ?? '');
+	$ret['procure'] = info_plugin_normalise_procure($arbre['procure'] ?? '');
+	$ret['chemin'] = info_plugin_normalise_chemin($arbre['path'] ?? '');
 
 	if (isset($arbre['pipeline'])) {
 		$ret['pipeline'] = $arbre['pipeline'];
@@ -110,7 +111,7 @@ function plugins_infos_plugin($desc, $plug = '', $dir_plugins = _DIR_PLUGINS) {
 	$ret['menu'] = $les_boutons['bouton'];
 	$ret['onglet'] = $les_boutons['onglet'];
 
-	$ret['traduire'] = isset($arbre['traduire']) ? $arbre['traduire'] : '';
+	$ret['traduire'] = $arbre['traduire'] ?? '';
 
 	if (isset($arbre['config'])) {
 		$ret['config'] = spip_xml_aplatit($arbre['config']);
@@ -158,7 +159,7 @@ function info_plugin_normalise_necessite($necessite) {
 	if (is_array($necessite)) {
 		foreach ($necessite as $need) {
 			$id = $need['id'];
-			$v = isset($need['version']) ? $need['version'] : '';
+			$v = $need['version'] ?? '';
 
 			// Necessite SPIP version x ?
 			if (strtoupper($id) == 'SPIP') {
@@ -194,7 +195,7 @@ function info_plugin_normalise_utilise($utilise) {
 	if (is_array($utilise)) {
 		foreach ($utilise as $need) {
 			$id = $need['id'];
-			$v = isset($need['version']) ? $need['version'] : '';
+			$v = $need['version'] ?? '';
 			$res[] = ['nom' => $id, 'id' => $id, 'version' => $v, 'compatibilite' => $v];
 		}
 	}

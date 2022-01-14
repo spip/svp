@@ -41,7 +41,7 @@ function teleporter_http_dist($methode, $source, $dest, $options = []) {
 		return $res;
 	}
 
-	list($fichier, $extension) = $res;
+	[$fichier, $extension] = $res;
 	if (!$deballe = charger_fonction('http_deballe_' . preg_replace(',\W,', '_', $extension), 'teleporter', true)) {
 		return _T('svp:erreur_teleporter_format_archive_non_supporte', ['extension' => $extension]);
 	}
@@ -135,7 +135,7 @@ function teleporter_http_recuperer_source($source, $dest_tmp) {
 	$dest_tmp = preg_replace(';\.[\w]{2,3}$;i', '', $dest_tmp) . ".$extension";
 
 	if (!defined('_SVP_PAQUET_MAX_SIZE')) {
-		define('_SVP_PAQUET_MAX_SIZE', 67108864);
+		define('_SVP_PAQUET_MAX_SIZE', 67_108_864);
 	} // 64Mo
 	include_spip('inc/distant');
 	$dest_tmp = copie_locale($source, 'force', $dest_tmp, _SVP_PAQUET_MAX_SIZE);

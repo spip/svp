@@ -26,6 +26,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Couples clés => valeurs de description du paquet
  **/
 function plugins_preparer_sql_paquet($plugin) {
+	$dependances = [];
 	include_spip('inc/svp_outiller');
 
 	$champs = [];
@@ -61,7 +62,7 @@ function plugins_preparer_sql_paquet($plugin) {
 
 	// Indicateurs d'etat numerique (pour simplifier la recherche des maj de STP)
 	static $num = ['stable' => 4, 'test' => 3, 'dev' => 2, 'experimental' => 1];
-	$champs['etatnum'] = isset($num[$plugin['etat']]) ? $num[$plugin['etat']] : 0;
+	$champs['etatnum'] = $num[$plugin['etat']] ?? 0;
 
 
 	// On passe en utf-8 avec le bon charset les champs pouvant contenir des entites html

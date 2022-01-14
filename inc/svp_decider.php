@@ -181,7 +181,7 @@ class Decideur {
 			$attente = $this->infos_courtes('pa.attente=' . sql_quote('oui'));
 		}
 
-		return isset($attente['i'][$id]) ? $attente['i'][$id] : false;
+		return $attente['i'][$id] ?? false;
 	}
 
 	/**
@@ -193,6 +193,7 @@ class Decideur {
 	 *     Tableau ('PREFIXE' => version)
 	 */
 	public function liste_plugins_procure() {
+		$infos = [];
 		$procure = [];
 		$get_infos = charger_fonction('get_infos', 'plugins');
 		$infos['_DIR_RESTREINT'][''] = $get_infos('./', false, _DIR_RESTREINT);
@@ -340,9 +341,9 @@ class Decideur {
 
 				// gerer les dependences autres que dans 0 (communs ou local) !!!!
 				// il peut exister des cles info[dn]["[version_spip_min;version_spip_max]"] de dependences
-				if (!isset($d[$cle][0]) or count($d[$cle]) > 1) {
+				if (!isset($d[$cle][0]) or (is_countable($d[$cle]) ? count($d[$cle]) : 0) > 1) {
 					$dep = [];
-					$dep[0] = isset($d[$cle][0]) ? $d[$cle][0] : [];
+					$dep[0] = $d[$cle][0] ?? [];
 					unset($d[$cle][0]);
 					foreach ($d[$cle] as $version => $dependences) {
 						if (svp_verifier_compatibilite_spip($version)) {
@@ -400,7 +401,7 @@ class Decideur {
 	 *     false si pas d'erreur, tableau des erreurs sinon.
 	 */
 	public function en_erreur($id) {
-		return isset($this->err[$id]) ? $this->err[$id] : false;
+		return $this->err[$id] ?? false;
 	}
 
 
@@ -422,7 +423,7 @@ class Decideur {
 			'pa.id_depot > ' . sql_quote(0)
 		], true);
 		$res = false;
-		if ($news and count($news['p'][$prefixe]) > 0) {
+		if ($news and (is_countable($news['p'][$prefixe]) ? count($news['p'][$prefixe]) : 0) > 0) {
 			foreach ($news['p'][$prefixe] as $new) {
 				if (spip_version_compare($new['v'], $version, '>')) {
 					if (!$res or version_compare($new['v'], $res['v'], '>')) {
@@ -456,7 +457,7 @@ class Decideur {
 			'pa.obsolete=' . sql_quote('non'),
 			'pa.id_depot=' . sql_quote(0)
 		], true);
-		if ($locaux and isset($locaux['p'][$prefixe]) and count($locaux['p'][$prefixe]) > 0) {
+		if ($locaux and isset($locaux['p'][$prefixe]) and (is_countable($locaux['p'][$prefixe]) ? count($locaux['p'][$prefixe]) : 0) > 0) {
 			foreach ($locaux['p'][$prefixe] as $new) {
 				if (
 					plugin_version_compatible($version, $new['v'])
@@ -495,7 +496,7 @@ class Decideur {
 				'pa.obsolete=' . sql_quote('non'),
 				'pa.id_depot>' . sql_quote(0)
 			], true);
-			if ($distants and isset($distants['p'][$prefixe]) and count($distants['p'][$prefixe]) > 0) {
+			if ($distants and isset($distants['p'][$prefixe]) and (is_countable($distants['p'][$prefixe]) ? count($distants['p'][$prefixe]) : 0) > 0) {
 				foreach ($distants['p'][$prefixe] as $new) {
 					if (
 						plugin_version_compatible($version, $new['v'])
@@ -509,7 +510,7 @@ class Decideur {
 			}
 		}
 
-		return ($plugin ? $plugin : false);
+		return ($plugin ?: false);
 	}
 
 
@@ -539,7 +540,7 @@ class Decideur {
 
 		// si recursif, on stoppe aussi les plugins dependants
 		if ($recur) {
-			$prefixes = array_merge([$info['p']], array_keys($info['procure']));
+			$prefixes = [...[$info['p']], ...array_keys($info['procure'])];
 			foreach ($this->end['i'] as $id => $plug) {
 				if (is_array($plug['dn']) and $plug['dn']) {
 					foreach ($plug['dn'] as $n) {
@@ -562,7 +563,7 @@ class Decideur {
 	 *     Le paquet sera t'il off ?
 	 **/
 	public function sera_off($prefixe) {
-		return isset($this->off[$prefixe]) ? $this->off[$prefixe] : false;
+		return $this->off[$prefixe] ?? false;
 	}
 
 	/**
@@ -621,7 +622,7 @@ class Decideur {
 	 *     Le paquet sera t'il actif ?
 	 **/
 	public function sera_actif_id($id) {
-		return isset($this->end['i'][$id]) ? $this->end['i'][$id] : false;
+		return $this->end['i'][$id] ?? false;
 	}
 
 	/**
@@ -732,7 +733,7 @@ class Decideur {
 	 *     Le paquet est t'il invalide ?
 	 **/
 	public function sera_invalide($p) {
-		return isset($this->invalides[$p]) ? $this->invalides[$p] : false;
+		return $this->invalides[$p] ?? false;
 	}
 
 	/**
@@ -750,7 +751,7 @@ class Decideur {
 			$libs = svp_lister_librairies();
 		}
 
-		return isset($libs[$lib]) ? $libs[$lib] : false;
+		return $libs[$lib] ?? false;
 	}
 
 
@@ -1048,7 +1049,7 @@ class Decideur {
 		if (is_array($info['dn']) and count($info['dn'])) {
 			foreach ($info['dn'] as $n) {
 				$p = $n['nom'];
-				$v = isset($n['compatibilite']) ? $n['compatibilite'] : '';
+				$v = $n['compatibilite'] ?? '';
 
 				if ($p == 'SPIP') {
 					// c'est pas la que ça se fait !
@@ -1105,7 +1106,7 @@ class Decideur {
 											'pa.maj_version=' . sql_quote($new['v'])
 										], true);
 									}
-									if ($i and isset($i['p'][$new['p']]) and count($i['p'][$new['p']])) {
+									if ($i and isset($i['p'][$new['p']]) and is_countable($i['p'][$new['p']]) ? count($i['p'][$new['p']]) : 0) {
 										// c'est une mise a jour
 										$vieux = $i['p'][$new['p']][0];
 										$this->change($vieux, 'upon');
@@ -1188,7 +1189,7 @@ class Decideur {
 			$type = 'php';
 		} elseif (strncmp($dependance, 'PHP:', 4) === 0) {
 			$type = 'extension_php';
-			list(,$dependance) = explode(':', $dependance, 2);
+			[, $dependance] = explode(':', $dependance, 2);
 		}
 
 		if ($intervalle) {

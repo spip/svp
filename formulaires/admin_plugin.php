@@ -162,16 +162,16 @@ function formulaires_admin_plugin_verifier_dist($voir = 'actif', $verrouille = '
 					set_request('_notices', $notices);
 				}
 			} elseif (
-				count($todo) == count($a_actionner) // et on n'a pas plus d'actions que ce qu'on avait demandé explicitement
+				(is_countable($todo) ? count($todo) : 0) == count($a_actionner) // et on n'a pas plus d'actions que ce qu'on avait demandé explicitement
 				and !isset($erreurs['decideur_erreurs'])
-				and (!isset($erreurs['decideur_propositions']) or !count($actions['decideur_propositions']))
+				and (!isset($erreurs['decideur_propositions']) or !(is_countable($actions['decideur_propositions']) ? count($actions['decideur_propositions']) : 0))
 			) {
 				set_request('valider_actions', true); // on fake la validation, non mais ho !
 			}
 		}
 	}
 
-	if (count($erreurs) and !isset($erreurs['message_erreur'])) {
+	if (is_countable($erreurs) ? count($erreurs) : 0 and !isset($erreurs['message_erreur'])) {
 		$erreurs['message_erreur'] = '';
 	}
 

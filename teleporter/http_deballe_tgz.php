@@ -149,7 +149,7 @@ function teleporter_http_charger_tgz($quoi = []) {
 	foreach ($infos['fichiers'] as $k => $f) {
 		$size += $f['size'];
 		$filename = $f['filename'];
-		if ($infos['proprietes']['racine'] and strpos($filename, $infos['proprietes']['racine']) === 0) {
+		if ($infos['proprietes']['racine'] and strpos($filename, (string) $infos['proprietes']['racine']) === 0) {
 			$filename = substr($filename, strlen($infos['proprietes']['racine']));
 		}
 		$list[] = $filename;

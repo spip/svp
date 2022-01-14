@@ -63,6 +63,7 @@ function svp_rechercher_plugins_spip(
 	$tri = 'nom'
 ) {
 
+	$where = [];
 	include_spip('inc/rechercher');
 
 	$plugins = [];

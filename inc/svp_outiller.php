@@ -123,6 +123,7 @@ $GLOBALS['licences_plugin'] = [
  **/
 function fusionner_intervalles($intervalle_a, $intervalle_b) {
 
+	$bornes_fusionnees = [];
 	// On recupere les bornes de chaque intervalle
 	$borne_a = extraire_bornes($intervalle_a);
 	$borne_b = extraire_bornes($intervalle_b);

@@ -27,6 +27,7 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  *     Couples clés => valeurs de description du paquet
  **/
 function plugins_preparer_sql_plugin($plugin) {
+	$dependances = [];
 	include_spip('inc/svp_outiller');
 
 	$champs = [];
@@ -82,7 +83,7 @@ function plugins_preparer_sql_plugin($plugin) {
 	$champs['nom'] = trim(entite2charset($plugin['nom'], 'utf-8'));
 
 	// Extraction de la compatibilite SPIP et construction de la liste des branches spip supportees
-	$champs['compatibilite_spip'] = ($plugin['compatibilite']) ? $plugin['compatibilite'] : '';
+	$champs['compatibilite_spip'] = $plugin['compatibilite'] ?: '';
 	$champs['branches_spip'] = ($plugin['compatibilite']) ? compiler_branches_spip($plugin['compatibilite']) : '';
 
 	// Construction du tableau des dependances necessite, lib et utilise
@@ -151,7 +152,7 @@ function normaliser_nom($nom, $langue = '', $supprimer_numero = true) {
 		} else {
 			$nbr_matches = 0;
 		}
-		if (!$langue or $langue == $_lang or count($noms) == 1) {
+		if (!$langue or $langue == $_lang or (is_countable($noms) ? count($noms) : 0) == 1) {
 			$nouveau_nom .= (($multi) ? '[' . $_lang . ']' : '') .
 				(($nbr_matches > 0) ? trim($matches[1]) : $_nom);
 		}
@@ -237,7 +238,7 @@ function normaliser_auteur_licence($texte, $balise) {
 			} else {
 				$href = $r[4];
 			}
-			$v = ($r[1]) ? $r[1] : str_replace($r[0], '', $v);
+			$v = $r[1] ?: str_replace($r[0], '', $v);
 		} else {
 			$href = '';
 		}
@@ -309,8 +310,8 @@ function normaliser_multi($texte) {
 	foreach ($regs as $reg) {
 		foreach (extraire_trads($reg[1]) as $k => $v) {
 			// Si le code de langue n'est pas précisé dans le multi c'est donc la langue par défaut
-			$lang = ($k) ? $k : _LANGUE_PAR_DEFAUT;
-			$trads[$lang] = str_replace($reg[0], $v, isset($trads[$k]) ? $trads[$k] : $texte);
+			$lang = $k ?: _LANGUE_PAR_DEFAUT;
+			$trads[$lang] = str_replace($reg[0], $v, $trads[$k] ?? $texte);
 		}
 	}
 

@@ -32,7 +32,7 @@ if (!defined('_GIT_COMMAND')) {
  */
 function teleporter_git_dist($methode, $source, $dest, $options = []) {
 
-	$branche = (isset($options['branche']) ? $options['branche'] : 'master');
+	$branche = ($options['branche'] ?? 'master');
 	if (is_dir($dest)) {
 		$infos = teleporter_git_read($dest, ['format' => 'assoc']);
 		if (!$infos) {

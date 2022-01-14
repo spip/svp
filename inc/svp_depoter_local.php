@@ -257,8 +257,8 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 				if (isset($multis['nom'])) {
 					$paquet['nom'] = $multis['nom'];
 				}
-				$paquet['slogan'] = (isset($multis['slogan'])) ? $multis['slogan'] : '';
-				$paquet['description'] = (isset($multis['description'])) ? $multis['description'] : '';
+				$paquet['slogan'] = $multis['slogan'] ?? '';
+				$paquet['description'] = $multis['description'] ?? '';
 			}
 
 			// On met les neccesite, utilise, procure, dans la clé 0
@@ -313,7 +313,7 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 				$le_paquet['prefixe'] = $prefixe;
 				$le_paquet['constante'] = $const_dir;
 				$le_paquet['src_archive'] = $chemin;
-				$le_paquet['recent'] = isset($recents[$chemin]) ? $recents[$chemin] : 0;
+				$le_paquet['recent'] = $recents[$chemin] ?? 0;
 				$le_paquet['installe'] = is_array($chemin) && in_array(
 					$chemin,
 					$installes

@@ -33,7 +33,7 @@ function plugin_lire($plugin, $informations = []) {
 	// -- on essaye de déterminer l'index de la description qui est toujours le préfixe.
 	$id_plugin = intval($plugin);
 	if ($id_plugin) {
-		$index = isset($prefixes[$id_plugin]) ? $prefixes[$id_plugin] : '';
+		$index = $prefixes[$id_plugin] ?? '';
 	} else {
 		$prefixe = strtoupper($plugin);
 		$index = $prefixe;
@@ -88,7 +88,7 @@ function plugin_lire($plugin, $informations = []) {
 
 		if (is_string($informations)) {
 			// Valeur unique demandée.
-			$description = isset($description[$informations]) ? $description[$informations] : '';
+			$description = $description[$informations] ?? '';
 		}
 	}
 
