@@ -517,7 +517,7 @@ parameters:
 
 		-
 			message: "#^Function include_spip not found\\.$#"
-			count: 16
+			count: 17
 			path: inc/svp_actionner.php
 
 		-
@@ -611,11 +611,6 @@ parameters:
 			path: inc/svp_actionner.php
 
 		-
-			message: "#^Undefined variable\\: \\$contenu$#"
-			count: 2
-			path: inc/svp_actionner.php
-
-		-
 			message: "#^Call to function unset\\(\\) contains undefined variable \\$conflit\\.$#"
 			count: 1
 			path: inc/svp_decider.php
@@ -636,7 +631,7 @@ parameters:
 			path: inc/svp_decider.php
 
 		-
-			message: "#^Cannot unset offset 'id_depot' on array\\('p' \\=\\> string, 'local' \\=\\> bool\\)\\.$#"
+			message: "#^Cannot unset offset 'id_depot' on array\\{p\\: string, local\\: bool\\}\\.$#"
 			count: 1
 			path: inc/svp_decider.php
 
@@ -966,16 +961,6 @@ parameters:
 			path: inc/svp_phraser.php
 
 		-
-			message: "#^Undefined variable\\: \\$cache_md5$#"
-			count: 2
-			path: inc/svp_phraser.php
-
-		-
-			message: "#^Undefined variable\\: \\$xml$#"
-			count: 3
-			path: inc/svp_phraser.php
-
-		-
 			message: "#^Function sql_fetsel not found\\.$#"
 			count: 1
 			path: inc/svp_plugin.php
@@ -1059,6 +1044,41 @@ parameters:
 			message: "#^Function spip_version_compare not found\\.$#"
 			count: 1
 			path: plugins/fusion_plugin.php
+
+		-
+			message: "#^Function charger_fonction not found\\.$#"
+			count: 2
+			path: plugins/infos_plugin.php
+
+		-
+			message: "#^Function charset2unicode not found\\.$#"
+			count: 1
+			path: plugins/infos_plugin.php
+
+		-
+			message: "#^Function include_spip not found\\.$#"
+			count: 2
+			path: plugins/infos_plugin.php
+
+		-
+			message: "#^Function spip_log not found\\.$#"
+			count: 1
+			path: plugins/infos_plugin.php
+
+		-
+			message: "#^Function spip_xml_aplatit not found\\.$#"
+			count: 12
+			path: plugins/infos_plugin.php
+
+		-
+			message: "#^Function spip_xml_parse not found\\.$#"
+			count: 1
+			path: plugins/infos_plugin.php
+
+		-
+			message: "#^Function tester_url_absolue not found\\.$#"
+			count: 1
+			path: plugins/infos_plugin.php
 
 		-
 			message: "#^Function include_spip not found\\.$#"
