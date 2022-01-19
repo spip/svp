@@ -20,7 +20,6 @@ if (!defined('_ECRIRE_INC_VERSION')) {
  * @package SPIP\SVP\Actionner
  **/
 class Actionneur {
-
 	/**
 	 * Instance du décideur
 	 *

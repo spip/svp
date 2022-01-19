@@ -25,7 +25,6 @@ include_spip('inc/svp_rechercher'); // svp_verifier_compatibilite_spip()
  * @package SPIP\SVP\Actionner
  **/
 class Decideur {
-
 	/**
 	 * Plugins actifs en cours avant toute modification
 	 *
