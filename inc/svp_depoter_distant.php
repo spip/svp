@@ -883,7 +883,7 @@ function svp_actualiser_url_plugins() {
 		$nb_plugins = count($ids_plugin);
 
 		foreach ($ids_plugin as $_id) {
-			generer_url_entite($_id, 'plugin', '', '', true);
+			generer_objet_url($_id, 'plugin', '', '', true);
 		}
 	}
 

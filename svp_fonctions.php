@@ -145,7 +145,7 @@ function svp_afficher_dependances($balise_serialisee, $dependance = 'necessite',
 							$logiciel = $nom;
 						} else {
 							$url = ($lien == 'local')
-								? generer_url_entite($plugin['id_plugin'], 'plugin')
+								? generer_objet_url($plugin['id_plugin'], 'plugin')
 								: "https://plugins.spip.net/{$_plugin['nom']}.html";
 							$bulle = _T('svp:bulle_aller_plugin');
 							$logiciel = '<a href="' . $url . '" title="' . $bulle . '">' . $nom . '</a>';

@@ -36,7 +36,7 @@
 <BOUCLE_liste_plugins(PLUGINS) {id_plugin?}{where?}{id_depot?}{recherche?}{tri #ENV{par, prefixe}, #GET{defaut_tri}}{pagination #ENV{pas, 25}}{fusion prefixe}{doublons}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
 				<td class="prefixe principale">
-					<a[ href="(#ID_PLUGIN|generer_url_entite{plugin})"] title="<:svp:bulle_aller_plugin:>">
+					<a[ href="(#ID_PLUGIN|generer_objet_url{plugin})"] title="<:svp:bulle_aller_plugin:>">
 						[(#PREFIXE|strtolower)]
 					</a>
 				</td>
