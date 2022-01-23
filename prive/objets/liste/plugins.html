@@ -25,7 +25,7 @@
 	[<caption><strong class="caption">(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{svp:info_1_plugin,svp:info_nb_plugins}})</strong></caption>]
 		<thead>
 			<tr class="first_row">
-				<th class="prefixe principale">[(#TRI{prefixe, <:svp:label_prefixe:>, ajax})]</th>
+				<th class="prefixe">[(#TRI{prefixe, <:svp:label_prefixe:>, ajax})]</th>
 				<th class="titre principale">[(#TRI{nom, <:info_titre:>, ajax})]</th>
 				<th class="branche"><:svp:label_branches_spip:></th>
 				<th class="date secondaire">[(#TRI{date_modif, <:svp:label_modifie_le:>, ajax})]</th>
@@ -35,7 +35,7 @@
 		<tbody>
 <BOUCLE_liste_plugins(PLUGINS) {id_plugin?}{where?}{id_depot?}{recherche?}{tri #ENV{par, prefixe}, #GET{defaut_tri}}{pagination #ENV{pas, 25}}{fusion prefixe}{doublons}>
 			<tr class="[(#COMPTEUR_BOUCLE|alterner{row_odd,row_even})]">
-				<td class="prefixe principale">
+				<td class="prefixe">
 					<a[ href="(#ID_PLUGIN|generer_objet_url{plugin})"] title="<:svp:bulle_aller_plugin:>">
 						[(#PREFIXE|strtolower)]
 					</a>
@@ -45,7 +45,11 @@
 				</td>
 				<td class="branche">[(#BRANCHES_SPIP)]</td>
 				<td class="date secondaire">[(#DATE_MODIF|affdate{d-m H:i})]</td>
-				<td class="id">[(#ID_PLUGIN)]</td>
+				<td class="id secondaire">
+					<a[ href="(#ID_PLUGIN|generer_objet_url{plugin})"] title="<:svp:bulle_aller_plugin:>">
+					[(#ID_PLUGIN)]
+					</a>
+				</td>
 			</tr>
 </BOUCLE_liste_plugins>
 		</tbody>
