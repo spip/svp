@@ -1,8 +1,8 @@
 <paquet
 	prefix="svp"
 	categorie="maintenance"
-	version="3.0.0-dev"
-	etat="dev"
+	version="3.0.0"
+	etat="stable"
 	compatibilite="[4.1.0-alpha;4.1.*]"
 	logo="svp.svg"
 	schema="0.6.1"
