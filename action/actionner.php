@@ -107,9 +107,11 @@ function svp_redirige_boucle($url, $texte, $progres) {
 	include_spip('inc/minipres');
 
 	//@apache_setenv('no-gzip', 1); // provoque page blanche chez certains hebergeurs donc ne pas utiliser
-	@ini_set('zlib.output_compression', '0'); // pour permettre l'affichage au fur et a mesure
-	@ini_set('output_buffering', 'off');
-	@ini_set('implicit_flush', 1);
+	if (function_exists('ini_set')) {
+		@ini_set('zlib.output_compression', '0'); // pour permettre l'affichage au fur et a mesure
+		@ini_set('output_buffering', 'off');
+		@ini_set('implicit_flush', 1);
+	}
 	@ob_implicit_flush(1);
 
 	$pres = '<meta http-equiv="refresh" content="0;' . $url . '">';
