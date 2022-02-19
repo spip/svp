@@ -26,7 +26,7 @@ if (!defined('_SVP_VERSION_SPIP_MAX')) {
 	 * Version SPIP maximale
 	 *
 	 * Pour l'instant on ne connait pas la borne sup exacte */
-	define('_SVP_VERSION_SPIP_MAX', '4.0.999');
+	define('_SVP_VERSION_SPIP_MAX', '4.1.999');
 }
 
 /**
@@ -44,7 +44,8 @@ $GLOBALS['infos_branches_spip'] = [
 	'3.1' => ['3.1.0', '3.1.999'],
 	'3.2' => ['3.2.0', '3.2.999'],
 	'3.3' => ['3.3.0-dev', '3.3.0-dev'],
-	'4.0' => ['4.0.0-alpha', _SVP_VERSION_SPIP_MAX],
+	'4.0' => ['4.0.0-alpha', '4.0.999'],
+	'4.1' => ['4.1.0-alpha', _SVP_VERSION_SPIP_MAX],
 ];
 # define('_INFOS_BRANCHES_SPIP', serialize($infos_branches_spip));
 
