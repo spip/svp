@@ -130,10 +130,21 @@ function teleporter_http_charger_zip($quoi = []) {
 	if (is_dir($target)) {
 		supprimer_repertoire($target);
 	}
-	// mais creer le repertoire vide
-	$target = sous_repertoire(dirname($target), basename($target));
 
-	if (!$zip->deballer($target)) {
+	if (!$racine) {
+		// mais creer le repertoire vide
+		$target = sous_repertoire(dirname($target), basename($target));
+		$ok = $zip->deballer($target);
+	} else {
+		$tmp = sous_repertoire(dirname($target), '_tmp');
+		$ok = $zip->deballer($tmp);
+		if ($ok) {
+			rename($tmp . $racine, $target);
+			supprimer_repertoire($tmp);
+		}
+	}
+
+	if (!$ok) {
 		spip_log(
 			'charger_decompresser erreur zip ' . $zip->erreur() . ' ' . $zip->message() . ' pour paquet: ' . $quoi['archive'],
 			'teleport' . _LOG_ERREUR
