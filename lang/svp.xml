@@ -12,7 +12,7 @@
 		<traducteur nom="kerivo" lien="https://trad.spip.net/auteur/kerivo" />
 		<traducteur nom="nonobreizh" lien="https://trad.spip.net/auteur/nonobreizh" />
 	</langue>
-	<langue code="de" url="https://trad.spip.net/tradlang_module/svp?lang_cible=de" total="248" traduits="233" relire="0" modifs="1" nouveaux="14" pourcent="93.95">
+	<langue code="de" url="https://trad.spip.net/tradlang_module/svp?lang_cible=de" total="248" traduits="248" relire="0" modifs="0" nouveaux="0" pourcent="100.00">
 		<traducteur nom="kennethkeen" lien="https://trad.spip.net/auteur/kennethkeen" />
 		<traducteur nom="klaus++" lien="https://trad.spip.net/auteur/klaus" />
 		<traducteur nom="Torsten Willmann" lien="https://trad.spip.net/auteur/torsten-willmann" />

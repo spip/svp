@@ -27,6 +27,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'bouton_actualiser' => 'Aktualisieren',
 	'bouton_actualiser_tout' => 'Softwaredepots aktualisieren',
 	'bouton_appliquer' => 'Anwenden',
+	'bouton_configurer' => 'Konfigurieren',
 	'bouton_confirmer' => 'Bestätigen',
 	'bouton_desactiver' => 'Deaktivieren',
 	'bouton_desinstaller' => 'Deinstallieren',
@@ -83,12 +84,17 @@ existiert nicht oder hat keinen Schreibrechte.
 	'erreur_teleporter_methode_inconue' => 'Datenübertragung mit der Methode @methode@ ist nicht eingerichtet.',
 	'erreur_teleporter_type_fichier_inconnu' => 'Dateityp der Quelle @source@ unbekannt',
 	'erreurs_xml' => 'Manche XML-Beschreibungen können nicht gelesen werden.',
+	'etat_actif' => 'Aktiv',
+	'etat_inactif' => 'Inaktiv',
+	'etat_obsolete' => 'Veraltet',
+	'etat_verrouille' => 'Gesperrt',
 	'explication_destination' => 'Der Pfadname wird von der Bezeichnung des Archivs abgeleitet, wenn sie ihn nicht eintragen..',
 
 	// F
 	'fieldset_debug' => 'Debug',
 	'fieldset_edition' => 'Bearbeiten',
 	'fieldset_fonctionnement' => 'Funktionsweise',
+	'fieldset_typologie' => 'Typologie der Plugins',
 	'filtrer' => 'nach Begriff filtern',
 
 	// I
@@ -126,6 +132,7 @@ existiert nicht oder hat keinen Schreibrechte.
 	'info_nb_plugins' => '@nb@ Plugins',
 	'info_paquets_disponibles' => '@total_paquets@ Paket(e) verfügbar',
 	'info_plugin_attente_dependance' => 'fehlende Abhängigkeiten',
+	'info_plugin_compat_forcee' => 'Inkompatible Version: Kompatibilität erzwungen',
 	'info_plugin_incompatible' => 'Version inkompatibel',
 	'info_plugin_installe' => 'bereits installiert',
 	'info_plugin_obsolete' => 'veraltete Version',
@@ -150,8 +157,10 @@ existiert nicht oder hat keinen Schreibrechte.
 	'label_critere_etat' => 'Status',
 	'label_critere_phrase' => 'In Plugins suchen',
 	'label_destination' => 'Unterverzeichnis von « auto » in dem das Plugin gespeichert wird',
+	'label_etat' => 'Status',
 	'label_modifie_le' => 'Geändert am',
 	'label_n_autres_contributions' => 'weitere Kontributionen',
+	'label_plugin_description' => 'Beschreibung der Version @version@',
 	'label_prefixe' => 'Präfix',
 	'label_selectionner_plugin' => 'Plugin auswählen',
 	'label_tags' => 'Tags',
@@ -168,6 +177,8 @@ existiert nicht oder hat keinen Schreibrechte.
 	'legende_installer_plugins' => 'Plugins installieren',
 	'legende_rechercher_plugins' => 'Plugins suchen',
 	'lien_demo' => 'Demonstration',
+	'lien_details_moins' => 'Weniger Infos',
+	'lien_details_plus' => 'Mehr Infos',
 	'lien_documentation' => 'Dokumentation',
 
 	// M
@@ -240,7 +251,10 @@ existiert nicht oder hat keinen Schreibrechte.
 	// P
 	'placeholder_phrase' => 'Präfix, Name, Slogan, Beschreibung oder Autor',
 	'plugin_info_actif' => 'aktives Plugin',
-	'plugin_info_up' => 'Eine Aktualisierung des Plugins ist verfügbar (Version@version@)', # MODIF
+	'plugin_info_up' => 'Eine Aktualisierung des Plugins ist verfügbar (@version@)',
+	'plugin_info_up_x' => 'Eine größere Aktualisierung ist verfügbar (@version@). Denken Sie daran, auf Inkompatibilitäten zu prüfen. ',
+	'plugin_info_up_y' => 'Ein funktionelle Aktualisierung ist verfügbar (@version@).',
+	'plugin_info_up_z' => 'Eine Aktualisierung mit Fehlerkorrekturen ist verfügbar (@version@).',
 	'plugin_info_verrouille' => 'Plugin gesperrt',
 	'plugins_inactifs_liste' => 'Inaktiv',
 	'plugins_non_verrouilles_liste' => 'Nicht gesperrt',
