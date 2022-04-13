@@ -49,8 +49,9 @@ function action_actionner_dist() {
 		include_spip('inc/config');
 		if (lire_config('svp/mode_pas_a_pas') == 'oui') {
 			include_spip('inc/minipres');
+			include_spip('inc/filtres');
 			$pres = $actionneur->presenter_actions();
-			$btn = "<a href='$url'>[ Action Suivante ]</a>";
+			$btn = "<a href='".attribut_html($url)."'>[ Action Suivante ]</a>";
 			$styles = "
 				<style type='text/css'>
 				#minipres #actionner .fail {color:#c30000;}
