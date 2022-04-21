@@ -69,7 +69,7 @@ function formulaires_editer_depot_traiter_dist($id_depot, $redirect) {
  *     Tableau de configurations qui seront ajoutés à l'environnement
  *     du formulaire sous la clé 'config'
  **/
-function depots_edit_config($row) {
+function depots_edit_config(array $row): array {
 
 	$config = [];
 	$config['lignes'] = ($GLOBALS['spip_ecran'] == 'large') ? 8 : 5;
