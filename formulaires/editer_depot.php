@@ -70,11 +70,10 @@ function formulaires_editer_depot_traiter_dist($id_depot, $redirect) {
  *     du formulaire sous la clé 'config'
  **/
 function depots_edit_config($row) {
-	global $spip_ecran, $spip_lang;
 
-	$config = $GLOBALS['meta'];
-	$config['lignes'] = ($spip_ecran == 'large') ? 8 : 5;
-	$config['langue'] = $spip_lang;
+	$config = [];
+	$config['lignes'] = ($GLOBALS['spip_ecran'] == 'large') ? 8 : 5;
+	$config['langue'] = $GLOBALS['spip_lang'];
 
 	return $config;
 }
