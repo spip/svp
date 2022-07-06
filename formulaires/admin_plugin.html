@@ -46,41 +46,43 @@
 			<script type="text/javascript">
 			/*<![CDATA[*/
 				(function($){
-					var tous_les_elements = $('div#liste_plugins ul > li');
+					// Les sélecteurs
+					var selecteurs = {
+						items: {
+							tous: '#liste_plugins ul > li',
+							visibles: '#liste_plugins ul > li:not([hidden])',
+							upgradables: '#liste_plugins ul > li.up', // Todo : que les visibles
+						},
+						inputs: {
+							cocher: 'input.select_plugin',
+							filtrer: 'input#filtrer'
+						}
+					}
 
-					// afficher le nombre de plugin au chargement de la page
-					calculer_nbr_plugin(tous_les_elements);
-
-					// on filtre les plugins
-					$('input#filtrer').keyup(function(){
-						var that = this;
-						jQuery('h1.grostitre').attr('data',$(this).val());
-						var elements_trouves = tous_les_elements.filter(function(i, li){
-							var listItemText = $(li).text().toUpperCase()
-							searchText       = that.value.toUpperCase();
-							return ~listItemText.indexOf(searchText);
-						});
-						tous_les_elements.hide();
-						elements_trouves.show();
-
-						// recalculer le nombre de plugin
-						calculer_nbr_plugin(elements_trouves);
+					// Filtrer en live
+					$(selecteurs.inputs.filtrer).keyup(function(){
+						filtrer_par_terme();
 					});
 
+					// Cocher tous les items visibles
 					$("#select_tous").click(function(){
-						jQuery("input.select_plugin").prop("checked",true);
+						$(selecteurs.items.visibles).find(selecteurs.inputs.cocher).prop("checked",true);
 						return false;
 					});
+
+					// Décocher tous les items visibles
 					$("#select_aucun").click(function(){
-						$("input.select_plugin").prop("checked",false);
+						$(selecteurs.items.visibles).find(selecteurs.inputs.cocher).prop("checked",false);
 						return false;
 					});
+
+					// Cocher les mises à jour, sinon masquer le bouton
+					// Todo : il faudrait ne cocher que les visibles
 					var cocher_plugins_up = function(){
-						if ($(".plugins li.item.up").length != 0) {
+						if ($(selecteurs.items.upgradables).length != 0) {
 							$("#select_up").click(function(){
-								$(".plugins li.item.up input.select_plugin")
-									.prop("checked",true)
-									.parents("li.item.up").siblings(":not(.up)").find("input.select_plugin").prop("checked",false);
+								$(selecteurs.items.tous).find(selecteurs.inputs.cocher).prop("checked",false);
+								$(selecteurs.items.upgradables).find(selecteurs.inputs.cocher).prop("checked",false);
 								$("select#action_globale>option#option_up").prop("selected",true);
 								return false;
 							});
@@ -90,6 +92,7 @@
 							$("#option_up").hide();
 						}
 					}
+
 					// lorsqu'il y a de nombreux plugins et comme la remontee ajax est desactivee
 					// on ne voit pas forcement les erreurs. A ce monent la, on remonte dessus.
 					var remonter_sur_erreurs = function() {
@@ -97,28 +100,35 @@
 							$(document).scrollTop($('#formulaire_admin_plugin').offset().top - 20);
 						}
 					}
-					cocher_plugins_up();
-					onAjaxLoad(cocher_plugins_up);
-					onAjaxLoad(remonter_sur_erreurs);
-					onAjaxLoad(refiltrer);
 
-					// Au rechargement de la page et lors du chargement du descriptif d'un plugin
-					// on recupere l'éventuel filtre et on l'applique si présent
+					// Filtrer la liste en fonction d'un terme de recherche
+					var filtrer_par_terme = function() {
+						var $input = $(selecteurs.inputs.filtrer);
+						var searchText = $input.val().toUpperCase();
+						var $items_filtres = $(selecteurs.items.tous).filter(function(i, li){
+							var listItemText = $(li).text().toUpperCase();
+							return ~listItemText.indexOf(searchText);
+						});
+						$(selecteurs.items.tous).hide().attr('hidden', true);
+						$items_filtres.show().attr('hidden', false);
+						// On ajoute la valeur en data sur le titre pour la garder en cas de rechargement ajax
+						$('h1.grostitre').attr('data',$input.val());
+						// recalculer le nombre de plugin
+						calculer_nbr_plugin();
+					}
+
+					// Relancer le filtrage s'il y a un terme de recherche enregistré
 					function refiltrer(){
-						if (jQuery('h1.grostitre').attr('data')) {
-							var elements_trouves = tous_les_elements.filter(function(i, li){
-								var listItemText = $(li).text().toUpperCase()
-								var searchText = jQuery('h1.grostitre').attr('data');
-								jQuery('input#filtrer').val(searchText);
-								return ~listItemText.indexOf(searchText.toUpperCase());
-							});
-							tous_les_elements.hide();
-							elements_trouves.show();
+						var searchText = $('h1.grostitre').attr('data');
+						if (searchText) {
+							$(selecteurs.inputs.filtrer).val(searchText);
+							filtrer_par_terme();
 						}
 					}
 
-					function calculer_nbr_plugin(liste_plugins){
-						var nbr_plugin = liste_plugins.length;
+					// Calculer et afficher le nombre de plugins visibles
+					function calculer_nbr_plugin(){
+						var nbr_plugin = $(selecteurs.items.visibles).length;
 						if (nbr_plugin > 1){
 							var texte = '<:svp:info_nb_plugins|texte_script:>';
 							texte = texte.replace('@nb@', nbr_plugin);
@@ -129,6 +139,15 @@
 							jQuery('span#nbr_plugin').text('<:svp:info_0_plugin|texte_script:>');
 						}
 					}
+
+					// Lancements au chargement de la page
+					calculer_nbr_plugin();
+					cocher_plugins_up();
+					// Lancements lors de rechargements ajax
+					onAjaxLoad(cocher_plugins_up);
+					onAjaxLoad(remonter_sur_erreurs);
+					onAjaxLoad(refiltrer);
+
 				})(jQuery);
 
 			/*]]>*/
