@@ -95,6 +95,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'erreur_teleporter_type_fichier_inconnu' => 'Type de fichier inconnu pour la source @source@',
 	'erreurs_xml' => 'Impossible de lire certaines descriptions XML',
 	'explication_destination' => 'Le chemin sera calculé depuis le nom de l’archive si vous ne le remplissez pas.',
+	'explication_mot_passe' => 'Saisissez votre mot de passe pour sécuriser l\'installation',
 
 	// F
 	'fieldset_debug' => 'Débug',
