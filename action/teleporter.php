@@ -33,6 +33,9 @@ function action_teleporter_composant_dist($methode, $source, $dest, $options = [
 	if (!preg_match(',' . substr(_DIR_LIB, 0, -1) . ',', $dest) && !_DIR_PLUGINS_AUTO) {
 		die('Vous ne pouvez pas télécharger, absence de _DIR_PLUGINS_AUTO');
 	}
+	if (!autoriser('ajouter', '_plugins')){
+		return _T('svp:erreur_teleporter_chargement_source_impossible', ['source' => $source]);
+	}
 
 	// verifier que la methode est connue
 	if (!$teleporter = charger_fonction($methode, 'teleporter', true)) {

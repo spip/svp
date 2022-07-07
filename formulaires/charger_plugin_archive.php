@@ -26,7 +26,8 @@ function formulaires_charger_plugin_archive_charger_dist() {
 
 	return [
 		'archive' => '',
-		'destination' => ''
+		'destination' => '',
+		'password' => ''
 	];
 }
 
@@ -42,33 +43,51 @@ function formulaires_charger_plugin_archive_charger_dist() {
 function formulaires_charger_plugin_archive_verifier_dist() {
 	include_spip('inc/plugin'); // _DIR_PLUGINS_AUTO
 	$erreurs = [];
-	if (!$archive = _request('archive')) {
-		$erreurs['archive'] = _T('info_obligatoire');
-	} else {
-		// Validité de l'url de l'archive
-		$infos_archive = pathinfo($archive);
-		if (!isset($infos_archive['extension'])) {
-			$erreurs['archive'] = _T('svp:message_nok_url_archive');
-		} else {
-			// calcul du répertoire de destination
-			if (!$destination = _request('destination')) {
-				$destination = $infos_archive['filename'];
-			}
-			$destination = str_replace('../', '', $destination);
-			set_request('destination', $destination);
 
-			// si la destination existe, on demande confirmation de l'ecrasement.
-			$dir = _DIR_PLUGINS_AUTO . $destination;
-			if (is_dir($dir) and !_request('confirmer')) {
-				$base = dirname($dir);
-				$nom = basename($dir);
-				$backup = "$base/.$nom.bck";
-				$erreurs['confirmer'] = _T('svp:confirmer_telecharger_dans', [
-					'dir' => joli_repertoire($dir),
-					'dir_backup' => joli_repertoire($backup)
-				]);
+	if (!autoriser('ajouter', '_plugins')) {
+		$erreurs['message_erreur'] = _T('svp:erreur_teleporter_chargement_source_impossible', ['source' => '']);
+	}
+	else {
+
+		if (!$archive = _request('archive')) {
+			$erreurs['archive'] = _T('info_obligatoire');
+		} else {
+			// Validité de l'url de l'archive
+			$infos_archive = pathinfo($archive);
+			if (!isset($infos_archive['extension'])) {
+				$erreurs['archive'] = _T('svp:message_nok_url_archive');
+			} else {
+				// calcul du répertoire de destination
+				if (!$destination = _request('destination')) {
+					$destination = $infos_archive['filename'];
+				}
+				$destination = str_replace('../', '', $destination);
+				set_request('destination', $destination);
+
+				// si la destination existe, on demande confirmation de l'ecrasement.
+				$dir = _DIR_PLUGINS_AUTO . $destination;
+				if (is_dir($dir) and !_request('confirmer')) {
+					$base = dirname($dir);
+					$nom = basename($dir);
+					$backup = "$base/.$nom.bck";
+					$erreurs['confirmer'] = _T('svp:confirmer_telecharger_dans', [
+						'dir' => joli_repertoire($dir),
+						'dir_backup' => joli_repertoire($backup)
+					]);
+				}
 			}
 		}
+
+		if (empty($password = _request('password'))) {
+			$erreurs['password'] = _T('info_obligatoire');
+		}
+		else {
+			include_spip('inc/auth');
+			if (!auth_controler_password_auteur_connecte($password)) {
+				$erreurs['message_erreur'] = _T('svp:erreur_teleporter_chargement_source_impossible', ['source' => '']);
+			}
+		}
+
 	}
 
 	return $erreurs;
