@@ -25,8 +25,10 @@ function formulaires_ajouter_depot_charger_dist() {
 	}
 
 	// On ne renvoie pas les valeurs saisies mais on fait un raz systematique
+	$nb = (int)sql_countsel('spip_depots');
 	return [
-		'nb_depots' => (int)sql_countsel('spip_depots'),
+		'xml_paquets' => $nb ? '' : "https://plugins.spip.net/depots/principal.xml",
+		'password' => '',
 	];
 }
 
@@ -43,17 +45,40 @@ function formulaires_ajouter_depot_charger_dist() {
 function formulaires_ajouter_depot_verifier_dist() {
 
 	$erreurs = [];
-	$xml = trim(_request('xml_paquets'));
 
-	if (!$xml) {
-		// L'url est obligatoire
-		$erreurs['xml_paquets'] = _T('svp:message_nok_champ_obligatoire');
-	} elseif (!svp_verifier_adresse_depot($xml)) {
-		// L'url n'est pas correcte, le fichier xml n'a pas ete trouve
-		$erreurs['xml_paquets'] = _T('svp:message_nok_url_depot_incorrecte', ['url' => $xml]);
-	} elseif (sql_countsel('spip_depots', 'xml_paquets=' . sql_quote($xml))) {
-		// L'url est deja ajoutee
-		$erreurs['xml_paquets'] = _T('svp:message_nok_depot_deja_ajoute', ['url' => $xml]);
+	if (!autoriser('ajouter', '_depots')) {
+		$erreurs['message_erreur'] = _T('svp:erreur_teleporter_chargement_source_impossible', ['source' => '']);
+	}
+	else {
+		if (empty($password = _request('password'))) {
+			$erreurs['password'] = _T('info_obligatoire');
+		}
+		else {
+			include_spip('inc/auth');
+			if (!auth_controler_password_auteur_connecte($password)) {
+				$erreurs['message_erreur'] = _T('svp:erreur_teleporter_chargement_source_impossible', ['source' => '']);
+			}
+		}
+
+		$xml = trim(_request('xml_paquets'));
+		if (!$xml){
+			// L'url est obligatoire
+			$erreurs['xml_paquets'] = _T('svp:message_nok_champ_obligatoire');
+		}
+
+		if (empty($erreurs)) {
+			if (!svp_verifier_adresse_depot($xml)) {
+				// L'url n'est pas correcte, le fichier xml n'a pas ete trouve
+				$erreurs['xml_paquets'] = _T('svp:message_nok_url_depot_incorrecte', ['url' => $xml]);
+			} elseif (sql_countsel('spip_depots', 'xml_paquets=' . sql_quote($xml))) {
+				// L'url est deja ajoutee
+				$erreurs['xml_paquets'] = _T('svp:message_nok_depot_deja_ajoute', ['url' => $xml]);
+			}
+		}
+
+	}
+	if (count($erreurs)) {
+		set_request('password');
 	}
 
 	return $erreurs;
@@ -88,7 +113,9 @@ function formulaires_ajouter_depot_traiter_dist() {
 	} else {
 		$retour['message_ok'] = _T('svp:message_ok_depot_ajoute', ['url' => $xml]);
 		spip_log('ACTION AJOUTER DEPOT (manuel) : url = ' . $xml, 'svp_actions.' . _LOG_INFO);
+		set_request('xml_paquets');
 	}
+	set_request('password');
 	$retour['editable'] = true;
 
 	return $retour;
