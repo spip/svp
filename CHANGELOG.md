@@ -4,7 +4,7 @@
 
 ### Security
 
-- spip-team/securite#4832 et spip-team/securite#4833 securiser le telechargement de zip de plugin ou l'ajout d'un depot par saisie du mot de passe
+- spip-team/securite#4832 et spip-team/securite#4833 Sécuriser le téléchargement de zip de plugin ou l'ajout d'un dépôt par saisie du mot de passe
 
 ### Added
 
@@ -17,4 +17,4 @@
 
 ### Fixed
 
-- #4854 tout cocher/decocher tout n'agit que sur les plugins visibles de la liste
+- #4854 Tout cocher/décocher n'agit que sur les plugins visibles de la liste
