@@ -21,7 +21,7 @@
 					[<span class="erreur_message">(#ENV{erreurs}|table_valeur{xml_paquets})</span>]
 					<input type="text" name="xml_paquets" id="xml_paquets" value="#ENV{xml_paquets}" class="text" />
 				</div>
-				<div class="editer editer_password[(#ENV{erreurs/password}|oui) erreur]">
+				<div class="editer editer_password obligatoire[(#ENV{erreurs/password}|oui) erreur]">
 					<label for="password"><:entree_mot_passe:></label>
 					[<span class="erreur_message">(#ENV**{erreurs/password})</span>]
 					<input type="password" name="password" id="password" value="#ENV{password}" class="text" />
