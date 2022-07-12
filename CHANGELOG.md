@@ -1,5 +1,16 @@
 # Changelog
 
+## [Unreleased]
+
+### Security
+
+- spip-team/securite#4832 et spip-team/securite#4833 Sécuriser le téléchargement de zip de plugin ou l'ajout d'un dépôt par saisie du mot de passe
+
+### Fixed
+
+- #4854 Tout cocher/décocher n'agit que sur les plugins visibles de la liste
+
+
 ## [3.0.5] - 2022-05-20
 
 ### Security
