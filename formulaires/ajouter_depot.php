@@ -46,7 +46,8 @@ function formulaires_ajouter_depot_verifier_dist() {
 		$erreurs['message_erreur'] = _T('svp:erreur_teleporter_chargement_source_impossible', ['source' => '']);
 	}
 	else {
-		if (empty($password = _request('password'))) {
+		$password = _request('password');
+		if (empty($password)) {
 			$erreurs['password'] = _T('info_obligatoire');
 		}
 		else {

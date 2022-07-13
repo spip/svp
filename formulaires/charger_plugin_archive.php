@@ -73,7 +73,8 @@ function formulaires_charger_plugin_archive_verifier_dist() {
 			}
 		}
 
-		if (empty($password = _request('password'))) {
+		$password = _request('password');
+		if (empty($password)) {
 			$erreurs['password'] = _T('info_obligatoire');
 		}
 		else {
