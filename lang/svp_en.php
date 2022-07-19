@@ -89,6 +89,7 @@ is not created or is not writable.
 	'etat_obsolete' => 'Obsolete',
 	'etat_verrouille' => 'Locked',
 	'explication_destination' => 'The path will be calculated from the archive name if you don’t fill it.',
+	'explication_mot_passe' => 'Enter your password to secure the installation',
 
 	// F
 	'fieldset_debug' => 'Debug',
