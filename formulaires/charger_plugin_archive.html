@@ -12,6 +12,12 @@
 
 		<p class='explication'><:svp:telecharger_archive_plugin_explication:></p>
 		<div class="editer-groupe">
+			<div class="editer editer_password obligatoire[(#ENV{erreurs/password}|oui) erreur]">
+				<label for="password"><:entree_mot_passe:></label>
+				[<span class="erreur_message">(#ENV**{erreurs/password})</span>]
+				<input type="password" name="password" id="password" value="#ENV{password}" class="text" />
+				<p class='explication'><:svp:explication_mot_passe:></p>
+			</div>
 			<div class="editer editer_archive pleine_largeur obligatoire[(#ENV{erreurs/archive}|oui) erreur]">
 				<label for="archive"><:svp:label_archive:></label>
 				[<span class="erreur_message">(#ENV**{erreurs/archive})</span>]
@@ -22,12 +28,6 @@
 				[<span class="erreur_message">(#ENV**{erreurs/destination})</span>]
 				<input type="text" name="destination" id="destination" value="#ENV{destination}" class="text" />
 				<p class='explication'><:svp:explication_destination:></p>
-			</div>
-			<div class="editer editer_password obligatoire[(#ENV{erreurs/password}|oui) erreur]">
-				<label for="password"><:entree_mot_passe:></label>
-				[<span class="erreur_message">(#ENV**{erreurs/password})</span>]
-				<input type="password" name="password" id="password" value="#ENV{password}" class="text" />
-				<p class='explication'><:svp:explication_mot_passe:></p>
 			</div>
 		</div>
 		<p class='boutons'><input class='btn submit' type="submit" value="<:bouton_telecharger:>" /></p>
