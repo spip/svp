@@ -1,5 +1,12 @@
 # Changelog
 
+## [Unreleased]
+
+### Fixed
+
+- #4854 Tout cocher/décocher doit agir (mais que sur les plugins visibles de la liste)
+
+
 ## [3.0.6] - 2022-07-21
 
 ### Security

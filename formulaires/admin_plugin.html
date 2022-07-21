@@ -82,7 +82,7 @@
 						if ($(selecteurs.items.upgradables).length != 0) {
 							$("#select_up").click(function(){
 								$(selecteurs.items.tous).find(selecteurs.inputs.cocher).prop("checked",false);
-								$(selecteurs.items.upgradables).find(selecteurs.inputs.cocher).prop("checked",false);
+								$(selecteurs.items.upgradables).find(selecteurs.inputs.cocher).prop("checked",true);
 								$("select#action_globale>option#option_up").prop("selected",true);
 								return false;
 							});
