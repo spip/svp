@@ -89,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'etat_obsolete' => 'قديم',
 	'etat_verrouille' => 'مقفل',
 	'explication_destination' => 'سيتم حساب المسار من اسم الأرشيف اذا لم تدخله.',
+	'explication_mot_passe' => 'ادخلوا كلمة السر لتأمين التثبيت',
 
 	// F
 	'fieldset_debug' => 'كشف الأخطاء',
