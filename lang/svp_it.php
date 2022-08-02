@@ -89,6 +89,7 @@ Devi confermare questa azione.',
 	'etat_verrouille' => 'Bloccato',
 	'explication_destination' => 'Il percorso calcolato dal nome delle archivio se non viene compilato.
 ',
+	'explication_mot_passe' => 'Inserisci la tua password per proteggere l’installazione',
 
 	// F
 	'fieldset_debug' => 'Debug',
