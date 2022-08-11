@@ -72,7 +72,7 @@ function formulaires_editer_depot_traiter_dist($id_depot, $redirect) {
 function depots_edit_config(array $row): array {
 
 	$config = [];
-	$config['lignes'] = ($GLOBALS['spip_ecran'] == 'large') ? 8 : 5;
+	$config['lignes'] = 8;
 	$config['langue'] = $GLOBALS['spip_lang'];
 
 	return $config;
