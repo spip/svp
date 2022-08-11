@@ -1,7 +1,7 @@
 [(#REM) <!-- Liste des paquets :
 	- soit integrale de l'ensemble du site
 	- soit reduite a un seul depot ou a un plugin
-	
+
 	Les parametres d'environnement specifiques sont :
 	- titre     : le titre de la liste
 	- par       : le champ tri principal
@@ -25,7 +25,7 @@
 	[<caption><strong class="caption">(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{svp:info_1_paquet,svp:info_nb_paquets}})</strong></caption>]
 		<thead>
 			<tr class="first_row">
-				<th class="titre principale">[(#TRI{nom_archive, <:info_titre:>, ajax})]</th>
+				<th class="titre principale">[(#TRI{nom_archive, <:info_titre|label_nettoyer:>, ajax})]</th>
 				<th class="date secondaire">[(#TRI{date_modif, <:svp:label_modifie_le:>, ajax})]</th>
 				<th class="intervalle"><:svp:label_compatibilite_spip:></th>
 				<th class="numero">[(#TRI{version, <:svp:label_version:>, ajax})]</th>

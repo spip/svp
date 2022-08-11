@@ -13,4 +13,5 @@
 
 ### Fixed
 
+- spip/spip#5274 Homogénéiser les labels des listes
 - #4854 Tout cocher/décocher doit agir (mais que sur les plugins visibles de la liste)

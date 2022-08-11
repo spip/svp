@@ -2,7 +2,7 @@
 	- soit integrale de l'ensemble du site si on est dans la page depots (dans le bloc contenu)
 	- soit reduite aux autre depots que celui affiche dans la page depot (dans le bloc extra/navigation)
 	Dans ces deux cas les informations different car la taille des blocs influe sur l'affichage.
-	
+
 	Les parametres d'environnement specifiques sont :
 	- titre     : le titre de la liste
 	- par       : le champ tri principal
@@ -26,7 +26,7 @@
 	[<caption><strong class="caption">(#ENV*{titre, #GRAND_TOTAL|singulier_ou_pluriel{svp:info_1_depot,svp:info_nb_depots}})</strong></caption>]
 		<thead>
 			<tr class="first_row">
-				<th class="titre principale">[(#TRI{titre, <:info_titre:>, ajax})]</th>
+				<th class="titre principale">[(#TRI{titre, <:info_titre|label_nettoyer:>, ajax})]</th>
 				[(#ENV{affichage}|=={complet}|oui)
                 <th class="nombre">[(#TRI{nbr_paquets, <:svp:titre_paquets:>, ajax})]</th>
                 <th class="nombre">[(#TRI{nbr_plugins, <:svp:titre_plugins:>, ajax})]</th>
