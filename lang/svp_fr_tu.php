@@ -89,6 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 	'etat_obsolete' => 'Obsolète',
 	'etat_verrouille' => 'Verrouillé',
 	'explication_destination' => 'Le chemin sera calculé depuis le nom de l’archive si tu ne le remplis pas.',
+	'explication_mot_passe' => 'Saisis ton mot de passe pour sécuriser l’installation',
 
 	// F
 	'fieldset_debug' => 'Débug',
