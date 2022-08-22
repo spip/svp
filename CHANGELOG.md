@@ -13,5 +13,6 @@
 
 ### Fixed
 
+- #4829 Mise à jour d'un plugin quand la version courante n'est pas compatible avec la version courante de SPIP
 - spip/spip#5274 Homogénéiser les labels des listes
 - #4854 Tout cocher/décocher doit agir (mais que sur les plugins visibles de la liste)

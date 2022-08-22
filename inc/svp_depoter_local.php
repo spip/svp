@@ -346,7 +346,7 @@ function svp_base_inserer_paquets_locaux($paquets_locaux) {
 				$le_paquet['attente'] = $attente;
 
 				// on recherche d'eventuelle mises a jour existantes
-				if ($maj_version = svp_rechercher_maj_version($prefixe, $le_paquet['version'], $le_paquet['etatnum'])) {
+				if ($maj_version = svp_rechercher_maj_version($prefixe, $le_paquet['version'], $le_paquet['etatnum'], $le_paquet['compatibilite_spip'])) {
 					$le_paquet['maj_version'] = $maj_version;
 				}
 
@@ -708,9 +708,19 @@ function svp_supprimer_plugins_orphelins($ids_plugin) {
  * @return string
  *    Version plus à jour, sinon rien
  **/
-function svp_rechercher_maj_version($prefixe, $version, $etatnum) {
+function svp_rechercher_maj_version($prefixe, $version, $etatnum, $compatibilite_spip = null) {
 
 	$maj_version = '';
+	$maj_etatnum = $etatnum;
+
+	// si le plugin dont on recherche la maj n'est pas compatible, ne pas se limiter a la recherche d'un plugin aussi stable
+	// on cherche avant tout quelque chose de compatible avec la version de SPIP qu'on utilise, le plus table possible
+	if (
+		!is_null($compatibilite_spip)
+		and !svp_verifier_compatibilite_spip($compatibilite_spip)
+	) {
+		$maj_etatnum = 0;
+	}
 
 	if (
 		$res = sql_allfetsel(
@@ -720,16 +730,25 @@ function svp_rechercher_maj_version($prefixe, $version, $etatnum) {
 			'pl.id_plugin = pa.id_plugin',
 			'pa.id_depot>' . sql_quote(0),
 			'pl.prefixe=' . sql_quote($prefixe),
-			'pa.etatnum>=' . sql_quote($etatnum)
-			]
+			'pa.etatnum>=' . sql_quote($maj_etatnum)
+			],
+			'',
+			'etatnum DESC'
 		)
 	) {
 		foreach ($res as $paquet_distant) {
 			// si version superieure et etat identique ou meilleur,
 			// c'est que c'est une mise a jour possible !
 			if (spip_version_compare($paquet_distant['version'], $version, '>')) {
-				if (!strlen($maj_version) or spip_version_compare($paquet_distant['version'], $maj_version, '>')) {
+				if (
+					!strlen($maj_version)
+					or (
+						$paquet_distant['etatnum'] >= $maj_etatnum
+						and spip_version_compare($paquet_distant['version'], $maj_version, '>')
+					)
+				) {
 					$maj_version = $paquet_distant['version'];
+					$maj_etatnum = $paquet_distant['etatnum'];
 				}
 				# a voir si on utilisera...
 				# "superieur"		=> "varchar(3) DEFAULT 'non' NOT NULL",
@@ -752,13 +771,13 @@ function svp_actualiser_maj_version() {
 	// tous les paquets locaux
 	if (
 		$locaux = sql_allfetsel(
-			['id_paquet', 'prefixe', 'version', 'maj_version', 'etatnum'],
+			['id_paquet', 'prefixe', 'version', 'maj_version', 'etatnum', 'compatibilite_spip'],
 			['spip_paquets'],
 			['id_depot=' . sql_quote(0)]
 		)
 	) {
 		foreach ($locaux as $paquet) {
-			$new_maj_version = svp_rechercher_maj_version($paquet['prefixe'], $paquet['version'], $paquet['etatnum']);
+			$new_maj_version = svp_rechercher_maj_version($paquet['prefixe'], $paquet['version'], $paquet['etatnum'], $paquet['compatibilite_spip']);
 			if ($new_maj_version != $paquet['maj_version']) {
 				$update[$paquet['id_paquet']] = ['maj_version' => $new_maj_version];
 			}
